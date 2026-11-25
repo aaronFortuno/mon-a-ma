@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.19 · 25 de novembre de 2026
+
+- Separa Fitxes relacionades d’Aquest tema i Fonts i crèdits de Maquetació en dos blocs independents, al peu de cada lateral.
+- Permet obrir aquests blocs sense plegar els menús de sobre.
+
 ## 0.1.18 · 25 de novembre de 2026
 
 - Mostra les fitxes del mateix conjunt o col·lecció a Fitxes relacionades, al peu del lateral esquerre.

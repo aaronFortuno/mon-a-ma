@@ -7,14 +7,14 @@
   <title>Món a mà · Apunts i materials per explorar el medi</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png?v=0.1.4">
   <link rel="apple-touch-icon" href="assets/mon-a-ma.png?v=0.1.4">
-  <link rel="stylesheet" href="estils.css?v=0.1.18">
-  <script src="interficie.js?v=0.1.18" defer></script>
-  <script src="continguts/terra-i-mapes.js?v=0.1.18" defer></script>
-  <script src="imprimible.js?v=0.1.18" defer></script>
-  <script src="preferencies.js?v=0.1.18" defer></script>
-  <script src="continguts/curriculum.js?v=0.1.18" defer></script>
-  <script src="mapa-curricular.js?v=0.1.18" defer></script>
-  <script src="app.js?v=0.1.18" defer></script>
+  <link rel="stylesheet" href="estils.css?v=0.1.19">
+  <script src="interficie.js?v=0.1.19" defer></script>
+  <script src="continguts/terra-i-mapes.js?v=0.1.19" defer></script>
+  <script src="imprimible.js?v=0.1.19" defer></script>
+  <script src="preferencies.js?v=0.1.19" defer></script>
+  <script src="continguts/curriculum.js?v=0.1.19" defer></script>
+  <script src="mapa-curricular.js?v=0.1.19" defer></script>
+  <script src="app.js?v=0.1.19" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Ves al contingut</a>
@@ -74,42 +74,44 @@
     </section>
     <section class="container workspace" id="workspace" aria-labelledby="topic-title" hidden>
       <div class="workspace-grid" id="workspace-grid">
-        <details class="outline sidebar" id="topic-outline" open>
-          <summary>Aquest tema</summary>
-          <div class="sidebar-stack">
-            <details id="chapter-menu" class="sidebar-menu" name="navegacio" hidden>
-              <summary id="outline-title">Apartats</summary>
-              <div class="sidebar-pane scroll-pane">
-                <nav id="chapter-nav" aria-labelledby="outline-title"></nav>
-                <section id="removed-sections" class="removed-sections" aria-labelledby="removed-sections-title" hidden>
-                  <h3 id="removed-sections-title">Apartats retirats</h3>
-                  <ul></ul>
-                </section>
-                <button type="button" class="secondary" id="reset-section-order" hidden>Recupera l’ordre original</button>
-              </div>
-            </details>
-            <details class="sidebar-menu" name="navegacio">
-              <summary>Il·lustracions</summary>
-              <div class="sidebar-pane scroll-pane">
-                <form class="option-group" id="figure-settings">
-                  <label class="check full-width"><input type="checkbox" name="showFigures"> Mostra les il·lustracions</label>
-                  <div class="full-width" id="figure-options"></div>
-                  <label class="upload full-width">Afegeix una imatge <input type="file" id="upload" accept="image/png,image/jpeg,image/webp,image/gif,image/avif"></label>
-                  <p class="hint full-width" id="upload-hint">Les imatges afegides es desen en aquest navegador. Si n’ancores dues al mateix paràgraf, el text només pot envoltar la primera.</p>
-                  <p id="upload-status" class="hint full-width" role="status" hidden></p>
-                </form>
-              </div>
-            </details>
-            <details id="resources" class="sidebar-menu resources" name="navegacio">
-              <summary>Recursos</summary>
-              <div class="sidebar-pane scroll-pane"></div>
-            </details>
-            <details id="related-nav" class="sidebar-menu sidebar-footer related-nav" name="navegacio" hidden>
-              <summary id="related-title">Fitxes relacionades</summary>
-              <div class="sidebar-pane scroll-pane"><nav aria-labelledby="related-title"></nav></div>
-            </details>
-          </div>
-        </details>
+        <div class="sidebar-column">
+          <details class="outline sidebar sidebar-primary" id="topic-outline" open>
+            <summary>Aquest tema</summary>
+            <div class="sidebar-stack">
+              <details id="chapter-menu" class="sidebar-menu" name="navegacio" hidden>
+                <summary id="outline-title">Apartats</summary>
+                <div class="sidebar-pane scroll-pane">
+                  <nav id="chapter-nav" aria-labelledby="outline-title"></nav>
+                  <section id="removed-sections" class="removed-sections" aria-labelledby="removed-sections-title" hidden>
+                    <h3 id="removed-sections-title">Apartats retirats</h3>
+                    <ul></ul>
+                  </section>
+                  <button type="button" class="secondary" id="reset-section-order" hidden>Recupera l’ordre original</button>
+                </div>
+              </details>
+              <details class="sidebar-menu" name="navegacio">
+                <summary>Il·lustracions</summary>
+                <div class="sidebar-pane scroll-pane">
+                  <form class="option-group" id="figure-settings">
+                    <label class="check full-width"><input type="checkbox" name="showFigures"> Mostra les il·lustracions</label>
+                    <div class="full-width" id="figure-options"></div>
+                    <label class="upload full-width">Afegeix una imatge <input type="file" id="upload" accept="image/png,image/jpeg,image/webp,image/gif,image/avif"></label>
+                    <p class="hint full-width" id="upload-hint">Les imatges afegides es desen en aquest navegador. Si n’ancores dues al mateix paràgraf, el text només pot envoltar la primera.</p>
+                    <p id="upload-status" class="hint full-width" role="status" hidden></p>
+                  </form>
+                </div>
+              </details>
+              <details id="resources" class="sidebar-menu resources" name="navegacio">
+                <summary>Recursos</summary>
+                <div class="sidebar-pane scroll-pane"></div>
+              </details>
+            </div>
+          </details>
+          <details id="related-nav" class="sidebar sidebar-footer related-nav" hidden>
+            <summary id="related-title">Fitxes relacionades</summary>
+            <div class="sidebar-pane scroll-pane"><nav aria-labelledby="related-title"></nav></div>
+          </details>
+        </div>
         <section id="studio" class="studio" aria-label="Vista prèvia A4">
           <div class="studio-toolbar">
             <div><h2>Vista prèvia A4</h2><output id="page-count" aria-live="polite"></output></div>
@@ -137,101 +139,103 @@
           <div id="paper-stack" class="paper-stack scroll-pane" role="region" aria-label="Pàgines imprimibles" tabindex="0"></div>
           <div id="paper-motion" class="paper-motion" aria-hidden="true" inert></div>
         </section>
-        <details class="settings sidebar" id="settings" open>
-          <summary>Maquetació</summary>
-          <form id="options" class="sidebar-stack">
-            <details class="sidebar-menu" name="maquetacio">
-              <summary>Plantilles</summary>
-              <div class="sidebar-pane scroll-pane">
-                <div class="option-group">
-                  <label class="full-width">Format d’aquesta fitxa <select id="layout-template"></select></label>
-                  <button type="button" class="secondary full-width" id="manage-templates" data-dialog="templates-dialog" aria-haspopup="dialog">Gestiona les plantilles</button>
+        <div class="sidebar-column">
+          <details class="settings sidebar sidebar-primary" id="settings" open>
+            <summary>Maquetació</summary>
+            <form id="options" class="sidebar-stack">
+              <details class="sidebar-menu" name="maquetacio">
+                <summary>Plantilles</summary>
+                <div class="sidebar-pane scroll-pane">
+                  <div class="option-group">
+                    <label class="full-width">Format d’aquesta fitxa <select id="layout-template"></select></label>
+                    <button type="button" class="secondary full-width" id="manage-templates" data-dialog="templates-dialog" aria-haspopup="dialog">Gestiona les plantilles</button>
+                  </div>
                 </div>
-              </div>
-            </details>
-            <details class="sidebar-menu" name="maquetacio" open>
-              <summary>Text i pàgina</summary>
-              <div class="sidebar-pane scroll-pane">
-                <div class="option-group">
-                  <label id="print-scope" class="full-width">Imprimeix
-                    <select name="scope"><option value="chapter">Capítol actual</option><option value="topic">Tema complet</option></select>
-                  </label>
-                  <label>Tipografia
-                    <select name="font">
-                      <optgroup label="Amb serifa"><option value="georgia">Georgia</option><option value="lora">Lora</option><option value="times">Times New Roman</option></optgroup>
-                      <optgroup label="Sense serifa"><option value="arial">Arial</option><option value="lexend">Lexend</option><option value="verdana">Verdana</option></optgroup>
-                    </select>
-                  </label>
-                  <label class="slider">Cos <output id="font-size-value"></output><input type="range" name="fontSize" min="10" max="16" step="0.5" aria-label="Cos de lletra"></label>
-                  <label class="slider">Interlineat <output id="leading-value"></output><input type="range" name="leading" min="1.1" max="2" step="0.05" aria-label="Interlineat"></label>
-                  <label class="slider">Marges <output id="margin-value"></output><input type="range" name="margin" min="8" max="28" step="1" aria-label="Marges en mil·límetres"></label>
-                  <fieldset class="text-alignment full-width">
-                    <legend>Alineació del text</legend>
-                    <div class="alignment-options">
-                      <label title="Esquerra">
-                        <input class="sr-only" type="radio" name="textAlignment" value="left" aria-label="Esquerra">
-                        <span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2h10M2 5.3h6M2 8.7h10M2 12h6"/></svg></span>
-                      </label>
-                      <label title="Centrat">
-                        <input class="sr-only" type="radio" name="textAlignment" value="center" aria-label="Centrat">
-                        <span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2h10M4 5.3h6M2 8.7h10M4 12h6"/></svg></span>
-                      </label>
-                      <label title="Dreta">
-                        <input class="sr-only" type="radio" name="textAlignment" value="right" aria-label="Dreta">
-                        <span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2h10M6 5.3h6M2 8.7h10M6 12h6"/></svg></span>
-                      </label>
-                      <label title="Justificat">
-                        <input class="sr-only" type="radio" name="textAlignment" value="justify" aria-label="Justificat">
-                        <span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2h10M2 5.3h10M2 8.7h10M2 12h10"/></svg></span>
-                      </label>
+              </details>
+              <details class="sidebar-menu" name="maquetacio" open>
+                <summary>Text i pàgina</summary>
+                <div class="sidebar-pane scroll-pane">
+                  <div class="option-group">
+                    <label id="print-scope" class="full-width">Imprimeix
+                      <select name="scope"><option value="chapter">Capítol actual</option><option value="topic">Tema complet</option></select>
+                    </label>
+                    <label>Tipografia
+                      <select name="font">
+                        <optgroup label="Amb serifa"><option value="georgia">Georgia</option><option value="lora">Lora</option><option value="times">Times New Roman</option></optgroup>
+                        <optgroup label="Sense serifa"><option value="arial">Arial</option><option value="lexend">Lexend</option><option value="verdana">Verdana</option></optgroup>
+                      </select>
+                    </label>
+                    <label class="slider">Cos <output id="font-size-value"></output><input type="range" name="fontSize" min="10" max="16" step="0.5" aria-label="Cos de lletra"></label>
+                    <label class="slider">Interlineat <output id="leading-value"></output><input type="range" name="leading" min="1.1" max="2" step="0.05" aria-label="Interlineat"></label>
+                    <label class="slider">Marges <output id="margin-value"></output><input type="range" name="margin" min="8" max="28" step="1" aria-label="Marges en mil·límetres"></label>
+                    <fieldset class="text-alignment full-width">
+                      <legend>Alineació del text</legend>
+                      <div class="alignment-options">
+                        <label title="Esquerra">
+                          <input class="sr-only" type="radio" name="textAlignment" value="left" aria-label="Esquerra">
+                          <span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2h10M2 5.3h6M2 8.7h10M2 12h6"/></svg></span>
+                        </label>
+                        <label title="Centrat">
+                          <input class="sr-only" type="radio" name="textAlignment" value="center" aria-label="Centrat">
+                          <span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2h10M4 5.3h6M2 8.7h10M4 12h6"/></svg></span>
+                        </label>
+                        <label title="Dreta">
+                          <input class="sr-only" type="radio" name="textAlignment" value="right" aria-label="Dreta">
+                          <span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2h10M6 5.3h6M2 8.7h10M6 12h6"/></svg></span>
+                        </label>
+                        <label title="Justificat">
+                          <input class="sr-only" type="radio" name="textAlignment" value="justify" aria-label="Justificat">
+                          <span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2h10M2 5.3h10M2 8.7h10M2 12h10"/></svg></span>
+                        </label>
+                      </div>
+                    </fieldset>
+                    <button type="button" id="reset" class="secondary full-width">Restableix la maquetació</button>
+                  </div>
+                </div>
+              </details>
+              <details class="sidebar-menu" name="maquetacio">
+                <summary>Capçalera</summary>
+                <div class="sidebar-pane scroll-pane">
+                  <div class="option-group">
+                    <label class="check"><input type="checkbox" name="headerName"> Camp de nom</label>
+                    <label class="check"><input type="checkbox" name="headerDate"> Camp de data</label>
+                    <label class="check"><input type="checkbox" name="headerLogo"> Logotip</label>
+                    <label class="check"><input type="checkbox" name="showClassroomCode"> Codi d’aula</label>
+                    <div id="header-logo-options" class="option-group full-width">
+                      <label class="check full-width"><input type="checkbox" name="headerBrand"> Mostra «Món a mà» sota el logotip</label>
+                      <label class="upload full-width">Logotip propi <input type="file" id="header-logo-upload" accept="image/png,image/jpeg,image/webp,image/gif,image/avif"></label>
+                      <button type="button" class="secondary full-width" id="reset-header-logo" hidden>Recupera el logotip de Món a mà</button>
+                      <p id="header-logo-status" class="hint full-width" role="status" hidden></p>
                     </div>
-                  </fieldset>
-                  <button type="button" id="reset" class="secondary full-width">Restableix la maquetació</button>
-                </div>
-              </div>
-            </details>
-            <details class="sidebar-menu" name="maquetacio">
-              <summary>Capçalera</summary>
-              <div class="sidebar-pane scroll-pane">
-                <div class="option-group">
-                  <label class="check"><input type="checkbox" name="headerName"> Camp de nom</label>
-                  <label class="check"><input type="checkbox" name="headerDate"> Camp de data</label>
-                  <label class="check"><input type="checkbox" name="headerLogo"> Logotip</label>
-                  <label class="check"><input type="checkbox" name="showClassroomCode"> Codi d’aula</label>
-                  <div id="header-logo-options" class="option-group full-width">
-                    <label class="check full-width"><input type="checkbox" name="headerBrand"> Mostra «Món a mà» sota el logotip</label>
-                    <label class="upload full-width">Logotip propi <input type="file" id="header-logo-upload" accept="image/png,image/jpeg,image/webp,image/gif,image/avif"></label>
-                    <button type="button" class="secondary full-width" id="reset-header-logo" hidden>Recupera el logotip de Món a mà</button>
-                    <p id="header-logo-status" class="hint full-width" role="status" hidden></p>
-                  </div>
-                  <div id="classroom-code-options" class="option-group full-width" hidden>
-                    <label class="full-width">Text del codi d’aula <input type="text" name="classroomCode" maxlength="20" placeholder="Ex. TERRA-01"></label>
-                    <label>Mida <select name="classroomCodeSize"><option value="15">15 pt</option><option value="20">20 pt</option><option value="25">25 pt</option><option value="30">30 pt</option><option value="35">35 pt</option></select></label>
-                    <label>Contrast <select name="classroomCodeStyle"><option value="solid">Fons negre</option><option value="outline">Fons blanc</option></select></label>
+                    <div id="classroom-code-options" class="option-group full-width" hidden>
+                      <label class="full-width">Text del codi d’aula <input type="text" name="classroomCode" maxlength="20" placeholder="Ex. TERRA-01"></label>
+                      <label>Mida <select name="classroomCodeSize"><option value="15">15 pt</option><option value="20">20 pt</option><option value="25">25 pt</option><option value="30">30 pt</option><option value="35">35 pt</option></select></label>
+                      <label>Contrast <select name="classroomCodeStyle"><option value="solid">Fons negre</option><option value="outline">Fons blanc</option></select></label>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </details>
-            <details class="sidebar-menu" name="maquetacio">
-              <summary>Peu de pàgina</summary>
-              <div class="sidebar-pane scroll-pane">
-                <div class="option-group">
-                  <label class="check full-width"><input type="checkbox" name="showPageFooter"> Mostra el peu de pàgina</label>
-                  <div class="option-group full-width" id="page-footer-options">
-                    <label class="check full-width"><input type="checkbox" name="showTopicTitle"> Títol del tema</label>
-                    <label class="check"><input type="checkbox" name="pageNumbers"> Numera el full</label>
-                    <label class="check"><input type="checkbox" name="showMaterialCode"> Codi de la fitxa</label>
+              </details>
+              <details class="sidebar-menu" name="maquetacio">
+                <summary>Peu de pàgina</summary>
+                <div class="sidebar-pane scroll-pane">
+                  <div class="option-group">
+                    <label class="check full-width"><input type="checkbox" name="showPageFooter"> Mostra el peu de pàgina</label>
+                    <div class="option-group full-width" id="page-footer-options">
+                      <label class="check full-width"><input type="checkbox" name="showTopicTitle"> Títol del tema</label>
+                      <label class="check"><input type="checkbox" name="pageNumbers"> Numera el full</label>
+                      <label class="check"><input type="checkbox" name="showMaterialCode"> Codi de la fitxa</label>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </details>
-            <p class="hint" id="save-status" role="status" hidden></p>
-            <details id="sources" class="sidebar-menu sidebar-footer resources" name="maquetacio" hidden>
-              <summary>Fonts i crèdits</summary>
-              <div class="sidebar-pane scroll-pane"></div>
-            </details>
-          </form>
-        </details>
+              </details>
+              <p class="hint" id="save-status" role="status" hidden></p>
+            </form>
+          </details>
+          <details id="sources" class="sidebar sidebar-footer resources" hidden>
+            <summary>Fonts i crèdits</summary>
+            <div class="sidebar-pane scroll-pane"></div>
+          </details>
+        </div>
       </div>
     </section>
   </main>
@@ -241,7 +245,7 @@
       <div class="footer-family">Un projecte d’<a href="https://ortogra.fi/" aria-label="ortogra.fi"><svg viewBox="0 0 48 48" width="22" height="22" fill="none" stroke-linecap="round" aria-hidden="true"><circle cx="22" cy="28" r="14" stroke="currentColor" stroke-width="5.5"/><path d="m27 9 7-6" stroke="var(--accent)" stroke-width="4.5"/></svg>ortogra.fi</a></div>
       <nav class="footer-links" aria-label="Sobre el projecte">
         <a href="https://github.com/aaronFortuno/mon-a-ma/blob/main/license.md">MIT</a>
-        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.18 · Historial de versions">v0.1.18</button>
+        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.19 · Historial de versions">v0.1.19</button>
         <button type="button" data-dialog="about" aria-haspopup="dialog" aria-label="V4V · Sobre el projecte">V4V</button>
       </nav>
     </div>
@@ -252,6 +256,10 @@
       <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
     </div>
     <div class="dialog-content">
+      <h3>v0.1.19</h3>
+      <ul>
+        <li>Separa Fitxes relacionades d’Aquest tema i Fonts i crèdits de Maquetació. Els blocs es poden desplegar independentment.</li>
+      </ul>
       <h3>v0.1.18</h3>
       <ul>
         <li>Ancora Fitxes relacionades a l’esquerra i Fonts i crèdits a la dreta, al peu dels laterals.</li>
