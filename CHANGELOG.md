@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.20 · 25 de novembre de 2026
+
+- Allibera la previsualització A4 i mostra el selector de document quan hi ha solucionari.
+- Mou el desament de plantilles al menú Plantilles.
+- Posa Imprimeix al capdamunt de Maquetació, amb Desa en PDF al desplegable.
+
 ## 0.1.19 · 25 de novembre de 2026
 
 - Separa Fitxes relacionades d’Aquest tema i Fonts i crèdits de Maquetació en dos blocs independents, al peu de cada lateral.

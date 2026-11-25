@@ -10,6 +10,7 @@
   const topicByCode = new Map(topics.map(topic => [topic.code, topic]));
   const codeInput = byId('material-code');
   const quickTemplateForm = byId('quick-template-form');
+  const quickTemplateEntry = byId('quick-template-entry');
   const quickTemplateStatus = byId('quick-template-status');
   let library = preferences.library();
   let activeCollection = null;
@@ -18,6 +19,9 @@
   const figureAlignment = byId('figure-alignment-template');
   const stack = byId('paper-stack');
   const motionLayer = byId('paper-motion');
+  const printMenu = byId('print-menu');
+  const printButtons = [byId('print'), byId('save-pdf')];
+  const printStatus = byId('print-status');
   const catalogTitle = document.title;
   const layoutNumber = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
   const images = new Map();
@@ -382,6 +386,7 @@
     title.textContent = route?.topic.title ?? '';
     if (!route) {
       stopPaperMotion();
+      if (printMenu.matches(':popover-open')) printMenu.hidePopover();
       sectionEdit = null;
       revision++;
       if (location.hash.startsWith('#conjunt/')) {
@@ -772,13 +777,17 @@
     });
   }
 
+  function setPrintReady(ready) {
+    for (const button of printButtons) button.disabled = !ready;
+  }
+
   async function refreshPaper() {
     const ticket = ++revision;
     const { topic, chapter } = route;
     const options = { ...settings, documentType, cycleLabel: cycleById.get(topic.cycle)?.label ?? '' };
     const chapters = (options.scope === 'topic' ? topic.chapters : [chapter]).map(printableChapter).filter(Boolean);
-    const print = byId('print');
-    print.disabled = true;
+    setPrintReady(false);
+    printStatus.hidden = true;
     const fontReady = loadPaperFont(options.font);
     const selected = chapters.map(entry => [entry.id, options.showFigures ? figuresFor(entry).filter(item => item.visible) : []]);
     let missing = false;
@@ -814,15 +823,17 @@
       focusMovedSection(edit);
     }
     if (snapshot) animatePaper(snapshot, edit);
-    byId('page-count').value = paper.count + (paper.count === 1 ? ' pàgina' : ' pàgines') +
-      (missing ? ' · Alguna imatge no s’ha pogut carregar.' : '') +
-      (paper.oversized ? ' · Redueix la lletra, l’interlineat o els marges per encabir el contingut.' : '');
-    print.disabled = paper.oversized;
+    const warnings = [];
+    if (missing) warnings.push('Alguna imatge no s’ha pogut carregar.');
+    if (paper.oversized) warnings.push('Redueix la lletra, l’interlineat o els marges per encabir el contingut.');
+    printStatus.textContent = warnings.join(' ');
+    printStatus.hidden = !warnings.length;
+    setPrintReady(!paper.oversized);
   }
 
   function requestPaper() {
     revision++;
-    byId('print').disabled = true;
+    setPrintReady(false);
     cancelAnimationFrame(frameId);
     frameId = requestAnimationFrame(() => {
       if (route) refreshPaper();
@@ -970,7 +981,7 @@
   }
 
   function showQuickTemplate(open) {
-    quickTemplateForm.hidden = !open;
+    quickTemplateEntry.hidden = !open;
     byId('template-actions').hidden = open;
     byId('new-template').setAttribute('aria-expanded', String(open));
     if (open) {
@@ -1198,7 +1209,7 @@
     byId('new-template').focus();
   }
   byId('cancel-new-template').addEventListener('click', cancelQuickTemplate);
-  quickTemplateForm.addEventListener('keydown', event => {
+  quickTemplateEntry.addEventListener('keydown', event => {
     if (event.key === 'Escape') cancelQuickTemplate();
   });
   quickTemplateForm.addEventListener('submit', event => {
@@ -1296,19 +1307,24 @@
     renderControls();
     requestPaper();
   });
-  byId('print').addEventListener('click', () => {
+  function printDocument() {
     if (!route || !paper || paper.oversized) return;
     const title = document.title;
     const name = settings.scope === 'topic' ? route.topic.title : printableChapter(route.chapter).title;
     document.title = documentType === 'solution' ? name + ' · Solucionari' : name;
-    window.print();
-    document.title = title;
-  });
+    try { window.print(); }
+    finally { document.title = title; }
+  }
+  for (const button of printButtons) {
+    button.addEventListener('click', () => {
+      if (printMenu.matches(':popover-open')) printMenu.hidePopover();
+      printDocument();
+    });
+  }
   new ResizeObserver(fitPaper).observe(stack);
   window.addEventListener('hashchange', event => {
     if (location.hash !== '#main') renderRoute(event);
   });
-  byId('print').disabled = true;
   const refreshCatalog = setupCatalog();
   window.setupCurriculum(topics, (topic, section) => {
     const chapter = topic.chapters.find(entry => entry.sections.some(item => item.id === section)) ?? topic.chapters[0];
