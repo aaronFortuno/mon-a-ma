@@ -95,9 +95,9 @@ window.imprimible = (() => {
     return element;
   }
 
-  function chapterHeader(chapter, showTitle = true) {
+  function chapterHeader(chapter) {
     const header = node('div', 'paper-unit');
-    if (showTitle) header.append(node('h2', '', chapter.title));
+    header.append(node('h2', '', chapter.title));
     header.append(rich(node('p', 'chapter-intro'), chapter.intro));
     return header;
   }
@@ -106,7 +106,7 @@ window.imprimible = (() => {
     return anchor === 'lead' ? 0 : /^paragraph-\d+$/.test(anchor) ? Number(anchor.slice(10)) : null;
   }
 
-  function sectionUnits(section, figures, headingTag = 'h3') {
+  function sectionUnits(section, figures) {
     const units = [];
     const before = figures.filter(item => item.anchor === 'before');
     const after = figures.filter(item => item.anchor === 'after');
@@ -120,7 +120,7 @@ window.imprimible = (() => {
       const anchored = figures.filter(item => paragraphAnchor(item.anchor) === index);
       const unit = node('div', 'paper-unit');
       if (index === 0) {
-        unit.append(node(headingTag, 'section-title', section.title), ...before.slice(0, 1).map(figure));
+        unit.append(node('h3', 'section-title', section.title), ...before.slice(0, 1).map(figure));
       }
       if (anchored[0]) unit.append(figure(anchored[0]));
       unit.append(block(section.blocks[index]));
@@ -136,20 +136,6 @@ window.imprimible = (() => {
     return units;
   }
 
-  function readChapter(chapter, figures, showTitle = true) {
-    const article = node('article', 'reading ink');
-    article.append(chapterHeader(chapter, showTitle));
-    const headingTag = showTitle ? 'h3' : 'h2';
-    for (const source of chapter.sections) {
-      const section = node('section');
-      section.id = 'apartat-' + source.id;
-      section.tabIndex = -1;
-      section.append(...sectionUnits(source, figures.filter(item => item.section === source.id), headingTag));
-      article.append(section);
-    }
-    return article;
-  }
-
   function makePage(topic, options, firstPage) {
     const sheet = node('article', 'sheet ink');
     sheet.lang = topic.lang;
@@ -162,7 +148,7 @@ window.imprimible = (() => {
     const header = node('header', 'sheet-header');
     const label = options.documentType === 'solution' ? 'Solucionari · ' : '';
     const meta = node('div', 'sheet-header-meta');
-    meta.append(node('span', '', topic.title), node('span', '', label + topic.subject + ' · ' + topic.grades.join(', ')));
+    meta.append(node('span', '', topic.title), node('span', '', label + topic.subject + ' · ' + options.cycleLabel));
     header.append(meta);
     if (firstPage) {
       const row = node('div', 'sheet-header-fields');
@@ -234,7 +220,12 @@ window.imprimible = (() => {
       add(chapterHeader(chapter));
       const figures = figuresByChapter.get(chapter.id);
       for (const section of chapter.sections) {
-        for (const unit of sectionUnits(section, figures.filter(item => item.section === section.id))) add(unit);
+        const units = sectionUnits(section, figures.filter(item => item.section === section.id));
+        if (units[0]) {
+          units[0].id = 'fitxa-' + chapter.id + '-' + section.id;
+          units[0].tabIndex = -1;
+        }
+        for (const unit of units) add(unit);
       }
     }
     const width = pages[0].sheet.getBoundingClientRect().width;
@@ -249,5 +240,5 @@ window.imprimible = (() => {
     return { count: pages.length, width, height, oversized };
   }
 
-  return { node, paragraphAnchor, readChapter, loadPaperFont, paginate };
+  return { node, paragraphAnchor, loadPaperFont, paginate };
 })();

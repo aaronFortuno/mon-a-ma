@@ -11,7 +11,6 @@ window.quaderns ??= [];
     id: 'terra-i-mapes',
     title: 'La Terra i els mapes',
   });
-  const curriculumSource = ['XTEC · Currículum de Coneixement del Medi', 'https://xtec.gencat.cat/web/.content/curriculum/primaria/curriculum-175-2022/Coneixement-del-Medi-Natural-Social-i-Cultural.pdf'];
   const worldMaps = [
     { type: 'mapa', title: 'El món en català', provider: 'ICGC', url: 'https://www.icgc.cat/ca/Eines-i-visors/Visors/Didactics-i-ludics/El-Mon-en-catala' },
     { type: 'mapa', title: 'Mapes físics i polítics del món', provider: 'IGN', url: 'https://www.ign.es/web/ign/portal/recursos-educativos' },
@@ -25,11 +24,10 @@ window.quaderns ??= [];
       title: chapter.title,
       collection,
       subject: 'Medi',
-      grades: ['5è'],
+      cycle: 'p3',
       theme: 'Geografia',
       difficulty: 'Intermèdia',
       ...details,
-      sources: [curriculumSource, ...(details.sources ?? [])],
       chapters: [chapter],
     });
   }
@@ -71,7 +69,7 @@ window.quaderns ??= [];
     ],
   }, {
     description: 'Descobreix les capes de la Terra, el moviment de les plaques, la gravetat i com es relacionen l’aigua, l’aire, les roques i els éssers vius.',
-    curriculum: 'Anàlisi de la Terra com a sistema i de les interaccions entre els elements que la formen.',
+    curriculum: [{ row: 'medi:terra', section: 'elements', note: 'Explica les capes i com s’influeixen les roques, l’aigua, l’aire i els éssers vius.' }],
     sources: [
       ['USGS · L’interior de la Terra', 'https://pubs.usgs.gov/gip/dynamic/inside.html'],
       ['NASA · La Terra', 'https://science.nasa.gov/earth/facts/'],
@@ -106,7 +104,7 @@ window.quaderns ??= [];
     ],
   }, {
     description: 'Fes servir els paral·lels i els meridians per llegir la latitud i la longitud i localitzar un punt al mapa.',
-    curriculum: 'Localització espacial i interpretació de representacions cartogràfiques.',
+    curriculum: [{ row: 'medi:cartografia', section: 'localitzacio', note: 'Situa punts al mapa amb la latitud i la longitud.' }],
     sources: [
       ['NOAA · Latitud i longitud', 'https://oceanservice.noaa.gov/education/tutorial_nautical_charts/nautical_charts02_information_2b.html'],
     ],
@@ -138,7 +136,7 @@ window.quaderns ??= [];
     ],
   }, {
     description: 'Distingeix un mapa d’un plànol i aprèn a llegir-ne la llegenda i l’escala per orientar-te i calcular distàncies.',
-    curriculum: 'Representació de l’espai en mapes i plànols a diferents escales.',
+    curriculum: [{ row: 'medi:cartografia', section: 'escala', note: 'Ensenya a llegir la llegenda i a calcular distàncies amb l’escala.' }],
     sources: [
       ['ICGC · Escala cartogràfica', 'https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Escala'],
     ],
@@ -179,7 +177,7 @@ window.quaderns ??= [];
     ],
   }, {
     description: 'Tria el mapa que et convé, consulta un atles i compara què mostren els planisferis físics i polítics.',
-    curriculum: 'Interpretació de cartografia del territori i tria de representacions segons la informació que es busca.',
+    curriculum: [{ row: 'medi:cartografia', section: 'lectura', note: 'Ensenya a triar i llegir mapes físics, polítics i temàtics.' }],
     resources: worldMaps,
   });
 }

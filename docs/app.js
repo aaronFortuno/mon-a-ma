@@ -1,7 +1,8 @@
 (() => {
   const locale = document.documentElement.lang;
+  const cycleById = new Map(window.curriculum.cycles.map(cycle => [cycle.id, cycle]));
   const topics = window.quaderns.filter(topic => topic.lang === locale);
-  const { node, paragraphAnchor, readChapter, loadPaperFont, paginate } = window.imprimible;
+  const { node, paragraphAnchor, loadPaperFont, paginate } = window.imprimible;
   const preferences = window.preferencies;
   const { defaults } = preferences;
   const byId = id => document.getElementById(id);
@@ -26,6 +27,7 @@
   let frameId;
   let imageDb;
   let logoUploadVersion = 0;
+  let pendingSection = '';
 
   function imageStore() {
     imageDb ??= new Promise((resolve, reject) => {
@@ -63,9 +65,9 @@
     return collection ? '#colleccio/' + collection.id : '#';
   }
 
-  function address(topic, chapter, view = 'maqueta', section = '', collection = activeCollection) {
+  function address(topic, chapter, section = '', collection = activeCollection) {
     const path = topic.chapters.length === 1 ? [topic.code] : [topic.code, chapter.id];
-    return [catalogAddress(collection), ...path, view, section].filter(Boolean).join('/').replace(/^#\//, '#');
+    return [catalogAddress(collection), ...path, 'maqueta', section].filter(Boolean).join('/').replace(/^#\//, '#');
   }
 
   function members(collection) {
@@ -83,7 +85,7 @@
       return count + (count === 1 ? ' apartat' : ' apartats');
     };
     const fields = {
-      grade: topic => topic.grades,
+      cycle: topic => [topic.cycle],
       theme: topic => [topic.theme],
       collection: topic => [topic.collection?.title],
       length: topic => [size(topic)],
@@ -93,7 +95,10 @@
       const select = filters.elements.namedItem(name);
       const available = [...new Set(topics.flatMap(values).filter(Boolean))]
         .sort((a, b) => a.localeCompare(b, locale, { numeric: true }));
-      select.append(...available.map(value => option(value, value)));
+      if (name === 'cycle') {
+        select.append(...window.curriculum.cycles.filter(cycle => available.includes(cycle.id))
+          .map(cycle => option(cycle.id, cycle.label + (cycle.stage === 'ESO' ? ' · ESO' : ''))));
+      } else select.append(...available.map(value => option(value, value)));
       return { select, values };
     });
 
@@ -110,7 +115,7 @@
         picture.append(cover);
       }
       const details = node('div', 'topic-details');
-      const summary = [topic.grades.join(', '), topic.theme ?? topic.subject].join(' · ');
+      const summary = [cycleById.get(topic.cycle)?.label, topic.theme ?? topic.subject].filter(Boolean).join(' · ');
       const extent = [topic.code, size(topic), topic.difficulty].filter(Boolean).join(' · ');
       details.append(node('p', 'eyebrow', summary), node(grouped ? 'h3' : 'h2', 'topic-card-title', topic.title),
         node('p', 'topic-description', topic.description), node('p', 'topic-extent', extent));
@@ -169,8 +174,8 @@
     if (!topic || (activeCollection && !activeCollection.topicIds.includes(topic.id))) return null;
     const chapterId = topic.chapters.length > 1 ? path.shift() : topic.chapters[0].id;
     const chapter = topic.chapters.find(item => item.id === chapterId) ?? topic.chapters[0];
-    const [view, section] = path;
-    return { topic, chapter, view: view === 'llegeix' ? 'llegeix' : 'maqueta', section, collectionId: activeCollection?.id };
+    const section = path[1];
+    return { topic, chapter, section, collectionId: activeCollection?.id };
   }
 
   function getOptions(topic) {
@@ -234,8 +239,8 @@
     }
   }
 
-  function mountList(container, rows, intro) {
-    container.hidden = rows.length === 0 && !intro;
+  function mountList(container, rows) {
+    container.hidden = rows.length === 0;
     if (container.hidden) container.open = false;
     const list = node('ul');
     for (const [label, url] of rows) {
@@ -248,11 +253,10 @@
     }
     const body = container.querySelector('.sidebar-pane');
     body.replaceChildren();
-    if (intro) body.append(node('p', '', intro));
     if (rows.length) body.append(list);
   }
 
-  function renderCollection(topic, view) {
+  function renderCollection(topic) {
     const container = byId('collection-nav');
     const group = activeCollection ?? topic.collection;
     container.hidden = !group;
@@ -265,16 +269,18 @@
     const nav = container.querySelector('nav');
     nav.replaceChildren();
     nav.setAttribute('aria-label', 'Temes de ' + groupTitle);
-    const related = activeCollection ? members(activeCollection) : topics.filter(candidate => candidate.collection?.id === group.id);
-    for (const item of related) {
-      const anchor = link(item.title, address(item, item.chapters[0], view));
-      if (item.id === topic.id) anchor.setAttribute('aria-current', 'page');
-      nav.append(anchor);
+    const membersOfGroup = activeCollection ? members(activeCollection) : topics.filter(candidate => candidate.collection?.id === group.id);
+    const related = membersOfGroup.filter(item => item.id !== topic.id);
+    container.hidden = !related.length;
+    for (const item of related.slice(0, 3)) nav.append(link(item.title, address(item, item.chapters[0])));
+    if (related.length > 3) {
+      const target = activeCollection ? catalogAddress(activeCollection) : '#conjunt/' + group.id;
+      nav.append(link('Mostra tot el conjunt', target, 'all-related'));
     }
   }
 
   function renderNavigation() {
-    const { topic, chapter, view, section } = route;
+    const { topic, chapter, section } = route;
     const nav = byId('chapter-nav');
     const hasChapters = topic.chapters.length > 1;
     nav.replaceChildren();
@@ -282,12 +288,11 @@
     const revealChapters = chapterMenu.hidden;
     chapterMenu.hidden = false;
     const restore = byId('reset-section-order');
-    restore.hidden = view !== 'maqueta';
     restore.disabled = !settings.sectionOrder[chapter.id];
     byId('outline-title').textContent = hasChapters ? 'Capítols' : 'Apartats';
     for (const entry of topic.chapters) {
       if (hasChapters) {
-        const anchor = link(entry.title, address(topic, entry, view));
+        const anchor = link(entry.title, address(topic, entry));
         if (entry.id === chapter.id && !section) anchor.setAttribute('aria-current', 'page');
         nav.append(anchor);
       }
@@ -295,12 +300,8 @@
       const sub = node('div', hasChapters ? 'section-links' : '');
       const ordered = arrangeChapter(entry).sections;
       for (const [index, item] of ordered.entries()) {
-        const heading = link(item.title, address(topic, entry, 'llegeix', item.id));
+        const heading = link(item.title, address(topic, entry, item.id));
         if (item.id === section) heading.setAttribute('aria-current', 'location');
-        if (view === 'llegeix') {
-          sub.append(heading);
-          continue;
-        }
         const row = node('div', 'section-order-row');
         row.append(heading);
         for (const [direction, symbol, verb] of [[-1, '↑', 'Puja'], [1, '↓', 'Baixa']]) {
@@ -316,37 +317,56 @@
       }
       nav.append(sub);
     }
-    renderCollection(topic, view);
+    renderCollection(topic);
     const resources = [...(topic.resources ?? []), ...(topic.collection?.resources ?? [])];
     mountList(byId('resources'), resources.map(item => [[item.title, item.provider].filter(Boolean).join(' · '), item.url]));
-    mountList(byId('sources'), topic.sources ?? [], topic.curriculum);
+    mountList(byId('sources'), topic.sources ?? []);
     const outline = byId('topic-outline');
     if (revealChapters) chapterMenu.open = true;
     else if (!outline.querySelector('.sidebar-menu[open]:not([hidden])')) {
       const first = outline.querySelector('.sidebar-menu:not([hidden])');
       if (first) first.open = true;
     }
-    byId('document-view-link').href = address(topic, chapter, view === 'maqueta' ? 'llegeix' : 'maqueta');
-    byId('document-view-link').textContent = view === 'maqueta' ? 'Llegeix els apunts' : 'Obre la maquetació';
   }
 
   function renderRoute(event) {
     const previous = route;
     route = extractRoute();
+    const onMap = location.hash === '#mapa-curricular';
     const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
     byId('catalog-home').href = route ? catalogAddress(activeCollection) : '#';
+    if (onMap) byId('curriculum-link').setAttribute('aria-current', 'page');
+    else byId('curriculum-link').removeAttribute('aria-current');
+    byId('curriculum').hidden = !onMap;
+    byId('catalog').hidden = Boolean(route) || onMap;
+    byId('workspace').hidden = !route;
+
     const title = byId('topic-title');
     title.hidden = !route;
     title.textContent = route?.topic.title ?? '';
     if (!route) {
       revision++;
-      byId('catalog').hidden = false;
-      byId('workspace').hidden = true;
+      if (onMap) {
+        document.title = 'Mapa curricular · Món a mà';
+        if (event) byId('curriculum-title').focus({ preventScroll: true });
+        return;
+      }
+      if (location.hash.startsWith('#conjunt/')) {
+        const id = location.hash.slice('#conjunt/'.length);
+        const group = topics.find(topic => topic.collection?.id === id)?.collection;
+        if (group) {
+          const filters = byId('catalog-filters');
+          for (const select of filters.querySelectorAll('select')) select.selectedIndex = 0;
+          filters.elements.collection.value = group.title;
+        }
+      }
       refreshCatalog();
       document.title = activeCollection ? activeCollection.name + ' · Món a mà' : catalogTitle;
       if (previous && event) byId('topics').querySelector('[data-topic="' + previous.topic.id + '"]')?.focus({ preventScroll: true });
       return;
     }
+
+    const changedChapter = changedMaterial || previous?.chapter.id !== route.chapter.id;
     if (changedMaterial) {
       showQuickTemplate(false);
       quickTemplateStatus.textContent = '';
@@ -355,39 +375,21 @@
       logoUploadVersion++;
       headerLogoFeedback('');
     }
-    const editing = route.view === 'maqueta';
-    byId('catalog').hidden = true;
-    byId('workspace').hidden = false;
-    byId('reader').hidden = editing;
-    byId('studio').hidden = !editing;
-    byId('settings').hidden = !editing;
-    byId('workspace-grid').classList.toggle('maqueta', editing);
-    document.title = route.chapter.title + ' · Món a mà';
-    if (event && changedMaterial) title.focus({ preventScroll: true });
-    if (changedMaterial || previous?.chapter.id !== route.chapter.id || previous?.view !== route.view) {
+    if (changedChapter) {
       byId('upload-status').hidden = true;
       byId('save-status').hidden = true;
       byId('upload').value = '';
-      (editing ? stack : byId('reader')).scrollTop = 0;
+      stack.scrollTop = 0;
     }
+    if (changedChapter || previous?.section !== route.section) {
+      pendingSection = route.section ?? '';
+      if (pendingSection) documentType = 'sheet';
+    }
+    document.title = route.chapter.title + ' · Món a mà';
+    if (event && changedMaterial && !route.section) title.focus({ preventScroll: true });
     renderNavigation();
-    if (editing) {
-      renderControls();
-      refreshPaper();
-    } else {
-      const chapter = arrangeChapter(route.chapter);
-      const figures = settings.showFigures ? figuresFor(chapter, 'sheet').filter(item => item.visible) : [];
-      const reader = byId('reader');
-      const article = readChapter(chapter, figures, chapter.title !== route.topic.title);
-      article.lang = route.topic.lang;
-      reader.replaceChildren(article);
-      const heading = route.section && byId('apartat-' + route.section);
-      if (heading) {
-        heading.focus({ preventScroll: true });
-        const offset = heading.getBoundingClientRect().top - reader.getBoundingClientRect().top;
-        reader.scrollTop += offset - (parseFloat(getComputedStyle(heading).scrollMarginTop) || 0);
-      }
-    }
+    renderControls();
+    refreshPaper();
   }
 
   function control(label, input, className) {
@@ -558,7 +560,7 @@
   async function refreshPaper() {
     const ticket = ++revision;
     const { topic, chapter } = route;
-    const options = { ...settings, documentType };
+    const options = { ...settings, documentType, cycleLabel: cycleById.get(topic.cycle)?.label ?? '' };
     const chapters = (options.scope === 'topic' ? topic.chapters : [chapter]).map(printableChapter).filter(Boolean);
     const print = byId('print');
     print.disabled = true;
@@ -578,9 +580,17 @@
       return [id, figures.filter(Boolean)];
     }));
     await fontReady;
-    if (ticket !== revision || route?.view !== 'maqueta') return;
+    if (ticket !== revision || !route) return;
     paper = paginate(topic, chapters, new Map(resolved), options, byId('layout-probe'), stack);
     fitPaper();
+    if (pendingSection) {
+      const unit = byId('fitxa-' + chapter.id + '-' + pendingSection);
+      pendingSection = '';
+      if (unit) {
+        unit.focus({ preventScroll: true });
+        stack.scrollTop += unit.getBoundingClientRect().top - stack.getBoundingClientRect().top - 12;
+      }
+    }
     byId('page-count').value = paper.count + (paper.count === 1 ? ' pàgina' : ' pàgines') +
       (missing ? ' · Alguna imatge no s’ha pogut carregar.' : '') +
       (paper.oversized ? ' · Redueix la lletra, l’interlineat o els marges per encabir el contingut.' : '');
@@ -592,7 +602,7 @@
     byId('print').disabled = true;
     cancelAnimationFrame(frameId);
     frameId = requestAnimationFrame(() => {
-      if (route?.view === 'maqueta') refreshPaper();
+      if (route) refreshPaper();
     });
   }
 
@@ -809,7 +819,7 @@
 
   function changeSectionOrder(event) {
     const button = event.target.closest('button[data-section]');
-    if (!button || !route || route.view !== 'maqueta') return;
+    if (!button || !route) return;
     const { section, direction } = button.dataset;
     const list = arrangeChapter(route.chapter).sections;
     const index = list.findIndex(item => item.id === section);
@@ -837,7 +847,7 @@
       return;
     }
     codeInput.value = '';
-    location.hash = address(topic, topic.chapters[0], 'llegeix', '', null);
+    location.hash = address(topic, topic.chapters[0], '', null);
   });
 
   byId('catalog-collection').addEventListener('change', event => {
@@ -1002,7 +1012,7 @@
     requestPaper();
   });
   byId('print').addEventListener('click', () => {
-    if (route?.view !== 'maqueta' || !paper || paper.oversized) return;
+    if (!route || !paper || paper.oversized) return;
     const title = document.title;
     const name = settings.scope === 'topic' ? route.topic.title : printableChapter(route.chapter).title;
     document.title = documentType === 'solution' ? name + ' · Solucionari' : name;
@@ -1015,13 +1025,17 @@
   });
   byId('print').disabled = true;
   const refreshCatalog = setupCatalog();
+  window.setupCurriculum(topics, (topic, section) => {
+    const chapter = topic.chapters.find(entry => entry.sections.some(item => item.id === section)) ?? topic.chapters[0];
+    return address(topic, chapter, section, null);
+  });
   renderRoute();
   imageOperation('readonly', store => store.getAll()).then(items => {
     knownUploads.push(...items.map(item => ({ ...addUrl(item), persisted: true })));
-    if (route?.view === 'maqueta') {
+    if (route) {
       renderControls();
       requestPaper();
-    } else if (route) renderRoute();
+    }
   }).catch(() => {
     byId('upload-hint').textContent = 'Les imatges afegides es mantindran mentre aquesta pàgina sigui oberta.';
   });

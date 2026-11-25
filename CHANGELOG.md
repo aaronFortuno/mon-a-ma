@@ -1,5 +1,12 @@
 # Historial de versions
 
+## 0.1.10 · 25 de novembre de 2026
+
+- Afegeix un mapa curricular interactiu amb blocs de sabers per cicle i accés directe als apartats imprimibles.
+- Obre totes les fitxes a la vista d’impressió i mostra els materials del catàleg per cicle.
+- Limita els accessos ràpids del conjunt i posa les fonts de cada material al seu lateral.
+- Dona un estil més discret als enllaços del peu i acredita les eines obertes al quadre V4V.
+
 ## 0.1.9 · 25 de novembre de 2026
 
 - Permet desar el format com a plantilla des de la barra de la vista prèvia i actualitzar una plantilla aplicada amb un clic.
