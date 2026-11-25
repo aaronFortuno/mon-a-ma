@@ -69,6 +69,7 @@
       templateId,
       figures: { ...saved.figures },
       sectionOrder: { ...saved.sectionOrder },
+      hiddenSections: { ...saved.hiddenSections },
     };
   }
 
@@ -78,7 +79,10 @@
     const layouts = read(layoutKey, {});
     return write(layoutKey, {
       ...layouts,
-      [recordKey(topicId, collection)]: { templateId: settings.templateId, values, figures: settings.figures, sectionOrder: settings.sectionOrder },
+      [recordKey(topicId, collection)]: {
+        templateId: settings.templateId, values, figures: settings.figures,
+        sectionOrder: settings.sectionOrder, hiddenSections: settings.hiddenSections,
+      },
     });
   }
 

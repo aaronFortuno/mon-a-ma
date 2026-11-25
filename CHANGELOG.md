@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.13 · 25 de novembre de 2026
+
+- Mou els controls per reordenar els apartats a la vista prèvia de la fitxa.
+- Permet retirar apartats i tornar-los a afegir des del lateral. La selecció es desa al navegador amb la maquetació.
+
 ## 0.1.12 · 25 de novembre de 2026
 
 - Obre el mapa curricular en un quadre amb pestanyes de Primària i Secundària.

@@ -235,6 +235,8 @@ window.imprimible = (() => {
         if (units[0]) {
           units[0].id = 'fitxa-' + chapter.id + '-' + section.id;
           units[0].tabIndex = -1;
+          units[0].dataset.paperChapter = chapter.id;
+          units[0].dataset.paperSection = section.id;
         }
         for (const unit of units) add(unit);
       }

@@ -224,11 +224,13 @@ select { padding: .45rem .6rem; border: 1px solid var(--control-line); backgroun
 .sidebar-pane > :last-child { margin-bottom: 0; }
 .outline nav a { display: block; padding: .38rem .48rem; border-radius: .28rem; font-size: .92rem; text-decoration: none; }
 .outline nav > a { font-weight: 650; }
-.section-order-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: .2rem; }
-.section-order-row a { overflow-wrap: anywhere; }
-.section-order-row .move-section { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; padding: 0; border-color: var(--line); }
-.section-order-row .move-section:hover:not(:disabled) { border-color: var(--green); }
-.move-section:disabled, #reset-section-order:disabled { opacity: .4; cursor: default; }
+.removed-sections { margin-top: .55rem; padding-top: .55rem; border-top: 1px solid var(--line); }
+.removed-sections h3 { margin: 0 0 .28rem; font: 650 .82rem/1.25 var(--sans); color: var(--muted); }
+.removed-sections ul { padding: 0; margin: 0; list-style: none; }
+.restore-section { display: flex; width: 100%; align-items: baseline; gap: .45rem; padding: .32rem .38rem; border: 0; border-radius: .3rem; background: transparent; text-align: start; color: var(--green); }
+.restore-section:hover { background: var(--light); }
+.restore-section-icon { font-weight: 750; }
+.restore-section small { display: block; color: var(--muted); }
 #reset-section-order { margin-top: .5rem; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .outline nav a:hover, .outline nav a[aria-current] { background: var(--pale); color: var(--ink); }
@@ -270,6 +272,52 @@ summary { color: var(--green); font-weight: 650; }
 .illustration.is-wrap[data-position="right"] { float: right; margin-inline: .9em 0; }
 .illustration.is-wrap[data-position="left"] { float: left; margin-inline: 0 .9em; }
 .paper-unit { display: flow-root; }
+.paper-unit:has(.section-preview-tools) { position: relative; }
+.section-preview-tools {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border: 1px solid var(--control-line);
+  border-radius: .42rem;
+  background: var(--surface);
+  color: var(--green);
+  box-shadow: 0 3px 12px var(--shadow);
+  transform: scale(calc(1 / var(--zoom, 1)));
+  transform-origin: top right;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-duration) ease;
+}
+.paper-unit:hover > .section-preview-tools, .section-preview-tools:focus-within { opacity: 1; pointer-events: auto; }
+.section-preview-actions { display: flex; align-items: center; gap: 2px; }
+.section-preview-tools button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 27px;
+  border: 0;
+  padding: 0;
+  border-radius: .28rem;
+  background: transparent;
+  font: 650 16px/1 var(--sans);
+}
+.section-preview-tools button:hover:not(:disabled) { background: var(--light); }
+.section-preview-tools button:focus-visible { outline-offset: -2px; }
+.section-preview-tools button:disabled { opacity: .35; cursor: default; }
+.section-preview-tools button[data-action="remove"] { color: var(--accent); }
+.section-preview-tools .section-preview-toggle { display: none; }
+@media (hover: none), (pointer: coarse) {
+  .section-preview-tools { opacity: 1; pointer-events: auto; }
+  .section-preview-tools button { width: 32px; height: 32px; }
+  .section-preview-tools .section-preview-toggle { display: grid; }
+  .section-preview-actions { transition: opacity var(--motion-duration) ease, display var(--motion-duration) allow-discrete; }
+  .section-preview-toggle[aria-expanded="false"] + .section-preview-actions { display: none; opacity: 0; }
+  @starting-style { .section-preview-toggle[aria-expanded="true"] + .section-preview-actions { opacity: 0; } }
+}
 .project-dialog.curriculum-dialog {
   width: min(76rem, calc(100% - 1.4rem));
   height: min(44rem, calc(100dvh - 1.4rem));
@@ -661,7 +709,7 @@ details[open]::details-content {
   html, body { background: white; overflow: visible; }
   body { position: static; display: block; height: auto; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .skip, .site-header, #catalog, .site-footer, #layout-probe,
-  .outline, .settings, .studio-toolbar, dialog, noscript { display: none !important; }
+  .outline, .settings, .studio-toolbar, .section-preview-tools, dialog, noscript { display: none !important; }
   main, .workspace, .workspace-grid, .studio, .paper-stack { display: block; height: auto; width: auto; margin: 0; padding: 0; border: 0; background: white; overflow: visible; }
   .paper-stack { scrollbar-gutter: auto; }
   .sheet-frame { position: static; width: auto !important; height: auto !important; margin: 0 !important; break-after: page; }

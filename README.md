@@ -12,7 +12,7 @@ Tria un tema al catàleg per obrir la previsualització A4. Pots navegar pels ca
 
 Al taller, **Desa plantilla…** permet donar un nom al format actual. **Desa els canvis** actualitza la plantilla que has triat per a la fitxa. L’apartat **Plantilles** permet canviar de format i gestionar la plantilla per defecte. El codi d’aula, les imatges concretes i l’ordre dels apartats es desen amb cada fitxa. Al catàleg, **Nova col·lecció** crea un grup propi amb una plantilla opcional. Els ajustos fets dins d’una col·lecció es desen per separat.
 
-Les fletxes del panell **Apartats** canvien l’ordre de la fitxa imprimible. Les reserves d’imatge alternen de costat segons l’ordre del material, i el panell d’il·lustracions permet ajustar cada reserva.
+Passa per sobre de l’inici d’un apartat a la vista prèvia per moure’l o retirar-lo de la fitxa. En pantalles tàctils, obre les opcions amb el botó **⋯**. Els apartats retirats es poden tornar a afegir des del lateral **Apartats**. Les reserves d’imatge alternen de costat segons l’ordre del material, i el panell d’il·lustracions permet ajustar cada reserva.
 
 ## Mapa curricular
 

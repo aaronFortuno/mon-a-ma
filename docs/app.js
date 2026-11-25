@@ -28,6 +28,7 @@
   let imageDb;
   let logoUploadVersion = 0;
   let pendingSection = '';
+  let previewFocus;
 
   function imageStore() {
     imageDb ??= new Promise((resolve, reject) => {
@@ -190,8 +191,15 @@
     byId('save-status').textContent = persisted ? '' : 'Els ajustos es mantindran mentre aquesta pàgina sigui oberta.';
   }
 
+  function removedIds(chapter) {
+    const ids = settings.hiddenSections[chapter.id];
+    return new Set(Array.isArray(ids) ? ids : []);
+  }
+
   function arrangeChapter(chapter) {
-    return { ...chapter, sections: preferences.orderedSections(chapter, settings.sectionOrder[chapter.id]) };
+    const removed = removedIds(chapter);
+    const sections = preferences.orderedSections(chapter, settings.sectionOrder[chapter.id]);
+    return { ...chapter, sections: sections.filter(section => !removed.has(section.id)) };
   }
 
   function reservedFigures(chapter) {
@@ -215,11 +223,12 @@
     const userFigures = knownUploads.filter(item => item.topic === route.topic.id && item.chapter === chapter.id &&
       (item.collectionId ?? '') === collectionId && (item.documentType ?? 'sheet') === type);
     const planned = type === 'sheet' ? reservedFigures(chapter) : chapter.figures ?? [];
+    const sections = new Set(chapter.sections.map(section => section.id));
     return [...planned, ...userFigures].map(item => {
       const config = { ...item, visible: true, ...settings.figures[item.id] };
       if (paragraphAnchor(config.anchor) === null || config.position === 'center') config.wrap = false;
       return config;
-    });
+    }).filter(config => sections.has(config.section));
   }
 
   function printableChapter(chapter) {
@@ -288,7 +297,7 @@
     const revealChapters = chapterMenu.hidden;
     chapterMenu.hidden = false;
     const restore = byId('reset-section-order');
-    restore.disabled = !settings.sectionOrder[chapter.id];
+    restore.hidden = !settings.sectionOrder[chapter.id];
     byId('outline-title').textContent = hasChapters ? 'Capítols' : 'Apartats';
     for (const entry of topic.chapters) {
       if (hasChapters) {
@@ -298,25 +307,14 @@
       }
       if (entry.id !== chapter.id) continue;
       const sub = node('div', hasChapters ? 'section-links' : '');
-      const ordered = arrangeChapter(entry).sections;
-      for (const [index, item] of ordered.entries()) {
+      for (const item of arrangeChapter(entry).sections) {
         const heading = link(item.title, address(topic, entry, item.id));
         if (item.id === section) heading.setAttribute('aria-current', 'location');
-        const row = node('div', 'section-order-row');
-        row.append(heading);
-        for (const [direction, symbol, verb] of [[-1, '↑', 'Puja'], [1, '↓', 'Baixa']]) {
-          const move = node('button', 'secondary move-section', symbol);
-          move.type = 'button';
-          move.dataset.section = item.id;
-          move.dataset.direction = direction;
-          move.disabled = !ordered[index + direction];
-          move.setAttribute('aria-label', verb + ' ' + item.title);
-          row.append(move);
-        }
-        sub.append(row);
+        sub.append(heading);
       }
       nav.append(sub);
     }
+    renderRemovedSections(topic, chapter);
     renderCollection(topic);
     const resources = [...(topic.resources ?? []), ...(topic.collection?.resources ?? [])];
     mountList(byId('resources'), resources.map(item => [[item.title, item.provider].filter(Boolean).join(' · '), item.url]));
@@ -327,6 +325,42 @@
       const first = outline.querySelector('.sidebar-menu:not([hidden])');
       if (first) first.open = true;
     }
+  }
+
+  function renderRemovedSections(topic, chapter) {
+    const container = byId('removed-sections');
+    const chapters = settings.scope === 'topic' ? topic.chapters : [chapter];
+    const items = [];
+    for (const entry of chapters) {
+      const removed = removedIds(entry);
+      for (const section of entry.sections) {
+        if (!removed.has(section.id)) continue;
+        const item = node('li');
+        const button = node('button', 'restore-section');
+        button.type = 'button';
+        button.dataset.chapter = entry.id;
+        button.dataset.section = section.id;
+        button.setAttribute('aria-label', 'Torna a afegir «' + section.title + '»');
+        const plus = node('span', 'restore-section-icon', '+');
+        plus.setAttribute('aria-hidden', 'true');
+        const label = node('span', '', section.title);
+        if (chapters.length > 1) label.append(node('small', '', entry.title));
+        button.append(plus, label);
+        item.append(button);
+        items.push(item);
+      }
+    }
+    container.querySelector('ul').replaceChildren(...items);
+    container.hidden = items.length === 0;
+  }
+
+  function focusRemovedSection(chapter, section) {
+    const buttons = byId('removed-sections').querySelectorAll('button');
+    const target = [...buttons].find(button => button.dataset.chapter === chapter && button.dataset.section === section);
+    if (!target) return;
+    byId('topic-outline').open = true;
+    byId('chapter-menu').open = true;
+    target.focus();
   }
 
   function renderRoute(event) {
@@ -346,6 +380,7 @@
     title.hidden = !route;
     title.textContent = route?.topic.title ?? '';
     if (!route) {
+      previewFocus = null;
       revision++;
       if (location.hash.startsWith('#conjunt/')) {
         const id = location.hash.slice('#conjunt/'.length);
@@ -378,6 +413,7 @@
       stack.scrollTop = 0;
     }
     if (changedChapter || previous?.section !== route.section) {
+      previewFocus = null;
       pendingSection = route.section ?? '';
       if (pendingSection) documentType = 'sheet';
     }
@@ -472,7 +508,7 @@
     const chapter = printableChapter(route.chapter);
     const figures = chapter ? figuresFor(chapter) : [];
     byId('figure-options').replaceChildren(...figures.map(figureControl));
-    byId('upload').disabled = !chapter;
+    byId('upload').disabled = !chapter?.sections.length;
     byId('figure-options').hidden = !settings.showFigures;
   }
 
@@ -553,6 +589,57 @@
     }
   }
 
+  function paperSection(chapter, section) {
+    return byId('fitxa-' + chapter + '-' + section);
+  }
+
+  function renderSectionTools(chapters) {
+    for (const chapter of chapters) {
+      for (const [index, section] of chapter.sections.entries()) {
+        const unit = paperSection(chapter.id, section.id);
+        if (!unit) continue;
+        const tools = node('div', 'section-preview-tools');
+        const toggle = node('button', 'section-preview-toggle', '⋯');
+        toggle.type = 'button';
+        toggle.dataset.action = 'toggle';
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Opcions de «' + section.title + '»');
+        toggle.setAttribute('aria-controls', unit.id + '-controls');
+        const actions = node('div', 'section-preview-actions');
+        actions.id = unit.id + '-controls';
+        actions.setAttribute('role', 'group');
+        actions.setAttribute('aria-label', 'Edita «' + section.title + '»');
+        for (const [action, symbol, label, disabled] of [
+          ['up', '↑', 'Puja', index === 0],
+          ['down', '↓', 'Baixa', index === chapter.sections.length - 1],
+          ['remove', '×', 'Treu de la fitxa', false],
+        ]) {
+          const button = node('button', '', symbol);
+          button.type = 'button';
+          button.dataset.action = action;
+          button.title = label;
+          button.setAttribute('aria-label', label + ' «' + section.title + '»');
+          button.disabled = disabled;
+          actions.append(button);
+        }
+        tools.append(toggle, actions);
+        unit.append(tools);
+      }
+    }
+  }
+
+  function focusPaperSection(chapter, section, edit = {}) {
+    const unit = paperSection(chapter, section);
+    if (!unit) return false;
+    const toolbar = unit.querySelector('.section-preview-tools');
+    const action = toolbar?.querySelector('[data-action="' + edit.action + '"]:not(:disabled)');
+    const fallback = edit.action && toolbar?.querySelector('.section-preview-actions button:not(:disabled)');
+    if (edit.action) toolbar?.querySelector('.section-preview-toggle').setAttribute('aria-expanded', 'true');
+    (action || fallback || unit).focus({ preventScroll: true });
+    stack.scrollTop += unit.getBoundingClientRect().top - stack.getBoundingClientRect().top - (edit.offset ?? 12);
+    return true;
+  }
+
   async function refreshPaper() {
     const ticket = ++revision;
     const { topic, chapter } = route;
@@ -578,15 +665,15 @@
     await fontReady;
     if (ticket !== revision || !route) return;
     paper = paginate(topic, chapters, new Map(resolved), options, byId('layout-probe'), stack);
+    if (documentType === 'sheet') renderSectionTools(chapters);
     fitPaper();
     if (pendingSection) {
-      const unit = byId('fitxa-' + chapter.id + '-' + pendingSection);
+      if (!focusPaperSection(chapter.id, pendingSection)) focusRemovedSection(chapter.id, pendingSection);
       pendingSection = '';
-      if (unit) {
-        unit.focus({ preventScroll: true });
-        stack.scrollTop += unit.getBoundingClientRect().top - stack.getBoundingClientRect().top - 12;
-      }
+    } else if (previewFocus) {
+      focusPaperSection(previewFocus.chapter, previewFocus.section, previewFocus);
     }
+    previewFocus = null;
     byId('page-count').value = paper.count + (paper.count === 1 ? ' pàgina' : ' pàgines') +
       (missing ? ' · Alguna imatge no s’ha pogut carregar.' : '') +
       (paper.oversized ? ' · Redueix la lletra, l’interlineat o els marges per encabir el contingut.' : '');
@@ -633,7 +720,10 @@
       if (input.name === 'showFigures') byId('figure-options').hidden = !value;
       if (input.name === 'headerLogo' || input.name === 'showClassroomCode') syncHeaderControls();
       if (input.name === 'showPageFooter') syncFooterControls();
-      if (input.name === 'scope') renderControls();
+      if (input.name === 'scope') {
+        renderNavigation();
+        renderControls();
+      }
     }
     quickTemplateStatus.textContent = '';
     storeOptions();
@@ -651,8 +741,8 @@
     if (!file || !route) return;
     const { topic, chapter } = route;
     const printable = printableChapter(chapter);
-    if (!printable) return;
     input.value = '';
+    if (!printable?.sections.length) return;
     if (!['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif'].includes(file.type) || file.size > 12 * 1024 * 1024) {
       imageFeedback('Tria una imatge PNG, JPG, WebP, GIF o AVIF de fins a 12 MB.');
       return;
@@ -813,24 +903,66 @@
     else location.hash = hash;
   }
 
-  function changeSectionOrder(event) {
-    const button = event.target.closest('button[data-section]');
-    if (!button || !route) return;
-    const { section, direction } = button.dataset;
-    const list = arrangeChapter(route.chapter).sections;
-    const index = list.findIndex(item => item.id === section);
-    const newIndex = index + Number(direction);
-    if (index < 0 || !list[newIndex]) return;
-    const [item] = list.splice(index, 1);
-    list.splice(newIndex, 0, item);
-    settings.sectionOrder[route.chapter.id] = list.map(entry => entry.id);
+  function updateSections(message) {
     storeOptions();
     renderNavigation();
-    const controls = [...byId('chapter-nav').querySelectorAll('button:not(:disabled)')]
-      .filter(control => control.dataset.section === section);
-    (controls.find(control => control.dataset.direction === direction) ?? controls[0])?.focus({ preventScroll: true });
-    byId('section-order-status').textContent = item.title + '. Posició ' + (newIndex + 1) + ' de ' + list.length + '.';
+    renderControls();
+    byId('section-order-status').textContent = message;
     requestPaper();
+  }
+
+  function editPreviewSection(event) {
+    const button = event.target.closest('.section-preview-tools button');
+    if (!button || !route || documentType !== 'sheet') return;
+    const { action } = button.dataset;
+    if (action === 'toggle') {
+      button.setAttribute('aria-expanded', String(button.getAttribute('aria-expanded') !== 'true'));
+      return;
+    }
+    const unit = button.closest('[data-paper-section]');
+    const { paperChapter, paperSection: id } = unit.dataset;
+    const chapter = route.topic.chapters.find(entry => entry.id === paperChapter);
+    if (!chapter) return;
+    const removed = removedIds(chapter);
+    const ordered = preferences.orderedSections(chapter, settings.sectionOrder[chapter.id]);
+    const visible = ordered.filter(section => !removed.has(section.id));
+    const index = visible.findIndex(section => section.id === id);
+    if (index < 0) return;
+    const section = visible[index];
+
+    if (action === 'remove') {
+      removed.add(id);
+      settings.hiddenSections[chapter.id] = [...removed];
+      previewFocus = null;
+      updateSections('S’ha tret «' + section.title + '» de la fitxa.');
+      focusRemovedSection(chapter.id, id);
+      return;
+    }
+
+    const direction = action === 'up' ? -1 : 1;
+    const neighbor = visible[index + direction];
+    if (!neighbor) return;
+    const from = ordered.indexOf(section);
+    const to = ordered.indexOf(neighbor);
+    [ordered[from], ordered[to]] = [ordered[to], ordered[from]];
+    settings.sectionOrder[chapter.id] = ordered.map(item => item.id);
+    previewFocus = { chapter: chapter.id, section: id, action, offset: unit.getBoundingClientRect().top - stack.getBoundingClientRect().top };
+    updateSections(section.title + '. Posició ' + (index + direction + 1) + ' de ' + visible.length + '.');
+  }
+
+  function restoreSection(event) {
+    const button = event.target.closest('button[data-section]');
+    if (!button || !route) return;
+    const chapter = route.topic.chapters.find(entry => entry.id === button.dataset.chapter);
+    const section = chapter?.sections.find(entry => entry.id === button.dataset.section);
+    if (!section) return;
+    const removed = removedIds(chapter);
+    if (!removed.delete(section.id)) return;
+    if (removed.size) settings.hiddenSections[chapter.id] = [...removed];
+    else delete settings.hiddenSections[chapter.id];
+    documentType = 'sheet';
+    previewFocus = { chapter: chapter.id, section: section.id };
+    updateSections('S’ha afegit «' + section.title + '» a la fitxa.');
   }
 
   codeInput.addEventListener('input', () => codeInput.setCustomValidity(''));
@@ -901,14 +1033,12 @@
     byId('collection-dialog').close();
     showCollection();
   });
-  byId('chapter-nav').addEventListener('click', changeSectionOrder);
+  stack.addEventListener('click', editPreviewSection);
+  byId('removed-sections').addEventListener('click', restoreSection);
   byId('reset-section-order').addEventListener('click', () => {
     delete settings.sectionOrder[route.chapter.id];
-    storeOptions();
-    renderNavigation();
+    updateSections('S’ha recuperat l’ordre original dels apartats.');
     byId('outline-title').focus({ preventScroll: true });
-    byId('section-order-status').textContent = 'S’ha recuperat l’ordre original dels apartats.';
-    requestPaper();
   });
   byId('layout-template').addEventListener('change', event => {
     const selected = event.target.value;
@@ -996,14 +1126,19 @@
     const type = event.target.closest('button')?.dataset.document;
     if (!type || type === documentType) return;
     documentType = type;
+    previewFocus = null;
     renderControls();
     requestPaper();
   });
   byId('reset').addEventListener('click', () => {
     logoUploadVersion++;
     headerLogoFeedback('');
-    settings = { ...preferences.getBase(settings.templateId, activeCollection, library), templateId: settings.templateId, figures: {}, sectionOrder: settings.sectionOrder };
+    settings = {
+      ...preferences.getBase(settings.templateId, activeCollection, library), templateId: settings.templateId,
+      figures: {}, sectionOrder: settings.sectionOrder, hiddenSections: settings.hiddenSections,
+    };
     storeOptions();
+    renderNavigation();
     renderControls();
     requestPaper();
   });
