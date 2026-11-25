@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.5 · 25 de novembre de 2026
+
+- Manté la capçalera, el peu i els panells dins la finestra amb desplaçament intern i ajust automàtic del catàleg i la previsualització.
+- Els enllaços als apartats desplacen només el panell de lectura.
+
 ## 0.1.4 · 25 de novembre de 2026
 
 - El títol del tema a la capçalera deixa més alçada lliure per a la lectura i la previsualització.

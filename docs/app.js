@@ -294,11 +294,13 @@
       refreshPaper();
     } else {
       const figures = (route.chapter.figures ?? []).map(item => ({ ...item, visible: true }));
-      byId('reader').replaceChildren(readChapter(route.chapter, figures, route.chapter.title !== route.topic.title));
-      if (route.section) {
-        const heading = byId('apartat-' + route.section);
-        heading?.focus({ preventScroll: true });
-        heading?.scrollIntoView();
+      const reader = byId('reader');
+      reader.replaceChildren(readChapter(route.chapter, figures, route.chapter.title !== route.topic.title));
+      const heading = route.section && byId('apartat-' + route.section);
+      if (heading) {
+        heading.focus({ preventScroll: true });
+        const offset = heading.getBoundingClientRect().top - reader.getBoundingClientRect().top;
+        reader.scrollTop += offset - (parseFloat(getComputedStyle(heading).scrollMarginTop) || 0);
       }
     }
   }
