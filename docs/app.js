@@ -4,6 +4,8 @@
   const byId = id => document.getElementById(id);
   const form = byId('options');
   const stack = byId('paper-stack');
+  const catalogTitle = document.title;
+  // Keep storage identifiers stable so saved layouts and uploaded images survive the rename.
   const storageKey = 'quadern-obert:layout:v1';
   const defaults = { scope: 'chapter', fontSize: 12, leading: 1.45, margin: 16, monochrome: false, pageNumbers: true, showFigures: true };
   const widths = new Intl.NumberFormat('ca', { maximumFractionDigits: 1 });
@@ -172,7 +174,7 @@
       revision++;
       byId('catalog').hidden = false;
       byId('workspace').hidden = true;
-      document.title = 'Quadern obert · Apunts i recursos de primària';
+      document.title = catalogTitle;
       if (previous) window.scrollTo(0, 0);
       return;
     }
@@ -186,7 +188,7 @@
     byId('workspace-grid').classList.toggle('maqueta', editing);
     byId('topic-title').textContent = route.topic.title;
     byId('topic-meta').textContent = meta(route.topic);
-    document.title = route.chapter.title + ' · Quadern obert';
+    document.title = route.chapter.title + ' · Món a mà';
     for (const [id, view] of [['read-view', 'llegeix'], ['studio-view', 'maqueta']]) {
       const anchor = byId(id);
       anchor.href = address(route.topic, route.chapter, view);

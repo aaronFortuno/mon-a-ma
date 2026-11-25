@@ -126,7 +126,7 @@ window.imprimible = (() => {
     header.append(node('span', '', topic.title), node('span', '', topic.subject + ' · ' + topic.grades.join(', ')));
     const body = node('div', 'sheet-body');
     const footer = node('footer', 'sheet-footer');
-    footer.append(node('span', '', 'Quadern obert'));
+    footer.append(node('span', '', 'Món a mà'));
     inner.append(header, body, footer);
     sheet.append(inner);
     return { sheet, body, footer };

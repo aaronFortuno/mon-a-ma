@@ -1,6 +1,6 @@
-# Quadern obert
+# Món a mà
 
-Catàleg de temes de primària per preparar carpetes d’aprenentatge. El primer tema, **La Terra i els mapes**, conté quatre capítols de medi de 5è de primària.
+Apunts i materials per explorar el medi a primària i preparar carpetes d’aprenentatge. El primer tema, **La Terra i els mapes**, conté quatre capítols de 5è de primària.
 
 ## Obre el catàleg
 
@@ -16,4 +16,4 @@ A **Llegeix** pots navegar pels capítols i apartats. A **Maqueta** pots canviar
 
 ## GitHub Pages
 
-Configura Pages perquè publiqui la carpeta `/docs` de la branca `main`. El catàleg funciona amb fitxers estàtics i rutes relatives.
+La font de publicació a GitHub Pages és la carpeta `/docs` de la branca `main` del repositori `aaronFortuno/mon-a-ma`. El domini del projecte és `monama.ortogra.fi`.
