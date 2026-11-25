@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.2.1 · 25 de novembre de 2026
+
+- Capçalera i peu sempre visibles. La galeria, els filtres i els panells del taller es desplacen per separat, amb els seus menús ancorats.
+
 ## 0.2.0 · 25 de novembre de 2026
 
 - Logotip nou al web, al favicon i als imprimibles.

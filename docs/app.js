@@ -218,10 +218,7 @@
       byId('catalog').hidden = false;
       byId('workspace').hidden = true;
       document.title = catalogTitle;
-      if (previous) {
-        window.scrollTo(0, 0);
-        if (event) byId('topics').querySelector('[data-topic="' + previous.topic.id + '"]')?.focus({ preventScroll: true });
-      }
+      if (previous && event) byId('topics').querySelector('[data-topic="' + previous.topic.id + '"]')?.focus({ preventScroll: true });
       return;
     }
     if (previous?.topic.id !== route.topic.id) {
@@ -243,8 +240,8 @@
       byId('upload-status').hidden = true;
       byId('save-status').hidden = true;
       byId('upload').value = '';
+      (editing ? stack : byId('reader')).scrollTop = 0;
     }
-    window.scrollTo(0, 0);
     renderNavigation();
     if (editing) {
       renderControls();
