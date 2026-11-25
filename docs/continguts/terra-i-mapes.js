@@ -17,9 +17,11 @@ window.quaderns ??= [];
     { type: 'mapa', title: 'Mapes físics i polítics del món', provider: 'IGN', url: 'https://www.ign.es/web/ign/portal/recursos-educativos' },
   ];
 
-  function addTopic(chapter, details) {
+  function addTopic(code, chapter, details) {
     window.quaderns.push({
       id: chapter.id,
+      code,
+      lang: 'ca',
       title: chapter.title,
       collection,
       subject: 'Medi',
@@ -32,7 +34,7 @@ window.quaderns ??= [];
     });
   }
 
-  addTopic({
+  addTopic('M001', {
     id: 'planeta-terra',
     title: 'El planeta Terra',
     intro: 'Quan trepitgem el terra, només veiem una part molt petita del planeta. Sota els peus hi ha capes de roca i metall. A la superfície i al seu voltant hi trobem aigua, aire i éssers vius. Tots aquests elements es relacionen.',
@@ -76,7 +78,7 @@ window.quaderns ??= [];
     ],
   });
 
-  addTopic({
+  addTopic('M002', {
     id: 'coordenades',
     title: 'Les coordenades geogràfiques',
     intro: 'Un mateix riu pot passar per molts llocs. Per assenyalar un punt concret, com ara on neix o on desemboca, fem servir dues dades: la latitud i la longitud. Juntes formen les seves coordenades geogràfiques.',
@@ -110,7 +112,7 @@ window.quaderns ??= [];
     ],
   });
 
-  addTopic({
+  addTopic('M003', {
     id: 'mapes-i-planols',
     title: 'Els mapes i els plànols geogràfics',
     intro: 'Un globus ens mostra la forma general del planeta. Un mapa ens permet posar tota la Terra, o només una part, sobre un paper o una pantalla. Si volem conèixer de prop un lloc, com els carrers que envolten l’escola, podem fer servir un plànol.',
@@ -142,7 +144,7 @@ window.quaderns ??= [];
     ],
   });
 
-  addTopic({
+  addTopic('M004', {
     id: 'tipus-de-mapes',
     title: 'Els tipus de mapes',
     intro: 'Pots mirar un mateix territori per saber com és el relleu, per on passa una carretera o quines fronteres el divideixen. La pregunta que et fas t’ajuda a triar el mapa.',

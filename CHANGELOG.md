@@ -1,5 +1,12 @@
 # Historial de versions
 
+## 0.1.9 · 25 de novembre de 2026
+
+- Permet desar el format com a plantilla des de la barra de la vista prèvia i actualitzar una plantilla aplicada amb un clic.
+- Afegeix lliscadors numèrics per a l’interlineat i els marges, i icones per a l’alineació. Mostra la vista prèvia sempre en color.
+- Afegeix un apartat per configurar el peu de pàgina amb la numeració i el codi del material.
+- Identifica els materials amb codis curts que es poden cercar al catàleg i compartir amb l’alumnat.
+
 ## 0.1.8 · 25 de novembre de 2026
 
 - Aplica transicions de 220 ms en obrir i tancar els desplegables, el menú d’idioma i els diàlegs. Respecta el moviment reduït.

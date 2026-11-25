@@ -151,7 +151,8 @@ window.imprimible = (() => {
   }
 
   function makePage(topic, options, firstPage) {
-    const sheet = node('article', options.monochrome ? 'sheet ink mono' : 'sheet ink');
+    const sheet = node('article', 'sheet ink');
+    sheet.lang = topic.lang;
     sheet.style.setProperty('--margin', options.margin + 'mm');
     sheet.style.setProperty('--font-size', options.fontSize + 'pt');
     sheet.style.setProperty('--leading', options.leading);
@@ -187,16 +188,20 @@ window.imprimible = (() => {
       if (row.childElementCount) header.append(row);
     }
     const body = node('div', 'sheet-body');
-    const footer = node('footer', 'sheet-footer');
-    const signature = node('span', 'sheet-brand');
-    const logo = node('img');
-    logo.src = projectLogo;
-    logo.alt = '';
-    logo.width = 15;
-    logo.height = 15;
-    signature.append(logo, 'Món a mà');
-    footer.append(signature);
-    inner.append(header, body, footer);
+    const footer = options.showPageFooter ? node('footer', 'sheet-footer') : null;
+    inner.append(header, body);
+    if (footer) {
+      const signature = node('span', 'sheet-brand');
+      const logo = node('img');
+      logo.src = projectLogo;
+      logo.alt = '';
+      logo.width = 15;
+      logo.height = 15;
+      signature.append(logo, 'Món a mà');
+      footer.append(signature);
+      if (options.showMaterialCode) footer.append(node('span', 'sheet-material-code', topic.code));
+      inner.append(footer);
+    }
     sheet.append(inner);
     return { sheet, body, footer };
   }
@@ -235,7 +240,7 @@ window.imprimible = (() => {
     const width = pages[0].sheet.getBoundingClientRect().width;
     const height = pages[0].sheet.getBoundingClientRect().height;
     const frames = pages.map(({ sheet, footer }, index) => {
-      if (options.pageNumbers) footer.append(node('span', '', (index + 1) + ' / ' + pages.length));
+      if (options.pageNumbers) footer?.append(node('span', 'sheet-page-number', (index + 1) + ' / ' + pages.length));
       const frame = node('div', 'sheet-frame');
       frame.append(sheet);
       return frame;

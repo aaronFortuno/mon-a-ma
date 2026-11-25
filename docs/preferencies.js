@@ -4,7 +4,7 @@
   const libraryKey = 'mon-a-ma:organitzacio:v1';
   const defaults = {
     scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.45, margin: 16, textAlignment: 'left',
-    monochrome: false, pageNumbers: true, showFigures: true,
+    showPageFooter: true, pageNumbers: true, showMaterialCode: true, showFigures: true,
     headerLogo: true, headerName: true, headerDate: true, headerLogoImage: '',
     showClassroomCode: false, classroomCode: '', classroomCodeSize: 20, classroomCodeStyle: 'solid',
   };

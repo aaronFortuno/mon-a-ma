@@ -1,16 +1,21 @@
 (() => {
-  const topics = window.quaderns;
+  const locale = document.documentElement.lang;
+  const topics = window.quaderns.filter(topic => topic.lang === locale);
   const { node, paragraphAnchor, readChapter, loadPaperFont, paginate } = window.imprimible;
   const preferences = window.preferencies;
   const { defaults } = preferences;
   const byId = id => document.getElementById(id);
   const topicById = new Map(topics.map(topic => [topic.id, topic]));
+  const topicByCode = new Map(topics.map(topic => [topic.code, topic]));
+  const codeInput = byId('material-code');
+  const quickTemplateForm = byId('quick-template-form');
+  const quickTemplateStatus = byId('quick-template-status');
   let library = preferences.library();
   let activeCollection = null;
   const form = byId('options');
   const stack = byId('paper-stack');
   const catalogTitle = document.title;
-  const widths = new Intl.NumberFormat('ca', { maximumFractionDigits: 1 });
+  const layoutNumber = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
   const images = new Map();
   let knownUploads = [];
   let route;
@@ -58,9 +63,9 @@
     return collection ? '#colleccio/' + collection.id : '#';
   }
 
-  function address(topic, chapter, view = 'maqueta', section = '') {
-    const path = topic.chapters.length === 1 ? [topic.id] : [topic.id, chapter.id];
-    return [catalogAddress(activeCollection), ...path, view, section].filter(Boolean).join('/').replace(/^#\//, '#');
+  function address(topic, chapter, view = 'maqueta', section = '', collection = activeCollection) {
+    const path = topic.chapters.length === 1 ? [topic.code] : [topic.code, chapter.id];
+    return [catalogAddress(collection), ...path, view, section].filter(Boolean).join('/').replace(/^#\//, '#');
   }
 
   function members(collection) {
@@ -87,7 +92,7 @@
     const controls = Object.entries(fields).map(([name, values]) => {
       const select = filters.elements.namedItem(name);
       const available = [...new Set(topics.flatMap(values).filter(Boolean))]
-        .sort((a, b) => a.localeCompare(b, 'ca', { numeric: true }));
+        .sort((a, b) => a.localeCompare(b, locale, { numeric: true }));
       select.append(...available.map(value => option(value, value)));
       return { select, values };
     });
@@ -106,7 +111,7 @@
       }
       const details = node('div', 'topic-details');
       const summary = [topic.grades.join(', '), topic.theme ?? topic.subject].join(' · ');
-      const extent = [size(topic), topic.difficulty].filter(Boolean).join(' · ');
+      const extent = [topic.code, size(topic), topic.difficulty].filter(Boolean).join(' · ');
       details.append(node('p', 'eyebrow', summary), node(grouped ? 'h3' : 'h2', 'topic-card-title', topic.title),
         node('p', 'topic-description', topic.description), node('p', 'topic-extent', extent));
       card.append(picture, details);
@@ -160,7 +165,7 @@
       activeCollection = library.collections.find(item => item.id === path.shift()) ?? null;
       if (!activeCollection) return null;
     }
-    const topic = topicById.get(path.shift());
+    const topic = topicByCode.get(path.shift().toUpperCase());
     if (!topic || (activeCollection && !activeCollection.topicIds.includes(topic.id))) return null;
     const chapterId = topic.chapters.length > 1 ? path.shift() : topic.chapters[0].id;
     const chapter = topic.chapters.find(item => item.id === chapterId) ?? topic.chapters[0];
@@ -343,6 +348,8 @@
       return;
     }
     if (changedMaterial) {
+      showQuickTemplate(false);
+      quickTemplateStatus.textContent = '';
       settings = getOptions(route.topic);
       documentType = 'sheet';
       logoUploadVersion++;
@@ -371,7 +378,9 @@
       const chapter = arrangeChapter(route.chapter);
       const figures = settings.showFigures ? figuresFor(chapter, 'sheet').filter(item => item.visible) : [];
       const reader = byId('reader');
-      reader.replaceChildren(readChapter(chapter, figures, chapter.title !== route.topic.title));
+      const article = readChapter(chapter, figures, chapter.title !== route.topic.title);
+      article.lang = route.topic.lang;
+      reader.replaceChildren(article);
       const heading = route.section && byId('apartat-' + route.section);
       if (heading) {
         heading.focus({ preventScroll: true });
@@ -458,14 +467,25 @@
       if (input.type === 'checkbox') input.checked = settings[key];
       else input.value = settings[key];
     }
-    byId('font-size-value').value = widths.format(settings.fontSize) + ' pt';
+    syncMeasurements();
     syncHeaderControls();
+    syncFooterControls();
     syncTemplateSelector();
     const chapter = printableChapter(route.chapter);
     const figures = chapter ? figuresFor(chapter) : [];
     byId('figure-options').replaceChildren(...figures.map(figureControl));
     byId('upload').disabled = !chapter;
     byId('figure-options').hidden = !settings.showFigures;
+  }
+
+  function syncMeasurements() {
+    byId('font-size-value').value = layoutNumber.format(settings.fontSize) + ' pt';
+    byId('leading-value').value = layoutNumber.format(settings.leading);
+    byId('margin-value').value = layoutNumber.format(settings.margin) + ' mm';
+  }
+
+  function syncFooterControls() {
+    byId('page-footer-options').hidden = !settings.showPageFooter;
   }
 
   function syncHeaderControls() {
@@ -563,7 +583,7 @@
     fitPaper();
     byId('page-count').value = paper.count + (paper.count === 1 ? ' pàgina' : ' pàgines') +
       (missing ? ' · Alguna imatge no s’ha pogut carregar.' : '') +
-      (paper.oversized ? ' · Redueix la lletra o els marges per encabir el contingut.' : '');
+      (paper.oversized ? ' · Redueix la lletra, l’interlineat o els marges per encabir el contingut.' : '');
     print.disabled = paper.oversized;
   }
 
@@ -580,7 +600,7 @@
     const input = event.target;
     if (input.type === 'file') return;
     if (event.type === 'input' && !['range', 'text'].includes(input.type)) return;
-    const isNumber = input.type === 'range' || ['leading', 'margin', 'classroomCodeSize'].includes(input.name);
+    const isNumber = input.type === 'range' || input.name === 'classroomCodeSize';
     const value = input.type === 'checkbox' ? input.checked : isNumber ? Number(input.value) : input.value;
     const card = input.closest('[data-figure-id]');
     if (card) {
@@ -603,11 +623,13 @@
     } else {
       if (!(input.name in defaults)) return;
       settings[input.name] = value;
-      if (input.name === 'fontSize') byId('font-size-value').value = widths.format(value) + ' pt';
+      if (['fontSize', 'leading', 'margin'].includes(input.name)) syncMeasurements();
       if (input.name === 'showFigures') byId('figure-options').hidden = !value;
       if (input.name === 'headerLogo' || input.name === 'showClassroomCode') syncHeaderControls();
+      if (input.name === 'showPageFooter') syncFooterControls();
       if (input.name === 'scope') renderControls();
     }
+    quickTemplateStatus.textContent = '';
     storeOptions();
     requestPaper();
   }
@@ -696,10 +718,38 @@
     const inherited = library.templates.find(item => item.id === inheritedId)?.name ?? 'Format original';
     select.replaceChildren(...templateOptions('Per defecte · ' + inherited));
     select.value = settings.templateId ?? 'inherit';
+    const template = library.templates.find(item => item.id === settings.templateId);
+    const save = byId('save-active-template');
+    save.hidden = !template;
+    save.title = template ? 'Desa els canvis a «' + template.name + '»' : '';
+    byId('new-template').textContent = template ? 'Nova plantilla' : 'Desa plantilla…';
+  }
+
+  function showQuickTemplate(open) {
+    quickTemplateForm.hidden = !open;
+    byId('template-actions').hidden = open;
+    byId('new-template').setAttribute('aria-expanded', String(open));
+    if (open) {
+      quickTemplateForm.reset();
+      quickTemplateStatus.textContent = '';
+      quickTemplateForm.elements.title.focus();
+    }
+  }
+
+  function saveCurrentTemplate(id, name) {
+    const template = { id, name, format: preferences.format(settings) };
+    const persisted = updateLibrary(data => {
+      const index = data.templates.findIndex(item => item.id === id);
+      if (index < 0) data.templates.push(template);
+      else data.templates[index] = template;
+    });
+    applyTemplate(id);
+    quickTemplateStatus.textContent = persisted ? 'Plantilla desada.' : 'Plantilla disponible durant aquesta sessió.';
   }
 
   function applyTemplate(id) {
     settings.templateId = id;
+    quickTemplateStatus.textContent = '';
     Object.assign(settings, preferences.format(preferences.getBase(id, activeCollection, library)));
     storeOptions();
     renderControls();
@@ -712,10 +762,11 @@
     picker.replaceChildren(...templateOptions());
     picker.value = library.defaultTemplateId;
     const select = manager.elements.template;
-    select.replaceChildren(option('', 'Nova plantilla'), ...library.templates.map(item => option(item.id, item.name)));
-    select.value = selected;
-    manager.elements.title.value = library.templates.find(item => item.id === selected)?.name ?? '';
-    byId('remove-template').hidden = !selected;
+    select.replaceChildren(...library.templates.map(item => option(item.id, item.name)));
+    const template = library.templates.find(item => item.id === selected) ?? library.templates[0];
+    manager.hidden = !template;
+    select.value = template?.id ?? '';
+    manager.elements.title.value = template?.name ?? '';
   }
 
   function updateLibrary(change) {
@@ -775,6 +826,19 @@
     byId('section-order-status').textContent = item.title + '. Posició ' + (newIndex + 1) + ' de ' + list.length + '.';
     requestPaper();
   }
+
+  codeInput.addEventListener('input', () => codeInput.setCustomValidity(''));
+  byId('material-code-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const topic = topicByCode.get(codeInput.value.trim().toUpperCase());
+    if (!topic) {
+      codeInput.setCustomValidity('No hi ha cap material amb aquest codi.');
+      codeInput.reportValidity();
+      return;
+    }
+    codeInput.value = '';
+    location.hash = address(topic, topic.chapters[0], 'llegeix', '', null);
+  });
 
   byId('catalog-collection').addEventListener('change', event => {
     showCollection(library.collections.find(item => item.id === event.target.value));
@@ -844,6 +908,28 @@
     const selected = event.target.value;
     applyTemplate(selected === 'inherit' ? null : selected);
   });
+  byId('new-template').addEventListener('click', () => showQuickTemplate(true));
+  function cancelQuickTemplate() {
+    showQuickTemplate(false);
+    byId('new-template').focus();
+  }
+  byId('cancel-new-template').addEventListener('click', cancelQuickTemplate);
+  quickTemplateForm.addEventListener('keydown', event => {
+    if (event.key === 'Escape') cancelQuickTemplate();
+  });
+  quickTemplateForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const name = quickTemplateForm.elements.title.value.trim();
+    if (!name) return;
+    const id = 'fmt-' + crypto.getRandomValues(new Uint32Array(2)).join('-');
+    saveCurrentTemplate(id, name);
+    showQuickTemplate(false);
+    byId('save-active-template').focus();
+  });
+  byId('save-active-template').addEventListener('click', () => {
+    const template = library.templates.find(item => item.id === settings.templateId);
+    if (template) saveCurrentTemplate(template.id, template.name);
+  });
   byId('manage-templates').addEventListener('click', () => {
     byId('template-status').textContent = '';
     showTemplateManager(settings.templateId ?? '');
@@ -854,16 +940,14 @@
     const manager = event.currentTarget;
     const name = manager.elements.title.value.trim();
     if (!name) return;
-    const id = manager.elements.template.value || 'fmt-' + crypto.getRandomValues(new Uint32Array(2)).join('-');
-    const template = { id, name, format: preferences.format(settings) };
+    const id = manager.elements.template.value;
     const persisted = updateLibrary(data => {
-      const index = data.templates.findIndex(item => item.id === id);
-      if (index < 0) data.templates.push(template);
-      else data.templates[index] = template;
+      const template = data.templates.find(item => item.id === id);
+      if (template) template.name = name;
     });
-    applyTemplate(id);
+    syncTemplateSelector();
     showTemplateManager(id);
-    templateStatus('Plantilla desada.', persisted);
+    templateStatus('Nom de la plantilla actualitzat.', persisted);
   });
   byId('default-template').addEventListener('change', event => {
     const persisted = updateLibrary(data => { data.defaultTemplateId = event.target.value; });
