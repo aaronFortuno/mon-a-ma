@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.3.0 · 25 de novembre de 2026
+
+- Tipografia de pantalla una mica més compacta.
+- «La Terra i els mapes» agrupa quatre temes amb lectura, maquetació i impressió pròpies. El filtre de conjunt i els enllaços entre temes faciliten la navegació.
+
 ## 0.2.1 · 25 de novembre de 2026
 
 - Capçalera i peu sempre visibles. La galeria, els filtres i els panells del taller es desplacen per separat, amb els seus menús ancorats.

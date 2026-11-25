@@ -56,7 +56,8 @@
   }
 
   function address(topic, chapter, view = 'maqueta', section = '') {
-    return '#' + [topic.id, chapter.id, view, section].filter(Boolean).join('/');
+    const path = topic.chapters.length === 1 ? [topic.id] : [topic.id, chapter.id];
+    return '#' + [...path, view, section].filter(Boolean).join('/');
   }
 
   function meta(topic) {
@@ -69,10 +70,14 @@
 
   function setupCatalog() {
     const filters = byId('catalog-filters');
-    const size = topic => topic.chapters.length + (topic.chapters.length === 1 ? ' capítol' : ' capítols');
+    const size = topic => {
+      const count = topic.chapters.reduce((total, chapter) => total + chapter.sections.length, 0);
+      return count + (count === 1 ? ' apartat' : ' apartats');
+    };
     const fields = {
       grade: topic => topic.grades,
       theme: topic => [topic.theme],
+      collection: topic => [topic.collection?.title],
       length: topic => [size(topic)],
       difficulty: topic => [topic.difficulty],
     };
@@ -84,26 +89,41 @@
       return { select, values };
     });
 
+    function makeCard(topic, grouped) {
+      const card = link('', address(topic, topic.chapters[0]), 'topic-card');
+      card.dataset.topic = topic.id;
+      const picture = node('div', topic.cover ? 'topic-cover' : 'topic-cover topic-cover-brand');
+      const cover = node('img');
+      cover.src = topic.cover ?? 'assets/mon-a-ma.png';
+      cover.alt = '';
+      cover.loading = 'lazy';
+      picture.append(cover);
+      const details = node('div', 'topic-details');
+      const summary = [topic.grades.join(', '), topic.theme ?? topic.subject].join(' · ');
+      const extent = [size(topic), topic.difficulty].filter(Boolean).join(' · ');
+      details.append(node('p', 'eyebrow', summary), node(grouped ? 'h3' : 'h2', 'topic-card-title', topic.title),
+        node('p', 'topic-description', topic.description), node('p', 'topic-extent', extent));
+      card.append(picture, details);
+      return card;
+    }
+
     function refresh() {
       const matching = topics.filter(topic => controls.every(({ select, values }) => !select.value || values(topic).includes(select.value)));
-      byId('topics').replaceChildren(...matching.map(topic => {
-        const card = link('', address(topic, topic.chapters[0]), 'topic-card');
-        card.dataset.topic = topic.id;
-        const picture = node('div', 'topic-cover');
-        if (topic.cover) {
-          const cover = node('img');
-          cover.src = topic.cover;
-          cover.alt = '';
-          cover.loading = 'lazy';
-          picture.append(cover);
-        }
-        const details = node('div', 'topic-details');
-        const summary = [topic.grades.join(', '), topic.theme ?? topic.subject].join(' · ');
-        const extent = [size(topic), topic.difficulty].filter(Boolean).join(' · ');
-        details.append(node('p', 'eyebrow', summary), node('h2', '', topic.title),
-          node('p', 'topic-description', topic.description), node('p', 'topic-extent', extent));
-        card.append(picture, details);
-        return card;
+      const groups = new Map();
+      for (const topic of matching) {
+        const collection = topic.collection ?? null;
+        const key = collection?.id ?? null;
+        if (!groups.has(key)) groups.set(key, { collection, cards: node('div', 'topics') });
+        groups.get(key).cards.append(makeCard(topic, Boolean(collection)));
+      }
+      byId('topics').replaceChildren(...[...groups.values()].map(({ collection, cards }) => {
+        if (!collection) return cards;
+        const group = node('section', 'topic-group');
+        const heading = node('h2', 'topic-group-title', collection.title);
+        heading.id = 'conjunt-' + collection.id;
+        group.setAttribute('aria-labelledby', heading.id);
+        group.append(heading, cards);
+        return group;
       }));
       byId('empty').hidden = matching.length > 0;
       byId('topic-count').value = matching.length + (matching.length === 1 ? ' tema' : ' temes');
@@ -120,16 +140,20 @@
   }
 
   function extractRoute() {
-    const [topicId, chapterId, view, section] = location.hash.slice(1).split('/');
+    const [topicId, ...path] = location.hash.slice(1).split('/');
     const topic = topics.find(item => item.id === topicId);
     if (!topic) return null;
+    const chapterId = topic.chapters.length > 1 ? path.shift() : topic.chapters[0].id;
     const chapter = topic.chapters.find(item => item.id === chapterId) ?? topic.chapters[0];
+    const [view, section] = path;
     return { topic, chapter, view: view === 'llegeix' ? 'llegeix' : 'maqueta', section };
   }
 
   function getOptions(topic) {
     const data = saved[topic.id] ?? {};
-    return { ...defaults, ...data, figures: { ...data.figures } };
+    const settings = { ...defaults, ...data, figures: { ...data.figures } };
+    if (topic.chapters.length === 1) settings.scope = 'chapter';
+    return settings;
   }
 
   function storeOptions() {
@@ -187,16 +211,36 @@
     if (rows.length) container.append(list);
   }
 
+  function renderCollection(topic, view) {
+    const container = byId('collection-nav');
+    container.hidden = !topic.collection;
+    container.replaceChildren();
+    if (!topic.collection) return;
+    const nav = node('nav');
+    nav.setAttribute('aria-label', 'Temes del conjunt ' + topic.collection.title);
+    for (const item of topics.filter(candidate => candidate.collection?.id === topic.collection.id)) {
+      const anchor = link(item.title, address(item, item.chapters[0], view));
+      if (item.id === topic.id) anchor.setAttribute('aria-current', 'page');
+      nav.append(anchor);
+    }
+    container.append(node('summary', '', topic.collection.title), nav);
+  }
+
   function renderNavigation() {
     const { topic, chapter, view, section } = route;
     const nav = byId('chapter-nav');
+    const hasChapters = topic.chapters.length > 1;
     nav.replaceChildren();
+    nav.hidden = !hasChapters && view !== 'llegeix';
+    byId('outline-title').textContent = hasChapters ? 'Capítols' : view === 'llegeix' ? 'Apartats' : 'Aquest tema';
     for (const entry of topic.chapters) {
-      const anchor = link(entry.title, address(topic, entry, view));
-      if (entry.id === chapter.id && !section) anchor.setAttribute('aria-current', 'page');
-      nav.append(anchor);
+      if (hasChapters) {
+        const anchor = link(entry.title, address(topic, entry, view));
+        if (entry.id === chapter.id && !section) anchor.setAttribute('aria-current', 'page');
+        nav.append(anchor);
+      }
       if (entry.id !== chapter.id || view !== 'llegeix') continue;
-      const sub = node('div', 'section-links');
+      const sub = node('div', hasChapters ? 'section-links' : '');
       for (const item of entry.sections) {
         const heading = link(item.title, address(topic, entry, view, item.id));
         if (item.id === section) heading.setAttribute('aria-current', 'location');
@@ -204,7 +248,9 @@
       }
       nav.append(sub);
     }
-    mountList(byId('resources'), 'Recursos del tema', (topic.resources ?? []).map(item => [[item.title, item.provider].filter(Boolean).join(' · '), item.url]));
+    renderCollection(topic, view);
+    const resources = [...(topic.resources ?? []), ...(topic.collection?.resources ?? [])];
+    mountList(byId('resources'), 'Recursos', resources.map(item => [[item.title, item.provider].filter(Boolean).join(' · '), item.url]));
     mountList(byId('sources'), 'Currículum i fonts', topic.sources ?? [], topic.curriculum);
     byId('document-view-link').href = address(topic, chapter, view === 'maqueta' ? 'llegeix' : 'maqueta');
     byId('document-view-link').textContent = view === 'maqueta' ? 'Llegeix els apunts' : 'Obre la maquetació';
@@ -324,6 +370,7 @@
   }
 
   function renderControls() {
+    byId('print-scope').hidden = route.topic.chapters.length === 1;
     syncDocumentPicker();
     for (const key of Object.keys(defaults)) {
       const input = form.elements.namedItem(key);

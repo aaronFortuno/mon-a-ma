@@ -1,6 +1,6 @@
 # Món a mà
 
-Apunts i materials per explorar el medi a primària i preparar carpetes d’aprenentatge. El primer tema, **La Terra i els mapes**, conté quatre capítols de 5è de primària.
+Apunts i materials per explorar el medi a primària i preparar carpetes d’aprenentatge. El primer conjunt, **La Terra i els mapes**, agrupa quatre temes de 5è de primària.
 
 ## Obre el catàleg
 
@@ -13,7 +13,7 @@ Tria un tema al catàleg per obrir la previsualització A4. Pots navegar pels ca
 - Crea un fitxer a `docs/continguts` a partir de `terra-i-mapes.js` i carrega’l a `docs/index.html` abans d’`app.js`. Cada tema té metadades, capítols i, si escau, fonts, currículum i recursos. Els capítols contenen apartats amb paràgrafs, taules, passos numerats i requadres. Mantén estables els identificadors per conservar els enllaços.
 - Desa les figures a `docs/illustracions` i registra-les al capítol amb un identificador únic dins del tema, l’apartat, la ruta, el text alternatiu i el peu. Els ajustos inicials són l’amplada en percentatge, l’alineació i el punt d’inserció. El programa `tools/dibuixa-esquemes.py` regenera les tres figures del tema amb Pillow.
 - Llista els materials complementaris a `resources` amb `type`, `title`, `provider` i `url`. Aquest camp permet reunir els materials de cada tema quan s’hi vagin incorporant altres formats. Les adreces dels temes, capítols i apartats es poden enllaçar directament.
-- Afegeix `theme`, `difficulty` i, opcionalment, `cover` a les dades del tema. L’extensió es calcula amb el nombre de capítols.
+- Afegeix `theme`, `difficulty` i, opcionalment, `cover` a les dades del tema. L’extensió es calcula amb el nombre d’apartats. Els temes poden compartir una `collection` amb `id`, `title` i recursos comuns opcionals.
 - Per oferir un solucionari, afegeix `solution` al capítol amb `sections` i, opcionalment, `title`, `intro` i `figures`. Si utilitzes figures, assigna’ls identificadors diferents dels de la fitxa.
 
 ## GitHub Pages
