@@ -8,6 +8,12 @@ Obre `docs/index.html` al navegador. També es pot servir el directori `docs` am
 
 Tria un tema al catàleg per obrir la previsualització A4. Pots navegar pels capítols i canviar el cos de lletra, l’interlineat, els marges i les il·lustracions. **Llegeix els apunts** obre la vista de lectura. **Imprimeix / Desa en PDF** obre el diàleg d’impressió del navegador amb el capítol o el tema complet, segons l’opció seleccionada. Els ajustos i les imatges que hi afegeixis es desen al navegador que fas servir, sempre que l’emmagatzematge local hi estigui disponible.
 
+## Organitza les fitxes
+
+Al taller, **Plantilles** permet desar el format actual amb un nom, aplicar-lo a altres materials i establir-lo com a format per defecte. El codi d’aula, les imatges concretes i l’ordre dels apartats es desen amb cada fitxa. Al catàleg, **Nova col·lecció** crea un grup propi amb una plantilla opcional. Els ajustos fets dins d’una col·lecció es desen per separat.
+
+Les fletxes del panell **Apartats** canvien l’ordre de la fitxa i de la lectura. Les reserves d’imatge alternen de costat segons l’ordre del material, i el panell d’il·lustracions permet ajustar cada reserva.
+
 ## Afegeix continguts
 
 - Crea un fitxer a `docs/continguts` a partir de `terra-i-mapes.js` i carrega’l a `docs/index.html` abans d’`app.js`. Cada tema té metadades, capítols i, si escau, fonts, currículum i recursos. Els capítols contenen apartats amb paràgrafs, taules, passos numerats i requadres. Mantén estables els identificadors per conservar els enllaços.

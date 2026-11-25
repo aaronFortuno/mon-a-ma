@@ -1,21 +1,17 @@
 (() => {
   const topics = window.quaderns;
   const { node, paragraphAnchor, readChapter, loadPaperFont, paginate } = window.imprimible;
+  const preferences = window.preferencies;
+  const { defaults } = preferences;
   const byId = id => document.getElementById(id);
+  const topicById = new Map(topics.map(topic => [topic.id, topic]));
+  let library = preferences.library();
+  let activeCollection = null;
   const form = byId('options');
   const stack = byId('paper-stack');
   const catalogTitle = document.title;
-  // Keep storage identifiers stable so saved layouts and uploaded images survive the rename.
-  const storageKey = 'quadern-obert:layout:v1';
-  const defaults = {
-    scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.45, margin: 16, textAlignment: 'left',
-    monochrome: false, pageNumbers: true, showFigures: true,
-    headerLogo: true, headerName: true, headerDate: true,
-    showClassroomCode: false, classroomCode: '', classroomCodeSize: 20, classroomCodeStyle: 'solid',
-  };
   const widths = new Intl.NumberFormat('ca', { maximumFractionDigits: 1 });
   const images = new Map();
-  let saved = {};
   let knownUploads = [];
   let route;
   let documentType = 'sheet';
@@ -25,9 +21,6 @@
   let frameId;
   let imageDb;
   let logoUploadVersion = 0;
-
-  try { saved = JSON.parse(localStorage.getItem(storageKey)) || {}; }
-  catch { saved = {}; }
 
   function imageStore() {
     imageDb ??= new Promise((resolve, reject) => {
@@ -61,9 +54,17 @@
     return element;
   }
 
+  function catalogAddress(collection) {
+    return collection ? '#colleccio/' + collection.id : '#';
+  }
+
   function address(topic, chapter, view = 'maqueta', section = '') {
     const path = topic.chapters.length === 1 ? [topic.id] : [topic.id, chapter.id];
-    return '#' + [...path, view, section].filter(Boolean).join('/');
+    return [catalogAddress(activeCollection), ...path, view, section].filter(Boolean).join('/').replace(/^#\//, '#');
+  }
+
+  function members(collection) {
+    return collection.topicIds.map(id => topicById.get(id)).filter(Boolean);
   }
 
   function option(value, label) {
@@ -113,10 +114,16 @@
     }
 
     function refresh() {
-      const matching = topics.filter(topic => controls.every(({ select, values }) => !select.value || values(topic).includes(select.value)));
+      const choices = byId('catalog-collection');
+      choices.replaceChildren(option('', 'Tot el catàleg'), ...library.collections.map(item => option(item.id, item.name)));
+      choices.value = activeCollection?.id ?? '';
+      byId('edit-collection').hidden = !activeCollection;
+      byId('catalog-title').textContent = activeCollection?.name ?? 'Temes';
+      const candidates = activeCollection ? members(activeCollection) : topics;
+      const matching = candidates.filter(topic => controls.every(({ select, values }) => !select.value || values(topic).includes(select.value)));
       const groups = new Map();
       for (const topic of matching) {
-        const collection = topic.collection ?? null;
+        const collection = activeCollection ? null : topic.collection ?? null;
         const key = collection?.id ?? null;
         if (!groups.has(key)) groups.set(key, { collection, cards: node('div', 'topics') });
         groups.get(key).cards.append(makeCard(topic, Boolean(collection)));
@@ -131,6 +138,7 @@
         return group;
       }));
       byId('empty').hidden = matching.length > 0;
+      byId('empty').textContent = activeCollection && !candidates.length ? 'La col·lecció encara és buida.' : 'No hi ha cap tema amb aquests filtres.';
       byId('topic-count').value = matching.length + (matching.length === 1 ? ' tema' : ' temes');
       filters.querySelector('button[type="reset"]').hidden = !controls.some(({ select }) => select.value);
     }
@@ -141,41 +149,63 @@
       refresh();
       controls[0].select.focus();
     });
-    refresh();
+    return refresh;
   }
 
   function extractRoute() {
-    const [topicId, ...path] = location.hash.slice(1).split('/');
-    const topic = topics.find(item => item.id === topicId);
-    if (!topic) return null;
+    const path = location.hash.slice(1).split('/');
+    activeCollection = null;
+    if (path[0] === 'colleccio') {
+      path.shift();
+      activeCollection = library.collections.find(item => item.id === path.shift()) ?? null;
+      if (!activeCollection) return null;
+    }
+    const topic = topicById.get(path.shift());
+    if (!topic || (activeCollection && !activeCollection.topicIds.includes(topic.id))) return null;
     const chapterId = topic.chapters.length > 1 ? path.shift() : topic.chapters[0].id;
     const chapter = topic.chapters.find(item => item.id === chapterId) ?? topic.chapters[0];
     const [view, section] = path;
-    return { topic, chapter, view: view === 'llegeix' ? 'llegeix' : 'maqueta', section };
+    return { topic, chapter, view: view === 'llegeix' ? 'llegeix' : 'maqueta', section, collectionId: activeCollection?.id };
   }
 
   function getOptions(topic) {
-    const data = saved[topic.id] ?? {};
-    const settings = { ...defaults, ...data, figures: { ...data.figures } };
-    if (topic.chapters.length === 1) settings.scope = 'chapter';
-    return settings;
+    const chosen = preferences.loadLayout(topic.id, activeCollection, library);
+    if (topic.chapters.length === 1) chosen.scope = 'chapter';
+    return chosen;
   }
 
   function storeOptions() {
-    saved[route.topic.id] = settings;
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(saved));
-      byId('save-status').hidden = true;
-    } catch {
-      byId('save-status').hidden = false;
-      byId('save-status').textContent = 'Els ajustos es mantindran mentre aquesta pàgina sigui oberta.';
-    }
+    const persisted = preferences.saveLayout(route.topic.id, activeCollection, settings, library);
+    byId('save-status').hidden = persisted;
+    byId('save-status').textContent = persisted ? '' : 'Els ajustos es mantindran mentre aquesta pàgina sigui oberta.';
   }
 
-  function figuresFor(chapter) {
-    const userFigures = knownUploads.filter(item => item.topic === route.topic.id &&
-      item.chapter === chapter.id && (item.documentType ?? 'sheet') === documentType);
-    return [...(chapter.figures ?? []), ...userFigures].map(item => {
+  function arrangeChapter(chapter) {
+    return { ...chapter, sections: preferences.orderedSections(chapter, settings.sectionOrder[chapter.id]) };
+  }
+
+  function reservedFigures(chapter) {
+    const figures = chapter.figures ?? [];
+    return chapter.sections.flatMap((section, index) => {
+      const [original, ...extra] = figures.filter(figure => figure.section === section.id);
+      const startsWithText = section.blocks[0]?.type === 'paragraph';
+      return [{
+        id: 'reserva-' + section.id, section: section.id, name: section.title, ratio: 1.7,
+        ...original,
+        anchor: startsWithText ? 'lead' : 'before',
+        width: Math.min(original?.width ?? 45, 45),
+        position: index % 2 ? 'left' : 'right',
+        wrap: startsWithText,
+      }, ...extra];
+    });
+  }
+
+  function figuresFor(chapter, type = documentType) {
+    const collectionId = activeCollection?.id ?? '';
+    const userFigures = knownUploads.filter(item => item.topic === route.topic.id && item.chapter === chapter.id &&
+      (item.collectionId ?? '') === collectionId && (item.documentType ?? 'sheet') === type);
+    const planned = type === 'sheet' ? reservedFigures(chapter) : chapter.figures ?? [];
+    return [...planned, ...userFigures].map(item => {
       const config = { ...item, visible: true, ...settings.figures[item.id] };
       if (paragraphAnchor(config.anchor) === null || config.position === 'center') config.wrap = false;
       return config;
@@ -183,9 +213,9 @@
   }
 
   function printableChapter(chapter) {
-    if (documentType === 'sheet') return chapter;
+    if (documentType === 'sheet') return arrangeChapter(chapter);
     const solution = chapter.solution;
-    return solution && { ...solution, id: chapter.id, title: solution.title ?? chapter.title };
+    return solution && arrangeChapter({ ...solution, id: chapter.id, title: solution.title ?? chapter.title });
   }
 
   function syncDocumentPicker() {
@@ -219,16 +249,19 @@
 
   function renderCollection(topic, view) {
     const container = byId('collection-nav');
-    container.hidden = !topic.collection;
-    if (!topic.collection) {
+    const group = activeCollection ?? topic.collection;
+    container.hidden = !group;
+    if (!group) {
       container.open = false;
       return;
     }
-    container.querySelector('summary').textContent = topic.collection.title;
+    const groupTitle = group.name ?? group.title;
+    container.querySelector('summary').textContent = groupTitle;
     const nav = container.querySelector('nav');
     nav.replaceChildren();
-    nav.setAttribute('aria-label', 'Temes del conjunt ' + topic.collection.title);
-    for (const item of topics.filter(candidate => candidate.collection?.id === topic.collection.id)) {
+    nav.setAttribute('aria-label', 'Temes de ' + groupTitle);
+    const related = activeCollection ? members(activeCollection) : topics.filter(candidate => candidate.collection?.id === group.id);
+    for (const item of related) {
       const anchor = link(item.title, address(item, item.chapters[0], view));
       if (item.id === topic.id) anchor.setAttribute('aria-current', 'page');
       nav.append(anchor);
@@ -241,10 +274,11 @@
     const hasChapters = topic.chapters.length > 1;
     nav.replaceChildren();
     const chapterMenu = byId('chapter-menu');
-    const showChapters = hasChapters || view === 'llegeix';
-    const revealChapters = chapterMenu.hidden && showChapters;
-    chapterMenu.hidden = !showChapters;
-    if (!showChapters) chapterMenu.open = false;
+    const revealChapters = chapterMenu.hidden;
+    chapterMenu.hidden = false;
+    const restore = byId('reset-section-order');
+    restore.hidden = view !== 'maqueta';
+    restore.disabled = !settings.sectionOrder[chapter.id];
     byId('outline-title').textContent = hasChapters ? 'Capítols' : 'Apartats';
     for (const entry of topic.chapters) {
       if (hasChapters) {
@@ -252,12 +286,28 @@
         if (entry.id === chapter.id && !section) anchor.setAttribute('aria-current', 'page');
         nav.append(anchor);
       }
-      if (entry.id !== chapter.id || view !== 'llegeix') continue;
+      if (entry.id !== chapter.id) continue;
       const sub = node('div', hasChapters ? 'section-links' : '');
-      for (const item of entry.sections) {
-        const heading = link(item.title, address(topic, entry, view, item.id));
+      const ordered = arrangeChapter(entry).sections;
+      for (const [index, item] of ordered.entries()) {
+        const heading = link(item.title, address(topic, entry, 'llegeix', item.id));
         if (item.id === section) heading.setAttribute('aria-current', 'location');
-        sub.append(heading);
+        if (view === 'llegeix') {
+          sub.append(heading);
+          continue;
+        }
+        const row = node('div', 'section-order-row');
+        row.append(heading);
+        for (const [direction, symbol, verb] of [[-1, '↑', 'Puja'], [1, '↓', 'Baixa']]) {
+          const move = node('button', 'secondary move-section', symbol);
+          move.type = 'button';
+          move.dataset.section = item.id;
+          move.dataset.direction = direction;
+          move.disabled = !ordered[index + direction];
+          move.setAttribute('aria-label', verb + ' ' + item.title);
+          row.append(move);
+        }
+        sub.append(row);
       }
       nav.append(sub);
     }
@@ -278,6 +328,8 @@
   function renderRoute(event) {
     const previous = route;
     route = extractRoute();
+    const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
+    byId('catalog-home').href = route ? catalogAddress(activeCollection) : '#';
     const title = byId('topic-title');
     title.hidden = !route;
     title.textContent = route?.topic.title ?? '';
@@ -285,11 +337,12 @@
       revision++;
       byId('catalog').hidden = false;
       byId('workspace').hidden = true;
-      document.title = catalogTitle;
+      refreshCatalog();
+      document.title = activeCollection ? activeCollection.name + ' · Món a mà' : catalogTitle;
       if (previous && event) byId('topics').querySelector('[data-topic="' + previous.topic.id + '"]')?.focus({ preventScroll: true });
       return;
     }
-    if (previous?.topic.id !== route.topic.id) {
+    if (changedMaterial) {
       settings = getOptions(route.topic);
       documentType = 'sheet';
       logoUploadVersion++;
@@ -303,8 +356,8 @@
     byId('settings').hidden = !editing;
     byId('workspace-grid').classList.toggle('maqueta', editing);
     document.title = route.chapter.title + ' · Món a mà';
-    if (event && previous?.topic.id !== route.topic.id) title.focus({ preventScroll: true });
-    if (previous?.topic.id !== route.topic.id || previous?.chapter.id !== route.chapter.id || previous?.view !== route.view) {
+    if (event && changedMaterial) title.focus({ preventScroll: true });
+    if (changedMaterial || previous?.chapter.id !== route.chapter.id || previous?.view !== route.view) {
       byId('upload-status').hidden = true;
       byId('save-status').hidden = true;
       byId('upload').value = '';
@@ -315,9 +368,10 @@
       renderControls();
       refreshPaper();
     } else {
-      const figures = (route.chapter.figures ?? []).map(item => ({ ...item, visible: true }));
+      const chapter = arrangeChapter(route.chapter);
+      const figures = settings.showFigures ? figuresFor(chapter, 'sheet').filter(item => item.visible) : [];
       const reader = byId('reader');
-      reader.replaceChildren(readChapter(route.chapter, figures, route.chapter.title !== route.topic.title));
+      reader.replaceChildren(readChapter(chapter, figures, chapter.title !== route.topic.title));
       const heading = route.section && byId('apartat-' + route.section);
       if (heading) {
         heading.focus({ preventScroll: true });
@@ -400,11 +454,13 @@
     syncDocumentPicker();
     for (const key of Object.keys(defaults)) {
       const input = form.elements.namedItem(key);
+      if (!input) continue;
       if (input.type === 'checkbox') input.checked = settings[key];
       else input.value = settings[key];
     }
     byId('font-size-value').value = widths.format(settings.fontSize) + ' pt';
     syncHeaderControls();
+    syncTemplateSelector();
     const chapter = printableChapter(route.chapter);
     const figures = chapter ? figuresFor(chapter) : [];
     byId('figure-options').replaceChildren(...figures.map(figureControl));
@@ -577,6 +633,7 @@
     const source = {
       id: 'local-' + crypto.getRandomValues(new Uint32Array(4)).join('-'),
       name, alt: name, caption: '', blob: file, topic: topic.id, chapter: chapter.id, documentType,
+      collectionId: activeCollection?.id ?? '',
       section: printable.sections[0].id, anchor: 'lead', width: 55, position: 'center', wrap: false,
     };
     const item = addUrl(source);
@@ -590,7 +647,7 @@
     try { await imageOperation('readwrite', store => store.put(source)); }
     catch { persisted = false; }
     knownUploads.push({ ...item, persisted });
-    if (route?.topic.id === topic.id && route.chapter.id === chapter.id && source.documentType === documentType) {
+    if (route?.topic.id === topic.id && route.chapter.id === chapter.id && source.documentType === documentType && source.collectionId === (activeCollection?.id ?? '')) {
       settings.showFigures = true;
       storeOptions();
       renderControls();
@@ -615,7 +672,7 @@
     knownUploads = knownUploads.filter(image => image.id !== id);
     URL.revokeObjectURL(item.src);
     images.delete(item.src);
-    if (route?.topic.id === item.topic) {
+    if (route?.topic.id === item.topic && (activeCollection?.id ?? '') === (item.collectionId ?? '')) {
       delete settings.figures[id];
       storeOptions();
       renderControls();
@@ -624,6 +681,212 @@
     }
   }
 
+
+  function templateOptions(inheritedLabel) {
+    return [
+      ...(inheritedLabel ? [option('inherit', inheritedLabel)] : []),
+      option('', 'Format original'),
+      ...library.templates.map(item => option(item.id, item.name)),
+    ];
+  }
+
+  function syncTemplateSelector() {
+    const select = byId('layout-template');
+    const inheritedId = activeCollection?.templateId ?? library.defaultTemplateId;
+    const inherited = library.templates.find(item => item.id === inheritedId)?.name ?? 'Format original';
+    select.replaceChildren(...templateOptions('Per defecte · ' + inherited));
+    select.value = settings.templateId ?? 'inherit';
+  }
+
+  function applyTemplate(id) {
+    settings.templateId = id;
+    Object.assign(settings, preferences.format(preferences.getBase(id, activeCollection, library)));
+    storeOptions();
+    renderControls();
+    requestPaper();
+  }
+
+  function showTemplateManager(selected = '') {
+    const manager = byId('template-form');
+    const picker = byId('default-template');
+    picker.replaceChildren(...templateOptions());
+    picker.value = library.defaultTemplateId;
+    const select = manager.elements.template;
+    select.replaceChildren(option('', 'Nova plantilla'), ...library.templates.map(item => option(item.id, item.name)));
+    select.value = selected;
+    manager.elements.title.value = library.templates.find(item => item.id === selected)?.name ?? '';
+    byId('remove-template').hidden = !selected;
+  }
+
+  function updateLibrary(change) {
+    const persisted = preferences.saveLibrary(change);
+    library = preferences.library();
+    if (activeCollection) activeCollection = library.collections.find(item => item.id === activeCollection.id) ?? null;
+    return persisted;
+  }
+
+  function templateStatus(message, persisted) {
+    byId('template-status').textContent = persisted ? message : message + ' Disponible durant aquesta sessió.';
+  }
+
+  function editCollection(collection) {
+    const editor = byId('collection-form');
+    editor.dataset.collectionId = collection?.id ?? '';
+    editor.elements.title.value = collection?.name ?? '';
+    editor.elements.template.replaceChildren(...templateOptions('Per defecte del professorat'));
+    editor.elements.template.value = collection?.templateId ?? 'inherit';
+    const ids = collection?.topicIds ?? [];
+    const choices = collection ? [...members(collection), ...topics.filter(item => !ids.includes(item.id))] : topics;
+    byId('collection-topics').replaceChildren(...choices.map(topic => {
+      const choice = node('input');
+      choice.type = 'checkbox';
+      choice.name = 'material';
+      choice.value = topic.id;
+      choice.checked = ids.includes(topic.id);
+      return control(topic.title, choice, 'check');
+    }));
+    byId('remove-collection').hidden = !collection;
+    byId('collection-status').textContent = '';
+    byId('collection-dialog').showModal();
+  }
+
+  function showCollection(collection) {
+    const hash = catalogAddress(collection);
+    if (location.hash === hash || (!location.hash && hash === '#')) renderRoute();
+    else location.hash = hash;
+  }
+
+  function changeSectionOrder(event) {
+    const button = event.target.closest('button[data-section]');
+    if (!button || !route || route.view !== 'maqueta') return;
+    const { section, direction } = button.dataset;
+    const list = arrangeChapter(route.chapter).sections;
+    const index = list.findIndex(item => item.id === section);
+    const newIndex = index + Number(direction);
+    if (index < 0 || !list[newIndex]) return;
+    const [item] = list.splice(index, 1);
+    list.splice(newIndex, 0, item);
+    settings.sectionOrder[route.chapter.id] = list.map(entry => entry.id);
+    storeOptions();
+    renderNavigation();
+    const controls = [...byId('chapter-nav').querySelectorAll('button:not(:disabled)')]
+      .filter(control => control.dataset.section === section);
+    (controls.find(control => control.dataset.direction === direction) ?? controls[0])?.focus({ preventScroll: true });
+    byId('section-order-status').textContent = item.title + '. Posició ' + (newIndex + 1) + ' de ' + list.length + '.';
+    requestPaper();
+  }
+
+  byId('catalog-collection').addEventListener('change', event => {
+    showCollection(library.collections.find(item => item.id === event.target.value));
+  });
+  byId('new-collection').addEventListener('click', () => editCollection());
+  byId('edit-collection').addEventListener('click', () => editCollection(activeCollection));
+  byId('collection-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const editor = event.currentTarget;
+    const name = editor.elements.title.value.trim();
+    if (!name) return;
+    const id = editor.dataset.collectionId || 'col-' + crypto.getRandomValues(new Uint32Array(2)).join('-');
+    const topics = [...editor.querySelectorAll('input[name="material"]:checked')].map(input => input.value);
+    const selected = editor.elements.template.value;
+    const collection = { id, name, topicIds: topics, templateId: selected === 'inherit' ? null : selected };
+    const persisted = updateLibrary(data => {
+      const index = data.collections.findIndex(item => item.id === id);
+      if (index < 0) data.collections.push(collection);
+      else data.collections[index] = collection;
+    });
+    if (!persisted) {
+      byId('collection-status').textContent = 'La col·lecció es mantindrà mentre aquesta pàgina sigui oberta.';
+      editor.dataset.collectionId = id;
+      byId('remove-collection').hidden = false;
+      refreshCatalog();
+      return;
+    }
+    byId('collection-dialog').close();
+    showCollection(collection);
+  });
+  byId('remove-collection').addEventListener('click', async () => {
+    const id = byId('collection-form').dataset.collectionId;
+    const collection = library.collections.find(item => item.id === id);
+    if (!collection || !window.confirm('Vols suprimir «' + collection.name + '» i la seva maquetació?')) return;
+    const uploads = knownUploads.filter(item => item.collectionId === id);
+    try {
+      if (uploads.some(item => item.persisted)) {
+        await imageOperation('readwrite', store => {
+          for (const item of uploads.filter(image => image.persisted)) store.delete(item.id);
+          return store.count();
+        });
+      }
+    } catch {
+      byId('collection-status').textContent = 'No s’han pogut eliminar les imatges de la col·lecció. Prova-ho de nou.';
+      return;
+    }
+    for (const item of uploads) {
+      URL.revokeObjectURL(item.src);
+      images.delete(item.src);
+    }
+    knownUploads = knownUploads.filter(item => item.collectionId !== id);
+    preferences.clearCollectionLayouts(id);
+    updateLibrary(data => { data.collections = data.collections.filter(item => item.id !== id); });
+    byId('collection-dialog').close();
+    showCollection();
+  });
+  byId('chapter-nav').addEventListener('click', changeSectionOrder);
+  byId('reset-section-order').addEventListener('click', () => {
+    delete settings.sectionOrder[route.chapter.id];
+    storeOptions();
+    renderNavigation();
+    byId('outline-title').focus({ preventScroll: true });
+    byId('section-order-status').textContent = 'S’ha recuperat l’ordre original dels apartats.';
+    requestPaper();
+  });
+  byId('layout-template').addEventListener('change', event => {
+    const selected = event.target.value;
+    applyTemplate(selected === 'inherit' ? null : selected);
+  });
+  byId('manage-templates').addEventListener('click', () => {
+    byId('template-status').textContent = '';
+    showTemplateManager(settings.templateId ?? '');
+  });
+  byId('template-form').elements.template.addEventListener('change', event => showTemplateManager(event.target.value));
+  byId('template-form').addEventListener('submit', event => {
+    event.preventDefault();
+    const manager = event.currentTarget;
+    const name = manager.elements.title.value.trim();
+    if (!name) return;
+    const id = manager.elements.template.value || 'fmt-' + crypto.getRandomValues(new Uint32Array(2)).join('-');
+    const template = { id, name, format: preferences.format(settings) };
+    const persisted = updateLibrary(data => {
+      const index = data.templates.findIndex(item => item.id === id);
+      if (index < 0) data.templates.push(template);
+      else data.templates[index] = template;
+    });
+    applyTemplate(id);
+    showTemplateManager(id);
+    templateStatus('Plantilla desada.', persisted);
+  });
+  byId('default-template').addEventListener('change', event => {
+    const persisted = updateLibrary(data => { data.defaultTemplateId = event.target.value; });
+    settings = getOptions(route.topic);
+    renderControls();
+    requestPaper();
+    templateStatus('Format per defecte actualitzat.', persisted);
+  });
+  byId('remove-template').addEventListener('click', () => {
+    const id = byId('template-form').elements.template.value;
+    const template = library.templates.find(item => item.id === id);
+    if (!template || !window.confirm('Vols suprimir la plantilla «' + template.name + '»?')) return;
+    const persisted = updateLibrary(data => {
+      data.templates = data.templates.filter(item => item.id !== id);
+      if (data.defaultTemplateId === id) data.defaultTemplateId = '';
+      for (const item of data.collections) if (item.templateId === id) item.templateId = null;
+    });
+    settings = getOptions(route.topic);
+    renderControls();
+    requestPaper();
+    showTemplateManager();
+    templateStatus('Plantilla suprimida.', persisted);
+  });
   form.addEventListener('submit', event => event.preventDefault());
   form.addEventListener('input', updateOption);
   form.addEventListener('change', updateOption);
@@ -649,7 +912,7 @@
   byId('reset').addEventListener('click', () => {
     logoUploadVersion++;
     headerLogoFeedback('');
-    settings = { ...defaults, figures: {} };
+    settings = { ...preferences.getBase(settings.templateId, activeCollection, library), templateId: settings.templateId, figures: {}, sectionOrder: settings.sectionOrder };
     storeOptions();
     renderControls();
     requestPaper();
@@ -667,14 +930,14 @@
     if (location.hash !== '#main') renderRoute(event);
   });
   byId('print').disabled = true;
-  setupCatalog();
+  const refreshCatalog = setupCatalog();
   renderRoute();
   imageOperation('readonly', store => store.getAll()).then(items => {
     knownUploads.push(...items.map(item => ({ ...addUrl(item), persisted: true })));
     if (route?.view === 'maqueta') {
       renderControls();
       requestPaper();
-    }
+    } else if (route) renderRoute();
   }).catch(() => {
     byId('upload-hint').textContent = 'Les imatges afegides es mantindran mentre aquesta pàgina sigui oberta.';
   });

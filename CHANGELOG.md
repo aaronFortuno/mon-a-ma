@@ -1,5 +1,12 @@
 # Historial de versions
 
+## 0.1.7 · 25 de novembre de 2026
+
+- Afegeix plantilles reutilitzables i una plantilla per defecte per al professorat.
+- Permet crear col·leccions de materials amb ajustos de maquetació propis desats al navegador.
+- Permet reordenar els apartats amb fletxes i recuperar l’ordre original.
+- Reserva una imatge per apartat i alterna per defecte la dreta i l’esquerra.
+
 ## 0.1.6 · 25 de novembre de 2026
 
 - Amplia els laterals i agrupa els controls en submenús exclusius. Les capçaleres queden visibles i el contingut obert té desplaçament propi.
