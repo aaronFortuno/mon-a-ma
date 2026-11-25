@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.8 · 25 de novembre de 2026
+
+- Aplica transicions de 220 ms en obrir i tancar els desplegables, el menú d’idioma i els diàlegs. Respecta el moviment reduït.
+
 ## 0.1.7 · 25 de novembre de 2026
 
 - Afegeix plantilles reutilitzables i una plantilla per defecte per al professorat.
