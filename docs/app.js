@@ -15,6 +15,7 @@
   let activeCollection = null;
   const form = byId('options');
   const figureForm = byId('figure-settings');
+  const figureAlignment = byId('figure-alignment-template');
   const stack = byId('paper-stack');
   const motionLayer = byId('paper-motion');
   const catalogTitle = document.title;
@@ -436,64 +437,100 @@
     return wrapper;
   }
 
-  function figureControl(item) {
+  function figureControl(item, chapter) {
     const field = node('fieldset', 'figure-control');
     field.dataset.figureId = item.id;
-    field.append(node('legend', '', item.name || item.alt.replace(/\.$/, '')));
+    const title = item.name || item.alt?.replace(/\.$/, '') || 'Il·lustració';
+    field.append(node('legend', 'sr-only', title));
+    const header = node('div', 'figure-heading');
+    const name = node('span', 'figure-name', title);
+    name.setAttribute('aria-hidden', 'true');
     const visible = node('input');
     visible.type = 'checkbox';
     visible.checked = item.visible;
     visible.dataset.setting = 'visible';
-    field.append(control('Mostra aquesta imatge', visible, 'check'));
-    const group = node('div', 'option-group');
+    visible.setAttribute('aria-label', 'Mostra «' + title + '»');
+    visible.title = 'Mostra a la fitxa';
+    header.append(name, visible);
+    field.append(header);
+
+    const group = node('div', 'figure-options');
     group.hidden = !item.visible;
+    const sizeAndAlignment = node('div', 'figure-size-alignment');
     const width = node('input');
-    width.type = 'range';
+    width.type = 'number';
     width.min = '25';
     width.max = '100';
-    width.value = item.width;
+    width.step = '1';
+    width.defaultValue = item.width;
     width.dataset.setting = 'width';
-    const widthLabel = node('label', 'slider full-width', 'Amplada');
-    widthLabel.append(node('output', '', item.width + ' %'), width);
-    group.append(widthLabel);
+    width.setAttribute('aria-label', 'Amplada en percentatge');
+    const widthLabel = control('Amplada', width, 'figure-width');
+    const percent = node('span', '', '%');
+    percent.setAttribute('aria-hidden', 'true');
+    widthLabel.append(percent);
+    const alignment = figureAlignment.content.firstElementChild.cloneNode(true);
+    alignment.setAttribute('role', 'group');
+    alignment.setAttribute('aria-label', 'Alineació de la imatge');
+    for (const radio of alignment.querySelectorAll('input')) {
+      radio.name = 'figure-position-' + item.id;
+      radio.checked = radio.value === item.position;
+    }
+    sizeAndAlignment.append(widthLabel, alignment);
+    group.append(sizeAndAlignment);
 
-    function pick(key, label, values) {
+    function picker(key, label, values) {
       const select = node('select');
+      select.setAttribute('aria-label', label);
+      select.title = label;
       select.append(...values.map(([value, text]) => option(value, text)));
       select.value = item[key];
       select.dataset.setting = key;
-      group.append(control(label, select, key === 'section' ? 'full-width' : ''));
+      return select;
     }
-    const chapter = printableChapter(route.chapter);
-    pick('section', 'Apartat', chapter.sections.map(entry => [entry.id, entry.title]));
-    const anchors = [['before', 'Abans del primer text'], ['lead', 'Amb el primer text']];
+
+    const placement = node('div', 'figure-placement');
+    const anchors = [['before', 'Abans del text'], ['lead', 'Amb el primer text']];
     const section = chapter.sections.find(entry => entry.id === item.section);
     section.blocks.forEach((entry, index) => {
-      if (index > 0 && entry.type === 'paragraph') anchors.push(['paragraph-' + index, 'Amb el text «' + entry.text.replaceAll('*', '').slice(0, 32) + '…»']);
+      if (index > 0 && entry.type === 'paragraph') {
+        anchors.push(['paragraph-' + index, 'Amb «' + entry.text.replaceAll('*', '').slice(0, 32) + '…»']);
+      }
     });
     anchors.push(['after', 'Al final de l’apartat']);
-    pick('anchor', 'Punt d’inserció', anchors);
-    pick('position', 'Alineació', [['left', 'Esquerra'], ['center', 'Centre'], ['right', 'Dreta']]);
     const flow = node('input');
     flow.type = 'checkbox';
     flow.checked = item.wrap;
     flow.disabled = item.position === 'center' || paragraphAnchor(item.anchor) === null;
     flow.dataset.setting = 'wrap';
-    group.append(control('Text al voltant', flow, 'check'));
+    flow.setAttribute('aria-label', 'Envolta la imatge amb text');
+    const wrapLabel = control('Envolta', flow, 'check figure-wrap');
+    wrapLabel.title = 'Envolta la imatge amb text';
+    placement.append(picker('anchor', 'Punt d’inserció', anchors), wrapLabel);
+    group.append(placement);
+    if (item.blob && chapter.sections.length > 1) {
+      const sections = chapter.sections.map(entry => [entry.id, entry.title]);
+      group.append(picker('section', 'Apartat de la imatge pujada', sections));
+    }
     if (item.src) {
       const caption = node('input');
       caption.type = 'text';
       caption.value = item.caption ?? '';
       caption.maxLength = 240;
+      caption.placeholder = 'Peu de la imatge';
+      caption.setAttribute('aria-label', 'Peu de la imatge');
       caption.dataset.setting = 'caption';
-      group.append(control('Peu de la imatge', caption, 'full-width'));
+      group.append(caption);
     }
     if (item.blob) {
-      const remove = node('button', 'secondary', 'Treu la imatge');
+      const remove = node('button', 'figure-remove', '×');
       remove.type = 'button';
       remove.dataset.removeFigure = item.id;
-      field.append(group, remove);
-    } else field.append(group);
+      remove.title = 'Treu la imatge pujada';
+      remove.setAttribute('aria-label', 'Treu «' + title + '»');
+      header.append(remove);
+    }
+    field.append(group);
     return field;
   }
 
@@ -512,7 +549,7 @@
     syncTemplateSelector();
     const chapter = printableChapter(route.chapter);
     const figures = chapter ? figuresFor(chapter) : [];
-    byId('figure-options').replaceChildren(...figures.map(figureControl));
+    byId('figure-options').replaceChildren(...figures.map(item => figureControl(item, chapter)));
     byId('upload').disabled = !chapter?.sections.length;
     byId('figure-options').hidden = !settings.showFigures;
   }
@@ -798,17 +835,25 @@
   function updateOption(event) {
     const input = event.target;
     if (input.type === 'file') return;
-    if (event.type === 'input' && !['range', 'text'].includes(input.type)) return;
+    if (event.type === 'input' && !['range', 'text', 'number'].includes(input.type)) return;
     const isNumber = input.type === 'range' || input.name === 'classroomCodeSize';
-    const value = input.type === 'checkbox' ? input.checked : isNumber ? Number(input.value) : input.value;
+    let value = input.type === 'checkbox' ? input.checked : isNumber ? Number(input.value) : input.value;
     const card = input.closest('[data-figure-id]');
     if (card) {
       const id = card.dataset.figureId;
       const key = input.dataset.setting;
       if (!key) return;
+      if (key === 'width') {
+        const width = input.valueAsNumber;
+        if (event.type === 'input' && (!Number.isFinite(width) || !input.validity.valid)) return;
+        value = Number.isFinite(width)
+          ? Math.min(Number(input.max), Math.max(Number(input.min), Math.round(width)))
+          : settings.figures[id]?.width ?? Number(input.defaultValue);
+        if (event.type !== 'input') input.value = value;
+        if (settings.figures[id]?.width === value) return;
+      }
       settings.figures[id] = { ...settings.figures[id], [key]: value };
-      if (key === 'width') card.querySelector('output').value = value + ' %';
-      if (key === 'visible') card.querySelector('.option-group').hidden = !value;
+      if (key === 'visible') card.querySelector('.figure-options').hidden = !value;
       if (key === 'section') {
         settings.figures[id].anchor = 'lead';
         renderControls();
@@ -1218,6 +1263,10 @@
     panel.addEventListener('input', updateOption);
     panel.addEventListener('change', updateOption);
   }
+  figureForm.addEventListener('focusout', event => {
+    const input = event.target;
+    if (input.dataset.setting === 'width' && (!input.value || !input.validity.valid)) updateOption(event);
+  });
   byId('figure-options').addEventListener('click', removeImage);
   byId('upload').addEventListener('change', addImage);
   byId('header-logo-upload').addEventListener('change', changeHeaderLogo);

@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.16 · 25 de novembre de 2026
+
+- Iguala l’amplada dels dos laterals del material.
+- Reuneix l’amplada en percentatge i l’alineació amb icones en una fila. Situa la visibilitat al costat del títol de cada il·lustració.
+- Manté la tria d’apartat per a les imatges pujades quan hi ha més d’un apartat disponible.
+
 ## 0.1.15 · 25 de novembre de 2026
 
 - Manté la posició del visor quan es reordena un apartat i anima només l’apartat mogut.
