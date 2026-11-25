@@ -432,9 +432,28 @@ summary { color: var(--green); font-weight: 650; }
 .secondary { background: var(--surface); color: var(--green); }
 .secondary:hover { background: var(--light); }
 .paper-stack { padding: .85rem .6rem; scrollbar-gutter: stable both-edges; }
+#paper-stack, .paper-motion { grid-area: 2 / 1; }
+.paper-motion { position: relative; min-width: 0; min-height: 0; overflow: clip; pointer-events: none; z-index: 3; }
+@media screen {
+  .paper-stack.is-repaginating .sheet-body { overflow: visible; }
+  .sheet-frame:has([data-paper-in-motion]) { z-index: 1; }
+}
+.paper-ghost.sheet {
+  position: absolute;
+  height: auto;
+  padding: 0;
+  transform: scale(var(--ghost-zoom));
+  transform-origin: top left;
+  background: var(--preview-paper, white);
+}
 .sheet-frame { position: relative; margin: 0 auto .85rem; }
 .sheet-frame:last-child { margin-bottom: 0; }
 .sheet { width: 210mm; height: 297mm; padding: var(--margin); background: white; position: relative; font: var(--font-size)/var(--leading) var(--serif); }
+@media screen {
+  [data-theme="dark"] { --preview-paper: #f5efe3; }
+  :is(.sheet-frame, .curriculum-thumbnail) > .sheet { background: var(--preview-paper, white); }
+  :is(.sheet-frame, .curriculum-thumbnail, .paper-ghost) .image-placeholder { background-color: var(--preview-paper, white); }
+}
 .sheet-frame > .sheet { position: absolute; inset: 0 auto auto 0; transform: scale(var(--zoom, 1)); transform-origin: top left; box-shadow: 0 1px 6px #18392f30; }
 .sheet-inner { height: 100%; display: flex; flex-direction: column; min-height: 0; }
 .sheet-header, .sheet-footer { flex: none; font: 600 9pt/1.25 var(--sans); }
@@ -709,10 +728,11 @@ details[open]::details-content {
   html, body { background: white; overflow: visible; }
   body { position: static; display: block; height: auto; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .skip, .site-header, #catalog, .site-footer, #layout-probe,
-  .outline, .settings, .studio-toolbar, .section-preview-tools, dialog, noscript { display: none !important; }
+  .outline, .settings, .studio-toolbar, .section-preview-tools, .paper-motion, dialog, noscript { display: none !important; }
   main, .workspace, .workspace-grid, .studio, .paper-stack { display: block; height: auto; width: auto; margin: 0; padding: 0; border: 0; background: white; overflow: visible; }
   .paper-stack { scrollbar-gutter: auto; }
   .sheet-frame { position: static; width: auto !important; height: auto !important; margin: 0 !important; break-after: page; }
   .sheet-frame:last-child { break-after: auto; }
   .sheet-frame > .sheet { position: static; transform: none; box-shadow: none; }
+  .paper-unit[data-paper-in-motion] { transform: none !important; opacity: 1 !important; }
 }

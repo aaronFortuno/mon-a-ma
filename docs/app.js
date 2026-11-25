@@ -15,6 +15,7 @@
   let activeCollection = null;
   const form = byId('options');
   const stack = byId('paper-stack');
+  const motionLayer = byId('paper-motion');
   const catalogTitle = document.title;
   const layoutNumber = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
   const images = new Map();
@@ -29,6 +30,8 @@
   let logoUploadVersion = 0;
   let pendingSection = '';
   let previewFocus;
+  let animateNextPaper = false;
+  let paperAnimations = [];
 
   function imageStore() {
     imageDb ??= new Promise((resolve, reject) => {
@@ -380,6 +383,8 @@
     title.hidden = !route;
     title.textContent = route?.topic.title ?? '';
     if (!route) {
+      animateNextPaper = false;
+      stopPaperMotion();
       previewFocus = null;
       revision++;
       if (location.hash.startsWith('#conjunt/')) {
@@ -413,6 +418,8 @@
       stack.scrollTop = 0;
     }
     if (changedChapter || previous?.section !== route.section) {
+      animateNextPaper = false;
+      stopPaperMotion();
       previewFocus = null;
       pendingSection = route.section ?? '';
       if (pendingSection) documentType = 'sheet';
@@ -640,6 +647,89 @@
     return true;
   }
 
+  function stopPaperMotion() {
+    for (const animation of paperAnimations) animation.cancel();
+    paperAnimations = [];
+    for (const unit of stack.querySelectorAll('[data-paper-in-motion]')) delete unit.dataset.paperInMotion;
+    stack.classList.remove('is-repaginating');
+    motionLayer.replaceChildren();
+  }
+
+  function capturePaperMotion() {
+    if (!animateNextPaper) return;
+    const duration = parseFloat(getComputedStyle(stack).getPropertyValue('--motion-duration'));
+    if (!duration || typeof stack.animate !== 'function') return;
+    const units = new Map([...stack.querySelectorAll('[data-paper-unit]')].map(unit =>
+      [unit.dataset.paperUnit, { unit, rect: unit.getBoundingClientRect() }]));
+    return { units, duration, view: stack.getBoundingClientRect(), zoom: parseFloat(stack.style.getPropertyValue('--zoom')) || 1 };
+  }
+
+  function inPreview(rect, view) {
+    return rect.bottom > view.top && rect.top < view.bottom;
+  }
+
+  function removedPaperUnit({ unit, rect }, layer, zoom) {
+    const ghost = unit.closest('.sheet').cloneNode(false);
+    const clone = unit.cloneNode(true);
+    clone.querySelector('.section-preview-tools')?.remove();
+    clone.removeAttribute('id');
+    clone.removeAttribute('tabindex');
+    clone.removeAttribute('data-paper-unit');
+    clone.removeAttribute('data-paper-section');
+    const body = node('div', 'sheet-body');
+    body.append(clone);
+    ghost.append(body);
+    ghost.classList.add('paper-ghost');
+    ghost.style.left = rect.left - layer.left + 'px';
+    ghost.style.top = rect.top - layer.top + 'px';
+    ghost.style.width = rect.width / zoom + 'px';
+    ghost.style.setProperty('--ghost-zoom', zoom);
+    motionLayer.append(ghost);
+    return ghost;
+  }
+
+  function animatePaper(snapshot, edit) {
+    const timing = { duration: snapshot.duration, easing: 'ease-out' };
+    const animations = [];
+    const zoom = parseFloat(stack.style.getPropertyValue('--zoom')) || 1;
+    const view = stack.getBoundingClientRect();
+    const editedId = edit?.action ? 'fitxa-' + edit.chapter + '-' + edit.section : '';
+    const current = new Set();
+    for (const unit of stack.querySelectorAll('[data-paper-unit]')) {
+      const key = unit.dataset.paperUnit;
+      current.add(key);
+      const last = unit.getBoundingClientRect();
+      const first = snapshot.units.get(key)?.rect;
+      if (!inPreview(last, view) && (!first || !inPreview(first, snapshot.view))) continue;
+      let frames;
+      if (!first) {
+        frames = [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }];
+      } else {
+        const x = (first.left - last.left) / zoom;
+        let y = (first.top - last.top) / zoom;
+        if (unit.id === editedId && Math.abs(y) < 1) y = edit.action === 'up' ? 10 : -10;
+        if (Math.abs(x) < 1 && Math.abs(y) < 1) continue;
+        frames = Math.abs(y * zoom) > view.height * 1.5
+          ? [{ opacity: .25 }, { opacity: 1 }]
+          : [{ transform: 'translate(' + x + 'px, ' + y + 'px)' }, { transform: 'none' }];
+      }
+      unit.dataset.paperInMotion = '';
+      animations.push(unit.animate(frames, timing));
+    }
+    const layer = motionLayer.getBoundingClientRect();
+    for (const [key, previous] of snapshot.units) {
+      if (current.has(key) || !inPreview(previous.rect, snapshot.view)) continue;
+      const ghost = removedPaperUnit(previous, layer, snapshot.zoom);
+      animations.push(ghost.animate([{ opacity: 1, translate: '0 0' }, { opacity: 0, translate: '0 -9px' }], timing));
+    }
+    if (!animations.length) return;
+    stack.classList.add('is-repaginating');
+    paperAnimations = animations;
+    Promise.allSettled(animations.map(animation => animation.finished)).then(() => {
+      if (paperAnimations === animations) stopPaperMotion();
+    });
+  }
+
   async function refreshPaper() {
     const ticket = ++revision;
     const { topic, chapter } = route;
@@ -664,6 +754,9 @@
     }));
     await fontReady;
     if (ticket !== revision || !route) return;
+    const snapshot = capturePaperMotion();
+    animateNextPaper = false;
+    stopPaperMotion();
     paper = paginate(topic, chapters, new Map(resolved), options, byId('layout-probe'), stack);
     if (documentType === 'sheet') renderSectionTools(chapters);
     fitPaper();
@@ -673,6 +766,7 @@
     } else if (previewFocus) {
       focusPaperSection(previewFocus.chapter, previewFocus.section, previewFocus);
     }
+    if (snapshot) animatePaper(snapshot, previewFocus);
     previewFocus = null;
     byId('page-count').value = paper.count + (paper.count === 1 ? ' pàgina' : ' pàgines') +
       (missing ? ' · Alguna imatge no s’ha pogut carregar.' : '') +
@@ -904,6 +998,7 @@
   }
 
   function updateSections(message) {
+    animateNextPaper = true;
     storeOptions();
     renderNavigation();
     renderControls();
@@ -1126,6 +1221,7 @@
     const type = event.target.closest('button')?.dataset.document;
     if (!type || type === documentType) return;
     documentType = type;
+    animateNextPaper = false;
     previewFocus = null;
     renderControls();
     requestPaper();

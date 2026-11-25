@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.14 · 25 de novembre de 2026
+
+- Anima la retirada, la recuperació i els canvis d’ordre dels apartats de la fitxa.
+- Dona un to crema al paper de la vista prèvia en mode fosc. El PDF conserva el paper blanc.
+
 ## 0.1.13 · 25 de novembre de 2026
 
 - Mou els controls per reordenar els apartats a la vista prèvia de la fitxa.

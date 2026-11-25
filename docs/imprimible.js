@@ -238,7 +238,10 @@ window.imprimible = (() => {
           units[0].dataset.paperChapter = chapter.id;
           units[0].dataset.paperSection = section.id;
         }
-        for (const unit of units) add(unit);
+        for (const [index, unit] of units.entries()) {
+          unit.dataset.paperUnit = units[0].id + ':' + index;
+          add(unit);
+        }
       }
     }
     const width = pages[0].sheet.getBoundingClientRect().width;
