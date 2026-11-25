@@ -94,7 +94,7 @@
       card.dataset.topic = topic.id;
       const picture = node('div', topic.cover ? 'topic-cover' : 'topic-cover topic-cover-brand');
       const cover = node('img');
-      cover.src = topic.cover ?? 'assets/mon-a-ma.png';
+      cover.src = topic.cover ?? 'assets/mon-a-ma.png?v=0.3.2';
       cover.alt = '';
       cover.loading = 'lazy';
       picture.append(cover);

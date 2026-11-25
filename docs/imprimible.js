@@ -129,7 +129,7 @@ window.imprimible = (() => {
     const footer = node('footer', 'sheet-footer');
     const signature = node('span', 'sheet-brand');
     const logo = node('img');
-    logo.src = 'assets/mon-a-ma.png';
+    logo.src = 'assets/mon-a-ma.png?v=0.3.2';
     logo.alt = '';
     logo.width = 15;
     logo.height = 15;

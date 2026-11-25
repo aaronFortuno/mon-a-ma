@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.3.2 · 25 de novembre de 2026
+
+- Elimina la vora clara de la icona del projecte i en deixa el contorn transparent.
+
 ## 0.3.1 · 25 de novembre de 2026
 
 - Versiona els fitxers del catàleg i els estils per carregar-los alhora que la nova versió del web.
