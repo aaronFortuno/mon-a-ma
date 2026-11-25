@@ -269,22 +269,19 @@
     if (rows.length) body.append(list);
   }
 
-  function renderCollection(topic) {
-    const container = byId('collection-nav');
+  function renderRelatedTopics(topic) {
+    const container = byId('related-nav');
     const group = activeCollection ?? topic.collection;
-    container.hidden = !group;
-    if (!group) {
+    const membersOfGroup = activeCollection ? members(activeCollection) :
+      group ? topics.filter(candidate => candidate.collection?.id === group.id) : [];
+    const related = membersOfGroup.filter(item => item.id !== topic.id);
+    const nav = container.querySelector('nav');
+    nav.replaceChildren();
+    container.hidden = !related.length;
+    if (container.hidden) {
       container.open = false;
       return;
     }
-    const groupTitle = group.name ?? group.title;
-    container.querySelector('summary').textContent = groupTitle;
-    const nav = container.querySelector('nav');
-    nav.replaceChildren();
-    nav.setAttribute('aria-label', 'Temes de ' + groupTitle);
-    const membersOfGroup = activeCollection ? members(activeCollection) : topics.filter(candidate => candidate.collection?.id === group.id);
-    const related = membersOfGroup.filter(item => item.id !== topic.id);
-    container.hidden = !related.length;
     for (const item of related.slice(0, 3)) nav.append(link(item.title, address(item, item.chapters[0])));
     if (related.length > 3) {
       const target = activeCollection ? catalogAddress(activeCollection) : '#conjunt/' + group.id;
@@ -319,7 +316,7 @@
       nav.append(sub);
     }
     renderRemovedSections(topic, chapter);
-    renderCollection(topic);
+    renderRelatedTopics(topic);
     const resources = [...(topic.resources ?? []), ...(topic.collection?.resources ?? [])];
     mountList(byId('resources'), resources.map(item => [[item.title, item.provider].filter(Boolean).join(' · '), item.url]));
     mountList(byId('sources'), topic.sources ?? []);

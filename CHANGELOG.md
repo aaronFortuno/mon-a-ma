@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.18 · 25 de novembre de 2026
+
+- Mostra les fitxes del mateix conjunt o col·lecció a Fitxes relacionades, al peu del lateral esquerre.
+- Situa Fonts i crèdits al peu del lateral dret. Tots dos menús es despleguen cap amunt.
+
 ## 0.1.17 · 25 de novembre de 2026
 
 - Aplica als controls d’il·lustració la separació i les mides dels controls de Text i pàgina.

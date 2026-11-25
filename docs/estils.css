@@ -190,6 +190,7 @@ select { padding: .45rem .6rem; border: 1px solid var(--control-line); backgroun
   border: 1px solid var(--line);
   border-radius: .7rem;
 }
+.workspace-grid > .sidebar[open] { align-self: stretch; }
 .sidebar > summary {
   flex: none;
   padding: .64rem 1rem;
@@ -211,6 +212,9 @@ select { padding: .45rem .6rem; border: 1px solid var(--control-line); backgroun
   line-height: 1.35;
 }
 .sidebar-menu > summary:hover, .sidebar-menu[open] > summary { background: var(--light); }
+.sidebar-menu.sidebar-footer { flex-direction: column-reverse; margin-block-start: auto; }
+.sidebar-footer[open] { flex: 0 1 auto; }
+.sidebar-footer > summary { border-block-start: 1px solid var(--line); }
 .sidebar-menu summary::marker { color: var(--green); }
 :is(.sidebar, .sidebar-menu)::details-content {
   display: flex;
@@ -241,8 +245,8 @@ summary { color: var(--green); font-weight: 650; }
 .resources p, .resources li { font-size: .89rem; }
 .resources ul { margin: .45rem 0 0; padding-inline-start: 1.05rem; }
 .resources li { margin-bottom: .3rem; }
-.outline .collection-nav nav a { font-weight: 500; }
-.outline .collection-nav nav .all-related { margin-top: .32rem; text-decoration: underline; }
+.outline .related-nav nav a { font-weight: 500; }
+.outline .related-nav nav .all-related { margin-top: .32rem; text-decoration: underline; }
 
 
 .ink { --paper-ink: #182b28; --paper-accent: #195747; --paper-line: #9fb6aa; --paper-tint: #eff5f0; color: var(--paper-ink); }
@@ -668,8 +672,10 @@ summary { color: var(--green); font-weight: 650; }
   .workspace-grid .outline { grid-area: 1 / 1; }
   .workspace-grid .settings { grid-area: 1 / 2; }
   .workspace-grid .studio { grid-area: 2 / 1 / 3 / 3; }
-  .workspace-grid .sidebar { max-height: clamp(10.8rem, 38dvh, 19rem); }
-  .workspace-grid .settings { max-height: clamp(14rem, 48dvh, 20rem); }
+  .workspace-grid > .sidebar[open] {
+    align-self: start;
+    block-size: clamp(12.5rem, 38dvh, 19rem);
+  }
   .workspace-grid .sidebar > summary { padding-block: .42rem; }
   .workspace-grid .sidebar-menu > summary { padding-block: .41rem; }
 
