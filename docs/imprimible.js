@@ -192,6 +192,17 @@ window.imprimible = (() => {
     return { sheet, body, footer };
   }
 
+  function previewPage(topic, chapter, sectionId, options) {
+    const { sheet, body } = makePage(topic, options, true);
+    const section = chapter.sections.find(item => item.id === sectionId) ?? chapter.sections[0];
+    body.append(chapterHeader(chapter));
+    if (section) {
+      const figures = (chapter.figures ?? []).filter(item => item.section === section.id);
+      body.append(...sectionUnits(section, figures).slice(0, 2));
+    }
+    return sheet;
+  }
+
   function paginate(topic, chapters, figuresByChapter, options, measuring, target) {
     measuring.replaceChildren();
     const pages = [];
@@ -240,5 +251,5 @@ window.imprimible = (() => {
     return { count: pages.length, width, height, oversized };
   }
 
-  return { node, paragraphAnchor, loadPaperFont, paginate };
+  return { node, paragraphAnchor, loadPaperFont, paginate, previewPage };
 })();

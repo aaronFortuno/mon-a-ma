@@ -37,7 +37,10 @@
 
   for (const open of document.querySelectorAll('[data-dialog]')) {
     const dialog = document.getElementById(open.dataset.dialog);
-    open.addEventListener('click', () => dialog.showModal());
+    open.addEventListener('click', () => {
+      dialog.returnValue = '';
+      dialog.showModal();
+    });
     dialog.addEventListener('click', event => {
       if (event.target === dialog) {
         const bounds = dialog.getBoundingClientRect();
@@ -45,7 +48,9 @@
             event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
       }
     });
-    dialog.addEventListener('close', () => open.focus());
+    dialog.addEventListener('close', () => {
+      if (dialog.returnValue !== 'navigate') open.focus();
+    });
   }
 
   document.getElementById('copy-lightning').addEventListener('click', async () => {

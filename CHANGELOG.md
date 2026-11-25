@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.12 · 25 de novembre de 2026
+
+- Obre el mapa curricular en un quadre amb pestanyes de Primària i Secundària.
+- Mostra el resum curricular en passar sobre cada saber i un quadradet per a cada fitxa vinculada.
+- Permet seleccionar files i cel·les per consultar el detall, i mostra una miniatura en passar sobre una fitxa.
+
 ## 0.1.11 · 25 de novembre de 2026
 
 - Corregeix l’accés a les col·leccions des del catàleg amb les noves rutes per codi.

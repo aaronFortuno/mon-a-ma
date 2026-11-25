@@ -332,13 +332,14 @@
   function renderRoute(event) {
     const previous = route;
     route = extractRoute();
-    const onMap = location.hash === '#mapa-curricular';
     const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
     byId('catalog-home').href = route ? catalogAddress(activeCollection) : '#';
-    if (onMap) byId('curriculum-link').setAttribute('aria-current', 'page');
-    else byId('curriculum-link').removeAttribute('aria-current');
-    byId('curriculum').hidden = !onMap;
-    byId('catalog').hidden = Boolean(route) || onMap;
+    byId('catalog').hidden = Boolean(route);
+    const curriculumDialog = byId('curriculum-dialog');
+    if (location.hash === '#mapa-curricular' && !curriculumDialog.open) {
+      curriculumDialog.returnValue = '';
+      curriculumDialog.showModal();
+    }
     byId('workspace').hidden = !route;
 
     const title = byId('topic-title');
@@ -346,11 +347,6 @@
     title.textContent = route?.topic.title ?? '';
     if (!route) {
       revision++;
-      if (onMap) {
-        document.title = 'Mapa curricular · Món a mà';
-        if (event) byId('curriculum-title').focus({ preventScroll: true });
-        return;
-      }
       if (location.hash.startsWith('#conjunt/')) {
         const id = location.hash.slice('#conjunt/'.length);
         const group = topics.find(topic => topic.collection?.id === id)?.collection;
