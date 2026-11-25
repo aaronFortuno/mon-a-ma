@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.11 · 25 de novembre de 2026
+
+- Corregeix l’accés a les col·leccions des del catàleg amb les noves rutes per codi.
+
 ## 0.1.10 · 25 de novembre de 2026
 
 - Afegeix un mapa curricular interactiu amb blocs de sabers per cicle i accés directe als apartats imprimibles.

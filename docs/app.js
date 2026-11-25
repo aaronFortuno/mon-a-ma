@@ -170,7 +170,7 @@
       activeCollection = library.collections.find(item => item.id === path.shift()) ?? null;
       if (!activeCollection) return null;
     }
-    const topic = topicByCode.get(path.shift().toUpperCase());
+    const topic = topicByCode.get(path.shift()?.toUpperCase());
     if (!topic || (activeCollection && !activeCollection.topicIds.includes(topic.id))) return null;
     const chapterId = topic.chapters.length > 1 ? path.shift() : topic.chapters[0].id;
     const chapter = topic.chapters.find(item => item.id === chapterId) ?? topic.chapters[0];
