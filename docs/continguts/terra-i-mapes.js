@@ -2,7 +2,7 @@ window.quaderns ??= [];
 
 {
   const p = text => ({ type: 'paragraph', text });
-  const table = (headers, rows) => ({ type: 'table', headers, rows });
+  const table = (headers, rows, rowHeadingWidth) => ({ type: 'table', headers, rows, rowHeadingWidth });
   const list = (...items) => ({ type: 'steps', items });
   const box = (title, text) => ({ type: 'note', title, text });
   const section = (id, title, ...blocks) => ({ id, title, blocks });
@@ -47,7 +47,7 @@ window.quaderns ??= [];
           ['Escorça', 'És la capa de roca més exterior i més prima. Forma el sòl rocós dels continents i el fons dels oceans.'],
           ['Mantell', 'És la capa més gruixuda. Està format sobretot per roca sòlida molt calenta que es pot deformar lentament.'],
           ['Nucli', 'És al centre de la Terra i està format sobretot per ferro. La part externa és líquida i la part interna és sòlida.'],
-        ])),
+        ], 24)),
       section('moviment', 'Hi ha moviment a les capes de la Terra?',
         p('L’escorça i la part més superficial i rígida del mantell formen la **litosfera**. Està dividida en grans fragments anomenats **plaques tectòniques**. Les plaques es mouen uns quants centímetres cada any, aproximadament el que poden créixer les ungles en un any.'),
         p('La calor interna de la Terra contribueix a moviments molt lents al mantell. A la superfície, algunes plaques se separen, d’altres xoquen i d’altres llisquen de costat. Amb el pas de milions d’anys, aquests moviments desplacen els continents i poden aixecar serralades.'),

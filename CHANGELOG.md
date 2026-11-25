@@ -1,5 +1,13 @@
 # Historial de versions
 
+## 0.1.15 · 25 de novembre de 2026
+
+- Manté la posició del visor quan es reordena un apartat i anima només l’apartat mogut.
+- Eixampla la primera columna de la taula de les capes de la Terra.
+- Estableix un interlineat d’1,8 i marges de 20 mm al format original.
+- Situa el nom opcional de Món a mà sota el logotip i el títol del tema, també opcional, al peu de pàgina.
+- Mou els controls d’il·lustració al lateral Aquest tema.
+
 ## 0.1.14 · 25 de novembre de 2026
 
 - Anima la retirada, la recuperació i els canvis d’ordre dels apartats de la fitxa.

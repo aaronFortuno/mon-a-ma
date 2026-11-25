@@ -52,6 +52,7 @@ window.imprimible = (() => {
       return aside;
     }
     const table = node('table');
+    if (source.rowHeadingWidth) table.style.setProperty('--row-heading-width', source.rowHeadingWidth + '%');
     const headings = table.createTHead().insertRow();
     for (const heading of source.headers) {
       const cell = node('th', '', heading);
@@ -153,10 +154,13 @@ window.imprimible = (() => {
     if (firstPage) {
       const row = node('div', 'sheet-header-fields');
       if (options.headerLogo) {
+        const brand = node('div', 'sheet-header-brand');
         const logo = node('img', options.headerLogoImage ? 'sheet-header-logo is-custom' : 'sheet-header-logo');
         logo.src = options.headerLogoImage || projectLogo;
-        logo.alt = options.headerLogoImage ? '' : 'Món a mà';
-        row.append(logo);
+        logo.alt = options.headerBrand || options.headerLogoImage ? '' : 'Món a mà';
+        brand.append(logo);
+        if (options.headerBrand) brand.append(node('span', '', 'Món a mà'));
+        row.append(brand);
       }
       if (options.headerName || options.headerDate) {
         const fields = node('div', 'sheet-student-fields');
@@ -177,15 +181,9 @@ window.imprimible = (() => {
     const footer = options.showPageFooter ? node('footer', 'sheet-footer') : null;
     inner.append(header, body);
     if (footer) {
-      const signature = node('span', 'sheet-brand');
-      const logo = node('img');
-      logo.src = projectLogo;
-      logo.alt = '';
-      logo.width = 15;
-      logo.height = 15;
-      signature.append(logo, 'Món a mà');
-      footer.append(signature);
+      if (options.showTopicTitle) footer.append(node('span', 'sheet-footer-title', topic.title));
       if (options.showMaterialCode) footer.append(node('span', 'sheet-material-code', topic.code));
+      if (options.pageNumbers) footer.append(node('span', 'sheet-page-number', '1 / 1'));
       inner.append(footer);
     }
     sheet.append(inner);
@@ -247,7 +245,8 @@ window.imprimible = (() => {
     const width = pages[0].sheet.getBoundingClientRect().width;
     const height = pages[0].sheet.getBoundingClientRect().height;
     const frames = pages.map(({ sheet, footer }, index) => {
-      if (options.pageNumbers) footer?.append(node('span', 'sheet-page-number', (index + 1) + ' / ' + pages.length));
+      const number = footer?.querySelector('.sheet-page-number');
+      if (number) number.textContent = (index + 1) + ' / ' + pages.length;
       const frame = node('div', 'sheet-frame');
       frame.append(sheet);
       return frame;

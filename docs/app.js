@@ -14,6 +14,7 @@
   let library = preferences.library();
   let activeCollection = null;
   const form = byId('options');
+  const figureForm = byId('figure-settings');
   const stack = byId('paper-stack');
   const motionLayer = byId('paper-motion');
   const catalogTitle = document.title;
@@ -29,8 +30,7 @@
   let imageDb;
   let logoUploadVersion = 0;
   let pendingSection = '';
-  let previewFocus;
-  let animateNextPaper = false;
+  let sectionEdit;
   let paperAnimations = [];
 
   function imageStore() {
@@ -383,9 +383,8 @@
     title.hidden = !route;
     title.textContent = route?.topic.title ?? '';
     if (!route) {
-      animateNextPaper = false;
       stopPaperMotion();
-      previewFocus = null;
+      sectionEdit = null;
       revision++;
       if (location.hash.startsWith('#conjunt/')) {
         const id = location.hash.slice('#conjunt/'.length);
@@ -418,9 +417,8 @@
       stack.scrollTop = 0;
     }
     if (changedChapter || previous?.section !== route.section) {
-      animateNextPaper = false;
       stopPaperMotion();
-      previewFocus = null;
+      sectionEdit = null;
       pendingSection = route.section ?? '';
       if (pendingSection) documentType = 'sheet';
     }
@@ -503,7 +501,7 @@
     byId('print-scope').hidden = route.topic.chapters.length === 1;
     syncDocumentPicker();
     for (const key of Object.keys(defaults)) {
-      const input = form.elements.namedItem(key);
+      const input = form.elements.namedItem(key) ?? figureForm.elements.namedItem(key);
       if (!input) continue;
       if (input.type === 'checkbox') input.checked = settings[key];
       else input.value = settings[key];
@@ -635,16 +633,26 @@
     }
   }
 
-  function focusPaperSection(chapter, section, edit = {}) {
+  function focusPaperSection(chapter, section) {
     const unit = paperSection(chapter, section);
     if (!unit) return false;
-    const toolbar = unit.querySelector('.section-preview-tools');
-    const action = toolbar?.querySelector('[data-action="' + edit.action + '"]:not(:disabled)');
-    const fallback = edit.action && toolbar?.querySelector('.section-preview-actions button:not(:disabled)');
-    if (edit.action) toolbar?.querySelector('.section-preview-toggle').setAttribute('aria-expanded', 'true');
-    (action || fallback || unit).focus({ preventScroll: true });
-    stack.scrollTop += unit.getBoundingClientRect().top - stack.getBoundingClientRect().top - (edit.offset ?? 12);
+    unit.focus({ preventScroll: true });
+    stack.scrollTop += unit.getBoundingClientRect().top - stack.getBoundingClientRect().top - 12;
     return true;
+  }
+
+  function focusMovedSection({ chapter, section, action }) {
+    const unit = paperSection(chapter, section);
+    const heading = unit?.querySelector('.section-title');
+    if (!heading || !inPreview(heading.getBoundingClientRect(), stack.getBoundingClientRect())) {
+      stack.focus({ preventScroll: true });
+      return;
+    }
+    const tools = unit.querySelector('.section-preview-tools');
+    tools.querySelector('.section-preview-toggle').setAttribute('aria-expanded', 'true');
+    const button = tools.querySelector('[data-action="' + action + '"]:not(:disabled)') ??
+      tools.querySelector('.section-preview-actions button:not(:disabled)');
+    button.focus({ preventScroll: true });
   }
 
   function stopPaperMotion() {
@@ -655,11 +663,15 @@
     motionLayer.replaceChildren();
   }
 
-  function capturePaperMotion() {
-    if (!animateNextPaper) return;
+  function sectionUnitsOnPaper({ chapter, section }) {
+    const prefix = 'fitxa-' + chapter + '-' + section + ':';
+    return [...stack.querySelectorAll('[data-paper-unit]')].filter(unit => unit.dataset.paperUnit.startsWith(prefix));
+  }
+
+  function capturePaperMotion(edit) {
     const duration = parseFloat(getComputedStyle(stack).getPropertyValue('--motion-duration'));
     if (!duration || typeof stack.animate !== 'function') return;
-    const units = new Map([...stack.querySelectorAll('[data-paper-unit]')].map(unit =>
+    const units = new Map(sectionUnitsOnPaper(edit).map(unit =>
       [unit.dataset.paperUnit, { unit, rect: unit.getBoundingClientRect() }]));
     return { units, duration, view: stack.getBoundingClientRect(), zoom: parseFloat(stack.style.getPropertyValue('--zoom')) || 1 };
   }
@@ -691,36 +703,32 @@
   function animatePaper(snapshot, edit) {
     const timing = { duration: snapshot.duration, easing: 'ease-out' };
     const animations = [];
-    const zoom = parseFloat(stack.style.getPropertyValue('--zoom')) || 1;
-    const view = stack.getBoundingClientRect();
-    const editedId = edit?.action ? 'fitxa-' + edit.chapter + '-' + edit.section : '';
-    const current = new Set();
-    for (const unit of stack.querySelectorAll('[data-paper-unit]')) {
-      const key = unit.dataset.paperUnit;
-      current.add(key);
-      const last = unit.getBoundingClientRect();
-      const first = snapshot.units.get(key)?.rect;
-      if (!inPreview(last, view) && (!first || !inPreview(first, snapshot.view))) continue;
-      let frames;
-      if (!first) {
-        frames = [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }];
-      } else {
-        const x = (first.left - last.left) / zoom;
-        let y = (first.top - last.top) / zoom;
-        if (unit.id === editedId && Math.abs(y) < 1) y = edit.action === 'up' ? 10 : -10;
-        if (Math.abs(x) < 1 && Math.abs(y) < 1) continue;
-        frames = Math.abs(y * zoom) > view.height * 1.5
-          ? [{ opacity: .25 }, { opacity: 1 }]
-          : [{ transform: 'translate(' + x + 'px, ' + y + 'px)' }, { transform: 'none' }];
+    if (edit.action === 'remove') {
+      const layer = motionLayer.getBoundingClientRect();
+      for (const previous of snapshot.units.values()) {
+        if (!inPreview(previous.rect, snapshot.view)) continue;
+        const ghost = removedPaperUnit(previous, layer, snapshot.zoom);
+        animations.push(ghost.animate([{ opacity: 1, translate: '0 0' }, { opacity: 0, translate: '0 -9px' }], timing));
       }
-      unit.dataset.paperInMotion = '';
-      animations.push(unit.animate(frames, timing));
-    }
-    const layer = motionLayer.getBoundingClientRect();
-    for (const [key, previous] of snapshot.units) {
-      if (current.has(key) || !inPreview(previous.rect, snapshot.view)) continue;
-      const ghost = removedPaperUnit(previous, layer, snapshot.zoom);
-      animations.push(ghost.animate([{ opacity: 1, translate: '0 0' }, { opacity: 0, translate: '0 -9px' }], timing));
+    } else {
+      const zoom = parseFloat(stack.style.getPropertyValue('--zoom')) || 1;
+      const view = stack.getBoundingClientRect();
+      for (const unit of sectionUnitsOnPaper(edit)) {
+        const last = unit.getBoundingClientRect();
+        const first = snapshot.units.get(unit.dataset.paperUnit)?.rect;
+        if (!inPreview(last, view) && (!first || !inPreview(first, snapshot.view))) continue;
+        let frames;
+        if (first) {
+          const x = (first.left - last.left) / zoom;
+          const y = (first.top - last.top) / zoom;
+          if (Math.abs(x) < 1 && Math.abs(y) < 1) continue;
+          frames = [{ transform: 'translate(' + x + 'px, ' + y + 'px)' }, { transform: 'none' }];
+        } else {
+          frames = [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }];
+        }
+        unit.dataset.paperInMotion = first ? 'move' : 'enter';
+        animations.push(unit.animate(frames, timing));
+      }
     }
     if (!animations.length) return;
     stack.classList.add('is-repaginating');
@@ -754,20 +762,24 @@
     }));
     await fontReady;
     if (ticket !== revision || !route) return;
-    const snapshot = capturePaperMotion();
-    animateNextPaper = false;
+    const edit = sectionEdit;
+    sectionEdit = null;
+    const scrollTop = stack.scrollTop;
+    const snapshot = edit && capturePaperMotion(edit);
     stopPaperMotion();
     paper = paginate(topic, chapters, new Map(resolved), options, byId('layout-probe'), stack);
     if (documentType === 'sheet') renderSectionTools(chapters);
     fitPaper();
+    if (edit) stack.scrollTop = scrollTop;
     if (pendingSection) {
       if (!focusPaperSection(chapter.id, pendingSection)) focusRemovedSection(chapter.id, pendingSection);
       pendingSection = '';
-    } else if (previewFocus) {
-      focusPaperSection(previewFocus.chapter, previewFocus.section, previewFocus);
+    } else if (edit?.action === 'restore') {
+      focusPaperSection(edit.chapter, edit.section);
+    } else if (edit?.action === 'up' || edit?.action === 'down') {
+      focusMovedSection(edit);
     }
-    if (snapshot) animatePaper(snapshot, previewFocus);
-    previewFocus = null;
+    if (snapshot) animatePaper(snapshot, edit);
     byId('page-count').value = paper.count + (paper.count === 1 ? ' pàgina' : ' pàgines') +
       (missing ? ' · Alguna imatge no s’ha pogut carregar.' : '') +
       (paper.oversized ? ' · Redueix la lletra, l’interlineat o els marges per encabir el contingut.' : '');
@@ -800,7 +812,7 @@
       if (key === 'section') {
         settings.figures[id].anchor = 'lead';
         renderControls();
-        form.querySelector('[data-figure-id="' + id + '"] [data-setting="section"]').focus({ preventScroll: true });
+        figureForm.querySelector('[data-figure-id="' + id + '"] [data-setting="section"]').focus({ preventScroll: true });
       } else if (key === 'anchor' || key === 'position') {
         const current = figuresFor(printableChapter(route.chapter)).find(item => item.id === id);
         const wrap = card.querySelector('[data-setting="wrap"]');
@@ -997,8 +1009,8 @@
     else location.hash = hash;
   }
 
-  function updateSections(message) {
-    animateNextPaper = true;
+  function updateSections(message, edit) {
+    sectionEdit = edit;
     storeOptions();
     renderNavigation();
     renderControls();
@@ -1028,8 +1040,7 @@
     if (action === 'remove') {
       removed.add(id);
       settings.hiddenSections[chapter.id] = [...removed];
-      previewFocus = null;
-      updateSections('S’ha tret «' + section.title + '» de la fitxa.');
+      updateSections('S’ha tret «' + section.title + '» de la fitxa.', { chapter: chapter.id, section: id, action });
       focusRemovedSection(chapter.id, id);
       return;
     }
@@ -1041,8 +1052,8 @@
     const to = ordered.indexOf(neighbor);
     [ordered[from], ordered[to]] = [ordered[to], ordered[from]];
     settings.sectionOrder[chapter.id] = ordered.map(item => item.id);
-    previewFocus = { chapter: chapter.id, section: id, action, offset: unit.getBoundingClientRect().top - stack.getBoundingClientRect().top };
-    updateSections(section.title + '. Posició ' + (index + direction + 1) + ' de ' + visible.length + '.');
+    updateSections(section.title + '. Posició ' + (index + direction + 1) + ' de ' + visible.length + '.',
+      { chapter: chapter.id, section: id, action });
   }
 
   function restoreSection(event) {
@@ -1056,8 +1067,8 @@
     if (removed.size) settings.hiddenSections[chapter.id] = [...removed];
     else delete settings.hiddenSections[chapter.id];
     documentType = 'sheet';
-    previewFocus = { chapter: chapter.id, section: section.id };
-    updateSections('S’ha afegit «' + section.title + '» a la fitxa.');
+    updateSections('S’ha afegit «' + section.title + '» a la fitxa.',
+      { chapter: chapter.id, section: section.id, action: 'restore' });
   }
 
   codeInput.addEventListener('input', () => codeInput.setCustomValidity(''));
@@ -1202,9 +1213,11 @@
     showTemplateManager();
     templateStatus('Plantilla suprimida.', persisted);
   });
-  form.addEventListener('submit', event => event.preventDefault());
-  form.addEventListener('input', updateOption);
-  form.addEventListener('change', updateOption);
+  for (const panel of [form, figureForm]) {
+    panel.addEventListener('submit', event => event.preventDefault());
+    panel.addEventListener('input', updateOption);
+    panel.addEventListener('change', updateOption);
+  }
   byId('figure-options').addEventListener('click', removeImage);
   byId('upload').addEventListener('change', addImage);
   byId('header-logo-upload').addEventListener('change', changeHeaderLogo);
@@ -1221,8 +1234,7 @@
     const type = event.target.closest('button')?.dataset.document;
     if (!type || type === documentType) return;
     documentType = type;
-    animateNextPaper = false;
-    previewFocus = null;
+    sectionEdit = null;
     renderControls();
     requestPaper();
   });

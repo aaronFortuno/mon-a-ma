@@ -3,11 +3,12 @@
   const layoutKey = 'quadern-obert:layout:v1';
   const libraryKey = 'mon-a-ma:organitzacio:v1';
   const defaults = {
-    scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.45, margin: 16, textAlignment: 'left',
-    showPageFooter: true, pageNumbers: true, showMaterialCode: true, showFigures: true,
-    headerLogo: true, headerName: true, headerDate: true, headerLogoImage: '',
+    scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.8, margin: 20, textAlignment: 'left',
+    showPageFooter: true, pageNumbers: true, showMaterialCode: true, showTopicTitle: true, showFigures: true,
+    headerLogo: true, headerBrand: true, headerName: true, headerDate: true, headerLogoImage: '',
     showClassroomCode: false, classroomCode: '', classroomCodeSize: 20, classroomCodeStyle: 'solid',
   };
+  const legacyDefaults = { ...defaults, leading: 1.45, margin: 16 };
   const localKeys = new Set(['scope', 'classroomCode']);
   const temporary = new Map();
 
@@ -61,8 +62,8 @@
     const saved = read(layoutKey, {})[recordKey(topicId, collection)] ?? {};
     const templateId = data.templates.some(item => item.id === saved.templateId) || saved.templateId === '' ? saved.templateId : null;
     // Earlier versions stored a full snapshot. Keep the changes from the original defaults.
-    const changes = saved.values ?? Object.fromEntries(Object.keys(defaults)
-      .filter(key => Object.hasOwn(saved, key) && saved[key] !== defaults[key]).map(key => [key, saved[key]]));
+    const changes = saved.values ?? Object.fromEntries(Object.keys(legacyDefaults)
+      .filter(key => Object.hasOwn(saved, key) && saved[key] !== legacyDefaults[key]).map(key => [key, saved[key]]));
     return {
       ...getBase(templateId, collection, data),
       ...changes,
