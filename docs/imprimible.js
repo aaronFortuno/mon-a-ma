@@ -1,4 +1,28 @@
 window.imprimible = (() => {
+  const paperFonts = {
+    georgia: "Georgia, 'Times New Roman', serif",
+    lora: 'Lora, Georgia, serif',
+    times: "'Times New Roman', serif",
+    arial: 'Arial, sans-serif',
+    lexend: 'Lexend, Arial, sans-serif',
+    verdana: 'Verdana, sans-serif',
+  };
+  const webFonts = { lora: 'Lora', lexend: 'Lexend' };
+  const fontLoads = new Map();
+  const projectLogo = 'assets/mon-a-ma.png?v=0.1.4';
+
+  function loadPaperFont(id) {
+    const family = webFonts[id];
+    if (!family || !document.fonts) return;
+    if (!fontLoads.has(id)) {
+      const sample = 'Àçó ’ l·l ě';
+      const loaded = Promise.all([400, 700].map(weight => document.fonts.load(weight + ' 12pt ' + family, sample)))
+        .catch(() => fontLoads.delete(id));
+      fontLoads.set(id, loaded);
+    }
+    return fontLoads.get(id);
+  }
+
   function node(tag, className = '', value = '') {
     const element = document.createElement(tag);
     if (className) element.className = className;
@@ -126,20 +150,47 @@ window.imprimible = (() => {
     return article;
   }
 
-  function makePage(topic, options) {
+  function makePage(topic, options, firstPage) {
     const sheet = node('article', options.monochrome ? 'sheet ink mono' : 'sheet ink');
     sheet.style.setProperty('--margin', options.margin + 'mm');
     sheet.style.setProperty('--font-size', options.fontSize + 'pt');
     sheet.style.setProperty('--leading', options.leading);
+    sheet.style.setProperty('--serif', paperFonts[options.font] ?? paperFonts.georgia);
+    sheet.dataset.alignment = options.textAlignment;
     const inner = node('div', 'sheet-inner');
     const header = node('header', 'sheet-header');
     const label = options.documentType === 'solution' ? 'Solucionari · ' : '';
-    header.append(node('span', '', topic.title), node('span', '', label + topic.subject + ' · ' + topic.grades.join(', ')));
+    const meta = node('div', 'sheet-header-meta');
+    meta.append(node('span', '', topic.title), node('span', '', label + topic.subject + ' · ' + topic.grades.join(', ')));
+    header.append(meta);
+    if (firstPage) {
+      const row = node('div', 'sheet-header-fields');
+      if (options.headerLogo) {
+        const logo = node('img', options.headerLogoImage ? 'sheet-header-logo is-custom' : 'sheet-header-logo');
+        logo.src = options.headerLogoImage || projectLogo;
+        logo.alt = options.headerLogoImage ? '' : 'Món a mà';
+        row.append(logo);
+      }
+      if (options.headerName || options.headerDate) {
+        const fields = node('div', 'sheet-student-fields');
+        if (options.headerName) fields.append(node('span', 'sheet-student-field sheet-student-name', 'Nom'));
+        if (options.headerDate) fields.append(node('span', 'sheet-student-field', 'Data'));
+        row.append(fields);
+      }
+      const code = options.showClassroomCode && options.classroomCode.trim();
+      if (code) {
+        const badge = node('span', 'sheet-classroom-code', code);
+        badge.classList.toggle('is-outline', options.classroomCodeStyle === 'outline');
+        badge.style.fontSize = options.classroomCodeSize + 'pt';
+        row.append(badge);
+      }
+      if (row.childElementCount) header.append(row);
+    }
     const body = node('div', 'sheet-body');
     const footer = node('footer', 'sheet-footer');
     const signature = node('span', 'sheet-brand');
     const logo = node('img');
-    logo.src = 'assets/mon-a-ma.png?v=0.1.4';
+    logo.src = projectLogo;
     logo.alt = '';
     logo.width = 15;
     logo.height = 15;
@@ -156,8 +207,8 @@ window.imprimible = (() => {
     let page;
     let oversized = false;
 
-    function start() {
-      page = makePage(topic, options);
+    function start(firstPage = false) {
+      page = makePage(topic, options, firstPage);
       measuring.append(page.sheet);
       pages.push(page);
     }
@@ -174,7 +225,7 @@ window.imprimible = (() => {
     }
 
     for (const chapter of chapters) {
-      start();
+      start(true);
       add(chapterHeader(chapter));
       const figures = figuresByChapter.get(chapter.id);
       for (const section of chapter.sections) {
@@ -193,5 +244,5 @@ window.imprimible = (() => {
     return { count: pages.length, width, height, oversized };
   }
 
-  return { node, paragraphAnchor, readChapter, paginate };
+  return { node, paragraphAnchor, readChapter, loadPaperFont, paginate };
 })();

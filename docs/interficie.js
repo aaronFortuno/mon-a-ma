@@ -65,7 +65,7 @@
     result.hidden = false;
   });
 
-  const compact = matchMedia('(max-width: 680px)');
+  const compact = matchMedia('(max-width: 800px)');
   const panels = document.querySelectorAll('.catalog-filters, #topic-outline, #settings');
   function fitPanels() {
     for (const panel of panels) panel.open = !compact.matches;

@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.6 · 25 de novembre de 2026
+
+- Amplia els laterals i agrupa els controls en submenús exclusius. Les capçaleres queden visibles i el contingut obert té desplaçament propi.
+- Aplica barres de desplaçament amb els colors del projecte.
+- Afegeix tipografies, alineació del text, camps per escriure el nom i la data, logotip personalitzable i codi d’aula amb mida i contrast configurables als imprimibles.
+
 ## 0.1.5 · 25 de novembre de 2026
 
 - Manté la capçalera, el peu i els panells dins la finestra amb desplaçament intern i ajust automàtic del catàleg i la previsualització.

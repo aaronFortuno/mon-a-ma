@@ -1,13 +1,18 @@
 (() => {
   const topics = window.quaderns;
-  const { node, paragraphAnchor, readChapter, paginate } = window.imprimible;
+  const { node, paragraphAnchor, readChapter, loadPaperFont, paginate } = window.imprimible;
   const byId = id => document.getElementById(id);
   const form = byId('options');
   const stack = byId('paper-stack');
   const catalogTitle = document.title;
   // Keep storage identifiers stable so saved layouts and uploaded images survive the rename.
   const storageKey = 'quadern-obert:layout:v1';
-  const defaults = { scope: 'chapter', fontSize: 12, leading: 1.45, margin: 16, monochrome: false, pageNumbers: true, showFigures: true };
+  const defaults = {
+    scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.45, margin: 16, textAlignment: 'left',
+    monochrome: false, pageNumbers: true, showFigures: true,
+    headerLogo: true, headerName: true, headerDate: true,
+    showClassroomCode: false, classroomCode: '', classroomCodeSize: 20, classroomCodeStyle: 'solid',
+  };
   const widths = new Intl.NumberFormat('ca', { maximumFractionDigits: 1 });
   const images = new Map();
   let saved = {};
@@ -19,6 +24,7 @@
   let revision = 0;
   let frameId;
   let imageDb;
+  let logoUploadVersion = 0;
 
   try { saved = JSON.parse(localStorage.getItem(storageKey)) || {}; }
   catch { saved = {}; }
@@ -193,9 +199,9 @@
     }
   }
 
-  function mountList(container, title, rows, intro) {
+  function mountList(container, rows, intro) {
     container.hidden = rows.length === 0 && !intro;
-    const summary = node('summary', '', title);
+    if (container.hidden) container.open = false;
     const list = node('ul');
     for (const [label, url] of rows) {
       const item = node('li');
@@ -205,24 +211,28 @@
       item.append(anchor);
       list.append(item);
     }
-    container.replaceChildren(summary);
-    if (intro) container.append(node('p', '', intro));
-    if (rows.length) container.append(list);
+    const body = container.querySelector('.sidebar-pane');
+    body.replaceChildren();
+    if (intro) body.append(node('p', '', intro));
+    if (rows.length) body.append(list);
   }
 
   function renderCollection(topic, view) {
     const container = byId('collection-nav');
     container.hidden = !topic.collection;
-    container.replaceChildren();
-    if (!topic.collection) return;
-    const nav = node('nav');
+    if (!topic.collection) {
+      container.open = false;
+      return;
+    }
+    container.querySelector('summary').textContent = topic.collection.title;
+    const nav = container.querySelector('nav');
+    nav.replaceChildren();
     nav.setAttribute('aria-label', 'Temes del conjunt ' + topic.collection.title);
     for (const item of topics.filter(candidate => candidate.collection?.id === topic.collection.id)) {
       const anchor = link(item.title, address(item, item.chapters[0], view));
       if (item.id === topic.id) anchor.setAttribute('aria-current', 'page');
       nav.append(anchor);
     }
-    container.append(node('summary', '', topic.collection.title), nav);
   }
 
   function renderNavigation() {
@@ -230,8 +240,12 @@
     const nav = byId('chapter-nav');
     const hasChapters = topic.chapters.length > 1;
     nav.replaceChildren();
-    nav.hidden = !hasChapters && view !== 'llegeix';
-    byId('outline-title').textContent = hasChapters ? 'Capítols' : view === 'llegeix' ? 'Apartats' : 'Aquest tema';
+    const chapterMenu = byId('chapter-menu');
+    const showChapters = hasChapters || view === 'llegeix';
+    const revealChapters = chapterMenu.hidden && showChapters;
+    chapterMenu.hidden = !showChapters;
+    if (!showChapters) chapterMenu.open = false;
+    byId('outline-title').textContent = hasChapters ? 'Capítols' : 'Apartats';
     for (const entry of topic.chapters) {
       if (hasChapters) {
         const anchor = link(entry.title, address(topic, entry, view));
@@ -249,8 +263,14 @@
     }
     renderCollection(topic, view);
     const resources = [...(topic.resources ?? []), ...(topic.collection?.resources ?? [])];
-    mountList(byId('resources'), 'Recursos', resources.map(item => [[item.title, item.provider].filter(Boolean).join(' · '), item.url]));
-    mountList(byId('sources'), 'Currículum i fonts', topic.sources ?? [], topic.curriculum);
+    mountList(byId('resources'), resources.map(item => [[item.title, item.provider].filter(Boolean).join(' · '), item.url]));
+    mountList(byId('sources'), topic.sources ?? [], topic.curriculum);
+    const outline = byId('topic-outline');
+    if (revealChapters) chapterMenu.open = true;
+    else if (!outline.querySelector('.sidebar-menu[open]:not([hidden])')) {
+      const first = outline.querySelector('.sidebar-menu:not([hidden])');
+      if (first) first.open = true;
+    }
     byId('document-view-link').href = address(topic, chapter, view === 'maqueta' ? 'llegeix' : 'maqueta');
     byId('document-view-link').textContent = view === 'maqueta' ? 'Llegeix els apunts' : 'Obre la maquetació';
   }
@@ -272,6 +292,8 @@
     if (previous?.topic.id !== route.topic.id) {
       settings = getOptions(route.topic);
       documentType = 'sheet';
+      logoUploadVersion++;
+      headerLogoFeedback('');
     }
     const editing = route.view === 'maqueta';
     byId('catalog').hidden = true;
@@ -329,7 +351,7 @@
     width.max = '100';
     width.value = item.width;
     width.dataset.setting = 'width';
-    const widthLabel = node('label', 'slider', 'Amplada');
+    const widthLabel = node('label', 'slider full-width', 'Amplada');
     widthLabel.append(node('output', '', item.width + ' %'), width);
     group.append(widthLabel);
 
@@ -338,7 +360,7 @@
       select.append(...values.map(([value, text]) => option(value, text)));
       select.value = item[key];
       select.dataset.setting = key;
-      group.append(control(label, select));
+      group.append(control(label, select, key === 'section' ? 'full-width' : ''));
     }
     const chapter = printableChapter(route.chapter);
     pick('section', 'Apartat', chapter.sections.map(entry => [entry.id, entry.title]));
@@ -362,7 +384,7 @@
       caption.value = item.caption ?? '';
       caption.maxLength = 240;
       caption.dataset.setting = 'caption';
-      group.append(control('Peu de la imatge', caption));
+      group.append(control('Peu de la imatge', caption, 'full-width'));
     }
     if (item.blob) {
       const remove = node('button', 'secondary', 'Treu la imatge');
@@ -382,11 +404,58 @@
       else input.value = settings[key];
     }
     byId('font-size-value').value = widths.format(settings.fontSize) + ' pt';
+    syncHeaderControls();
     const chapter = printableChapter(route.chapter);
     const figures = chapter ? figuresFor(chapter) : [];
     byId('figure-options').replaceChildren(...figures.map(figureControl));
     byId('upload').disabled = !chapter;
     byId('figure-options').hidden = !settings.showFigures;
+  }
+
+  function syncHeaderControls() {
+    byId('header-logo-options').hidden = !settings.headerLogo;
+    byId('reset-header-logo').hidden = !settings.headerLogoImage;
+    byId('classroom-code-options').hidden = !settings.showClassroomCode;
+  }
+
+  function headerLogoFeedback(message) {
+    const status = byId('header-logo-status');
+    status.textContent = message;
+    status.hidden = !message;
+  }
+
+  async function changeHeaderLogo(event) {
+    const input = event.target;
+    const file = input.files[0];
+    input.value = '';
+    if (!file || !settings) return;
+    const selected = settings;
+    const version = ++logoUploadVersion;
+    const source = URL.createObjectURL(file);
+    const image = new Image();
+    image.src = source;
+    try {
+      await image.decode();
+      if (settings !== selected || logoUploadVersion !== version) return;
+      const scale = Math.min(1, 640 / image.naturalWidth, 240 / image.naturalHeight);
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+      canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
+      const data = canvas.toDataURL('image/webp', .85);
+      if (data.length > 180000) throw Error('Imatge massa gran');
+      settings.headerLogoImage = data;
+      storeOptions();
+      syncHeaderControls();
+      headerLogoFeedback('Logotip actualitzat.');
+      requestPaper();
+    } catch {
+      if (settings === selected && logoUploadVersion === version) {
+        headerLogoFeedback('No s’ha pogut carregar aquest logotip. Prova una altra imatge.');
+      }
+    } finally {
+      URL.revokeObjectURL(source);
+    }
   }
 
   function preload(url) {
@@ -417,6 +486,7 @@
     const chapters = (options.scope === 'topic' ? topic.chapters : [chapter]).map(printableChapter).filter(Boolean);
     const print = byId('print');
     print.disabled = true;
+    const fontReady = loadPaperFont(options.font);
     const selected = chapters.map(entry => [entry.id, options.showFigures ? figuresFor(entry).filter(item => item.visible) : []]);
     let missing = false;
     const resolved = await Promise.all(selected.map(async ([id, candidates]) => {
@@ -431,6 +501,7 @@
       }));
       return [id, figures.filter(Boolean)];
     }));
+    await fontReady;
     if (ticket !== revision || route?.view !== 'maqueta') return;
     paper = paginate(topic, chapters, new Map(resolved), options, byId('layout-probe'), stack);
     fitPaper();
@@ -451,9 +522,10 @@
 
   function updateOption(event) {
     const input = event.target;
-    if (input.id === 'upload') return;
-    if (event.type === 'input' && input.type !== 'range') return;
-    const value = input.type === 'checkbox' ? input.checked : input.type === 'range' || ['leading', 'margin'].includes(input.name) ? Number(input.value) : input.value;
+    if (input.type === 'file') return;
+    if (event.type === 'input' && !['range', 'text'].includes(input.type)) return;
+    const isNumber = input.type === 'range' || ['leading', 'margin', 'classroomCodeSize'].includes(input.name);
+    const value = input.type === 'checkbox' ? input.checked : isNumber ? Number(input.value) : input.value;
     const card = input.closest('[data-figure-id]');
     if (card) {
       const id = card.dataset.figureId;
@@ -477,6 +549,7 @@
       settings[input.name] = value;
       if (input.name === 'fontSize') byId('font-size-value').value = widths.format(value) + ' pt';
       if (input.name === 'showFigures') byId('figure-options').hidden = !value;
+      if (input.name === 'headerLogo' || input.name === 'showClassroomCode') syncHeaderControls();
       if (input.name === 'scope') renderControls();
     }
     storeOptions();
@@ -556,6 +629,16 @@
   form.addEventListener('change', updateOption);
   byId('figure-options').addEventListener('click', removeImage);
   byId('upload').addEventListener('change', addImage);
+  byId('header-logo-upload').addEventListener('change', changeHeaderLogo);
+  byId('reset-header-logo').addEventListener('click', () => {
+    logoUploadVersion++;
+    delete settings.headerLogoImage;
+    storeOptions();
+    syncHeaderControls();
+    headerLogoFeedback('');
+    byId('header-logo-upload').focus({ preventScroll: true });
+    requestPaper();
+  });
   byId('document-picker').addEventListener('click', event => {
     const type = event.target.closest('button')?.dataset.document;
     if (!type || type === documentType) return;
@@ -564,6 +647,8 @@
     requestPaper();
   });
   byId('reset').addEventListener('click', () => {
+    logoUploadVersion++;
+    headerLogoFeedback('');
     settings = { ...defaults, figures: {} };
     storeOptions();
     renderControls();
