@@ -12,6 +12,9 @@ window.quaderns ??= [];
     title: 'La Terra i els mapes',
     subject: 'Medi',
     grades: ['5è'],
+    theme: 'Geografia',
+    difficulty: 'Intermèdia',
+    cover: 'illustracions/capes.png',
     description: 'Descobreix com és la Terra per dins i per fora, aprèn a situar-hi un punt i tria el mapa que necessites en cada situació.',
     curriculum: 'A cicle superior, aquests apunts treballen la Terra com a sistema i la representació cartogràfica del territori. La lectura de plànols, l’orientació i l’escala recuperen aprenentatges de cicle mitjà i els apliquen a espais diferents, des del barri fins al món.',
     sources: [

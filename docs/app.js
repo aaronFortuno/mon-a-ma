@@ -13,6 +13,7 @@
   let saved = {};
   let knownUploads = [];
   let route;
+  let documentType = 'sheet';
   let settings;
   let paper;
   let revision = 0;
@@ -54,7 +55,7 @@
     return element;
   }
 
-  function address(topic, chapter, view = 'llegeix', section = '') {
+  function address(topic, chapter, view = 'maqueta', section = '') {
     return '#' + [topic.id, chapter.id, view, section].filter(Boolean).join('/');
   }
 
@@ -67,32 +68,54 @@
   }
 
   function setupCatalog() {
-    const areas = [...new Set(topics.map(topic => topic.subject))].sort((a, b) => a.localeCompare(b, 'ca'));
-    const grades = [...new Set(topics.flatMap(topic => topic.grades))].sort((a, b) => a.localeCompare(b, 'ca', { numeric: true }));
-    const subject = byId('subject-filter');
-    const grade = byId('grade-filter');
-    subject.append(...areas.map(value => option(value, value)));
-    grade.append(...grades.map(value => option(value, value)));
+    const filters = byId('catalog-filters');
+    const size = topic => topic.chapters.length + (topic.chapters.length === 1 ? ' capítol' : ' capítols');
+    const fields = {
+      grade: topic => topic.grades,
+      theme: topic => [topic.theme],
+      length: topic => [size(topic)],
+      difficulty: topic => [topic.difficulty],
+    };
+    const controls = Object.entries(fields).map(([name, values]) => {
+      const select = filters.elements.namedItem(name);
+      const available = [...new Set(topics.flatMap(values).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b, 'ca', { numeric: true }));
+      select.append(...available.map(value => option(value, value)));
+      return { select, values };
+    });
 
     function refresh() {
-      const matching = topics.filter(topic => (!subject.value || topic.subject === subject.value) && (!grade.value || topic.grades.includes(grade.value)));
+      const matching = topics.filter(topic => controls.every(({ select, values }) => !select.value || values(topic).includes(select.value)));
       byId('topics').replaceChildren(...matching.map(topic => {
-        const card = node('article', 'topic-card');
-        const heading = node('h3');
-        heading.append(link(topic.title, address(topic, topic.chapters[0])));
-        const list = node('ul');
-        for (const chapter of topic.chapters) {
-          const row = node('li');
-          row.append(link(chapter.title, address(topic, chapter)));
-          list.append(row);
+        const card = link('', address(topic, topic.chapters[0]), 'topic-card');
+        card.dataset.topic = topic.id;
+        const picture = node('div', 'topic-cover');
+        if (topic.cover) {
+          const cover = node('img');
+          cover.src = topic.cover;
+          cover.alt = '';
+          cover.loading = 'lazy';
+          picture.append(cover);
         }
-        card.append(node('p', 'eyebrow', meta(topic)), heading, node('p', '', topic.description), list);
+        const details = node('div', 'topic-details');
+        const summary = [topic.grades.join(', '), topic.theme ?? topic.subject].join(' · ');
+        const extent = [size(topic), topic.difficulty].filter(Boolean).join(' · ');
+        details.append(node('p', 'eyebrow', summary), node('h2', '', topic.title),
+          node('p', 'topic-description', topic.description), node('p', 'topic-extent', extent));
+        card.append(picture, details);
         return card;
       }));
       byId('empty').hidden = matching.length > 0;
+      byId('topic-count').value = matching.length + (matching.length === 1 ? ' tema' : ' temes');
+      filters.querySelector('button[type="reset"]').hidden = !controls.some(({ select }) => select.value);
     }
-    subject.addEventListener('change', refresh);
-    grade.addEventListener('change', refresh);
+    filters.addEventListener('change', refresh);
+    filters.addEventListener('reset', event => {
+      event.preventDefault();
+      for (const { select } of controls) select.selectedIndex = 0;
+      refresh();
+      controls[0].select.focus();
+    });
     refresh();
   }
 
@@ -101,7 +124,7 @@
     const topic = topics.find(item => item.id === topicId);
     if (!topic) return null;
     const chapter = topic.chapters.find(item => item.id === chapterId) ?? topic.chapters[0];
-    return { topic, chapter, view: view === 'maqueta' ? 'maqueta' : 'llegeix', section };
+    return { topic, chapter, view: view === 'llegeix' ? 'llegeix' : 'maqueta', section };
   }
 
   function getOptions(topic) {
@@ -121,12 +144,30 @@
   }
 
   function figuresFor(chapter) {
-    const userFigures = knownUploads.filter(item => item.topic === route.topic.id && item.chapter === chapter.id);
-    return [...chapter.figures, ...userFigures].map(item => {
+    const userFigures = knownUploads.filter(item => item.topic === route.topic.id &&
+      item.chapter === chapter.id && (item.documentType ?? 'sheet') === documentType);
+    return [...(chapter.figures ?? []), ...userFigures].map(item => {
       const config = { ...item, visible: true, ...settings.figures[item.id] };
       if (paragraphAnchor(config.anchor) === null || config.position === 'center') config.wrap = false;
       return config;
     });
+  }
+
+  function printableChapter(chapter) {
+    if (documentType === 'sheet') return chapter;
+    const solution = chapter.solution;
+    return solution && { ...solution, id: chapter.id, title: solution.title ?? chapter.title };
+  }
+
+  function syncDocumentPicker() {
+    const picker = byId('document-picker');
+    const hasSolution = settings.scope === 'topic' ?
+      route.topic.chapters.some(chapter => chapter.solution) : Boolean(route.chapter.solution);
+    if (!hasSolution) documentType = 'sheet';
+    picker.hidden = !hasSolution;
+    for (const button of picker.querySelectorAll('button')) {
+      button.setAttribute('aria-pressed', String(button.dataset.document === documentType));
+    }
   }
 
   function mountList(container, title, rows, intro) {
@@ -165,9 +206,11 @@
     }
     mountList(byId('resources'), 'Recursos del tema', (topic.resources ?? []).map(item => [[item.title, item.provider].filter(Boolean).join(' · '), item.url]));
     mountList(byId('sources'), 'Currículum i fonts', topic.sources ?? [], topic.curriculum);
+    byId('document-view-link').href = address(topic, chapter, view === 'maqueta' ? 'llegeix' : 'maqueta');
+    byId('document-view-link').textContent = view === 'maqueta' ? 'Llegeix els apunts' : 'Obre la maquetació';
   }
 
-  function renderRoute() {
+  function renderRoute(event) {
     const previous = route;
     route = extractRoute();
     if (!route) {
@@ -175,10 +218,16 @@
       byId('catalog').hidden = false;
       byId('workspace').hidden = true;
       document.title = catalogTitle;
-      if (previous) window.scrollTo(0, 0);
+      if (previous) {
+        window.scrollTo(0, 0);
+        if (event) byId('topics').querySelector('[data-topic="' + previous.topic.id + '"]')?.focus({ preventScroll: true });
+      }
       return;
     }
-    if (previous?.topic.id !== route.topic.id) settings = getOptions(route.topic);
+    if (previous?.topic.id !== route.topic.id) {
+      settings = getOptions(route.topic);
+      documentType = 'sheet';
+    }
     const editing = route.view === 'maqueta';
     byId('catalog').hidden = true;
     byId('workspace').hidden = false;
@@ -189,12 +238,7 @@
     byId('topic-title').textContent = route.topic.title;
     byId('topic-meta').textContent = meta(route.topic);
     document.title = route.chapter.title + ' · Món a mà';
-    for (const [id, view] of [['read-view', 'llegeix'], ['studio-view', 'maqueta']]) {
-      const anchor = byId(id);
-      anchor.href = address(route.topic, route.chapter, view);
-      if (view === route.view) anchor.setAttribute('aria-current', 'page');
-      else anchor.removeAttribute('aria-current');
-    }
+    if (event && previous?.topic.id !== route.topic.id) byId('topic-title').focus({ preventScroll: true });
     if (previous?.topic.id !== route.topic.id || previous?.chapter.id !== route.chapter.id || previous?.view !== route.view) {
       byId('upload-status').hidden = true;
       byId('save-status').hidden = true;
@@ -251,9 +295,10 @@
       select.dataset.setting = key;
       group.append(control(label, select));
     }
-    pick('section', 'Apartat', route.chapter.sections.map(entry => [entry.id, entry.title]));
+    const chapter = printableChapter(route.chapter);
+    pick('section', 'Apartat', chapter.sections.map(entry => [entry.id, entry.title]));
     const anchors = [['before', 'Abans del primer text'], ['lead', 'Amb el primer text']];
-    const section = route.chapter.sections.find(entry => entry.id === item.section);
+    const section = chapter.sections.find(entry => entry.id === item.section);
     section.blocks.forEach((entry, index) => {
       if (index > 0 && entry.type === 'paragraph') anchors.push(['paragraph-' + index, 'Amb el text «' + entry.text.replaceAll('*', '').slice(0, 32) + '…»']);
     });
@@ -282,15 +327,17 @@
   }
 
   function renderControls() {
+    syncDocumentPicker();
     for (const key of Object.keys(defaults)) {
       const input = form.elements.namedItem(key);
       if (input.type === 'checkbox') input.checked = settings[key];
       else input.value = settings[key];
     }
     byId('font-size-value').value = widths.format(settings.fontSize) + ' pt';
-    const figures = figuresFor(route.chapter);
+    const chapter = printableChapter(route.chapter);
+    const figures = chapter ? figuresFor(chapter) : [];
     byId('figure-options').replaceChildren(...figures.map(figureControl));
-    if (!figures.length) byId('figure-options').append(node('p', 'hint', 'Aquest capítol es pot maquetar amb les imatges que hi afegeixis.'));
+    byId('upload').disabled = !chapter;
     byId('figure-options').hidden = !settings.showFigures;
   }
 
@@ -318,8 +365,8 @@
   async function refreshPaper() {
     const ticket = ++revision;
     const { topic, chapter } = route;
-    const options = { ...settings };
-    const chapters = options.scope === 'topic' ? topic.chapters : [chapter];
+    const options = { ...settings, documentType };
+    const chapters = (options.scope === 'topic' ? topic.chapters : [chapter]).map(printableChapter).filter(Boolean);
     const print = byId('print');
     print.disabled = true;
     const selected = chapters.map(entry => [entry.id, options.showFigures ? figuresFor(entry).filter(item => item.visible) : []]);
@@ -345,6 +392,7 @@
   }
 
   function requestPaper() {
+    revision++;
     byId('print').disabled = true;
     cancelAnimationFrame(frameId);
     frameId = requestAnimationFrame(() => {
@@ -370,7 +418,7 @@
         renderControls();
         form.querySelector('[data-figure-id="' + id + '"] [data-setting="section"]').focus({ preventScroll: true });
       } else if (key === 'anchor' || key === 'position') {
-        const current = figuresFor(route.chapter).find(item => item.id === id);
+        const current = figuresFor(printableChapter(route.chapter)).find(item => item.id === id);
         const wrap = card.querySelector('[data-setting="wrap"]');
         wrap.disabled = paragraphAnchor(current.anchor) === null || current.position === 'center';
         wrap.checked = current.wrap;
@@ -380,6 +428,7 @@
       settings[input.name] = value;
       if (input.name === 'fontSize') byId('font-size-value').value = widths.format(value) + ' pt';
       if (input.name === 'showFigures') byId('figure-options').hidden = !value;
+      if (input.name === 'scope') renderControls();
     }
     storeOptions();
     requestPaper();
@@ -395,6 +444,8 @@
     const file = input.files[0];
     if (!file || !route) return;
     const { topic, chapter } = route;
+    const printable = printableChapter(chapter);
+    if (!printable) return;
     input.value = '';
     if (!['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif'].includes(file.type) || file.size > 12 * 1024 * 1024) {
       imageFeedback('Tria una imatge PNG, JPG, WebP, GIF o AVIF de fins a 12 MB.');
@@ -402,9 +453,9 @@
     }
     const name = file.name.replace(/\.[^.]+$/, '').slice(0, 75);
     const source = {
-      id: 'local-' + crypto.randomUUID(),
-      name, alt: name, caption: '', blob: file, topic: topic.id, chapter: chapter.id,
-      section: chapter.sections[0].id, anchor: 'lead', width: 55, position: 'center', wrap: false,
+      id: 'local-' + crypto.getRandomValues(new Uint32Array(4)).join('-'),
+      name, alt: name, caption: '', blob: file, topic: topic.id, chapter: chapter.id, documentType,
+      section: printable.sections[0].id, anchor: 'lead', width: 55, position: 'center', wrap: false,
     };
     const item = addUrl(source);
     if (!await preload(item.src)) {
@@ -417,7 +468,7 @@
     try { await imageOperation('readwrite', store => store.put(source)); }
     catch { persisted = false; }
     knownUploads.push({ ...item, persisted });
-    if (route?.topic.id === topic.id && route.chapter.id === chapter.id) {
+    if (route?.topic.id === topic.id && route.chapter.id === chapter.id && source.documentType === documentType) {
       settings.showFigures = true;
       storeOptions();
       renderControls();
@@ -456,6 +507,13 @@
   form.addEventListener('change', updateOption);
   byId('figure-options').addEventListener('click', removeImage);
   byId('upload').addEventListener('change', addImage);
+  byId('document-picker').addEventListener('click', event => {
+    const type = event.target.closest('button')?.dataset.document;
+    if (!type || type === documentType) return;
+    documentType = type;
+    renderControls();
+    requestPaper();
+  });
   byId('reset').addEventListener('click', () => {
     settings = { ...defaults, figures: {} };
     storeOptions();
@@ -465,13 +523,14 @@
   byId('print').addEventListener('click', () => {
     if (route?.view !== 'maqueta' || !paper || paper.oversized) return;
     const title = document.title;
-    document.title = settings.scope === 'topic' ? route.topic.title : route.chapter.title;
+    const name = settings.scope === 'topic' ? route.topic.title : printableChapter(route.chapter).title;
+    document.title = documentType === 'solution' ? name + ' · Solucionari' : name;
     window.print();
     document.title = title;
   });
   new ResizeObserver(fitPaper).observe(stack);
-  window.addEventListener('hashchange', () => {
-    if (location.hash !== '#main') renderRoute();
+  window.addEventListener('hashchange', event => {
+    if (location.hash !== '#main') renderRoute(event);
   });
   byId('print').disabled = true;
   setupCatalog();
