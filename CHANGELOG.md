@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.21 · 25 de novembre de 2026
+
+- Permet fer zoom al visor amb Ctrl i la roda del ratolí o amb els botons d’allunyar, ajustar i apropar.
+- Allibera espai a la capçalera impresa i manté el títol principal de la fitxa.
+
 ## 0.1.20 · 25 de novembre de 2026
 
 - Allibera la previsualització A4 i mostra el selector de document quan hi ha solucionari.

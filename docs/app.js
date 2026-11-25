@@ -18,6 +18,12 @@
   const figureForm = byId('figure-settings');
   const figureAlignment = byId('figure-alignment-template');
   const stack = byId('paper-stack');
+  const zoomOut = byId('zoom-out');
+  const zoomReset = byId('zoom-reset');
+  const zoomIn = byId('zoom-in');
+  const minPreviewMagnification = 0.5;
+  const maxPreviewMagnification = 4;
+  const zoomStep = 1.2;
   const motionLayer = byId('paper-motion');
   const printMenu = byId('print-menu');
   const printButtons = [byId('print'), byId('save-pdf')];
@@ -30,6 +36,7 @@
   let documentType = 'sheet';
   let settings;
   let paper;
+  let previewMagnification = 1;
   let revision = 0;
   let frameId;
   let imageDb;
@@ -409,6 +416,7 @@
       showQuickTemplate(false);
       quickTemplateStatus.textContent = '';
       settings = getOptions(route.topic);
+      previewMagnification = 1;
       documentType = 'sheet';
       logoUploadVersion++;
       headerLogoFeedback('');
@@ -418,6 +426,7 @@
       byId('save-status').hidden = true;
       byId('upload').value = '';
       stack.scrollTop = 0;
+      stack.scrollLeft = 0;
     }
     if (changedChapter || previous?.section !== route.section) {
       stopPaperMotion();
@@ -622,15 +631,41 @@
   }
 
   function fitPaper() {
-    if (!paper || byId('studio').hidden) return;
+    if (!paper || !route) return;
     const padding = getComputedStyle(stack);
     const available = stack.clientWidth - parseFloat(padding.paddingLeft) - parseFloat(padding.paddingRight);
-    const zoom = Math.min(1, Math.max(0.1, available / paper.width));
+    const fitted = Math.min(1, Math.max(0.1, available / paper.width));
+    const zoom = fitted * previewMagnification;
     stack.style.setProperty('--zoom', zoom);
     for (const frame of stack.children) {
       frame.style.width = paper.width * zoom + 'px';
       frame.style.height = paper.height * zoom + 'px';
     }
+    zoomOut.disabled = previewMagnification <= minPreviewMagnification;
+    zoomReset.disabled = false;
+    zoomIn.disabled = previewMagnification >= maxPreviewMagnification;
+  }
+
+  function zoomPaper(magnification, pointer) {
+    const next = Math.min(maxPreviewMagnification, Math.max(minPreviewMagnification, magnification));
+    if (!route || !paper || !stack.firstElementChild || next === previewMagnification) return;
+    stopPaperMotion();
+    const view = stack.getBoundingClientRect();
+    const x = pointer?.clientX ?? view.left + stack.clientLeft + stack.clientWidth / 2;
+    const y = pointer?.clientY ?? view.top + stack.clientTop + stack.clientHeight / 2;
+    let frame = stack.firstElementChild;
+    let before = frame.getBoundingClientRect();
+    while (before.bottom < y && frame.nextElementSibling) {
+      frame = frame.nextElementSibling;
+      before = frame.getBoundingClientRect();
+    }
+    const anchorX = Math.max(0, Math.min(1, (x - before.left) / before.width));
+    const anchorY = Math.max(0, Math.min(1, (y - before.top) / before.height));
+    previewMagnification = next;
+    fitPaper();
+    const after = frame.getBoundingClientRect();
+    stack.scrollLeft += after.left + anchorX * after.width - x;
+    stack.scrollTop += after.top + anchorY * after.height - y;
   }
 
   function paperSection(chapter, section) {
@@ -784,7 +819,7 @@
   async function refreshPaper() {
     const ticket = ++revision;
     const { topic, chapter } = route;
-    const options = { ...settings, documentType, cycleLabel: cycleById.get(topic.cycle)?.label ?? '' };
+    const options = { ...settings, documentType };
     const chapters = (options.scope === 'topic' ? topic.chapters : [chapter]).map(printableChapter).filter(Boolean);
     setPrintReady(false);
     printStatus.hidden = true;
@@ -1321,6 +1356,19 @@
       printDocument();
     });
   }
+  zoomOut.addEventListener('click', () => zoomPaper(previewMagnification / zoomStep));
+  zoomIn.addEventListener('click', () => zoomPaper(previewMagnification * zoomStep));
+  zoomReset.addEventListener('click', () => {
+    zoomPaper(1);
+    stack.scrollLeft = 0;
+  });
+  byId('studio').addEventListener('wheel', event => {
+    if (!event.ctrlKey) return;
+    event.preventDefault();
+    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? stack.clientHeight : 1;
+    const distance = Math.max(-240, Math.min(240, event.deltaY * unit));
+    if (distance) zoomPaper(previewMagnification * 2 ** (-distance / 480), event);
+  }, { passive: false });
   new ResizeObserver(fitPaper).observe(stack);
   window.addEventListener('hashchange', event => {
     if (location.hash !== '#main') renderRoute(event);

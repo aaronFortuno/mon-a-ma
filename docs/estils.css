@@ -426,17 +426,30 @@ summary { color: var(--green); font-weight: 650; }
   .curriculum-table td { min-width: 3.8rem; }
   .curriculum-square { width: 1.6rem; height: 1.6rem; }
 }
-.studio { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; background: var(--tray); border: 1px solid var(--line); border-radius: .65rem; overflow: hidden; }
+.studio { position: relative; display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; background: var(--tray); border: 1px solid var(--line); border-radius: .65rem; overflow: hidden; }
 .document-picker { grid-area: 1 / 1; justify-self: end; margin: .35rem .6rem 0; }
 .primary, .secondary { border: 1px solid var(--green); border-radius: .4rem; padding: .53rem .72rem; font-size: .91rem; font-weight: 650; }
 .primary { background: var(--button); color: var(--on-button); }
 .primary:hover { background: var(--button-hover); }
 .secondary { background: var(--surface); color: var(--green); }
 .secondary:hover { background: var(--light); }
-.paper-stack { overflow-anchor: none; padding: .85rem .6rem; scrollbar-gutter: stable both-edges; }
+.zoom-controls {
+  position: absolute;
+  inset-inline-end: 1rem;
+  inset-block-end: 1rem;
+  z-index: 4;
+  background: var(--surface);
+  box-shadow: 0 3px 12px var(--shadow);
+}
+.zoom-controls button { display: grid; place-items: center; width: 2rem; height: 2rem; padding: 0; }
+.zoom-controls button:hover:not(:disabled) { background: var(--light); color: var(--green); }
+.zoom-controls button:disabled { cursor: default; opacity: .42; }
+.zoom-controls svg { width: 1.05rem; height: 1.05rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.paper-stack { overflow: auto; overflow-anchor: none; padding: .85rem .6rem 3.75rem; scrollbar-gutter: stable both-edges; }
 #paper-stack, .paper-motion { grid-area: 2 / 1; }
 .paper-motion { position: relative; min-width: 0; min-height: 0; overflow: clip; pointer-events: none; z-index: 3; }
 @media screen {
+  .paper-stack:not(.is-repaginating) > .sheet-frame { overflow: clip; overflow-clip-margin: 4px; }
   .paper-stack.is-repaginating .sheet-body { overflow: visible; }
   .sheet-frame:has([data-paper-in-motion]) { z-index: 1; }
   .paper-unit[data-paper-in-motion="move"] { position: relative; z-index: 2; background: var(--preview-paper, white); }
@@ -461,8 +474,7 @@ summary { color: var(--green); font-weight: 650; }
 .sheet-inner { height: 100%; display: flex; flex-direction: column; min-height: 0; }
 .sheet-header, .sheet-footer { flex: none; font: 600 9pt/1.25 var(--sans); }
 .sheet-header { border-bottom: 1px solid var(--paper-line); padding-bottom: 2.2mm; margin-bottom: 4mm; color: var(--paper-accent); }
-.sheet-header-meta { display: flex; justify-content: space-between; gap: 1em; }
-.sheet-header-fields { display: flex; align-items: center; gap: 3.5mm; margin-top: 3mm; color: var(--paper-ink); }
+.sheet-header-fields { display: flex; align-items: center; gap: 3.5mm; color: var(--paper-ink); }
 .sheet-header-brand { display: grid; justify-items: center; flex: none; gap: .7mm; font-size: 7.5pt; }
 .sheet-header-logo { display: block; width: 13mm; height: 13mm; object-fit: contain; object-position: center; }
 .sheet-header-logo.is-custom { width: 35mm; }
@@ -784,7 +796,7 @@ details[open]::details-content {
   html, body { background: white; overflow: visible; }
   body { position: static; display: block; height: auto; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .skip, .site-header, #catalog, .site-footer, #layout-probe,
-  .sidebar-column, .document-picker, .print-menu, .section-preview-tools, .paper-motion, dialog, noscript { display: none !important; }
+  .sidebar-column, .document-picker, .zoom-controls, .print-menu, .section-preview-tools, .paper-motion, dialog, noscript { display: none !important; }
   main, .workspace, .workspace-grid, .studio, .paper-stack { display: block; height: auto; width: auto; margin: 0; padding: 0; border: 0; background: white; overflow: visible; }
   .paper-stack { scrollbar-gutter: auto; }
   .sheet-frame { position: static; width: auto !important; height: auto !important; margin: 0 !important; break-after: page; }

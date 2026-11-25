@@ -96,9 +96,10 @@ window.imprimible = (() => {
     return element;
   }
 
-  function chapterHeader(chapter) {
+  function chapterHeader(chapter, documentType) {
     const header = node('div', 'paper-unit');
-    header.append(node('h2', '', chapter.title));
+    const title = documentType === 'solution' ? 'Solucionari · ' + chapter.title : chapter.title;
+    header.append(node('h2', '', title));
     header.append(rich(node('p', 'chapter-intro'), chapter.intro));
     return header;
   }
@@ -146,11 +147,6 @@ window.imprimible = (() => {
     sheet.style.setProperty('--serif', paperFonts[options.font] ?? paperFonts.georgia);
     sheet.dataset.alignment = options.textAlignment;
     const inner = node('div', 'sheet-inner');
-    const header = node('header', 'sheet-header');
-    const label = options.documentType === 'solution' ? 'Solucionari · ' : '';
-    const meta = node('div', 'sheet-header-meta');
-    meta.append(node('span', '', topic.title), node('span', '', label + topic.subject + ' · ' + options.cycleLabel));
-    header.append(meta);
     if (firstPage) {
       const row = node('div', 'sheet-header-fields');
       if (options.headerLogo) {
@@ -175,11 +171,15 @@ window.imprimible = (() => {
         badge.style.fontSize = options.classroomCodeSize + 'pt';
         row.append(badge);
       }
-      if (row.childElementCount) header.append(row);
+      if (row.childElementCount) {
+        const header = node('header', 'sheet-header');
+        header.append(row);
+        inner.append(header);
+      }
     }
     const body = node('div', 'sheet-body');
     const footer = options.showPageFooter ? node('footer', 'sheet-footer') : null;
-    inner.append(header, body);
+    inner.append(body);
     if (footer) {
       if (options.showTopicTitle) footer.append(node('span', 'sheet-footer-title', topic.title));
       if (options.showMaterialCode) footer.append(node('span', 'sheet-material-code', topic.code));
@@ -193,7 +193,7 @@ window.imprimible = (() => {
   function previewPage(topic, chapter, sectionId, options) {
     const { sheet, body } = makePage(topic, options, true);
     const section = chapter.sections.find(item => item.id === sectionId) ?? chapter.sections[0];
-    body.append(chapterHeader(chapter));
+    body.append(chapterHeader(chapter, options.documentType));
     if (section) {
       const figures = (chapter.figures ?? []).filter(item => item.section === section.id);
       body.append(...sectionUnits(section, figures).slice(0, 2));
@@ -226,7 +226,7 @@ window.imprimible = (() => {
 
     for (const chapter of chapters) {
       start(true);
-      add(chapterHeader(chapter));
+      add(chapterHeader(chapter, options.documentType));
       const figures = figuresByChapter.get(chapter.id);
       for (const section of chapter.sections) {
         const units = sectionUnits(section, figures.filter(item => item.section === section.id));

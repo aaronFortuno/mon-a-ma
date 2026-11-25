@@ -102,7 +102,7 @@
       text.append(helpHeading(topic.title, topic.code + ' · ' + cycleLabel(cycle)), node('p', '', note));
       const miniature = node('div', 'curriculum-thumbnail');
       miniature.setAttribute('aria-hidden', 'true');
-      miniature.append(previewPage(topic, chapter, section, { ...window.preferencies.defaults, cycleLabel: cycleLabel(cycle) }));
+      miniature.append(previewPage(topic, chapter, section, window.preferencies.defaults));
       content.append(text, miniature);
       return [content];
     }
