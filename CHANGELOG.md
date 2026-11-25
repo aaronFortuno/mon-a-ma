@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.4.0 · 25 de novembre de 2026
+
+- El títol del tema a la capçalera deixa més alçada lliure per a la lectura i la previsualització.
+- El catàleg i el taller aprofiten l’amplada disponible de la finestra.
+- Requadres provisionals al catàleg i als apunts. Les reserves d’il·lustració es poden maquetar i imprimir.
+
 ## 0.3.2 · 25 de novembre de 2026
 
 - Elimina la vora clara de la icona del projecte i en deixa el contorn transparent.

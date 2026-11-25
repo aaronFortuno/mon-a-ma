@@ -51,8 +51,16 @@ window.imprimible = (() => {
     element.style.setProperty('--image-width', source.width + '%');
     element.dataset.position = source.position;
     element.dataset.figure = source.id;
+    if (!source.src) {
+      const placeholder = node('div', 'image-placeholder');
+      if (source.ratio) placeholder.style.setProperty('--figure-ratio', source.ratio);
+      placeholder.setAttribute('role', 'img');
+      placeholder.setAttribute('aria-label', ['Espai reservat per a una il·lustració', source.name].filter(Boolean).join(' · '));
+      element.append(placeholder);
+      return element;
+    }
     const image = node('img');
-    image.alt = source.alt;
+    image.alt = source.alt ?? '';
     if (source.pixelWidth && source.pixelHeight) {
       image.width = source.pixelWidth;
       image.height = source.pixelHeight;
@@ -63,9 +71,10 @@ window.imprimible = (() => {
     return element;
   }
 
-  function chapterHeader(chapter) {
+  function chapterHeader(chapter, showTitle = true) {
     const header = node('div', 'paper-unit');
-    header.append(node('h2', '', chapter.title), rich(node('p', 'chapter-intro'), chapter.intro));
+    if (showTitle) header.append(node('h2', '', chapter.title));
+    header.append(rich(node('p', 'chapter-intro'), chapter.intro));
     return header;
   }
 
@@ -73,7 +82,7 @@ window.imprimible = (() => {
     return anchor === 'lead' ? 0 : /^paragraph-\d+$/.test(anchor) ? Number(anchor.slice(10)) : null;
   }
 
-  function sectionUnits(section, figures) {
+  function sectionUnits(section, figures, headingTag = 'h3') {
     const units = [];
     const before = figures.filter(item => item.anchor === 'before');
     const after = figures.filter(item => item.anchor === 'after');
@@ -87,7 +96,7 @@ window.imprimible = (() => {
       const anchored = figures.filter(item => paragraphAnchor(item.anchor) === index);
       const unit = node('div', 'paper-unit');
       if (index === 0) {
-        unit.append(node('h3', '', section.title), ...before.slice(0, 1).map(figure));
+        unit.append(node(headingTag, 'section-title', section.title), ...before.slice(0, 1).map(figure));
       }
       if (anchored[0]) unit.append(figure(anchored[0]));
       unit.append(block(section.blocks[index]));
@@ -103,14 +112,15 @@ window.imprimible = (() => {
     return units;
   }
 
-  function readChapter(chapter, figures) {
+  function readChapter(chapter, figures, showTitle = true) {
     const article = node('article', 'reading ink');
-    article.append(chapterHeader(chapter));
+    article.append(chapterHeader(chapter, showTitle));
+    const headingTag = showTitle ? 'h3' : 'h2';
     for (const source of chapter.sections) {
       const section = node('section');
       section.id = 'apartat-' + source.id;
       section.tabIndex = -1;
-      section.append(...sectionUnits(source, figures.filter(item => item.section === source.id)));
+      section.append(...sectionUnits(source, figures.filter(item => item.section === source.id), headingTag));
       article.append(section);
     }
     return article;

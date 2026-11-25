@@ -60,10 +60,6 @@
     return '#' + [...path, view, section].filter(Boolean).join('/');
   }
 
-  function meta(topic) {
-    return [topic.subject, topic.grades.join(', ') + ' de primària'].join(' · ');
-  }
-
   function option(value, label) {
     return new Option(label, value);
   }
@@ -92,12 +88,15 @@
     function makeCard(topic, grouped) {
       const card = link('', address(topic, topic.chapters[0]), 'topic-card');
       card.dataset.topic = topic.id;
-      const picture = node('div', topic.cover ? 'topic-cover' : 'topic-cover topic-cover-brand');
-      const cover = node('img');
-      cover.src = topic.cover ?? 'assets/mon-a-ma.png?v=0.3.2';
-      cover.alt = '';
-      cover.loading = 'lazy';
-      picture.append(cover);
+      const picture = node('div', topic.cover ? 'topic-cover' : 'topic-cover image-placeholder');
+      picture.setAttribute('aria-hidden', 'true');
+      if (topic.cover) {
+        const cover = node('img');
+        cover.src = topic.cover;
+        cover.alt = '';
+        cover.loading = 'lazy';
+        picture.append(cover);
+      }
       const details = node('div', 'topic-details');
       const summary = [topic.grades.join(', '), topic.theme ?? topic.subject].join(' · ');
       const extent = [size(topic), topic.difficulty].filter(Boolean).join(' · ');
@@ -259,6 +258,9 @@
   function renderRoute(event) {
     const previous = route;
     route = extractRoute();
+    const title = byId('topic-title');
+    title.hidden = !route;
+    title.textContent = route?.topic.title ?? '';
     if (!route) {
       revision++;
       byId('catalog').hidden = false;
@@ -278,10 +280,8 @@
     byId('studio').hidden = !editing;
     byId('settings').hidden = !editing;
     byId('workspace-grid').classList.toggle('maqueta', editing);
-    byId('topic-title').textContent = route.topic.title;
-    byId('topic-meta').textContent = meta(route.topic);
     document.title = route.chapter.title + ' · Món a mà';
-    if (event && previous?.topic.id !== route.topic.id) byId('topic-title').focus({ preventScroll: true });
+    if (event && previous?.topic.id !== route.topic.id) title.focus({ preventScroll: true });
     if (previous?.topic.id !== route.topic.id || previous?.chapter.id !== route.chapter.id || previous?.view !== route.view) {
       byId('upload-status').hidden = true;
       byId('save-status').hidden = true;
@@ -293,8 +293,8 @@
       renderControls();
       refreshPaper();
     } else {
-      const figures = route.chapter.figures.map(item => ({ ...item, visible: true }));
-      byId('reader').replaceChildren(readChapter(route.chapter, figures));
+      const figures = (route.chapter.figures ?? []).map(item => ({ ...item, visible: true }));
+      byId('reader').replaceChildren(readChapter(route.chapter, figures, route.chapter.title !== route.topic.title));
       if (route.section) {
         const heading = byId('apartat-' + route.section);
         heading?.focus({ preventScroll: true });
@@ -354,12 +354,14 @@
     flow.disabled = item.position === 'center' || paragraphAnchor(item.anchor) === null;
     flow.dataset.setting = 'wrap';
     group.append(control('Text al voltant', flow, 'check'));
-    const caption = node('input');
-    caption.type = 'text';
-    caption.value = item.caption;
-    caption.maxLength = 240;
-    caption.dataset.setting = 'caption';
-    group.append(control('Peu de la imatge', caption));
+    if (item.src) {
+      const caption = node('input');
+      caption.type = 'text';
+      caption.value = item.caption ?? '';
+      caption.maxLength = 240;
+      caption.dataset.setting = 'caption';
+      group.append(control('Peu de la imatge', caption));
+    }
     if (item.blob) {
       const remove = node('button', 'secondary', 'Treu la imatge');
       remove.type = 'button';
@@ -417,6 +419,7 @@
     let missing = false;
     const resolved = await Promise.all(selected.map(async ([id, candidates]) => {
       const figures = await Promise.all(candidates.map(async item => {
+        if (!item.src) return item;
         const size = await preload(item.src);
         if (!size) {
           missing = true;

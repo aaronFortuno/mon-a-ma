@@ -10,9 +10,6 @@ window.quaderns ??= [];
   const collection = Object.freeze({
     id: 'terra-i-mapes',
     title: 'La Terra i els mapes',
-    resources: [
-      { type: 'pdf', title: 'Dossier del conjunt en PDF', url: 'recursos/la-terra-i-els-mapes.pdf' },
-    ],
   });
   const curriculumSource = ['XTEC · Currículum de Coneixement del Medi', 'https://xtec.gencat.cat/web/.content/curriculum/primaria/curriculum-175-2022/Coneixement-del-Medi-Natural-Social-i-Cultural.pdf'];
   const worldMaps = [
@@ -29,7 +26,6 @@ window.quaderns ??= [];
       grades: ['5è'],
       theme: 'Geografia',
       difficulty: 'Intermèdia',
-      cover: chapter.figures[0]?.src,
       ...details,
       sources: [curriculumSource, ...(details.sources ?? [])],
       chapters: [chapter],
@@ -41,7 +37,7 @@ window.quaderns ??= [];
     title: 'El planeta Terra',
     intro: 'Quan trepitgem el terra, només veiem una part molt petita del planeta. Sota els peus hi ha capes de roca i metall. A la superfície i al seu voltant hi trobem aigua, aire i éssers vius. Tots aquests elements es relacionen.',
     figures: [
-      { id: 'capes', section: 'capes', anchor: 'lead', src: 'illustracions/capes.png', alt: 'Tall de la Terra amb escorça, mantell, nucli extern i nucli intern.', caption: 'Tall esquemàtic de la Terra. El gruix de les capes no està dibuixat a escala.', width: 45, position: 'right', wrap: true },
+      { id: 'capes', section: 'capes', anchor: 'lead', name: 'Les capes de la Terra', ratio: 920 / 560, alt: 'Tall de la Terra amb escorça, mantell, nucli extern i nucli intern.', caption: 'Tall esquemàtic de la Terra. El gruix de les capes no està dibuixat a escala.', width: 45, position: 'right', wrap: true },
     ],
     sections: [
       section('capes', 'Les capes del planeta Terra',
@@ -85,7 +81,7 @@ window.quaderns ??= [];
     title: 'Les coordenades geogràfiques',
     intro: 'Un mateix riu pot passar per molts llocs. Per assenyalar un punt concret, com ara on neix o on desemboca, fem servir dues dades: la latitud i la longitud. Juntes formen les seves coordenades geogràfiques.',
     figures: [
-      { id: 'graella', section: 'localitzacio', anchor: 'before', src: 'illustracions/coordenades.png', alt: 'Graella amb l’equador i Greenwich destacats. El punt A és a 20 graus nord i 40 graus oest.', caption: 'El punt A es troba a l’encreuament del paral·lel 20° N i el meridià 40° O.', width: 67, position: 'center', wrap: false },
+      { id: 'graella', section: 'localitzacio', anchor: 'before', name: 'Graella de coordenades', ratio: 1110 / 550, alt: 'Graella amb l’equador i Greenwich destacats. El punt A és a 20 graus nord i 40 graus oest.', caption: 'El punt A es troba a l’encreuament del paral·lel 20° N i el meridià 40° O.', width: 67, position: 'center', wrap: false },
     ],
     sections: [
       section('latitud', 'Amb els paral·lels coneixem la latitud',
@@ -119,7 +115,7 @@ window.quaderns ??= [];
     title: 'Els mapes i els plànols geogràfics',
     intro: 'Un globus ens mostra la forma general del planeta. Un mapa ens permet posar tota la Terra, o només una part, sobre un paper o una pantalla. Si volem conèixer de prop un lloc, com els carrers que envolten l’escola, podem fer servir un plànol.',
     figures: [
-      { id: 'barri', section: 'llegenda', anchor: 'before', src: 'illustracions/planol.png', alt: 'Plànol esquemàtic amb escola, biblioteca, parc, pont, riu, nord i escala gràfica de 0, 50 i 100 metres.', caption: 'Plànol esquemàtic d’un barri imaginari. Fixa’t en la fletxa del nord, la llegenda i l’escala gràfica.', width: 72, position: 'center', wrap: false },
+      { id: 'barri', section: 'llegenda', anchor: 'before', name: 'Plànol del barri', ratio: 1170 / 600, alt: 'Plànol esquemàtic amb escola, biblioteca, parc, pont, riu, nord i escala gràfica de 0, 50 i 100 metres.', caption: 'Plànol esquemàtic d’un barri imaginari. Fixa’t en la fletxa del nord, la llegenda i l’escala gràfica.', width: 72, position: 'center', wrap: false },
     ],
     sections: [
       section('definicions', 'Què són els mapes i els plànols?',
@@ -150,7 +146,10 @@ window.quaderns ??= [];
     id: 'tipus-de-mapes',
     title: 'Els tipus de mapes',
     intro: 'Pots mirar un mateix territori per saber com és el relleu, per on passa una carretera o quines fronteres el divideixen. La pregunta que et fas t’ajuda a triar el mapa.',
-    figures: [],
+    figures: [
+      { id: 'planisferi-fisic', name: 'Planisferi físic', section: 'fisic', anchor: 'after', ratio: 2, width: 90, position: 'center', wrap: false },
+      { id: 'planisferi-politic', name: 'Planisferi polític', section: 'politic', anchor: 'lead', ratio: 2, width: 90, position: 'center', wrap: false },
+    ],
     sections: [
       section('tipus', 'Quins tipus de mapes hi ha?',
         table(['Tipus', 'Què destaca?', 'Quan ens pot servir?'], [
