@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.17 · 25 de novembre de 2026
+
+- Aplica als controls d’il·lustració la separació i les mides dels controls de Text i pàgina.
+
 ## 0.1.16 · 25 de novembre de 2026
 
 - Iguala l’amplada dels dos laterals del material.

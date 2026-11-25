@@ -500,10 +500,15 @@ summary { color: var(--green); font-weight: 650; }
 .sheet[data-alignment="right"] .sheet-body :is(h2, h3, p) { text-align: right; }
 .sheet[data-alignment="justify"] .sheet-body p { text-align: justify; }
 #layout-probe { position: fixed; inset: 0 auto auto 0; width: 0; height: 0; overflow: hidden; contain: strict; visibility: hidden; pointer-events: none; }
-.settings, #figure-settings { font-size: .9rem; }
-.option-group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .56rem .65rem; align-items: start; }
+.settings, #figure-settings {
+  --field-row-gap: .56rem;
+  --field-column-gap: .65rem;
+  font-size: .9rem;
+}
+.option-group, .figure-options { display: grid; gap: var(--field-row-gap) var(--field-column-gap); }
+.option-group { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
 .option-group > .full-width { grid-column: 1 / -1; }
-:is(.settings, #figure-settings) label:not(.check) { display: block; min-width: 0; }
+:is(.settings, #figure-settings) label:not(.check, .figure-width) { display: block; min-width: 0; }
 :is(.settings, #figure-settings) select, :is(.settings, #figure-settings) input[type="text"], :is(.settings, #figure-settings) input[type="range"] { display: block; min-width: 0; width: 100%; margin: .14rem 0 0; }
 :is(.settings, #figure-settings) select { padding: .32rem .38rem; }
 :is(.settings, #figure-settings) input[type="text"] { padding: .36rem .38rem; border: 1px solid var(--control-line); border-radius: .35rem; background: var(--surface); }
@@ -555,7 +560,13 @@ summary { color: var(--green); font-weight: 650; }
 :is(.settings, #figure-settings) input[type="range"], :is(.settings, #figure-settings) input[type="checkbox"] { accent-color: var(--green); }
 .check { display: flex; align-items: baseline; gap: .4rem; }
 .check input { flex: none; }
-.figure-control { min-width: 0; margin: 0 0 .45rem; padding: .4rem .5rem; border: 1px solid var(--line); border-radius: .4rem; }
+.figure-control {
+  min-width: 0;
+  margin: 0 0 var(--field-row-gap);
+  padding: .65rem var(--field-column-gap) .72rem;
+  border: 1px solid var(--line);
+  border-radius: .4rem;
+}
 .figure-control:last-child { margin-bottom: 0; }
 .figure-heading { display: flex; align-items: center; gap: .4rem; min-height: 1.25rem; line-height: 1.25; }
 .figure-name { flex: 1; min-width: 0; font-weight: 650; overflow-wrap: anywhere; }
@@ -572,24 +583,27 @@ summary { color: var(--green); font-weight: 650; }
   line-height: 1;
 }
 .figure-remove:hover { background: var(--light); }
-.figure-options { display: grid; gap: .28rem; padding-top: .28rem; }
-.figure-size-alignment { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .3rem; }
-#figure-settings .figure-width { display: inline-flex; align-items: center; gap: .22rem; }
+.figure-options { padding-top: var(--field-row-gap); }
+.figure-size-alignment, .figure-placement {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--field-row-gap) var(--field-column-gap);
+}
+.figure-size-alignment { justify-content: space-between; }
+#figure-settings .figure-width { display: inline-flex; align-items: center; gap: .4rem; }
 .figure-width input {
   width: 3.45rem;
   min-width: 0;
-  padding: .15rem .22rem;
+  padding: .32rem .38rem;
   border: 1px solid var(--control-line);
   border-radius: .3rem;
   background: var(--surface);
 }
 .figure-width input:focus-visible { outline-offset: 1px; }
-.figure-control .alignment-options label > span { width: 1.72rem; height: 1.62rem; }
-.figure-control .alignment-options svg { width: .82rem; height: .82rem; }
-.figure-placement { display: flex; flex-wrap: wrap; align-items: center; gap: .28rem .48rem; }
-#figure-settings .figure-options :is(select, input[type="text"]) { margin: 0; padding: .2rem .35rem; }
+#figure-settings .figure-options :is(select, input[type="text"]) { margin: 0; }
 .figure-placement select { flex: 1 1 5.5rem; text-overflow: ellipsis; }
-.figure-wrap { align-items: center; gap: .23rem; white-space: nowrap; }
+.figure-wrap { align-items: center; white-space: nowrap; }
 .figure-wrap input { margin: 0; }
 .figure-wrap:has(:disabled) { color: var(--muted); }
 .upload { padding: .4rem; border: 1px solid var(--line); border-radius: .35rem; }
