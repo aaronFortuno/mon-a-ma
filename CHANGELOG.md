@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.3.1 · 25 de novembre de 2026
+
+- Versiona els fitxers del catàleg i els estils per carregar-los alhora que la nova versió del web.
+
 ## 0.3.0 · 25 de novembre de 2026
 
 - Tipografia de pantalla una mica més compacta.
