@@ -27,6 +27,8 @@
   const figureUpload = byId('figure-upload');
   const levelPicker = byId('material-level');
   let helperFigure = '';
+  let helperPinned = false;
+  let helperTimer;
   let uploadTarget = null;
   let imageWrite = false;
   const stack = byId('paper-stack');
@@ -260,7 +262,7 @@
       }));
       if (!variants.length && item.src && !item.blob) variants.push({ id: 'original', label: 'Original', src: item.src });
       if (personal) variants.push({ id: 'custom', label: 'Imatge pròpia', src: personal.src, alt: personal.alt });
-      const defaultVariant = variants.find(variant => variant.id === settings.figureStyle && variant.src) ??
+      const defaultVariant = variants.find(variant => variant.id === (settings.figureStyle || route.topic.defaultFigureStyle) && variant.src) ??
         variants.find(variant => variant.id !== 'custom' && variant.src);
       const selected = variants.find(variant => variant.id === saved?.variant && variant.src) ?? defaultVariant;
       const config = {
@@ -298,6 +300,8 @@
       button.dataset.variant = variant.id;
       button.dataset.choiceFigure = item.id;
       button.setAttribute('aria-pressed', String(variant.id === item.selectedVariant));
+      button.setAttribute('aria-label', variant.src ? variant.label : variant.label + ' · Pendent');
+      button.title = variant.label;
       if (variant.src) {
         const image = node('img');
         image.src = variant.src;
@@ -307,7 +311,6 @@
         button.disabled = true;
         button.append(node('span', 'figure-style-pending', 'Pendent'));
       }
-      button.append(node('strong', '', variant.label));
       group.append(button);
     }
     const personal = item.variants.some(variant => variant.id === 'custom');
@@ -318,9 +321,15 @@
     return group;
   }
 
+  function clearHelperTimer() {
+    clearTimeout(helperTimer);
+  }
+
   function closeFigureHelper(restoreFocus = false) {
     const id = helperFigure;
+    clearHelperTimer();
     helperFigure = '';
+    helperPinned = false;
     figureHelper.hidden = true;
     for (const button of stack.querySelectorAll('[data-style-figure]')) {
       button.setAttribute('aria-expanded', 'false');
@@ -328,25 +337,70 @@
     }
   }
 
-  function openFigureStyles(event) {
-    const trigger = event.target.closest('[data-style-figure]');
-    if (!trigger || !route) return;
-    const item = findFigure(trigger.dataset.styleFigure);
-    if (!item) return;
-    const top = trigger.getBoundingClientRect().top - stack.getBoundingClientRect().top;
-    const wasOpen = helperFigure === item.id;
-    closeFigureHelper();
-    if (!wasOpen) {
-      helperFigure = item.id;
-      trigger.setAttribute('aria-expanded', 'true');
-      byId('figure-helper-title').textContent = item.name;
-      byId('figure-helper-status').textContent = '';
-      byId('figure-helper-options').replaceChildren(figureChoices(item));
-      figureHelper.hidden = false;
-      byId('figure-helper-close').focus({ preventScroll: true });
+  function positionFigureHelper() {
+    if (!helperFigure) return;
+    const figure = stack.querySelector('figure[data-figure="' + CSS.escape(helperFigure) + '"]');
+    const media = figure?.querySelector(':scope > img, :scope > .image-placeholder');
+    const bounds = media?.getBoundingClientRect();
+    const view = stack.getBoundingClientRect();
+    if (!bounds || bounds.bottom <= view.top || bounds.top >= view.bottom ||
+        bounds.right <= view.left || bounds.left >= view.right) {
+      closeFigureHelper();
+      return;
     }
-    fitPaper();
-    stack.scrollTop += trigger.getBoundingClientRect().top - stack.getBoundingClientRect().top - top;
+    const portrait = media.naturalWidth
+      ? media.naturalWidth < media.naturalHeight
+      : bounds.width < bounds.height;
+    figureHelper.dataset.orientation = portrait ? 'portrait' : 'landscape';
+
+    const margin = 8;
+    const gap = 6;
+    const viewportWidth = document.documentElement.clientWidth;
+    const viewportHeight = document.documentElement.clientHeight;
+    const left = Math.max(bounds.left, view.left);
+    const right = Math.min(bounds.right, view.right);
+    const leftSpace = left - gap - margin;
+    const rightSpace = viewportWidth - right - gap - margin;
+    const openLeft = leftSpace > rightSpace;
+    const space = openLeft ? leftSpace : rightSpace;
+    const preferredWidth = portrait ? 252 : 166;
+    const width = Math.min(viewportWidth - 2 * margin, preferredWidth, Math.max(118, space));
+    figureHelper.style.width = width + 'px';
+    const x = openLeft ? left - gap - width : right + gap;
+    const y = Math.max(view.top, bounds.top);
+    figureHelper.style.left = Math.max(margin, Math.min(x, viewportWidth - width - margin)) + 'px';
+    figureHelper.style.top = Math.max(margin, Math.min(y, viewportHeight - figureHelper.offsetHeight - margin)) + 'px';
+  }
+
+  function showFigureHelper(figure, pin = false) {
+    const id = figure.dataset.figure;
+    clearHelperTimer();
+    if (helperFigure === id && !pin) return;
+    if (helperFigure === id && helperPinned) {
+      closeFigureHelper(true);
+      return;
+    }
+    const item = findFigure(id);
+    if (!item) return;
+    closeFigureHelper();
+    helperFigure = id;
+    helperPinned = pin;
+    figure.querySelector('[data-style-figure]').setAttribute('aria-expanded', 'true');
+    byId('figure-helper-title').textContent = item.name;
+    byId('figure-helper-status').textContent = '';
+    byId('figure-helper-options').replaceChildren(figureChoices(item));
+    figureHelper.hidden = false;
+    positionFigureHelper();
+    if (pin && !figureHelper.hidden) byId('figure-helper-close').focus({ preventScroll: true });
+  }
+
+  function scheduleHelperClose() {
+    clearHelperTimer();
+    if (!helperPinned) helperTimer = setTimeout(() => closeFigureHelper(), 240);
+  }
+
+  function previewFigure(target) {
+    return target?.closest?.('figure[data-figure]:not([data-legacy-upload])');
   }
 
   function renderFigureStyleTools() {
@@ -400,12 +454,43 @@
     requestPaper();
   }
 
+  function syncIntroStyle(topic) {
+    const preferred = settings.figureStyle || topic.defaultFigureStyle || topic.figureStyles?.[0]?.id;
+    for (const button of byId('material-intro-style-options').children) {
+      button.setAttribute('aria-pressed', String(button.dataset.introStyle === preferred));
+    }
+  }
+
   function showMaterialIntro(topic) {
-    const dialog = byId('material-intro');
     if (!preferences.firstVisit(topic.code)) return;
-    byId('material-intro-styles').hidden = (topic.figureStyles?.length ?? 0) < 2;
+    const styles = topic.figureStyles?.slice(0, 2) ?? [];
+    const example = styles.length === 2 && topic.chapters.flatMap(chapter => chapter.figures ?? []).find(
+      figure => styles.every(style => figure.variants?.[style.id]?.src),
+    );
+    byId('material-intro-compare').hidden = !example;
+    byId('material-intro-styles').hidden = styles.length < 2;
     byId('material-intro-level').hidden = availableLevels(topic).length < 2;
-    dialog.showModal();
+    if (example) {
+      const images = styles.map(style => {
+        const variant = example.variants[style.id];
+        const image = node('img');
+        image.src = variant.src;
+        image.alt = style.label + ' · ' + (variant.alt ?? example.alt ?? example.name);
+        return image;
+      });
+      byId('material-intro-example').textContent = example.name;
+      byId('material-intro-picture').replaceChildren(...images, node('span', 'intro-divider'));
+      byId('material-intro-slider').value = '50';
+      byId('material-intro-picture').style.setProperty('--split', '50%');
+      byId('material-intro-style-options').replaceChildren(...styles.map(style => {
+        const button = node('button', '', style.label);
+        button.type = 'button';
+        button.dataset.introStyle = style.id;
+        return button;
+      }));
+      syncIntroStyle(topic);
+    }
+    byId('material-intro').showModal();
   }
 
   function availableLevels(topic) {
@@ -875,6 +960,7 @@
     const after = frame.getBoundingClientRect();
     stack.scrollLeft += after.left + anchorX * after.width - x;
     stack.scrollTop += after.top + anchorY * after.height - y;
+    positionFigureHelper();
   }
 
   function paperSection(chapter, section) {
@@ -1052,6 +1138,12 @@
     const edit = sectionEdit;
     sectionEdit = null;
     const scrollTop = stack.scrollTop;
+    const scrollLeft = stack.scrollLeft;
+    const viewTop = stack.getBoundingClientRect().top;
+    const visibleUnit = scrollTop > 0 && [...stack.querySelectorAll('[data-paper-unit]')].find(
+      unit => unit.getBoundingClientRect().bottom > viewTop,
+    );
+    const visibleOffset = visibleUnit ? visibleUnit.getBoundingClientRect().top - viewTop : 0;
     const snapshot = edit && capturePaperMotion(edit);
     stopPaperMotion();
     const focusedStyleFigure = document.activeElement?.dataset.styleFigure;
@@ -1063,7 +1155,12 @@
       [...stack.querySelectorAll('[data-style-figure]')].find(button =>
         button.dataset.styleFigure === focusedStyleFigure)?.focus({ preventScroll: true });
     }
-    if (edit) stack.scrollTop = scrollTop;
+    stack.scrollTop = scrollTop;
+    stack.scrollLeft = scrollLeft;
+    if (visibleUnit) {
+      const equivalent = stack.querySelector('[data-paper-unit="' + CSS.escape(visibleUnit.dataset.paperUnit) + '"]');
+      if (equivalent) stack.scrollTop += equivalent.getBoundingClientRect().top - viewTop - visibleOffset;
+    }
     if (pendingSection) {
       if (!focusPaperSection(chapter.id, pendingSection)) focusRemovedSection(chapter.id, pendingSection);
       pendingSection = '';
@@ -1073,6 +1170,7 @@
       focusMovedSection(edit);
     }
     if (snapshot) animatePaper(snapshot, edit);
+    positionFigureHelper();
     const warnings = [];
     if (missing) warnings.push('Alguna imatge no s’ha pogut carregar.');
     if (paper.oversized) warnings.push('Redueix la lletra, l’interlineat o els marges per encabir el contingut.');
@@ -1536,12 +1634,45 @@
     showCollection();
   });
   stack.addEventListener('click', editPreviewSection);
-  stack.addEventListener('click', openFigureStyles);
+  stack.addEventListener('pointerover', event => {
+    const figure = previewFigure(event.target);
+    if (event.pointerType === 'mouse' && route && figure && !figure.contains(event.relatedTarget)) showFigureHelper(figure);
+  });
+  stack.addEventListener('pointerout', event => {
+    const figure = previewFigure(event.target);
+    if (event.pointerType === 'mouse' && figure?.dataset.figure === helperFigure &&
+        !figure.contains(event.relatedTarget) && !figureHelper.contains(event.relatedTarget)) scheduleHelperClose();
+  });
+  stack.addEventListener('click', event => {
+    if (!route || !event.target.closest('[data-style-figure]')) return;
+    const figure = previewFigure(event.target);
+    if (figure) showFigureHelper(figure, true);
+  });
+  stack.addEventListener('scroll', positionFigureHelper, { passive: true });
   figureOptions.addEventListener('click', editFigureChoice);
   figureHelper.addEventListener('click', editFigureChoice);
+  figureHelper.addEventListener('pointerenter', clearHelperTimer);
+  figureHelper.addEventListener('pointerleave', event => {
+    if (event.pointerType === 'mouse' && previewFigure(event.relatedTarget)?.dataset.figure !== helperFigure) scheduleHelperClose();
+  });
   byId('figure-helper-close').addEventListener('click', () => closeFigureHelper(true));
-  byId('studio').addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !figureHelper.hidden) closeFigureHelper(true);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && helperFigure) closeFigureHelper(helperPinned);
+  });
+  document.addEventListener('pointerdown', event => {
+    if (helperFigure && !figureHelper.contains(event.target) && previewFigure(event.target)?.dataset.figure !== helperFigure) closeFigureHelper();
+  });
+  byId('material-intro-slider').addEventListener('input', event => {
+    byId('material-intro-picture').style.setProperty('--split', event.target.value + '%');
+  });
+  byId('material-intro-style-options').addEventListener('click', event => {
+    const choice = event.target.closest('[data-intro-style]')?.dataset.introStyle;
+    if (!route?.topic.figureStyles?.some(style => style.id === choice)) return;
+    settings.figureStyle = choice;
+    syncIntroStyle(route.topic);
+    storeOptions();
+    renderControls();
+    requestPaper();
   });
   byId('reset-figures').addEventListener('click', resetFigures);
   figureUpload.addEventListener('change', addImage);
@@ -1701,7 +1832,11 @@
     const distance = Math.max(-240, Math.min(240, event.deltaY * unit));
     if (distance) zoomPaper(previewMagnification * 2 ** (-distance / 480), event);
   }, { passive: false });
-  new ResizeObserver(fitPaper).observe(stack);
+  new ResizeObserver(() => {
+    fitPaper();
+    positionFigureHelper();
+  }).observe(stack);
+  window.addEventListener('resize', positionFigureHelper);
   window.addEventListener('hashchange', event => {
     if (location.hash !== '#main') renderRoute(event);
   });

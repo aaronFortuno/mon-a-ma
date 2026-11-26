@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.24 · 26 de novembre de 2026
+
+- La benvinguda compara els dos estils amb un separador i permet triar l’estil inicial de la fitxa.
+- Mostra miniatures al lateral i obre un selector flotant quan passes per sobre de la imatge.
+- Manté la posició del visor en repaginar i usa les il·lustracions amb volum per defecte a M001.
+
 ## 0.1.23 · 26 de novembre de 2026
 
 - Permet triar l’estil figura per figura des del lateral o des d’un panell al costat del visor.
