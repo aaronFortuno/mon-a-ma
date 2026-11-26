@@ -267,9 +267,17 @@ summary { color: var(--green); font-weight: 650; }
 .note strong { color: var(--paper-accent); }
 .note > strong { display: block; font-family: var(--sans); font-size: .91em; margin-bottom: .2em; }
 .note p:last-child { margin-bottom: 0; }
-.illustration { width: var(--image-width); max-width: 100%; margin: .25em 0 .65em; text-align: start; }
-.illustration img { display: block; width: 100%; height: auto; max-height: 88mm; object-fit: contain; }
-.illustration .image-placeholder { aspect-ratio: var(--figure-ratio, 2); max-height: 88mm; }
+.illustration {
+  --max-image-height: 125mm;
+  width: min(var(--image-width), calc(var(--max-image-height) * var(--figure-ratio, 2)));
+  max-width: 100%;
+  margin: .25em 0 .65em;
+  text-align: start;
+}
+.illustration img { display: block; width: 100%; height: auto; max-height: var(--max-image-height); object-fit: contain; }
+.illustration:not(.is-borderless) img { border: 1px solid var(--paper-line); }
+.illustration .image-placeholder { aspect-ratio: var(--figure-ratio, 2); }
+.illustration.is-borderless .image-placeholder { border-color: transparent; }
 .illustration figcaption { font: .82em/1.38 var(--sans); color: #394d47; padding-block: .38em 0; overflow-wrap: anywhere; }
 .figure-caption, .figure-credit { display: block; }
 .figure-credit { font-size: .89em; }
@@ -628,20 +636,21 @@ summary { color: var(--green); font-weight: 650; }
   gap: var(--field-row-gap) var(--field-column-gap);
 }
 .figure-size-alignment { justify-content: space-between; }
-#figure-settings .figure-width { display: inline-flex; align-items: center; gap: .4rem; }
-.figure-width input {
-  width: 3.45rem;
+#figure-settings .figure-width {
+  display: grid;
+  flex: 1 1 6rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: .1rem .4rem;
   min-width: 0;
-  padding: .32rem .38rem;
-  border: 1px solid var(--control-line);
-  border-radius: .3rem;
-  background: var(--surface);
 }
+.figure-width-value { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+#figure-settings .figure-width input { grid-column: 1 / -1; margin: 0; }
 .figure-width input:focus-visible { outline-offset: 1px; }
 #figure-settings .figure-options :is(select, input[type="text"]) { margin: 0; }
 .figure-placement select { flex: 1 1 5.5rem; text-overflow: ellipsis; }
-.figure-wrap { align-items: center; white-space: nowrap; }
-.figure-wrap input { margin: 0; }
+.figure-placement .check { align-items: center; white-space: nowrap; }
+.figure-placement .check input { margin: 0; }
 .figure-notes > summary { font-size: .84rem; }
 .figure-notes-fields { display: grid; gap: .45rem; margin-top: .4rem; font-size: .81rem; }
 .figure-notes-fields label { color: var(--muted); }

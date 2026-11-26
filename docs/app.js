@@ -2,7 +2,7 @@
   const locale = document.documentElement.lang;
   const cycleById = new Map(window.curriculum.cycles.map(cycle => [cycle.id, cycle]));
   const topics = window.quaderns.filter(topic => topic.lang === locale);
-  const { node, paragraphAnchor, loadPaperFont, paginate } = window.imprimible;
+  const { node, paragraphAnchor, loadPaperFont, paginate, figureSizing, normalizeFigureWidth, canWrapFigure } = window.imprimible;
   const preferences = window.preferencies;
   const { defaults } = preferences;
   const materialLevels = [
@@ -260,9 +260,7 @@
         id: 'reserva-' + section.id, section: section.id, name: section.title, ratio: 1.7,
         ...original,
         anchor: startsWithText ? 'lead' : 'before',
-        width: Math.min(original?.width ?? 45, 45),
         position: index % 2 ? 'left' : 'right',
-        wrap: startsWithText,
       }, ...extra];
     });
   }
@@ -285,7 +283,7 @@
         variants.find(variant => variant.id !== 'custom' && variant.src);
       const selected = variants.find(variant => variant.id === saved?.variant && variant.src) ?? defaultVariant;
       const config = {
-        ...item, ...selected, id: item.id, visible: true, ...saved,
+        wrap: false, border: true, ...item, ...selected, id: item.id, visible: true, ...saved,
         variants, selectedVariant: selected?.id ?? '', chapterId: chapter.id,
         ...(selected?.id === 'custom' ? { caption: '', credit: '' } : {}),
         ...saved?.byStyle?.[selected?.id],
@@ -295,7 +293,8 @@
       if (paragraph > 0 && blocks?.[paragraph]?.type !== 'paragraph') {
         config.anchor = blocks?.[0]?.type === 'paragraph' ? 'lead' : 'before';
       }
-      if (paragraphAnchor(config.anchor) === null || config.position === 'center') config.wrap = false;
+      config.width = normalizeFigureWidth(config.width);
+      config.wrap = canWrapFigure(config) && config.wrap;
       return config;
     }).filter(config => sections.has(config.section));
   }
@@ -771,6 +770,12 @@
     return wrapper;
   }
 
+  function syncFigureWidth(input) {
+    const label = input.value + ' %';
+    input.setAttribute('aria-valuetext', label);
+    input.parentElement.querySelector('.figure-width-value').textContent = label;
+  }
+
   function figureControl(item, chapter) {
     const field = node('fieldset', 'figure-control');
     field.dataset.figureId = item.id;
@@ -794,17 +799,18 @@
     if (!item.blob) group.append(figureChoices(item));
     const sizeAndAlignment = node('div', 'figure-size-alignment');
     const width = node('input');
-    width.type = 'number';
-    width.min = '25';
-    width.max = '100';
-    width.step = '1';
-    width.defaultValue = item.width;
+    width.type = 'range';
+    width.min = figureSizing.min;
+    width.max = figureSizing.max;
+    width.step = figureSizing.step;
+    width.value = item.width;
     width.dataset.setting = 'width';
-    width.setAttribute('aria-label', 'Amplada en percentatge');
-    const widthLabel = control('Amplada', width, 'figure-width');
-    const percent = node('span', '', '%');
+    width.setAttribute('aria-label', 'Amplada de la imatge');
+    const widthLabel = node('label', 'figure-width', 'Amplada');
+    const percent = node('span', 'figure-width-value');
     percent.setAttribute('aria-hidden', 'true');
-    widthLabel.append(percent);
+    widthLabel.append(percent, width);
+    syncFigureWidth(width);
     const alignment = figureAlignment.content.firstElementChild.cloneNode(true);
     alignment.setAttribute('role', 'group');
     alignment.setAttribute('aria-label', 'Alineació de la imatge');
@@ -837,12 +843,17 @@
     const flow = node('input');
     flow.type = 'checkbox';
     flow.checked = item.wrap;
-    flow.disabled = item.position === 'center' || paragraphAnchor(item.anchor) === null;
+    flow.disabled = !canWrapFigure(item);
     flow.dataset.setting = 'wrap';
     flow.setAttribute('aria-label', 'Envolta la imatge amb text');
     const wrapLabel = control('Envolta', flow, 'check figure-wrap');
     wrapLabel.title = 'Envolta la imatge amb text';
-    placement.append(picker('anchor', 'Punt d’inserció', anchors), wrapLabel);
+    const border = node('input');
+    border.type = 'checkbox';
+    border.checked = item.border;
+    border.dataset.setting = 'border';
+    border.setAttribute('aria-label', 'Mostra una vora a la imatge');
+    placement.append(picker('anchor', 'Punt d’inserció', anchors), wrapLabel, control('Vora', border, 'check'));
     group.append(placement);
     if (item.blob && chapter.sections.length > 1) {
       const sections = chapter.sections.map(entry => [entry.id, entry.title]);
@@ -1506,12 +1517,7 @@
       const key = input.dataset.setting;
       if (!key) return;
       if (key === 'width') {
-        const width = input.valueAsNumber;
-        if (event.type === 'input' && (!Number.isFinite(width) || !input.validity.valid)) return;
-        value = Number.isFinite(width)
-          ? Math.min(Number(input.max), Math.max(Number(input.min), Math.round(width)))
-          : settings.figures[id]?.width ?? Number(input.defaultValue);
-        if (event.type !== 'input') input.value = value;
+        syncFigureWidth(input);
         if (settings.figures[id]?.width === value) return;
       }
       const saved = settings.figures[id];
@@ -1533,10 +1539,10 @@
         settings.figures[id].anchor = 'lead';
         renderControls();
         figureForm.querySelector('[data-figure-id="' + id + '"] [data-setting="section"]').focus({ preventScroll: true });
-      } else if (key === 'anchor' || key === 'position') {
+      } else if (key === 'anchor' || key === 'position' || key === 'width') {
         const current = figuresFor(printableChapter(route.chapter)).find(item => item.id === id);
         const wrap = card.querySelector('[data-setting="wrap"]');
-        wrap.disabled = paragraphAnchor(current.anchor) === null || current.position === 'center';
+        wrap.disabled = !canWrapFigure(current);
         wrap.checked = current.wrap;
       }
     } else {

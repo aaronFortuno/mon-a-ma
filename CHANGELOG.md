@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.29 · 26 de novembre de 2026
+
+- Mostra les il·lustracions a amplada completa, amb vora i sense text al voltant per defecte.
+- Afegeix un selector de vora i un lliscador d’amplada del 25 % al 100 % en passos de 5.
+
 ## 0.1.28 · 26 de novembre de 2026
 
 - Redueix el quadre del comparador i aclareix el fons perquè es vegi la fitxa de sota.

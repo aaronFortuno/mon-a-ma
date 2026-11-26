@@ -10,6 +10,7 @@ window.imprimible = (() => {
   const webFonts = { lora: 'Lora', lexend: 'Lexend' };
   const fontLoads = new Map();
   const projectLogo = 'assets/mon-a-ma.png?v=0.1.4';
+  const figureSizing = Object.freeze({ min: 25, max: 100, step: 5 });
 
   function loadPaperFont(id) {
     const family = webFonts[id];
@@ -70,17 +71,29 @@ window.imprimible = (() => {
     return table;
   }
 
+  function normalizeFigureWidth(width) {
+    const { min, max, step } = figureSizing;
+    return Number.isFinite(width) ? Math.max(min, Math.min(max, Math.round(width / step) * step)) : max;
+  }
+
+  function canWrapFigure(item) {
+    return item.width < figureSizing.max && item.position !== 'center' && paragraphAnchor(item.anchor) !== null;
+  }
+
   function figure(source) {
-    const wrapped = source.wrap && source.position !== 'center';
+    const width = normalizeFigureWidth(source.width);
+    const wrapped = source.wrap && canWrapFigure({ ...source, width });
     const element = node('figure', wrapped ? 'illustration is-wrap' : 'illustration');
-    element.style.setProperty('--image-width', source.width + '%');
+    element.classList.toggle('is-borderless', source.border === false);
+    element.style.setProperty('--image-width', width + '%');
+    const ratio = source.pixelWidth && source.pixelHeight ? source.pixelWidth / source.pixelHeight : source.ratio;
+    if (ratio) element.style.setProperty('--figure-ratio', ratio);
     element.dataset.position = source.position;
     element.dataset.figure = source.id;
     element.dataset.figureName = source.name ?? source.alt ?? 'Il·lustració';
     if (source.blob) element.dataset.legacyUpload = '';
     if (!source.src) {
       const placeholder = node('div', 'image-placeholder');
-      if (source.ratio) placeholder.style.setProperty('--figure-ratio', source.ratio);
       placeholder.setAttribute('role', 'img');
       placeholder.setAttribute('aria-label', ['Espai reservat per a una il·lustració', source.name].filter(Boolean).join(' · '));
       element.append(placeholder);
@@ -265,5 +278,5 @@ window.imprimible = (() => {
     return { count: pages.length, width, height, oversized };
   }
 
-  return { node, paragraphAnchor, loadPaperFont, paginate, previewPage };
+  return { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure };
 })();
