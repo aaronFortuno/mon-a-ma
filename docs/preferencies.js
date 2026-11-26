@@ -68,6 +68,7 @@
       ...getBase(templateId, collection, data),
       ...changes,
       templateId,
+      figureStyle: typeof saved.figureStyle === 'string' ? saved.figureStyle : '',
       figures: { ...saved.figures },
       sectionOrder: { ...saved.sectionOrder },
       hiddenSections: { ...saved.hiddenSections },
@@ -81,7 +82,7 @@
     return write(layoutKey, {
       ...layouts,
       [recordKey(topicId, collection)]: {
-        templateId: settings.templateId, values, figures: settings.figures,
+        templateId: settings.templateId, values, figureStyle: settings.figureStyle, figures: settings.figures,
         sectionOrder: settings.sectionOrder, hiddenSections: settings.hiddenSections,
       },
     });

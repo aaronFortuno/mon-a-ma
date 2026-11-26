@@ -76,23 +76,29 @@ window.imprimible = (() => {
     element.style.setProperty('--image-width', source.width + '%');
     element.dataset.position = source.position;
     element.dataset.figure = source.id;
+    if (source.styleId) element.dataset.styled = '';
     if (!source.src) {
       const placeholder = node('div', 'image-placeholder');
       if (source.ratio) placeholder.style.setProperty('--figure-ratio', source.ratio);
       placeholder.setAttribute('role', 'img');
       placeholder.setAttribute('aria-label', ['Espai reservat per a una il·lustració', source.name].filter(Boolean).join(' · '));
       element.append(placeholder);
-      return element;
+    } else {
+      const image = node('img');
+      image.alt = source.alt ?? '';
+      if (source.pixelWidth && source.pixelHeight) {
+        image.width = source.pixelWidth;
+        image.height = source.pixelHeight;
+      }
+      image.src = source.src;
+      element.append(image);
     }
-    const image = node('img');
-    image.alt = source.alt ?? '';
-    if (source.pixelWidth && source.pixelHeight) {
-      image.width = source.pixelWidth;
-      image.height = source.pixelHeight;
+    if (source.caption || source.credit) {
+      const caption = node('figcaption');
+      if (source.caption) caption.append(node('span', 'figure-caption', source.caption));
+      if (source.credit) caption.append(node('span', 'figure-credit', 'Font: ' + source.credit));
+      element.append(caption);
     }
-    image.src = source.src;
-    element.append(image);
-    if (source.caption) element.append(node('figcaption', '', source.caption));
     return element;
   }
 

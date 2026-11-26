@@ -37,7 +37,19 @@ window.quaderns ??= [];
     title: 'El planeta Terra',
     intro: 'Quan trepitgem el terra, només veiem una part molt petita del planeta. Sota els peus hi ha capes de roca i metall. A la superfície i al seu voltant hi trobem aigua, aire i éssers vius. Tots aquests elements es relacionen.',
     figures: [
-      { id: 'capes', section: 'capes', anchor: 'lead', name: 'Les capes de la Terra', ratio: 920 / 560, alt: 'Tall de la Terra amb escorça, mantell, nucli extern i nucli intern.', caption: 'Tall esquemàtic de la Terra. El gruix de les capes no està dibuixat a escala.', width: 45, position: 'right', wrap: true },
+      {
+        id: 'capes', section: 'capes', anchor: 'lead', name: 'Les capes de la Terra', ratio: 23 / 14,
+        alt: 'Tall de la Terra amb escorça, mantell, nucli extern i nucli intern.',
+        caption: 'Tall esquemàtic de la Terra. El gruix de les capes no està dibuixat a escala.',
+        width: 45, position: 'right', wrap: true,
+        variants: {
+          pla: { src: 'illustracions/capes.png' },
+          volum: { src: 'illustracions/m001/capes.png', alt: 'Esfera de la Terra amb una porció retirada que mostra l’escorça, el mantell, el nucli extern i el nucli intern.' },
+        },
+      },
+      { id: 'reserva-moviment', section: 'moviment', name: 'Moviment de les plaques', ratio: 23 / 14, variants: { pla: {}, volum: {} } },
+      { id: 'reserva-gravetat', section: 'gravetat', name: 'La gravetat de la Terra', ratio: 23 / 14, variants: { pla: {}, volum: {} } },
+      { id: 'reserva-elements', section: 'elements', name: 'Els elements del planeta Terra', ratio: 23 / 14, variants: { pla: {}, volum: {} } },
     ],
     sections: [
       section('capes', 'Les capes del planeta Terra',
@@ -68,6 +80,10 @@ window.quaderns ??= [];
         box('I ara, on ho situem?', 'Si volguéssim assenyalar el naixement d’un riu o el lloc d’un terratrèmol en un globus, ens caldria una manera de dir en quin punt del planeta es troba.')),
     ],
   }, {
+    figureStyles: [
+      { id: 'pla', label: 'Esquema pla', description: 'Vistes planes, contorns nets i colors uniformes.' },
+      { id: 'volum', label: 'Il·lustració amb volum', description: 'Perspectiva i ombres suaus per veure la profunditat.' },
+    ],
     description: 'Descobreix les capes de la Terra, el moviment de les plaques, la gravetat i com es relacionen l’aigua, l’aire, les roques i els éssers vius.',
     curriculum: [{ row: 'medi:terra', section: 'elements', note: 'Explica les capes i com s’influeixen les roques, l’aigua, l’aire i els éssers vius.' }],
     sources: [

@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.22 · 26 de novembre de 2026
+
+- Permet comparar els estils pla i amb volum al visor i aplicar la tria a tota la fitxa M001.
+- Afegeix camps editables de peu i font, també a la fitxa impresa.
+- Incorpora les dues versions de les capes de la Terra al pilot d’il·lustracions.
+
 ## 0.1.21 · 25 de novembre de 2026
 
 - Permet fer zoom al visor amb Ctrl i la roda del ratolí o amb els botons d’allunyar, ajustar i apropar.

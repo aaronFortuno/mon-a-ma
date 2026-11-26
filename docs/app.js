@@ -17,6 +17,8 @@
   const form = byId('options');
   const figureForm = byId('figure-settings');
   const figureAlignment = byId('figure-alignment-template');
+  const figureStyleButton = byId('figure-style-button');
+  const figureStyleDialog = byId('figure-style-dialog');
   const stack = byId('paper-stack');
   const zoomOut = byId('zoom-out');
   const zoomReset = byId('zoom-reset');
@@ -234,16 +236,74 @@
   }
 
   function figuresFor(chapter, type = documentType) {
+    const style = selectedFigureStyle();
     const collectionId = activeCollection?.id ?? '';
     const userFigures = knownUploads.filter(item => item.topic === route.topic.id && item.chapter === chapter.id &&
       (item.collectionId ?? '') === collectionId && (item.documentType ?? 'sheet') === type);
     const planned = type === 'sheet' ? reservedFigures(chapter) : chapter.figures ?? [];
     const sections = new Set(chapter.sections.map(section => section.id));
     return [...planned, ...userFigures].map(item => {
-      const config = { ...item, visible: true, ...settings.figures[item.id] };
+      const variant = type === 'sheet' ? item.variants?.[style?.id] : undefined;
+      const saved = settings.figures[item.id];
+      const config = { ...item, ...variant, visible: true, ...saved, styleId: variant ? style.id : '' };
+      if (variant) Object.assign(config, saved?.byStyle?.[style.id]);
       if (paragraphAnchor(config.anchor) === null || config.position === 'center') config.wrap = false;
       return config;
     }).filter(config => sections.has(config.section));
+  }
+
+  function figureStyles() {
+    return documentType === 'sheet' ? route?.topic.figureStyles ?? [] : [];
+  }
+
+  function selectedFigureStyle() {
+    const styles = figureStyles();
+    return styles.find(style => style.id === settings.figureStyle) ?? styles[0];
+  }
+
+  function openFigureStyles(event) {
+    const trigger = event.target.closest('[data-style-figure]');
+    const styles = figureStyles();
+    if (!trigger || styles.length < 2) return;
+    const figures = route.topic.chapters.flatMap(chapter => chapter.figures ?? []);
+    const hasBoth = figure => styles.every(style => figure.variants?.[style.id]?.src);
+    const sample = figures.find(figure => figure.id === trigger.dataset.styleFigure && hasBoth(figure)) ??
+      figures.find(hasBoth) ?? figures.find(figure => figure.variants);
+    if (!sample) return;
+    const selected = selectedFigureStyle()?.id;
+    byId('figure-style-example').textContent = 'Mostra · ' + sample.name;
+    byId('figure-style-choices').replaceChildren(...styles.map(style => {
+      const option = node('button', 'figure-style-choice');
+      option.type = 'button';
+      option.dataset.figureStyle = style.id;
+      option.setAttribute('aria-pressed', String(style.id === selected));
+      option.autofocus = style.id === selected;
+      const variant = sample.variants[style.id];
+      if (variant?.src) {
+        const image = node('img');
+        image.src = variant.src;
+        image.alt = variant.alt ?? sample.alt ?? '';
+        option.append(image);
+      } else {
+        option.append(node('span', 'figure-style-pending', 'Mostra pendent'));
+      }
+      option.append(node('strong', '', style.label), node('span', 'figure-style-description', style.description));
+      return option;
+    }));
+    figureStyleDialog.showModal();
+  }
+
+  function renderFigureStyleTools() {
+    if (figureStyles().length < 2) return;
+    for (const figure of stack.querySelectorAll('figure[data-styled]')) {
+      const button = node('button', 'figure-style-trigger', 'Estil');
+      button.type = 'button';
+      button.dataset.styleFigure = figure.dataset.figure;
+      button.setAttribute('aria-label', 'Tria l’estil de les il·lustracions');
+      button.setAttribute('aria-haspopup', 'dialog');
+      button.title = 'Tria l’estil de les il·lustracions';
+      figure.append(button);
+    }
   }
 
   function printableChapter(chapter) {
@@ -379,6 +439,7 @@
     const previous = route;
     route = extractRoute();
     const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
+    if (changedMaterial && figureStyleDialog.open) figureStyleDialog.close();
     byId('catalog-home').href = route ? catalogAddress(activeCollection) : '#';
     byId('catalog').hidden = Boolean(route);
     const curriculumDialog = byId('curriculum-dialog');
@@ -451,6 +512,7 @@
   function figureControl(item, chapter) {
     const field = node('fieldset', 'figure-control');
     field.dataset.figureId = item.id;
+    if (item.styleId) field.dataset.figureStyle = item.styleId;
     const title = item.name || item.alt?.replace(/\.$/, '') || 'Il·lustració';
     field.append(node('legend', 'sr-only', title));
     const header = node('div', 'figure-heading');
@@ -523,16 +585,23 @@
       const sections = chapter.sections.map(entry => [entry.id, entry.title]);
       group.append(picker('section', 'Apartat de la imatge pujada', sections));
     }
-    if (item.src) {
-      const caption = node('input');
-      caption.type = 'text';
-      caption.value = item.caption ?? '';
-      caption.maxLength = 240;
-      caption.placeholder = 'Peu de la imatge';
-      caption.setAttribute('aria-label', 'Peu de la imatge');
-      caption.dataset.setting = 'caption';
-      group.append(caption);
+    const notes = node('details', 'figure-notes');
+    notes.append(node('summary', '', 'Peu i font'));
+    const fields = node('div', 'figure-notes-fields');
+    for (const [key, label, example] of [
+      ['caption', 'Peu de la imatge', 'Descripció breu'],
+      ['credit', 'Font o autoria', 'Autoria, arxiu o adreça web'],
+    ]) {
+      const input = node('input');
+      input.type = 'text';
+      input.value = item[key] ?? '';
+      input.maxLength = 240;
+      input.placeholder = example;
+      input.dataset.setting = key;
+      fields.append(control(label, input));
     }
+    notes.append(fields);
+    group.append(notes);
     if (item.blob) {
       const remove = node('button', 'figure-remove', '×');
       remove.type = 'button';
@@ -548,6 +617,9 @@
   function renderControls() {
     byId('print-scope').hidden = route.topic.chapters.length === 1;
     syncDocumentPicker();
+    figureStyleButton.hidden = figureStyles().length < 2;
+    const style = selectedFigureStyle();
+    if (style) figureStyleButton.textContent = 'Estil · ' + style.label;
     for (const key of Object.keys(defaults)) {
       const input = form.elements.namedItem(key) ?? figureForm.elements.namedItem(key);
       if (!input) continue;
@@ -832,7 +904,7 @@
         const size = await preload(item.src);
         if (!size) {
           missing = true;
-          return null;
+          return item.styleId ? { ...item, src: '' } : null;
         }
         return { ...item, pixelWidth: size.width, pixelHeight: size.height };
       }));
@@ -845,9 +917,15 @@
     const scrollTop = stack.scrollTop;
     const snapshot = edit && capturePaperMotion(edit);
     stopPaperMotion();
+    const focusedStyleFigure = document.activeElement?.dataset.styleFigure;
     paper = paginate(topic, chapters, new Map(resolved), options, byId('layout-probe'), stack);
     if (documentType === 'sheet') renderSectionTools(chapters);
+    renderFigureStyleTools();
     fitPaper();
+    if (focusedStyleFigure) {
+      [...stack.querySelectorAll('[data-style-figure]')].find(button =>
+        button.dataset.styleFigure === focusedStyleFigure)?.focus({ preventScroll: true });
+    }
     if (edit) stack.scrollTop = scrollTop;
     if (pendingSection) {
       if (!focusPaperSection(chapter.id, pendingSection)) focusRemovedSection(chapter.id, pendingSection);
@@ -895,7 +973,17 @@
         if (event.type !== 'input') input.value = value;
         if (settings.figures[id]?.width === value) return;
       }
-      settings.figures[id] = { ...settings.figures[id], [key]: value };
+      const saved = settings.figures[id];
+      const styleId = card.dataset.figureStyle;
+      if (styleId && (key === 'caption' || key === 'credit')) {
+        const byStyle = saved?.byStyle;
+        settings.figures[id] = {
+          ...saved,
+          byStyle: { ...byStyle, [styleId]: { ...byStyle?.[styleId], [key]: value } },
+        };
+      } else {
+        settings.figures[id] = { ...saved, [key]: value };
+      }
       if (key === 'visible') card.querySelector('.figure-options').hidden = !value;
       if (key === 'section') {
         settings.figures[id].anchor = 'lead';
@@ -1228,6 +1316,18 @@
     showCollection();
   });
   stack.addEventListener('click', editPreviewSection);
+  stack.addEventListener('click', openFigureStyles);
+  figureStyleButton.addEventListener('click', openFigureStyles);
+  byId('figure-style-choices').addEventListener('click', event => {
+    const id = event.target.closest('button[data-figure-style]')?.dataset.figureStyle;
+    if (!figureStyles().some(style => style.id === id)) return;
+    figureStyleDialog.close();
+    if (selectedFigureStyle()?.id === id) return;
+    settings.figureStyle = id;
+    storeOptions();
+    renderControls();
+    requestPaper();
+  });
   byId('removed-sections').addEventListener('click', restoreSection);
   byId('reset-section-order').addEventListener('click', () => {
     delete settings.sectionOrder[route.chapter.id];
@@ -1335,7 +1435,7 @@
     headerLogoFeedback('');
     settings = {
       ...preferences.getBase(settings.templateId, activeCollection, library), templateId: settings.templateId,
-      figures: {}, sectionOrder: settings.sectionOrder, hiddenSections: settings.hiddenSections,
+      figures: {}, figureStyle: settings.figureStyle, sectionOrder: settings.sectionOrder, hiddenSections: settings.hiddenSections,
     };
     storeOptions();
     renderNavigation();

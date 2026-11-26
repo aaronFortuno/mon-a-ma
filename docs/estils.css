@@ -271,6 +271,8 @@ summary { color: var(--green); font-weight: 650; }
 .illustration img { display: block; width: 100%; height: auto; max-height: 88mm; object-fit: contain; }
 .illustration .image-placeholder { aspect-ratio: var(--figure-ratio, 2); max-height: 88mm; }
 .illustration figcaption { font: .82em/1.38 var(--sans); color: #394d47; padding-block: .38em 0; overflow-wrap: anywhere; }
+.figure-caption, .figure-credit { display: block; }
+.figure-credit { font-size: .89em; }
 .illustration[data-position="center"] { margin-inline: auto; }
 .illustration[data-position="right"] { margin-inline-start: auto; }
 .illustration.is-wrap[data-position="right"] { float: right; margin-inline: .9em 0; }
@@ -449,6 +451,19 @@ summary { color: var(--green); font-weight: 650; }
 #paper-stack, .paper-motion { grid-area: 2 / 1; }
 .paper-motion { position: relative; min-width: 0; min-height: 0; overflow: clip; pointer-events: none; z-index: 3; }
 @media screen {
+  .illustration:has(.figure-style-trigger) { position: relative; }
+  .figure-style-trigger {
+    position: absolute;
+    inset: .3rem .3rem auto auto;
+    border: 1px solid #bcc9c1;
+    border-radius: .34rem;
+    padding: .16rem .42rem;
+    background: #fffffff5;
+    color: #254d40;
+    font: 700 .83rem/1.35 var(--sans);
+    opacity: .83;
+  }
+  .figure-style-trigger:is(:hover, :focus-visible) { opacity: 1; background: #e8f2ec; }
   .paper-stack:not(.is-repaginating) > .sheet-frame { overflow: clip; overflow-clip-margin: 4px; }
   .paper-stack.is-repaginating .sheet-body { overflow: visible; }
   .sheet-frame:has([data-paper-in-motion]) { z-index: 1; }
@@ -624,6 +639,35 @@ summary { color: var(--green); font-weight: 650; }
 .figure-placement select { flex: 1 1 5.5rem; text-overflow: ellipsis; }
 .figure-wrap { align-items: center; white-space: nowrap; }
 .figure-wrap input { margin: 0; }
+#figure-style-button { text-align: start; }
+.figure-notes > summary { font-size: .84rem; }
+.figure-notes-fields { display: grid; gap: .45rem; margin-top: .4rem; font-size: .81rem; }
+.figure-notes-fields label { color: var(--muted); }
+#figure-settings .figure-notes-fields input { margin-top: .14rem; }
+.figure-style-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.5rem, 2vw, 1rem); }
+.figure-style-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: .3rem;
+  min-width: 0;
+  padding: .55rem;
+  border: 2px solid var(--line);
+  border-radius: .6rem;
+  background: var(--surface);
+  text-align: start;
+}
+.figure-style-choice:is(:hover, [aria-pressed="true"]) { border-color: var(--green); background: var(--light); }
+.figure-style-choice img, .figure-style-pending {
+  width: 100%;
+  aspect-ratio: 23 / 14;
+  border-radius: .3rem;
+  background: #fff;
+}
+.figure-style-choice img { object-fit: contain; }
+.figure-style-description, .figure-style-pending { font-size: .82rem; }
+.figure-style-description { color: var(--muted); }
+.figure-style-pending { display: grid; place-items: center; background: var(--light); }
 .figure-wrap:has(:disabled) { color: var(--muted); }
 .upload { padding: .4rem; border: 1px solid var(--line); border-radius: .35rem; }
 .upload input { width: 100%; display: block; margin-top: .3rem; font-size: .85rem; }
@@ -796,7 +840,7 @@ details[open]::details-content {
   html, body { background: white; overflow: visible; }
   body { position: static; display: block; height: auto; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .skip, .site-header, #catalog, .site-footer, #layout-probe,
-  .sidebar-column, .document-picker, .zoom-controls, .print-menu, .section-preview-tools, .paper-motion, dialog, noscript { display: none !important; }
+  .sidebar-column, .document-picker, .zoom-controls, .print-menu, .section-preview-tools, .figure-style-trigger, .paper-motion, dialog, noscript { display: none !important; }
   main, .workspace, .workspace-grid, .studio, .paper-stack { display: block; height: auto; width: auto; margin: 0; padding: 0; border: 0; background: white; overflow: visible; }
   .paper-stack { scrollbar-gutter: auto; }
   .sheet-frame { position: static; width: auto !important; height: auto !important; margin: 0 !important; break-after: page; }
