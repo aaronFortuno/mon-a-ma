@@ -124,7 +124,7 @@ button, select, input { color: inherit; }
 [data-theme="dark"] .sun-icon { display: block; }
 .language-menu { position: fixed; top: 3.7rem; right: var(--page-gutter); bottom: auto; left: auto; margin: 0; min-width: 9rem; padding: .38rem; border: 1px solid var(--line); border-radius: .58rem; background: var(--surface); color: var(--ink); box-shadow: 0 8px 20px var(--shadow); }
 .language-menu button { width: 100%; display: flex; justify-content: space-between; gap: 1rem; padding: .5rem .6rem; border: 0; border-radius: .3rem; background: var(--light); text-align: left; }
-.header-topic { margin: .32rem 0; text-align: center; font: 700 clamp(1.1rem, 2.35vw, 1.85rem)/1.13 var(--serif); letter-spacing: -.025em; overflow-wrap: anywhere; }
+.header-beta { justify-self: center; color: var(--green); font: 800 clamp(1.12rem, 3vw, 1.9rem)/1 var(--sans); letter-spacing: .12em; }
 .eyebrow { margin: 0 0 .55rem; color: var(--green); text-transform: uppercase; letter-spacing: .075em; font-size: .83rem; font-weight: 750; }
 .catalog-body { display: grid; grid-template-columns: 16rem minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); gap: clamp(14px, 1.7vw, 23px); padding-block: .85rem; }
 .catalog-results { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; }
@@ -199,6 +199,8 @@ select { padding: .45rem .6rem; border: 1px solid var(--control-line); backgroun
 .footer-links { justify-self: end; display: flex; align-items: center; flex-wrap: wrap; justify-content: end; gap: clamp(.45rem, 1.25vw, 1.05rem); font-size: .85rem; font-weight: 350; }
 .footer-links :is(a, button) { color: var(--muted); }
 .footer-links a { text-decoration: none; }
+.footer-links #reset-user[data-confirming-reset] { color: var(--green); font-weight: 700; }
+#reset-user-status:empty { display: none; }
 .footer-links :is(a, button):hover { text-decoration: underline; }
 .workspace { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); padding-block: .85rem; }
 .views { display: flex; gap: .22rem; padding: .22rem; border: 1px solid var(--line); background: var(--light); border-radius: .5rem; }
@@ -263,8 +265,9 @@ select { padding: .45rem .6rem; border: 1px solid var(--control-line); backgroun
 .restore-section:hover { background: var(--light); }
 .restore-section-icon { font-weight: 750; }
 .restore-section small { display: block; color: var(--muted); }
-.sidebar-menu > .chapter-summary { position: relative; padding-inline-end: 5.1rem; }
-.chapter-summary .reset-order {
+.sidebar-menu > .reset-summary, .sidebar > .reset-summary { position: relative; padding-inline-end: 5.6rem; }
+#topic-title { overflow-wrap: anywhere; }
+.reset-summary .reset-order {
   position: absolute;
   inset-block-start: 50%;
   inset-inline-end: .42rem;
@@ -273,8 +276,8 @@ select { padding: .45rem .6rem; border: 1px solid var(--control-line); backgroun
   height: 1.7rem;
   color: var(--green);
 }
-.chapter-summary .reset-order svg { width: 1.02rem; height: 1.02rem; }
-.chapter-summary .reset-order[data-confirming-reset] {
+.reset-summary .reset-order svg { width: 1.02rem; height: 1.02rem; }
+.reset-summary .reset-order[data-confirming-reset] {
   width: auto;
   padding-inline: .38rem;
   background: var(--button);
@@ -880,8 +883,6 @@ summary { color: var(--green); font-weight: 650; }
 @media (max-width: 800px) {
   :root { --page-gutter: clamp(12px, 3vw, 16px); }
   .header-inner { min-height: 3.8rem; }
-  .header-inner:has(.header-topic:not([hidden])) .brand-name { display: none; }
-  .header-topic { font-size: clamp(1.1rem, 3.7vw, 1.5rem); }
   .header-inner .icon-button { width: 2.35rem; height: 2.35rem; }
   .language-menu { top: 3.45rem; }
   .catalog-heading { gap: .4rem .7rem; }
@@ -911,6 +912,7 @@ summary { color: var(--green); font-weight: 650; }
   .v4v-resources { border-inline-start: 0; border-top: 1px solid var(--line); padding: 1rem 0 0; }
 }
 @media (max-width: 520px) {
+  .header-inner .brand-name { display: none; }
   :is(.settings, #figure-settings) .option-group { grid-template-columns: minmax(0, 1fr); }
   .print-actions > button { padding-inline: .55rem; }
   .alignment-options label > span { width: 1.95rem; }

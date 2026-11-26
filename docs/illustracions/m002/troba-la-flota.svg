@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="680" viewBox="0 0 960 680">
+  <rect width="960" height="680" fill="white"/>
+  <rect x="170" y="185" width="690" height="380" fill="#f0f7f8"/>
+  <g font-family="Arial, sans-serif" fill="#173b34">
+    <text x="515" y="65" font-size="56" font-weight="bold" text-anchor="middle">Troba la flota</text>
+    <text x="515" y="117" font-size="37" text-anchor="middle">Longitud</text>
+    <text x="39" y="375" font-size="37" text-anchor="middle" transform="rotate(-90 39 375)">Latitud</text>
+    <g font-size="38" text-anchor="middle">
+      <text x="170" y="165">60° O</text>
+      <text x="285" y="165">40° O</text>
+      <text x="400" y="165">20° O</text>
+      <text x="515" y="165" font-weight="bold">0°</text>
+      <text x="630" y="165">20° E</text>
+      <text x="745" y="165">40° E</text>
+      <text x="860" y="165">60° E</text>
+    </g>
+    <g font-size="38" text-anchor="end" dominant-baseline="central">
+      <text x="153" y="185">40° N</text>
+      <text x="153" y="280">20° N</text>
+      <text x="153" y="375" font-weight="bold">0°</text>
+      <text x="153" y="470">20° S</text>
+      <text x="153" y="565">40° S</text>
+    </g>
+  </g>
+  <path d="M170 185H860V565H170ZM285 185V565M400 185V565M630 185V565M745 185V565M170 280H860M170 470H860"
+    fill="none" stroke="#68898b" stroke-width="3"/>
+  <path d="M170 375H860M179 626H236" fill="none" stroke="#236a8a" stroke-width="6"/>
+  <path d="M515 185V565M443 626H500" fill="none" stroke="#126653" stroke-width="6" stroke-dasharray="13 8"/>
+  <g font-family="Arial, sans-serif" font-size="38" dominant-baseline="central">
+    <text x="253" y="626" fill="#236a8a">Equador</text>
+    <text x="517" y="626" fill="#126653">Meridià de Greenwich</text>
+  </g>
+</svg>

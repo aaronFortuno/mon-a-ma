@@ -277,19 +277,17 @@
       const first = {
         id: 'reserva-' + section.id, section: section.id, name: section.title, ratio: 1.7,
         anchor: section.blocks[0]?.type === 'paragraph' ? 'lead' : 'before',
-        position: side,
+        width: 100, position: side, wrap: false,
         ...original,
       };
       const additions = extra.concat(uploads.filter(figure => figure.section === section.id));
       const taken = new Set([first, ...additions].map(figure => paragraphAnchor(settings.figures[figure.id]?.anchor ?? figure.anchor)));
       const paragraphSlots = section.blocks.flatMap((block, number) => block.type === 'paragraph' && !taken.has(number) ? [number] : []);
-      const firstSide = first.position === 'center' ? side : first.position;
       return [first, ...additions.map((figure, i) => {
         const paragraph = figure.anchor || settings.figures[figure.id]?.anchor ? undefined : paragraphSlots.shift();
-        const position = (i % 2 === 0) === (firstSide === 'right') ? 'left' : 'right';
         return {
           name: figure.alt || 'Imatge complementària',
-          width: 45, position, wrap: true,
+          width: 50, position: i % 2 ? 'right' : 'left', wrap: true,
           anchor: paragraph === undefined ? 'after' : paragraph === 0 ? 'lead' : 'paragraph-' + paragraph,
           ...figure,
         };
@@ -764,8 +762,7 @@
     byId('workspace').hidden = !route;
 
     const title = byId('topic-title');
-    title.hidden = !route;
-    title.textContent = route?.topic.title ?? '';
+    title.textContent = route ? 'Tema: ' + route.topic.title : '';
     if (!route) {
       closeFigureHelper();
       stopPaperMotion();
@@ -1736,6 +1733,33 @@
     knownUploads = knownUploads.filter(item => !inFigureScope(item, topic, collection));
   }
 
+  async function resetUserPreferences() {
+    if (imageWrite) return;
+    const status = byId('reset-user-status');
+    imageWrite = true;
+    status.textContent = '';
+    try {
+      await uploadsReady;
+      await imageOperation('readwrite', store => store.clear());
+      for (const item of knownUploads) releaseUpload(item);
+      knownUploads = [];
+      uploadTarget = null;
+      logoUploadVersion++;
+      const persisted = preferences.resetAll();
+      library = preferences.library();
+      document.dispatchEvent(new Event('reset-user-preferences'));
+      byId('catalog-drafts').checked = preferences.loadCatalogDrafts();
+      for (const select of byId('catalog-filters').querySelectorAll('select')) select.selectedIndex = 0;
+      history.replaceState(history.state, '', '#');
+      renderRoute();
+      status.textContent = persisted ? 'Preferències restablertes.' : 'Preferències restablertes durant aquesta sessió.';
+    } catch {
+      status.textContent = 'No s’han pogut restablir les preferències.';
+    } finally {
+      imageWrite = false;
+    }
+  }
+
   async function resetMaterial() {
     if (!route || imageWrite) return;
     const { topic } = route;
@@ -1945,7 +1969,6 @@
     const label = labelElement.textContent;
     button.addEventListener('click', event => {
       event.preventDefault();
-      if (!route) return;
       if (pendingReset?.button === button) {
         cancelResetConfirmation();
         action();
@@ -2142,7 +2165,8 @@
     renderControls();
     requestPaper();
   });
-  registerReset('reset-figures', 'Confirma i esborra les imatges pròpies', resetFigures);
+  registerReset('reset-figures', 'Confirma', resetFigures);
+  registerReset('reset-user', 'Esborra tots els canvis locals', resetUserPreferences);
   registerReset('reset-material', 'Confirma i esborra els canvis i les imatges', resetMaterial);
   figureUpload.addEventListener('change', addImage);
   byId('removed-sections').addEventListener('click', restoreSection);
@@ -2274,6 +2298,12 @@
     comparisonObserver.observe(target);
   });
   for (const side of variantSides) comparisonObserver.observe(side);
+  comparisonDialog.addEventListener('click', event => {
+    if (event.target !== comparisonDialog) return;
+    const bounds = comparisonDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right ||
+        event.clientY < bounds.top || event.clientY > bounds.bottom) comparisonDialog.close();
+  });
   comparisonDialog.addEventListener('close', () => {
     comparisonRevision++;
     stopComparisonScroll();
@@ -2298,7 +2328,7 @@
     renderControls();
     requestPaper();
   });
-  registerReset('reset', 'Confirma el restabliment', () => {
+  registerReset('reset', 'Confirma', () => {
     logoUploadVersion++;
     headerLogoFeedback('');
     settings = {

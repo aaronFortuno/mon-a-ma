@@ -1,5 +1,12 @@
 # Historial de versions
 
+## 0.1.34 · 26 de novembre de 2026
+
+- Mostra BETA a la capçalera i el títol de la fitxa al desplegable esquerre.
+- Afegeix dues il·lustracions complementàries i les maqueta al 50 % amb text envoltant i costats alterns.
+- Permet tancar el comparador clicant fora i mou les icones de restabliment als títols dels blocs.
+- Afegeix un restabliment de totes les preferències locals.
+
 ## 0.1.33 · 26 de novembre de 2026
 
 - Afegeix un restabliment general que esborra les personalitzacions i les imatges pròpies de la fitxa.

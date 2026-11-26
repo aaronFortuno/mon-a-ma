@@ -22,6 +22,12 @@
     try { localStorage.setItem(themeKey, chosen); }
     catch { /* The choice is still active in this tab. */ }
   });
+  document.addEventListener('reset-user-preferences', () => {
+    chosen = null;
+    applyTheme();
+    try { localStorage.removeItem(themeKey); }
+    catch { /* The system setting is still active in this tab. */ }
+  });
   systemTheme.addEventListener('change', applyTheme);
   applyTheme();
 

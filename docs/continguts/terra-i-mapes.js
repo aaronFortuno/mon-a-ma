@@ -61,6 +61,13 @@ window.quaderns ??= [];
         },
       },
       {
+        id: 'falla-san-andreas', section: 'moviment', name: 'La falla de San Andreas',
+        src: 'illustracions/m001/falla-san-andreas.jpg', ratio: 1180 / 1704,
+        alt: 'Vista aèria de la plana de Carrizo. La traça de la falla travessa l’escena entre les elevacions del terreny.',
+        caption: 'La traça de la falla de San Andreas a la plana de Carrizo, a Califòrnia. És un exemple de límit on les plaques llisquen de costat.',
+        credit: 'Scott Haefner · USGS · Domini públic',
+      },
+      {
         id: 'reserva-gravetat', section: 'gravetat', name: 'La gravetat de la Terra', ratio: 23 / 14,
         alt: 'Tres fletxes, des de diferents punts de la superfície, apunten cap al centre de la Terra.',
         caption: 'En qualsevol punt de la superfície, la gravetat atrau els objectes cap al centre de la Terra.',
@@ -128,6 +135,7 @@ window.quaderns ??= [];
       ['USGS · L’interior de la Terra', 'https://pubs.usgs.gov/gip/dynamic/inside.html'],
       ['USGS · Ones sísmiques P i S', 'https://www.usgs.gov/media/images/p-wave-and-s-wave-paths-through-earth'],
       ['USGS · El moviment de les plaques', 'https://pubs.usgs.gov/gip/dynamic/understanding.html'],
+      ['USGS · Fotografia de la falla de San Andreas', 'https://www.usgs.gov/media/images/view-san-andreas-fault'],
       ['NASA · La Terra', 'https://science.nasa.gov/earth/facts/'],
       ['NASA · La gravetat i l’òrbita', 'https://science.nasa.gov/learn/basics-of-space-flight/chapter3-4/'],
       ['NASA · La gravetat a la Lluna', 'https://science.nasa.gov/moon/top-moon-questions/'],
@@ -142,6 +150,12 @@ window.quaderns ??= [];
     intro: 'Un mateix riu pot passar per molts llocs. Per assenyalar un punt concret, com ara on neix o on desemboca, fem servir dues dades: la latitud i la longitud. Juntes formen les seves coordenades geogràfiques.',
     figures: [
       { id: 'graella', section: 'localitzacio', anchor: 'before', name: 'Graella de coordenades', src: 'illustracions/coordenades.png', ratio: 1110 / 550, alt: 'Graella amb l’equador i Greenwich destacats. El punt A és a 20 graus nord i 40 graus oest.', caption: 'El punt A es troba a l’encreuament del paral·lel 20° N i el meridià 40° O.', position: 'center' },
+      {
+        id: 'troba-la-flota', section: 'localitzacio', name: 'Troba la flota',
+        src: 'illustracions/m002/troba-la-flota.svg', ratio: 960 / 680,
+        alt: 'Graella buida de latitud i longitud. L’equador és horitzontal i el meridià de Greenwich és vertical.',
+        caption: 'En parelles, cadascú marca en secret tres vaixells en encreuaments diferents. Per torns, digueu una posició, primer la latitud i després la longitud. Si hi ha un vaixell, l’altre diu «trobat». Guanya qui troba primer els tres.',
+      },
     ],
     sections: [
       section('latitud', 'Amb els paral·lels coneixem la latitud',

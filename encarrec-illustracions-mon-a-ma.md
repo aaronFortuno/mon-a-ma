@@ -2,46 +2,51 @@
 
 **Pilot · La Terra i els mapes · 5è de primària**
 
-La prioritat és acabar **M001 · El planeta Terra** com a pilot sencer. El lot conté quatre figures en dos estils, **Esquema pla** i **Il·lustració amb volum**. Fes les dues versions de Moviment, Gravetat i Elements, sis PNG en total, a partir de les dues referències ja disponibles de Capes. Els encàrrecs M002–M004 queden preparats per a quan es demanin.
+Cada encàrrec indica quantes **figures diferents** calen per apartat i quins **lots d’estil** cal lliurar. Una figura que es repeteix en tres estils compta com tres fitxers. Una fotografia o una graella compartida compta una sola vegada. Els lots visuals són independents de les variants de lectura Suport, Base i Ampliació.
 
 ## Pauta general
 
-Per a cada tema, prepara dues versions de cada figura. Acorda els dos estils i les imatges de referència abans de començar. Cada sèrie ha de poder-se emprar com un lot complet, amb una composició i una retolació pròpies que siguin coherents de la primera imatge a l’última.
+Per a cada tema, acorda els lots, les figures que comparteixen i les referències abans de començar. Cada sèrie ha de poder-se emprar com un lot complet, amb una composició i una retolació pròpies que siguin coherents de la primera imatge a l’última. Per a cada figura, anota l’ID de l’apartat, l’ordre, què ha de veure o fer l’alumnat, les etiquetes literals i els fitxers per lot.
 
 - **Finalitat.** Fes il·lustracions que ajudin l’alumnat de 10–11 anys a entendre o aplicar el que explica el text. Fes evident d’un cop d’ull què s’ha d’observar.
 - **Estil.** Atles escolar contemporani. Fons blanc llis, formes netes, línia fina però visible, masses de color suaus i contorns foscos. Fes servir blau per a l’aigua, verd i ocre per al terreny i un accent teula per destacar un element. Mantén la coherència amb la referència escollida. Reserva la fotografia o la textura per als encàrrecs que les demanin.
 - **Lectura impresa.** Comprova cada imatge a l’amplada A4 indicada a la taula. Fes servir una tipografia de pal sec amb accents correctes i etiquetes clau d’almenys 9 pt a la mida d’impressió. Combina el color amb el gruix del traç, els patrons o els símbols perquè també es pugui interpretar en grisos.
 - **Retolació.** Afegeix els noms, els números i les llegendes en una capa de text, amb els literals catalans indicats. La fitxa ja hi posa el peu i el títol. Deixa un marge net al voltant del contingut i dona més espai als elements que cal llegir.
 - **Precisió.** Construeix les graelles i els plànols amb geometria controlada. Munta els mapes geogràfics a partir de dades verificables. Pots generar motius purament visuals quan el brief ho indiqui. Per als elements que expressen posició, escala, relleu o fronteres, dibuixa o renderitza les dades i valida-les abans d’exportar.
-- **Lliurament.** Exporta un PNG RGB en sRGB, amb fons blanc i a les dimensions de la taula. Les rutes parteixen de l’arrel del repositori `mon-a-ma`. Crea la carpeta si cal. Mantén els noms i les ubicacions exactes. L’encàrrec és de producció d’imatges. La incorporació de les rutes al catàleg i la publicació són passos posteriors.
+- **Lliurament.** Exporta la il·lustració en PNG RGB amb perfil sRGB. Conserva en SVG els esquemes vectorials que hagin de mantenir traços i text nítids. Per a una fotografia, conserva el JPEG i anota font, autoria i permís d’ús. Lliura miniatures lleugeres per als selectors quan es demanin. Les rutes parteixen de l’arrel del repositori `mon-a-ma`. Crea la carpeta si cal. Mantén els noms i les ubicacions exactes. L’encàrrec és de producció d’imatges. La incorporació de les rutes al catàleg i la publicació són passos posteriors.
 
 ## Fitxers i encaix a les fitxes
 
-| Fitxa | Apartat · ID de la figura | Ruta al repositori | PNG | Amplada impresa orientativa |
-| --- | --- | --- | --- | --- |
-| M001 · Capes · Pla | `capes` · `capes` | `docs/illustracions/capes.png` | **920 × 560 px** | 77 mm, disponible |
-| M001 · Capes · Volum | `capes` · `capes` | `docs/illustracions/m001/capes.png` | **1840 × 1120 px** | 77 mm, disponible |
-| M001 · Moviment · Pla | `moviment` · `reserva-moviment` | `docs/illustracions/m001/moviment-pla.png` | **1840 × 1120 px** | 77 mm, a l’esquerra |
-| M001 · Moviment · Volum | `moviment` · `reserva-moviment` | `docs/illustracions/m001/moviment-volum.png` | **1840 × 1120 px** | 77 mm, a l’esquerra |
-| M001 · Gravetat · Pla | `gravetat` · `reserva-gravetat` | `docs/illustracions/m001/gravetat-pla.png` | **1840 × 1120 px** | 77 mm, a la dreta |
-| M001 · Gravetat · Volum | `gravetat` · `reserva-gravetat` | `docs/illustracions/m001/gravetat-volum.png` | **1840 × 1120 px** | 77 mm, a la dreta |
-| M001 · Elements · Pla | `elements` · `reserva-elements` | `docs/illustracions/m001/elements-pla.png` | **1840 × 1120 px** | 77 mm, a l’esquerra |
-| M001 · Elements · Volum | `elements` · `reserva-elements` | `docs/illustracions/m001/elements-volum.png` | **1840 × 1120 px** | 77 mm, a l’esquerra |
-| M002 · Les coordenades geogràfiques | `localitzacio` · `graella` | `docs/illustracions/m002/graella.png` | **2220 × 1100 px** | 114 mm, centrada |
-| M003 · Els mapes i els plànols geogràfics | `llegenda` · `barri` | `docs/illustracions/m003/barri.png` | **2340 × 1200 px** | 122 mm, centrada |
-| M004 · Els tipus de mapes | `fisic` · `planisferi-fisic` | `docs/illustracions/m004/planisferi-fisic.png` | **2600 × 1300 px** | 153 mm, centrat |
-| M004 · Els tipus de mapes | `politic` · `planisferi-politic` | `docs/illustracions/m004/planisferi-politic.png` | **2600 × 1300 px** | 153 mm, centrat |
+Amb marges laterals de 20 mm, l’A4 té 170 mm d’amplada útil. La primera figura de cada apartat ocupa el 100 %. Les complementàries ocupen el 50 % (85 mm) per defecte, alternen esquerra i dreta i s’ancoren a un paràgraf amb text envoltant, si n’hi ha un de disponible. Dissenya la retolació per a l’amplada que tindrà la figura impresa. Per a nous arxius de mapa de bits, preveu uns 2.000 px d’amplada per a figures principals i uns 1.000 px per a figures complementàries.
 
-Les amplades corresponen a un A4 de 210 mm amb marges laterals de 20 mm i respecten les proporcions de les reserves existents.
+| Fitxa | Figures diferents | Lots i arxius previstos |
+| --- | --- | --- |
+| M001 · El planeta Terra | 5, quatre principals i una fotografia | 3 lots de 4 figures (Pla, Volum i Realista) i 1 fotografia compartida. 13 originals. |
+| M002 · Les coordenades geogràfiques | 2, graella de la boia i joc de localització | 1 lot de 2 esquemes de geometria controlada. 2 originals. |
+| M003 · Els mapes i els plànols geogràfics | 1, plànol del barri | 1 lot cartogràfic. 1 original. |
+| M004 · Els tipus de mapes | 2, planisferis físic i polític | 1 lot cartogràfic amb el mateix enquadrament i projecció. 2 originals pendents. |
+
+| Fitxa | Apartat · ID de figura | Fitxers dins de docs/illustracions/ |
+| --- | --- | --- |
+| M001 | capes · capes | capes.png · m001/capes.png · m001/capes-realista.png |
+| M001 | moviment · reserva-moviment | m001/moviment-pla.png · m001/moviment-volum.png · m001/moviment-realista.png |
+| M001 | moviment · falla-san-andreas | m001/falla-san-andreas.jpg, complement compartit |
+| M001 | gravetat · reserva-gravetat | m001/gravetat-pla.png · m001/gravetat-volum.png · m001/gravetat-realista.png |
+| M001 | elements · reserva-elements | m001/elements-pla.png · m001/elements-volum.png · m001/elements-realista.png |
+| M002 | localitzacio · graella | coordenades.png |
+| M002 | localitzacio · troba-la-flota | m002/troba-la-flota.svg, complement |
+| M003 | llegenda · barri | planol.png |
+| M004 | fisic · planisferi-fisic | m004/planisferi-fisic.png, pendent, 2.600 × 1.300 px |
+| M004 | politic · planisferi-politic | m004/planisferi-politic.png, pendent, 2.600 × 1.300 px |
 
 ## M001 · El planeta Terra
 
-### Estils de referència i ordre de treball
+### Lots d’estil
 
-- **Pla · Esquema pla.** Pren com a referència `docs/illustracions/capes.png`. Usa vistes frontals o de perfil, contorns nets, masses planes i accents de color per separar els conceptes. Les línies guia i les fletxes han de destacar.
-- **Volum · Il·lustració amb volum.** Pren com a referència `docs/illustracions/m001/capes.png`. Usa perspectiva obliqua, superfícies visibles i llum suau per donar volum. Mantén l’acabat d’atles escolar i un fons clar, amb contrast suficient per imprimir.
-- **Coherència.** Reutilitza la paleta, la tipografia, el gruix de les línies guia i l’estil de fletxa dins de cada sèrie. Per a cada parella mantén el mateix concepte, els mateixos elements que cal identificar i una jerarquia similar. La perspectiva i l’ombrejat són les diferències.
-- **Ordre.** Fes primer les tres figures noves en estil pla, alineades amb la referència plana, i després les tres amb volum, alineades amb la referència tridimensional. Compara les quatre imatges de cada sèrie al final. Conserva les dues referències de les capes.
+- **Pla · Esquema pla.** Pren com a referència docs/illustracions/capes.png. Usa vistes frontals o de perfil, contorns nets i masses planes. Les línies guia i les fletxes han de destacar.
+- **Volum · Il·lustració amb volum.** Pren com a referència docs/illustracions/m001/capes.png. Usa perspectiva obliqua, superfícies visibles i llum suau.
+- **Realista · Il·lustració realista.** Pren com a referència docs/illustracions/m001/capes-realista.png. Alterna textures naturals i escenes recreades segons la figura. En gràfics amb fletxes i etiquetes, prioritza la precisió i la lectura impresa.
+- Mantén el concepte, els elements identificats i la jerarquia visual als tres lots. Fes servir la foto de la falla com a complement compartit.
 
 ### Capes de la Terra · Referències disponibles
 
@@ -59,7 +64,9 @@ En pla, el disc mostra quatre zones concèntriques. Amb volum, l’esfera té un
 
 **Peu proposat.** «Les plaques tectòniques poden separar-se, acostar-se o lliscar de costat.»
 
-**Comprovació.** Es poden seguir amb el dit les sis fletxes i distingir els tres moviments en grisos, a 77 mm d’amplada.
+**Comprovació.** Es poden seguir amb el dit les sis fletxes i distingir els tres moviments en grisos a l’amplada completa.
+
+**Complement compartit.** La fotografia de la falla de San Andreas mostra la traça superficial del límit entre plaques a la plana de Carrizo. Conserva el crèdit de Scott Haefner (USGS) i la referència de domini públic. [Fitxa original de l’USGS](https://www.usgs.gov/media/images/view-san-andreas-fault).
 
 ### La gravetat de la Terra · `reserva-gravetat`
 
@@ -101,6 +108,10 @@ En pla, el disc mostra quatre zones concèntriques. Amb volum, l’esfera té un
 | Latitud, de dalt a baix | 40° N · 20° N · 0° · 20° S |
 
 Diferencia l’**Equador** i el meridià de **Greenwich** amb un traç de referència més gruixut. Afegeix «Equador» i «Greenwich» al costat de la línia que toca. Ressalta el paral·lel 20° N i el meridià 40° O amb un altre traç i marca l’encreuament amb un punt gran i una **A** una mica separada del punt. La boia és al punt **A**. Verifica l’encreuament comptant dues divisions a l’oest de Greenwich i una al nord de l’equador. [Referència de la NOAA sobre paral·lels i meridians](https://oceanservice.noaa.gov/education/tutorial_nautical_charts/nautical_charts02_information_2b.html).
+
+### Troba la flota · Complement al 50 %
+
+Prepara una graella buida amb set meridians, de 60° O a 60° E en passos de 20°, i cinc paral·lels, de 40° N a 40° S en passos de 20°. Identifica l’Equador i el meridià de Greenwich amb traços diferents. Situa els nombres sobre les línies perquè l’alumnat pugui marcar interseccions. Cada jugador hi amaga tres vaixells i els busca dient latitud i longitud, en aquest ordre. La graella queda en SVG vectorial i es pot imprimir en grisos.
 
 ## M003 · Plànol d’un barri imaginari
 
