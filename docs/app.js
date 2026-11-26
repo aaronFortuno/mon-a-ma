@@ -2,7 +2,7 @@
   const locale = document.documentElement.lang;
   const cycleById = new Map(window.curriculum.cycles.map(cycle => [cycle.id, cycle]));
   const topics = window.quaderns.filter(topic => topic.lang === locale);
-  const { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure, noteTypes, noteIcons } = window.imprimible;
+  const { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure, noteTypes, noteIcons, noteColors, noteIcon } = window.imprimible;
   const preferences = window.preferencies;
   const { defaults } = preferences;
   const materialLevels = [
@@ -965,6 +965,7 @@
       else input.value = settings[key];
     }
     syncMeasurements();
+    syncNoteColors();
     syncHeaderControls();
     syncFooterControls();
     syncTemplateSelector();
@@ -1636,6 +1637,10 @@
         renderControls();
       }
     }
+    applyOptions();
+  }
+
+  function applyOptions() {
     quickTemplateStatus.textContent = '';
     storeOptions();
     requestPaper();
@@ -2459,15 +2464,100 @@
   window.addEventListener('hashchange', event => {
     if (location.hash !== '#main') renderRoute(event);
   });
-  for (const type of Object.values(noteTypes)) {
-    const picker = node('select');
-    picker.name = type.field;
-    picker.append(option('none', 'Sense icona'),
-      ...Object.entries(noteIcons).map(([id, [label]]) => option(id, label)));
-    const label = node('label', '', type.label);
-    label.append(picker);
-    byId('note-icon-options').append(label);
+  function noteRadio(name, value, title, symbol) {
+    const label = node('label');
+    label.title = title;
+    const input = node('input', 'sr-only');
+    input.type = 'radio';
+    input.name = name;
+    input.value = value;
+    input.setAttribute('aria-label', title);
+    const face = node('span');
+    face.setAttribute('aria-hidden', 'true');
+    face.append(symbol);
+    label.append(input, face);
+    return label;
   }
+
+  function syncNoteColors() {
+    for (const card of byId('note-type-options').children) {
+      const type = noteTypes[card.dataset.noteType];
+      const color = settings[type.colorField];
+      const trigger = card.querySelector('.note-color-trigger');
+      trigger.dataset.noteColor = color;
+      trigger.setAttribute('aria-label', 'Color del quadre «' + type.label + '» · ' + noteColors[color]);
+      trigger.title = trigger.getAttribute('aria-label');
+      for (const swatch of card.querySelectorAll('.note-color-swatch')) {
+        swatch.setAttribute('aria-pressed', String(swatch.dataset.noteColor === color));
+      }
+    }
+  }
+
+  function setupNoteOptions() {
+    const options = byId('note-type-options');
+
+    function showPalette(trigger, open) {
+      trigger.setAttribute('aria-expanded', String(open));
+      byId(trigger.getAttribute('aria-controls')).hidden = !open;
+    }
+
+    for (const [kind, type] of Object.entries(noteTypes)) {
+      const card = node('div', 'note-edit-card');
+      card.dataset.noteType = kind;
+      const heading = node('div', 'note-edit-heading');
+      const trigger = node('button', 'note-color-trigger');
+      trigger.type = 'button';
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.setAttribute('aria-controls', 'note-colors-' + kind);
+      const side = node('div', 'alignment-options note-side-options');
+      side.setAttribute('role', 'group');
+      side.setAttribute('aria-label', 'Costat de la barra · ' + type.label);
+      side.append(noteRadio(type.sideField, 'left', 'Esquerra', '←'), noteRadio(type.sideField, 'right', 'Dreta', '→'));
+      heading.append(trigger, node('span', 'note-edit-title', type.label), side);
+
+      const palette = node('div', 'note-color-options');
+      palette.id = 'note-colors-' + kind;
+      palette.hidden = true;
+      palette.setAttribute('role', 'group');
+      palette.setAttribute('aria-label', 'Colors · ' + type.label);
+      for (const [id, color] of Object.entries(noteColors)) {
+        const swatch = node('button', 'note-color-swatch');
+        swatch.type = 'button';
+        swatch.dataset.noteColor = id;
+        swatch.setAttribute('aria-label', color);
+        swatch.title = color;
+        swatch.addEventListener('click', () => {
+          settings[type.colorField] = id;
+          syncNoteColors();
+          showPalette(trigger, false);
+          trigger.focus({ preventScroll: true });
+          applyOptions();
+        });
+        palette.append(swatch);
+      }
+      trigger.addEventListener('click', () => {
+        const open = palette.hidden;
+        const previous = options.querySelector('.note-color-trigger[aria-expanded="true"]');
+        if (previous) showPalette(previous, false);
+        if (open) showPalette(trigger, true);
+      });
+      card.addEventListener('keydown', event => {
+        if (event.key !== 'Escape' || palette.hidden) return;
+        event.stopPropagation();
+        showPalette(trigger, false);
+        trigger.focus({ preventScroll: true });
+      });
+
+      const icons = node('div', 'alignment-options note-icon-gallery');
+      icons.setAttribute('role', 'group');
+      icons.setAttribute('aria-label', 'Icona · ' + type.label);
+      for (const id of [...type.icons, 'none']) icons.append(noteRadio(type.iconField, id, noteIcons[id][0], noteIcon(id)));
+      card.append(heading, palette, icons);
+      options.append(card);
+    }
+  }
+
+  setupNoteOptions();
   const refreshCatalog = setupCatalog();
   window.setupCurriculum(topics, (topic, section) => {
     const chapter = topic.chapters.find(entry => entry.sections.some(item => item.id === section)) ?? topic.chapters[0];

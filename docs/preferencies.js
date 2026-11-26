@@ -4,15 +4,18 @@
   const libraryKey = 'mon-a-ma:organitzacio:v1';
   const visitsKey = 'mon-a-ma:fitxes-vistes:v1';
   const catalogDraftsKey = 'mon-a-ma:cataleg-en-desenvolupament';
+  const { noteTypes, noteIconChoice } = window.imprimible;
+  const noteDefaults = Object.fromEntries(Object.values(noteTypes).flatMap(type => [
+    [type.iconField, type.icons[0]], [type.sideField, 'left'], [type.colorField, type.color],
+  ]));
   const defaults = {
     scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.8, margin: 20, textAlignment: 'left', blockSpacing: 100,
     showPageFooter: true, pageNumbers: true, showMaterialCode: true, showTopicTitle: true, showFigures: true, markCore: true,
-    noteSide: 'left', noteWidth: 80,
-    showNoteIcons: true, noteIconAmpliacio: 'llibre', noteIconCuriositat: 'espurnes', noteIconObserva: 'ull', noteIconProva: 'llapis',
+    noteWidth: 90, showNoteIcons: true, ...noteDefaults,
     headerLogo: true, headerBrand: true, headerName: true, headerDate: true, headerLogoImage: '',
     showClassroomCode: false, classroomCode: '', classroomCodeSize: 20, classroomCodeStyle: 'solid',
   };
-  const legacyDefaults = { ...defaults, leading: 1.45, margin: 16 };
+  const legacyDefaults = { ...defaults, leading: 1.45, margin: 16, noteWidth: 80, noteSide: 'left' };
   const localKeys = new Set(['scope', 'classroomCode']);
   const temporary = new Map();
 
@@ -67,10 +70,18 @@
     return Object.fromEntries(Object.keys(defaults).filter(key => !localKeys.has(key)).map(key => [key, settings[key]]));
   }
 
+  function normalizeNoteOptions({ noteSide, ...format } = {}) {
+    for (const type of Object.values(noteTypes)) {
+      if (noteSide !== undefined) format[type.sideField] ??= noteSide;
+      if (Object.hasOwn(format, type.iconField)) format[type.iconField] = noteIconChoice(type, format[type.iconField]);
+    }
+    return format;
+  }
+
   function getBase(templateId, collection, data) {
     const id = templateId ?? collection?.templateId ?? data.defaultTemplateId;
     const template = data.templates.find(item => item.id === id);
-    return { ...defaults, ...template?.format };
+    return { ...defaults, ...normalizeNoteOptions(template?.format) };
   }
 
   function recordKey(topicId, collection) {
@@ -85,7 +96,7 @@
       .filter(key => Object.hasOwn(saved, key) && saved[key] !== legacyDefaults[key]).map(key => [key, saved[key]]));
     return {
       ...getBase(templateId, collection, data),
-      ...changes,
+      ...normalizeNoteOptions(changes),
       templateId,
       figureStyle: typeof saved.figureStyle === 'string' ? saved.figureStyle : '',
       materialLevel: saved.materialLevel ?? 'intermedia',

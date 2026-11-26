@@ -41,17 +41,43 @@ window.imprimible = (() => {
   }
 
   const noteTypes = {
-    ampliacio: { label: 'Ampliació', field: 'noteIconAmpliacio', icon: 'llibre' },
-    curiositat: { label: 'Curiositat', field: 'noteIconCuriositat', icon: 'espurnes' },
-    observa: { label: 'Observa', field: 'noteIconObserva', icon: 'ull' },
-    prova: { label: 'Prova-ho', field: 'noteIconProva', icon: 'llapis' },
+    ampliacio: {
+      label: 'Ampliació', iconField: 'noteIconAmpliacio', sideField: 'noteSideAmpliacio', colorField: 'noteColorAmpliacio',
+      icons: ['llibre', 'capes', 'muntanya'], color: 'blau',
+    },
+    curiositat: {
+      label: 'Curiositat', iconField: 'noteIconCuriositat', sideField: 'noteSideCuriositat', colorField: 'noteColorCuriositat',
+      icons: ['espurnes', 'bombeta', 'interrogant'], color: 'lila',
+    },
+    observa: {
+      label: 'Observa', iconField: 'noteIconObserva', sideField: 'noteSideObserva', colorField: 'noteColorObserva',
+      icons: ['ull', 'lupa', 'binocles'], color: 'verd',
+    },
+    prova: {
+      label: 'Prova-ho', iconField: 'noteIconProva', sideField: 'noteSideProva', colorField: 'noteColorProva',
+      icons: ['llapis', 'flasco', 'regle'], color: 'ocre',
+    },
   };
   const noteIcons = {
     llibre: ['Llibre obert', 'M12 6v14M12 6C8 3 5 4 3 5v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-2-1-5-2-9 1Z'],
+    capes: ['Capes', 'm12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5'],
+    muntanya: ['Muntanya', 'm2 20 7-12 3 4 3-6 7 14H2Zm5-8 2 2 2-2m2-3 2 2 2-2'],
     espurnes: ['Espurnes', 'M10 4c0 5 2 7 7 7-5 0-7 2-7 7 0-5-2-7-7-7 5 0 7-2 7-7ZM19 3v5m-2.5-2.5h5m-2.5 10v5m-2.5-2.5h5'],
+    bombeta: ['Bombeta', 'M9 18h6m-5 3h4m1-6c0-2 3-3 3-7a6 6 0 0 0-12 0c0 4 3 5 3 7h6Z'],
+    interrogant: ['Interrogant', 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-11.5-3a2.5 2.5 0 1 1 4 2c-1.2.9-1.5 1.4-1.5 2.5m0 3h.01'],
     ull: ['Ull', 'M2 12S5.5 5.5 12 5.5 22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Zm13 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'],
+    lupa: ['Lupa', 'M16.5 10a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Zm-2 4.5L21 21'],
+    binocles: ['Binocles', 'M8 17a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm14 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM2 17l2-9a2 2 0 0 1 4 0v9m8 0V8a2 2 0 0 1 4 0l2 9M8 10h8m-8 4h8'],
     llapis: ['Llapis', 'm5 16 11-11a2.1 2.1 0 0 1 3 3L8 19l-4 1 1-4Zm9-9 3 3'],
+    flasco: ['Flascó', 'M9 3h6m-5 0v6l-5 10a1 1 0 0 0 1 2h12a1 1 0 0 0 1-2L14 9V3M8 14h8m-6 3h.01m4 1h.01'],
+    regle: ['Regle', 'm3 16 13-13 5 5L8 21l-5-5ZM7 12l2 2m1-5 2 2m1-5 2 2'],
+    none: ['Sense icona', 'M8 12h8'],
   };
+  const noteColors = { blau: 'Blau', lila: 'Lila', verd: 'Verd', ocre: 'Ocre', rosa: 'Rosa', gris: 'Gris' };
+
+  function noteIconChoice(type, value) {
+    return value === 'none' || type.icons.includes(value) ? value : type.icons[0];
+  }
 
   function noteIcon(id) {
     const definition = noteIcons[id];
@@ -79,10 +105,12 @@ window.imprimible = (() => {
       const type = noteTypes[source.kind];
       if (type) {
         aside.dataset.kind = source.kind;
-        const icon = options.showNoteIcons !== false && noteIcon(options[type.field] ?? type.icon);
-        if (icon) {
+        aside.dataset.noteSide = options[type.sideField] === 'right' ? 'right' : 'left';
+        aside.dataset.noteColor = options[type.colorField] ?? type.color;
+        const icon = noteIconChoice(type, options[type.iconField]);
+        if (options.showNoteIcons !== false && icon !== 'none') {
           const mark = node('div', 'note-mark');
-          mark.append(icon);
+          mark.append(noteIcon(icon));
           aside.append(mark);
         }
         panel.append(node('div', 'note-label', type.label));
@@ -205,10 +233,9 @@ window.imprimible = (() => {
     sheet.style.setProperty('--leading', options.leading);
     sheet.style.setProperty('--serif', paperFonts[options.font] ?? paperFonts.georgia);
     sheet.dataset.alignment = options.textAlignment;
-    sheet.dataset.noteSide = options.noteSide === 'right' ? 'right' : 'left';
-    sheet.style.setProperty('--note-width', (options.noteWidth ?? 80) + '%');
+    sheet.style.setProperty('--note-width', (options.noteWidth ?? 90) + '%');
     if (options.markCore) sheet.dataset.markCore = '';
-    if (options.blockSpacing !== undefined) sheet.style.setProperty('--block-spacing', options.blockSpacing / 100);
+    sheet.style.setProperty('--block-spacing', (options.blockSpacing ?? 100) * 1.2 / 100);
     const inner = node('div', 'sheet-inner');
     if (firstPage) {
       const row = node('div', 'sheet-header-fields');
@@ -319,5 +346,5 @@ window.imprimible = (() => {
     return { count: pages.length, width, height, oversized };
   }
 
-  return { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure, noteTypes, noteIcons };
+  return { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure, noteTypes, noteIcons, noteColors, noteIcon, noteIconChoice };
 })();

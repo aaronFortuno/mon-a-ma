@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.39 · 26 de novembre de 2026
+
+- Permet triar el costat, la icona i el color de cada tipus de quadre. Augmenta l’amplada dels quadres al 90 % i dona més espai entre blocs.
+
 ## 0.1.38 · 26 de novembre de 2026
 
 - Dona als quadres icones grans, una paleta per tipus i controls per ajustar-ne l’amplada i el costat de la barra.
