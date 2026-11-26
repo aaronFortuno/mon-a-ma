@@ -429,7 +429,10 @@ summary { color: var(--green); font-weight: 650; }
   .curriculum-square { width: 1.6rem; height: 1.6rem; }
 }
 .studio { position: relative; display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; background: var(--tray); border: 1px solid var(--line); border-radius: .65rem; overflow: hidden; }
-.document-picker { grid-area: 1 / 1; justify-self: end; margin: .35rem .6rem 0; }
+.studio-pickers { grid-area: 1 / 1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .3rem; padding: .35rem .6rem; }
+.studio-pickers:not(:has(> :not([hidden]))) { display: none; }
+.studio-pickers .document-picker { margin-inline-start: auto; }
+.studio-pickers button { padding: .28rem .5rem; font-size: .83rem; }
 .primary, .secondary { border: 1px solid var(--green); border-radius: .4rem; padding: .53rem .72rem; font-size: .91rem; font-weight: 650; }
 .primary { background: var(--button); color: var(--on-button); }
 .primary:hover { background: var(--button-hover); }
@@ -639,7 +642,6 @@ summary { color: var(--green); font-weight: 650; }
 .figure-placement select { flex: 1 1 5.5rem; text-overflow: ellipsis; }
 .figure-wrap { align-items: center; white-space: nowrap; }
 .figure-wrap input { margin: 0; }
-#figure-style-button { text-align: start; }
 .figure-notes > summary { font-size: .84rem; }
 .figure-notes-fields { display: grid; gap: .45rem; margin-top: .4rem; font-size: .81rem; }
 .figure-notes-fields label { color: var(--muted); }
@@ -665,9 +667,25 @@ summary { color: var(--green); font-weight: 650; }
   background: #fff;
 }
 .figure-style-choice img { object-fit: contain; }
-.figure-style-description, .figure-style-pending { font-size: .82rem; }
-.figure-style-description { color: var(--muted); }
+.figure-style-choice strong, .figure-style-pending { font-size: .8rem; overflow-wrap: anywhere; }
 .figure-style-pending { display: grid; place-items: center; background: var(--light); }
+#figure-helper { grid-area: 1 / 2 / 3; }
+.studio:has(.figure-helper:not([hidden])) { grid-template-columns: minmax(0, 1fr) min(13.5rem, 38%); }
+.studio:has(.figure-helper:not([hidden])) .zoom-controls { grid-area: 2 / 1; }
+.figure-helper { padding: .65rem; border-inline-start: 1px solid var(--line); background: var(--surface); }
+.figure-helper-heading { display: flex; align-items: center; justify-content: space-between; gap: .4rem; margin-bottom: .5rem; }
+.figure-helper-heading h2 { margin: 0; font-size: .94rem; line-height: 1.25; overflow-wrap: anywhere; }
+.figure-helper-heading button { flex: none; width: 1.75rem; height: 1.75rem; }
+#figure-helper-status:not(:empty) { margin-top: .45rem; }
+.figure-upload-button { grid-column: 1 / -1; }
+.figure-style-choice:disabled { cursor: default; }
+@media screen and (max-width: 800px) {
+  #figure-helper { grid-area: 3 / 1; max-block-size: min(10rem, 36dvh); border-inline-start: 0; border-top: 1px solid var(--line); }
+  .studio:has(.figure-helper:not([hidden])) { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; }
+  .figure-helper .figure-style-choices { grid-template-columns: repeat(auto-fit, minmax(5.25rem, 1fr)); }
+  .figure-helper .figure-upload-button { grid-column: auto; }
+  .figure-helper :is(.figure-style-choice img, .figure-style-pending) { max-block-size: 3.5rem; }
+}
 .figure-wrap:has(:disabled) { color: var(--muted); }
 .upload { padding: .4rem; border: 1px solid var(--line); border-radius: .35rem; }
 .upload input { width: 100%; display: block; margin-top: .3rem; font-size: .85rem; }
@@ -840,7 +858,7 @@ details[open]::details-content {
   html, body { background: white; overflow: visible; }
   body { position: static; display: block; height: auto; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .skip, .site-header, #catalog, .site-footer, #layout-probe,
-  .sidebar-column, .document-picker, .zoom-controls, .print-menu, .section-preview-tools, .figure-style-trigger, .paper-motion, dialog, noscript { display: none !important; }
+  .sidebar-column, .studio-pickers, .zoom-controls, .print-menu, .section-preview-tools, .figure-style-trigger, .figure-helper, .paper-motion, dialog, noscript { display: none !important; }
   main, .workspace, .workspace-grid, .studio, .paper-stack { display: block; height: auto; width: auto; margin: 0; padding: 0; border: 0; background: white; overflow: visible; }
   .paper-stack { scrollbar-gutter: auto; }
   .sheet-frame { position: static; width: auto !important; height: auto !important; margin: 0 !important; break-after: page; }

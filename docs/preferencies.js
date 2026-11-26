@@ -2,6 +2,7 @@
   // Keep the original key so existing topic layouts remain available.
   const layoutKey = 'quadern-obert:layout:v1';
   const libraryKey = 'mon-a-ma:organitzacio:v1';
+  const visitsKey = 'mon-a-ma:fitxes-vistes:v1';
   const defaults = {
     scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.8, margin: 20, textAlignment: 'left',
     showPageFooter: true, pageNumbers: true, showMaterialCode: true, showTopicTitle: true, showFigures: true,
@@ -27,6 +28,13 @@
       temporary.set(key, value);
       return false;
     }
+  }
+
+  function firstVisit(code) {
+    const visits = read(visitsKey, {});
+    if (visits[code]) return false;
+    write(visitsKey, { ...visits, [code]: true });
+    return true;
   }
 
   function library() {
@@ -69,6 +77,7 @@
       ...changes,
       templateId,
       figureStyle: typeof saved.figureStyle === 'string' ? saved.figureStyle : '',
+      materialLevel: saved.materialLevel ?? 'intermedia',
       figures: { ...saved.figures },
       sectionOrder: { ...saved.sectionOrder },
       hiddenSections: { ...saved.hiddenSections },
@@ -82,7 +91,7 @@
     return write(layoutKey, {
       ...layouts,
       [recordKey(topicId, collection)]: {
-        templateId: settings.templateId, values, figureStyle: settings.figureStyle, figures: settings.figures,
+        templateId: settings.templateId, values, figureStyle: settings.figureStyle, materialLevel: settings.materialLevel, figures: settings.figures,
         sectionOrder: settings.sectionOrder, hiddenSections: settings.hiddenSections,
       },
     });
@@ -104,5 +113,5 @@
     return [...sorted, ...sections.values()];
   }
 
-  window.preferencies = { defaults, library, saveLibrary, format, getBase, loadLayout, saveLayout, clearCollectionLayouts, orderedSections };
+  window.preferencies = { defaults, firstVisit, library, saveLibrary, format, getBase, loadLayout, saveLayout, clearCollectionLayouts, orderedSections };
 })();

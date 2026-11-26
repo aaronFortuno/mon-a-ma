@@ -1,5 +1,13 @@
 # Historial de versions
 
+## 0.1.23 · 26 de novembre de 2026
+
+- Permet triar l’estil figura per figura des del lateral o des d’un panell al costat del visor.
+- Desa imatges pròpies a la figura corresponent i permet restablir les il·lustracions d’una fitxa.
+- Mostra una introducció a l’edició en la primera visita de cada fitxa.
+- Incorpora els dos estils visuals als quatre apartats d’El planeta Terra.
+- Afegeix variants de suport i ampliació als quatre materials, amb els mateixos apartats i il·lustracions.
+
 ## 0.1.22 · 26 de novembre de 2026
 
 - Permet comparar els estils pla i amb volum al visor i aplicar la tria a tota la fitxa M001.

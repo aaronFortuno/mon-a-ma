@@ -47,9 +47,33 @@ window.quaderns ??= [];
           volum: { src: 'illustracions/m001/capes.png', alt: 'Esfera de la Terra amb una porció retirada que mostra l’escorça, el mantell, el nucli extern i el nucli intern.' },
         },
       },
-      { id: 'reserva-moviment', section: 'moviment', name: 'Moviment de les plaques', ratio: 23 / 14, variants: { pla: {}, volum: {} } },
-      { id: 'reserva-gravetat', section: 'gravetat', name: 'La gravetat de la Terra', ratio: 23 / 14, variants: { pla: {}, volum: {} } },
-      { id: 'reserva-elements', section: 'elements', name: 'Els elements del planeta Terra', ratio: 23 / 14, variants: { pla: {}, volum: {} } },
+      {
+        id: 'reserva-moviment', section: 'moviment', name: 'Moviment de les plaques', ratio: 23 / 14,
+        alt: 'Tres límits entre plaques amb fletxes de separació, acostament i lliscament lateral.',
+        caption: 'Les plaques tectòniques poden separar-se, acostar-se o lliscar de costat.',
+        variants: {
+          pla: { src: 'illustracions/m001/moviment-pla.png' },
+          volum: { src: 'illustracions/m001/moviment-volum.png' },
+        },
+      },
+      {
+        id: 'reserva-gravetat', section: 'gravetat', name: 'La gravetat de la Terra', ratio: 23 / 14,
+        alt: 'Tres fletxes, des de diferents punts de la superfície, apunten cap al centre de la Terra.',
+        caption: 'En qualsevol punt de la superfície, la gravetat atrau els objectes cap al centre de la Terra.',
+        variants: {
+          pla: { src: 'illustracions/m001/gravetat-pla.png' },
+          volum: { src: 'illustracions/m001/gravetat-volum.png' },
+        },
+      },
+      {
+        id: 'reserva-elements', section: 'elements', name: 'Els elements del planeta Terra', ratio: 23 / 14,
+        alt: 'Paisatge amb un riu, roca, cel amb pluja i vegetació a la riba.',
+        caption: 'El riu connecta l’aigua, les roques, l’aire i els éssers vius.',
+        variants: {
+          pla: { src: 'illustracions/m001/elements-pla.png' },
+          volum: { src: 'illustracions/m001/elements-volum.png' },
+        },
+      },
     ],
     sections: [
       section('capes', 'Les capes del planeta Terra',

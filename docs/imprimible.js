@@ -76,7 +76,8 @@ window.imprimible = (() => {
     element.style.setProperty('--image-width', source.width + '%');
     element.dataset.position = source.position;
     element.dataset.figure = source.id;
-    if (source.styleId) element.dataset.styled = '';
+    element.dataset.figureName = source.name ?? source.alt ?? 'Il·lustració';
+    if (source.blob) element.dataset.legacyUpload = '';
     if (!source.src) {
       const placeholder = node('div', 'image-placeholder');
       if (source.ratio) placeholder.style.setProperty('--figure-ratio', source.ratio);

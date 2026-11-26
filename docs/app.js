@@ -5,6 +5,11 @@
   const { node, paragraphAnchor, loadPaperFont, paginate } = window.imprimible;
   const preferences = window.preferencies;
   const { defaults } = preferences;
+  const materialLevels = [
+    { id: 'suport', label: 'Amb suport' },
+    { id: 'intermedia', label: 'Intermèdia' },
+    { id: 'ampliacio', label: 'Ampliació' },
+  ];
   const byId = id => document.getElementById(id);
   const topicById = new Map(topics.map(topic => [topic.id, topic]));
   const topicByCode = new Map(topics.map(topic => [topic.code, topic]));
@@ -17,8 +22,13 @@
   const form = byId('options');
   const figureForm = byId('figure-settings');
   const figureAlignment = byId('figure-alignment-template');
-  const figureStyleButton = byId('figure-style-button');
-  const figureStyleDialog = byId('figure-style-dialog');
+  const figureOptions = byId('figure-options');
+  const figureHelper = byId('figure-helper');
+  const figureUpload = byId('figure-upload');
+  const levelPicker = byId('material-level');
+  let helperFigure = '';
+  let uploadTarget = null;
+  let imageWrite = false;
   const stack = byId('paper-stack');
   const zoomOut = byId('zoom-out');
   const zoomReset = byId('zoom-reset');
@@ -107,7 +117,7 @@
       theme: topic => [topic.theme],
       collection: topic => [topic.collection?.title],
       length: topic => [size(topic)],
-      difficulty: topic => [topic.difficulty],
+      difficulty: topic => availableLevels(topic).length > 1 ? availableLevels(topic).map(level => level.label) : [topic.difficulty],
     };
     const controls = Object.entries(fields).map(([name, values]) => {
       const select = filters.elements.namedItem(name);
@@ -134,7 +144,8 @@
       }
       const details = node('div', 'topic-details');
       const summary = [cycleById.get(topic.cycle)?.label, topic.theme ?? topic.subject].filter(Boolean).join(' · ');
-      const extent = [topic.code, size(topic), topic.difficulty].filter(Boolean).join(' · ');
+      const levels = availableLevels(topic);
+      const extent = [topic.code, size(topic), levels.length > 1 ? levels.length + ' variants' : topic.difficulty].filter(Boolean).join(' · ');
       details.append(node('p', 'eyebrow', summary), node(grouped ? 'h3' : 'h2', 'topic-card-title', topic.title),
         node('p', 'topic-description', topic.description), node('p', 'topic-extent', extent));
       card.append(picture, details);
@@ -236,78 +247,203 @@
   }
 
   function figuresFor(chapter, type = documentType) {
-    const style = selectedFigureStyle();
-    const collectionId = activeCollection?.id ?? '';
-    const userFigures = knownUploads.filter(item => item.topic === route.topic.id && item.chapter === chapter.id &&
-      (item.collectionId ?? '') === collectionId && (item.documentType ?? 'sheet') === type);
+    const uploads = knownUploads.filter(item => item.topic === route.topic.id && item.chapter === chapter.id &&
+      (item.collectionId ?? '') === (activeCollection?.id ?? '') && (item.documentType ?? 'sheet') === type);
     const planned = type === 'sheet' ? reservedFigures(chapter) : chapter.figures ?? [];
-    const sections = new Set(chapter.sections.map(section => section.id));
-    return [...planned, ...userFigures].map(item => {
-      const variant = type === 'sheet' ? item.variants?.[style?.id] : undefined;
+    const sections = new Map(chapter.sections.map(section => [section.id, section]));
+    return [...planned, ...uploads.filter(upload => !upload.figure)].map(item => {
       const saved = settings.figures[item.id];
-      const config = { ...item, ...variant, visible: true, ...saved, styleId: variant ? style.id : '' };
-      if (variant) Object.assign(config, saved?.byStyle?.[style.id]);
+      const personal = uploads.find(upload => upload.figure === item.id);
+      const styles = route.topic.figureStyles ?? [];
+      const variants = styles.filter(style => item.variants?.[style.id]).map(style => ({
+        ...style, ...item.variants[style.id],
+      }));
+      if (!variants.length && item.src && !item.blob) variants.push({ id: 'original', label: 'Original', src: item.src });
+      if (personal) variants.push({ id: 'custom', label: 'Imatge pròpia', src: personal.src, alt: personal.alt });
+      const defaultVariant = variants.find(variant => variant.id === settings.figureStyle && variant.src) ??
+        variants.find(variant => variant.id !== 'custom' && variant.src);
+      const selected = variants.find(variant => variant.id === saved?.variant && variant.src) ?? defaultVariant;
+      const config = {
+        ...item, ...selected, id: item.id, visible: true, ...saved,
+        variants, selectedVariant: selected?.id ?? '', chapterId: chapter.id,
+        ...(selected?.id === 'custom' ? { caption: '', credit: '' } : {}),
+        ...saved?.byStyle?.[selected?.id],
+      };
+      const paragraph = paragraphAnchor(config.anchor);
+      const blocks = sections.get(config.section)?.blocks;
+      if (paragraph > 0 && blocks?.[paragraph]?.type !== 'paragraph') {
+        config.anchor = blocks?.[0]?.type === 'paragraph' ? 'lead' : 'before';
+      }
       if (paragraphAnchor(config.anchor) === null || config.position === 'center') config.wrap = false;
       return config;
     }).filter(config => sections.has(config.section));
   }
 
-  function figureStyles() {
-    return documentType === 'sheet' ? route?.topic.figureStyles ?? [] : [];
+  function findFigure(id) {
+    const { topic, chapter } = route;
+    for (const entry of settings.scope === 'topic' ? topic.chapters : [chapter]) {
+      const printable = printableChapter(entry);
+      const figure = printable && figuresFor(printable).find(item => item.id === id);
+      if (figure) return figure;
+    }
   }
 
-  function selectedFigureStyle() {
-    const styles = figureStyles();
-    return styles.find(style => style.id === settings.figureStyle) ?? styles[0];
+  function figureChoices(item) {
+    const group = node('div', 'figure-style-choices');
+    group.setAttribute('role', 'group');
+    group.setAttribute('aria-label', 'Imatges de «' + item.name + '»');
+    for (const variant of item.variants) {
+      const button = node('button', 'figure-style-choice');
+      button.type = 'button';
+      button.dataset.variant = variant.id;
+      button.dataset.choiceFigure = item.id;
+      button.setAttribute('aria-pressed', String(variant.id === item.selectedVariant));
+      if (variant.src) {
+        const image = node('img');
+        image.src = variant.src;
+        image.alt = '';
+        button.append(image);
+      } else {
+        button.disabled = true;
+        button.append(node('span', 'figure-style-pending', 'Pendent'));
+      }
+      button.append(node('strong', '', variant.label));
+      group.append(button);
+    }
+    const personal = item.variants.some(variant => variant.id === 'custom');
+    const upload = node('button', 'secondary figure-upload-button', personal ? 'Substitueix la imatge pròpia' : 'Puja una imatge');
+    upload.type = 'button';
+    upload.dataset.uploadFigure = item.id;
+    group.append(upload);
+    return group;
+  }
+
+  function closeFigureHelper(restoreFocus = false) {
+    const id = helperFigure;
+    helperFigure = '';
+    figureHelper.hidden = true;
+    for (const button of stack.querySelectorAll('[data-style-figure]')) {
+      button.setAttribute('aria-expanded', 'false');
+      if (restoreFocus && button.dataset.styleFigure === id) button.focus({ preventScroll: true });
+    }
   }
 
   function openFigureStyles(event) {
     const trigger = event.target.closest('[data-style-figure]');
-    const styles = figureStyles();
-    if (!trigger || styles.length < 2) return;
-    const figures = route.topic.chapters.flatMap(chapter => chapter.figures ?? []);
-    const hasBoth = figure => styles.every(style => figure.variants?.[style.id]?.src);
-    const sample = figures.find(figure => figure.id === trigger.dataset.styleFigure && hasBoth(figure)) ??
-      figures.find(hasBoth) ?? figures.find(figure => figure.variants);
-    if (!sample) return;
-    const selected = selectedFigureStyle()?.id;
-    byId('figure-style-example').textContent = 'Mostra · ' + sample.name;
-    byId('figure-style-choices').replaceChildren(...styles.map(style => {
-      const option = node('button', 'figure-style-choice');
-      option.type = 'button';
-      option.dataset.figureStyle = style.id;
-      option.setAttribute('aria-pressed', String(style.id === selected));
-      option.autofocus = style.id === selected;
-      const variant = sample.variants[style.id];
-      if (variant?.src) {
-        const image = node('img');
-        image.src = variant.src;
-        image.alt = variant.alt ?? sample.alt ?? '';
-        option.append(image);
-      } else {
-        option.append(node('span', 'figure-style-pending', 'Mostra pendent'));
-      }
-      option.append(node('strong', '', style.label), node('span', 'figure-style-description', style.description));
-      return option;
-    }));
-    figureStyleDialog.showModal();
+    if (!trigger || !route) return;
+    const item = findFigure(trigger.dataset.styleFigure);
+    if (!item) return;
+    const top = trigger.getBoundingClientRect().top - stack.getBoundingClientRect().top;
+    const wasOpen = helperFigure === item.id;
+    closeFigureHelper();
+    if (!wasOpen) {
+      helperFigure = item.id;
+      trigger.setAttribute('aria-expanded', 'true');
+      byId('figure-helper-title').textContent = item.name;
+      byId('figure-helper-status').textContent = '';
+      byId('figure-helper-options').replaceChildren(figureChoices(item));
+      figureHelper.hidden = false;
+      byId('figure-helper-close').focus({ preventScroll: true });
+    }
+    fitPaper();
+    stack.scrollTop += trigger.getBoundingClientRect().top - stack.getBoundingClientRect().top - top;
   }
 
   function renderFigureStyleTools() {
-    if (figureStyles().length < 2) return;
-    for (const figure of stack.querySelectorAll('figure[data-styled]')) {
-      const button = node('button', 'figure-style-trigger', 'Estil');
+    for (const figure of stack.querySelectorAll('figure[data-figure]:not([data-legacy-upload])')) {
+      const button = node('button', 'figure-style-trigger', 'Imatge');
       button.type = 'button';
       button.dataset.styleFigure = figure.dataset.figure;
-      button.setAttribute('aria-label', 'Tria l’estil de les il·lustracions');
-      button.setAttribute('aria-haspopup', 'dialog');
-      button.title = 'Tria l’estil de les il·lustracions';
+      button.setAttribute('aria-label', 'Opcions d’imatge: ' + figure.dataset.figureName);
+      button.setAttribute('aria-controls', 'figure-helper');
+      button.setAttribute('aria-expanded', String(helperFigure === figure.dataset.figure));
       figure.append(button);
     }
   }
 
+  function updateFigureChoices(id, refreshChoices = false) {
+    const item = findFigure(id);
+    if (!item) return;
+    const card = [...figureOptions.children].find(field => field.dataset.figureId === id);
+    const groups = [];
+    if (card) {
+      card.dataset.figureStyle = item.selectedVariant;
+      for (const key of ['caption', 'credit']) card.querySelector('[data-setting="' + key + '"]').value = item[key] ?? '';
+      groups.push(card.querySelector('.figure-style-choices'));
+    }
+    if (helperFigure === id) groups.push(byId('figure-helper-options').firstElementChild);
+    for (const group of groups) {
+      if (refreshChoices) group.replaceWith(figureChoices(item));
+      else for (const button of group.querySelectorAll('[data-variant]')) {
+        button.setAttribute('aria-pressed', String(button.dataset.variant === item.selectedVariant));
+      }
+    }
+  }
+
+  function editFigureChoice(event) {
+    const button = event.target.closest('[data-choice-figure], [data-upload-figure]');
+    if (!route || !button) return;
+    const { choiceFigure, variant, uploadFigure } = button.dataset;
+    if (uploadFigure) {
+      if (imageWrite) return;
+      const item = findFigure(uploadFigure);
+      if (!item) return;
+      uploadTarget = { item, topic: route.topic.id, collection: activeCollection, type: documentType };
+      figureUpload.click();
+      return;
+    }
+    const item = findFigure(choiceFigure);
+    if (!item?.variants.some(choice => choice.id === variant && choice.src) || item.selectedVariant === variant) return;
+    settings.figures[item.id] = { ...settings.figures[item.id], variant };
+    storeOptions();
+    updateFigureChoices(item.id);
+    requestPaper();
+  }
+
+  function showMaterialIntro(topic) {
+    const dialog = byId('material-intro');
+    if (!preferences.firstVisit(topic.code)) return;
+    byId('material-intro-styles').hidden = (topic.figureStyles?.length ?? 0) < 2;
+    byId('material-intro-level').hidden = availableLevels(topic).length < 2;
+    dialog.showModal();
+  }
+
+  function availableLevels(topic) {
+    const variants = window.variantsMaterials[topic.code];
+    return materialLevels.filter(level => level.id === 'intermedia' ||
+      topic.chapters.some(chapter => variants?.[chapter.id]?.[level.id]));
+  }
+
+  function selectedLevel() {
+    return availableLevels(route.topic).find(level => level.id === settings.materialLevel) ?? materialLevels[1];
+  }
+
+  function syncMaterialLevel() {
+    const levels = availableLevels(route.topic);
+    levelPicker.hidden = levels.length < 2;
+    for (const button of levelPicker.querySelectorAll('button')) {
+      button.hidden = !levels.some(level => level.id === button.dataset.materialLevel);
+      button.setAttribute('aria-pressed', String(button.dataset.materialLevel === selectedLevel().id));
+    }
+  }
+
+  function chapterForLevel(chapter) {
+    const level = selectedLevel().id;
+    const content = window.variantsMaterials[route.topic.code]?.[chapter.id]?.[level];
+    if (!content) return chapter;
+    return {
+      ...chapter,
+      intro: content.intro ?? chapter.intro,
+      sections: chapter.sections.map(section => {
+        const alternate = content.sections[section.id];
+        if (!alternate) return section;
+        return { ...section, blocks: level === 'ampliacio' ? [...section.blocks, ...alternate] : alternate };
+      }),
+    };
+  }
+
   function printableChapter(chapter) {
-    if (documentType === 'sheet') return arrangeChapter(chapter);
+    if (documentType === 'sheet') return arrangeChapter(chapterForLevel(chapter));
     const solution = chapter.solution;
     return solution && arrangeChapter({ ...solution, id: chapter.id, title: solution.title ?? chapter.title });
   }
@@ -439,7 +575,7 @@
     const previous = route;
     route = extractRoute();
     const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
-    if (changedMaterial && figureStyleDialog.open) figureStyleDialog.close();
+    if (changedMaterial && byId('material-intro').open) byId('material-intro').close();
     byId('catalog-home').href = route ? catalogAddress(activeCollection) : '#';
     byId('catalog').hidden = Boolean(route);
     const curriculumDialog = byId('curriculum-dialog');
@@ -453,6 +589,7 @@
     title.hidden = !route;
     title.textContent = route?.topic.title ?? '';
     if (!route) {
+      closeFigureHelper();
       stopPaperMotion();
       if (printMenu.matches(':popover-open')) printMenu.hidePopover();
       sectionEdit = null;
@@ -473,6 +610,7 @@
     }
 
     const changedChapter = changedMaterial || previous?.chapter.id !== route.chapter.id;
+    if (changedChapter) closeFigureHelper();
     if (changedMaterial) {
       showQuickTemplate(false);
       quickTemplateStatus.textContent = '';
@@ -485,7 +623,6 @@
     if (changedChapter) {
       byId('upload-status').hidden = true;
       byId('save-status').hidden = true;
-      byId('upload').value = '';
       stack.scrollTop = 0;
       stack.scrollLeft = 0;
     }
@@ -500,6 +637,7 @@
     renderNavigation();
     renderControls();
     refreshPaper();
+    if (previous?.topic.id !== route.topic.id) showMaterialIntro(route.topic);
   }
 
   function control(label, input, className) {
@@ -512,7 +650,7 @@
   function figureControl(item, chapter) {
     const field = node('fieldset', 'figure-control');
     field.dataset.figureId = item.id;
-    if (item.styleId) field.dataset.figureStyle = item.styleId;
+    field.dataset.figureStyle = item.selectedVariant;
     const title = item.name || item.alt?.replace(/\.$/, '') || 'Il·lustració';
     field.append(node('legend', 'sr-only', title));
     const header = node('div', 'figure-heading');
@@ -529,6 +667,7 @@
 
     const group = node('div', 'figure-options');
     group.hidden = !item.visible;
+    if (!item.blob) group.append(figureChoices(item));
     const sizeAndAlignment = node('div', 'figure-size-alignment');
     const width = node('input');
     width.type = 'number';
@@ -617,9 +756,7 @@
   function renderControls() {
     byId('print-scope').hidden = route.topic.chapters.length === 1;
     syncDocumentPicker();
-    figureStyleButton.hidden = figureStyles().length < 2;
-    const style = selectedFigureStyle();
-    if (style) figureStyleButton.textContent = 'Estil · ' + style.label;
+    syncMaterialLevel();
     for (const key of Object.keys(defaults)) {
       const input = form.elements.namedItem(key) ?? figureForm.elements.namedItem(key);
       if (!input) continue;
@@ -632,9 +769,9 @@
     syncTemplateSelector();
     const chapter = printableChapter(route.chapter);
     const figures = chapter ? figuresFor(chapter) : [];
-    byId('figure-options').replaceChildren(...figures.map(item => figureControl(item, chapter)));
-    byId('upload').disabled = !chapter?.sections.length;
-    byId('figure-options').hidden = !settings.showFigures;
+    figureOptions.replaceChildren(...figures.map(item => figureControl(item, chapter)));
+    figureOptions.hidden = !settings.showFigures;
+    if (helperFigure && (!settings.showFigures || !findFigure(helperFigure)?.visible)) closeFigureHelper();
   }
 
   function syncMeasurements() {
@@ -829,7 +966,7 @@
   function removedPaperUnit({ unit, rect }, layer, zoom) {
     const ghost = unit.closest('.sheet').cloneNode(false);
     const clone = unit.cloneNode(true);
-    clone.querySelector('.section-preview-tools')?.remove();
+    for (const control of clone.querySelectorAll('.section-preview-tools, .figure-style-trigger')) control.remove();
     clone.removeAttribute('id');
     clone.removeAttribute('tabindex');
     clone.removeAttribute('data-paper-unit');
@@ -904,7 +1041,7 @@
         const size = await preload(item.src);
         if (!size) {
           missing = true;
-          return item.styleId ? { ...item, src: '' } : null;
+          return { ...item, src: '' };
         }
         return { ...item, pixelWidth: size.width, pixelHeight: size.height };
       }));
@@ -984,7 +1121,10 @@
       } else {
         settings.figures[id] = { ...saved, [key]: value };
       }
-      if (key === 'visible') card.querySelector('.figure-options').hidden = !value;
+      if (key === 'visible') {
+        card.querySelector('.figure-options').hidden = !value;
+        if (!value && helperFigure === id) closeFigureHelper();
+      }
       if (key === 'section') {
         settings.figures[id].anchor = 'lead';
         renderControls();
@@ -999,7 +1139,10 @@
       if (!(input.name in defaults)) return;
       settings[input.name] = value;
       if (['fontSize', 'leading', 'margin'].includes(input.name)) syncMeasurements();
-      if (input.name === 'showFigures') byId('figure-options').hidden = !value;
+      if (input.name === 'showFigures') {
+        figureOptions.hidden = !value;
+        if (!value) closeFigureHelper();
+      }
       if (input.name === 'headerLogo' || input.name === 'showClassroomCode') syncHeaderControls();
       if (input.name === 'showPageFooter') syncFooterControls();
       if (input.name === 'scope') {
@@ -1012,53 +1155,126 @@
     requestPaper();
   }
 
+  function inFigureScope(item, topic, collection) {
+    return item.topic === topic && (item.collectionId ?? '') === (collection?.id ?? '');
+  }
+
   function imageFeedback(message) {
     byId('upload-status').textContent = message;
     byId('upload-status').hidden = !message;
+    byId('figure-helper-status').textContent = message;
   }
 
-  async function addImage(event) {
-    const input = event.target;
-    const file = input.files[0];
-    if (!file || !route) return;
-    const { topic, chapter } = route;
-    const printable = printableChapter(chapter);
-    input.value = '';
-    if (!printable?.sections.length) return;
+  function releaseUpload(item) {
+    URL.revokeObjectURL(item.src);
+    images.delete(item.src);
+  }
+
+  async function addImage() {
+    const file = figureUpload.files[0];
+    const target = uploadTarget;
+    uploadTarget = null;
+    figureUpload.value = '';
+    if (!file || !target || imageWrite) return;
     if (!['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif'].includes(file.type) || file.size > 12 * 1024 * 1024) {
       imageFeedback('Tria una imatge PNG, JPG, WebP, GIF o AVIF de fins a 12 MB.');
       return;
     }
-    const name = file.name.replace(/\.[^.]+$/, '').slice(0, 75);
+    const { item, topic, collection, type } = target;
+    const collectionId = collection?.id ?? '';
+    const id = 'slot:' + JSON.stringify([collectionId, topic, item.chapterId, type, item.id]);
     const source = {
-      id: 'local-' + crypto.getRandomValues(new Uint32Array(4)).join('-'),
-      name, alt: name, caption: '', blob: file, topic: topic.id, chapter: chapter.id, documentType,
-      collectionId: activeCollection?.id ?? '',
-      section: printable.sections[0].id, anchor: 'lead', width: 55, position: 'center', wrap: false,
+      id, figure: item.id, topic, chapter: item.chapterId, collectionId, documentType: type,
+      blob: file, alt: file.name.replace(/\.[^.]+$/, '').slice(0, 75),
     };
-    const item = addUrl(source);
-    if (!await preload(item.src)) {
-      URL.revokeObjectURL(item.src);
-      images.delete(item.src);
-      imageFeedback('El navegador no pot obrir aquesta imatge.');
-      return;
+    const upload = addUrl(source);
+    imageWrite = true;
+    try {
+      await uploadsReady;
+      if (!await preload(upload.src)) {
+        releaseUpload(upload);
+        imageFeedback('El navegador no pot obrir aquesta imatge.');
+        return;
+      }
+      if (collectionId && !library.collections.some(entry => entry.id === collectionId)) {
+        releaseUpload(upload);
+        return;
+      }
+      const previous = knownUploads.find(entry => entry.id === id);
+      let persisted = true;
+      try { await imageOperation('readwrite', store => store.put(source)); }
+      catch {
+        if (previous?.persisted) {
+          releaseUpload(upload);
+          imageFeedback('No s’ha pogut substituir la imatge desada.');
+          return;
+        }
+        persisted = false;
+      }
+      if (previous) {
+        releaseUpload(previous);
+        knownUploads = knownUploads.filter(entry => entry.id !== id);
+      }
+      knownUploads.push({ ...upload, persisted });
+
+      const current = route && inFigureScope(source, route.topic.id, activeCollection);
+      const layout = current ? settings : preferences.loadLayout(topic, collection, library);
+      const saved = layout.figures[item.id];
+      layout.figures[item.id] = { ...saved, variant: 'custom' };
+      if (current) {
+        storeOptions();
+        if (documentType === type) updateFigureChoices(item.id, true);
+        requestPaper();
+        imageFeedback(persisted ? 'Imatge pròpia desada en aquest navegador.' : 'Imatge pròpia disponible durant aquesta sessió.');
+      } else {
+        preferences.saveLayout(topic, collection, layout, library);
+      }
+    } finally {
+      imageWrite = false;
     }
-    let persisted = true;
-    try { await imageOperation('readwrite', store => store.put(source)); }
-    catch { persisted = false; }
-    knownUploads.push({ ...item, persisted });
-    if (route?.topic.id === topic.id && route.chapter.id === chapter.id && source.documentType === documentType && source.collectionId === (activeCollection?.id ?? '')) {
-      settings.showFigures = true;
-      storeOptions();
-      renderControls();
-      requestPaper();
-      imageFeedback(persisted ? 'Imatge afegida.' : 'Imatge afegida per a aquesta sessió.');
+  }
+
+  async function resetFigures() {
+    if (!route || imageWrite) return;
+    const topic = route.topic.id;
+    const collection = activeCollection;
+    if (!window.confirm('Vols esborrar les imatges pròpies i els ajustos d’il·lustració d’aquesta fitxa?')) return;
+    imageWrite = true;
+    try {
+      await uploadsReady;
+      const uploads = knownUploads.filter(item => inFigureScope(item, topic, collection));
+      if (uploads.some(item => item.persisted)) {
+        await imageOperation('readwrite', store => {
+          for (const item of uploads) if (item.persisted) store.delete(item.id);
+          return store.count();
+        });
+      }
+      for (const item of uploads) releaseUpload(item);
+      knownUploads = knownUploads.filter(item => !inFigureScope(item, topic, collection));
+      const current = route?.topic.id === topic && activeCollection?.id === collection?.id;
+      const layout = current ? settings : preferences.loadLayout(topic, collection, library);
+      layout.figureStyle = '';
+      layout.figures = {};
+      layout.showFigures = preferences.getBase(layout.templateId, collection, library).showFigures;
+      if (current) {
+        closeFigureHelper();
+        storeOptions();
+        renderControls();
+        requestPaper();
+        imageFeedback('Il·lustracions restablertes.');
+      } else {
+        preferences.saveLayout(topic, collection, layout, library);
+      }
+    } catch {
+      imageFeedback('No s’han pogut esborrar les imatges desades. Prova-ho de nou.');
+    } finally {
+      imageWrite = false;
     }
   }
 
   async function removeImage(event) {
     const id = event.target.dataset.removeFigure;
-    if (!id) return;
+    if (!id || imageWrite) return;
     const item = knownUploads.find(image => image.id === id);
     if (!item) return;
     try { await imageOperation('readwrite', store => store.delete(id)); }
@@ -1292,7 +1508,9 @@
   byId('remove-collection').addEventListener('click', async () => {
     const id = byId('collection-form').dataset.collectionId;
     const collection = library.collections.find(item => item.id === id);
-    if (!collection || !window.confirm('Vols suprimir «' + collection.name + '» i la seva maquetació?')) return;
+    if (imageWrite || !collection || !window.confirm('Vols suprimir «' + collection.name + '» i la seva maquetació?')) return;
+    imageWrite = true;
+    await uploadsReady;
     const uploads = knownUploads.filter(item => item.collectionId === id);
     try {
       if (uploads.some(item => item.persisted)) {
@@ -1304,6 +1522,8 @@
     } catch {
       byId('collection-status').textContent = 'No s’han pogut eliminar les imatges de la col·lecció. Prova-ho de nou.';
       return;
+    } finally {
+      imageWrite = false;
     }
     for (const item of uploads) {
       URL.revokeObjectURL(item.src);
@@ -1317,17 +1537,14 @@
   });
   stack.addEventListener('click', editPreviewSection);
   stack.addEventListener('click', openFigureStyles);
-  figureStyleButton.addEventListener('click', openFigureStyles);
-  byId('figure-style-choices').addEventListener('click', event => {
-    const id = event.target.closest('button[data-figure-style]')?.dataset.figureStyle;
-    if (!figureStyles().some(style => style.id === id)) return;
-    figureStyleDialog.close();
-    if (selectedFigureStyle()?.id === id) return;
-    settings.figureStyle = id;
-    storeOptions();
-    renderControls();
-    requestPaper();
+  figureOptions.addEventListener('click', editFigureChoice);
+  figureHelper.addEventListener('click', editFigureChoice);
+  byId('figure-helper-close').addEventListener('click', () => closeFigureHelper(true));
+  byId('studio').addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !figureHelper.hidden) closeFigureHelper(true);
   });
+  byId('reset-figures').addEventListener('click', resetFigures);
+  figureUpload.addEventListener('change', addImage);
   byId('removed-sections').addEventListener('click', restoreSection);
   byId('reset-section-order').addEventListener('click', () => {
     delete settings.sectionOrder[route.chapter.id];
@@ -1411,7 +1628,6 @@
     if (input.dataset.setting === 'width' && (!input.value || !input.validity.valid)) updateOption(event);
   });
   byId('figure-options').addEventListener('click', removeImage);
-  byId('upload').addEventListener('change', addImage);
   byId('header-logo-upload').addEventListener('change', changeHeaderLogo);
   byId('reset-header-logo').addEventListener('click', () => {
     logoUploadVersion++;
@@ -1422,9 +1638,19 @@
     byId('header-logo-upload').focus({ preventScroll: true });
     requestPaper();
   });
+  levelPicker.addEventListener('click', event => {
+    const level = event.target.closest('button')?.dataset.materialLevel;
+    if (!availableLevels(route.topic).some(item => item.id === level) || level === selectedLevel().id) return;
+    settings.materialLevel = level;
+    sectionEdit = null;
+    storeOptions();
+    renderControls();
+    requestPaper();
+  });
   byId('document-picker').addEventListener('click', event => {
     const type = event.target.closest('button')?.dataset.document;
     if (!type || type === documentType) return;
+    closeFigureHelper();
     documentType = type;
     sectionEdit = null;
     renderControls();
@@ -1435,7 +1661,11 @@
     headerLogoFeedback('');
     settings = {
       ...preferences.getBase(settings.templateId, activeCollection, library), templateId: settings.templateId,
-      figures: {}, figureStyle: settings.figureStyle, sectionOrder: settings.sectionOrder, hiddenSections: settings.hiddenSections,
+      figures: Object.fromEntries(Object.entries(settings.figures).map(([id, figure]) => [id,
+        Object.fromEntries(Object.entries(figure).filter(([key]) => ['variant', 'caption', 'credit', 'byStyle'].includes(key))),
+      ])),
+      figureStyle: settings.figureStyle, materialLevel: settings.materialLevel,
+      sectionOrder: settings.sectionOrder, hiddenSections: settings.hiddenSections,
     };
     storeOptions();
     renderNavigation();
@@ -1446,7 +1676,9 @@
     if (!route || !paper || paper.oversized) return;
     const title = document.title;
     const name = settings.scope === 'topic' ? route.topic.title : printableChapter(route.chapter).title;
-    document.title = documentType === 'solution' ? name + ' · Solucionari' : name;
+    const level = selectedLevel();
+    const edition = level.id === 'intermedia' ? '' : ' · ' + level.label;
+    document.title = name + edition + (documentType === 'solution' ? ' · Solucionari' : '');
     try { window.print(); }
     finally { document.title = title; }
   }
@@ -1479,13 +1711,13 @@
     return address(topic, chapter, section, null);
   });
   renderRoute();
-  imageOperation('readonly', store => store.getAll()).then(items => {
+  const uploadsReady = imageOperation('readonly', store => store.getAll()).then(items => {
     knownUploads.push(...items.map(item => ({ ...addUrl(item), persisted: true })));
     if (route) {
       renderControls();
       requestPaper();
     }
   }).catch(() => {
-    byId('upload-hint').textContent = 'Les imatges afegides es mantindran mentre aquesta pàgina sigui oberta.';
+    if (route) imageFeedback('Les imatges afegides es mantindran mentre aquesta pàgina sigui oberta.');
   });
 })();
