@@ -991,6 +991,7 @@
     byId('leading-value').value = layoutNumber.format(settings.leading);
     byId('margin-value').value = layoutNumber.format(settings.margin) + ' mm';
     byId('block-spacing-value').value = layoutNumber.format(settings.blockSpacing) + ' %';
+    byId('note-width-value').value = layoutNumber.format(settings.noteWidth) + ' %';
   }
 
   function syncFooterControls() {
@@ -1623,7 +1624,7 @@
     } else {
       if (!(input.name in defaults)) return;
       settings[input.name] = value;
-      if (['fontSize', 'leading', 'margin', 'blockSpacing'].includes(input.name)) syncMeasurements();
+      if (['fontSize', 'leading', 'margin', 'blockSpacing', 'noteWidth'].includes(input.name)) syncMeasurements();
       if (input.name === 'showFigures') {
         figureOptions.hidden = !value;
         if (!value) closeFigureHelper();
@@ -1875,8 +1876,8 @@
       id: 'observacio', title: 'Com és el paisatge?',
       blocks: [
         { type: 'paragraph', core: true, text: 'Comença per allò que tens més a prop. Fixa’t en el relleu, la vegetació i els camins. Busca un detall que t’ajudi a orientar-te.' },
-        { type: 'paragraph', text: 'Ara mira més lluny. Què canvia? Explica-ho amb exemples i compara la teva descripció amb la d’un company.' },
         { type: 'note', kind: 'observa', title: 'El mateix lloc, dues mirades', text: 'Tria un detall del paisatge i explica per què t’hi has fixat.' },
+        { type: 'paragraph', text: 'Ara mira més lluny. Què canvia? Explica-ho amb exemples i compara la teva descripció amb la d’un company.' },
       ],
     }],
     figures: [{

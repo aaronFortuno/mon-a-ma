@@ -316,23 +316,72 @@ summary { color: var(--green); font-weight: 650; }
 .ink :is(th, td) { border: 1px solid var(--paper-line); padding: .43em .58em; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
 .ink thead th { background: var(--paper-tint); font-family: var(--sans); }
 .ink tbody th { width: var(--row-heading-width, auto); font-weight: 700; }
-.note { clear: both; margin: calc(var(--block-spacing) * .6em) 0 calc(var(--block-spacing) * .85em); border-left: .23em solid var(--paper-accent); background: var(--paper-tint); padding: .58em .8em; }
-.note strong { color: var(--paper-accent); }
-.note-label {
+.note {
+  --note-accent: var(--paper-accent);
+  --note-tint: var(--paper-tint);
+  --note-panel-width: min(var(--note-width, 80%), calc(100% - var(--note-clearance, 0px)));
+  clear: both;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--note-panel-width);
+  grid-template-areas: "mark panel";
+  margin-block: calc(var(--block-spacing) * .6em) calc(var(--block-spacing) * .85em);
+}
+.note:has(.note-mark) { --note-clearance: 2.9em; }
+.note[data-kind="ampliacio"] { --note-accent: #355989; --note-tint: #eef3fa; }
+.note[data-kind="curiositat"] { --note-accent: #74517c; --note-tint: #f6eff7; }
+.note[data-kind="observa"] { --note-accent: #346859; --note-tint: #edf5f0; }
+.note[data-kind="prova"] { --note-accent: #805129; --note-tint: #fbf2e8; }
+.sheet[data-note-side="right"] .note {
+  grid-template-columns: var(--note-panel-width) minmax(0, 1fr);
+  grid-template-areas: "panel mark";
+}
+.note-panel {
+  grid-area: panel;
+  min-inline-size: 0;
+  border-inline-start: .3em solid var(--note-accent);
+  background: var(--note-tint);
+  padding: .58em .85em;
+  overflow-wrap: anywhere;
+}
+.sheet[data-note-side="right"] .note-panel {
+  border-inline-start: 0;
+  border-inline-end: .3em solid var(--note-accent);
+}
+.note-mark {
+  grid-area: mark;
   display: flex;
-  align-items: center;
-  gap: .38em;
+  align-items: start;
+  justify-content: end;
+  overflow: hidden;
+  padding-block-start: .28em;
+  color: var(--note-accent);
+}
+.note-mark svg {
+  flex: none;
+  width: 3.8em;
+  max-width: calc(100% + .8em);
+  height: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: translateX(.95em) rotate(-13deg);
+}
+.sheet[data-note-side="right"] .note-mark { justify-content: start; }
+.sheet[data-note-side="right"] .note-mark svg { transform: translateX(-.95em) rotate(13deg); }
+.note-label {
   margin-block-end: .28em;
-  color: var(--paper-accent);
+  color: var(--note-accent);
   font: 720 .76em/1.24 var(--sans);
   letter-spacing: .045em;
   text-transform: uppercase;
 }
-.note-label svg { flex: none; width: 1.4em; height: 1.4em; fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
-.note-format > .check { margin-block: .45rem; }
+.note-panel strong { color: var(--note-accent); }
+.note-panel > strong { display: block; font-family: var(--sans); font-size: .91em; margin-bottom: .2em; }
+.note-panel p:last-child { margin-bottom: 0; }
+.note-layout-options { margin-block: .55rem; }
 .note-format:has(input[name="showNoteIcons"]:not(:checked)) #note-icon-options { display: none; }
-.note > strong { display: block; font-family: var(--sans); font-size: .91em; margin-bottom: .2em; }
-.note p:last-child { margin-bottom: 0; }
 .illustration {
   --max-image-height: 125mm;
   width: min(var(--image-width), calc(var(--max-image-height) * var(--figure-ratio, 2)));

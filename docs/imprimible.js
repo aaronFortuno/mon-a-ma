@@ -75,17 +75,20 @@ window.imprimible = (() => {
     }
     if (source.type === 'note') {
       const aside = node('aside', 'note');
+      const panel = node('div', 'note-panel');
       const type = noteTypes[source.kind];
       if (type) {
-        const label = node('div', 'note-label');
-        if (options.showNoteIcons !== false) {
-          const icon = noteIcon(options[type.field] ?? type.icon);
-          if (icon) label.append(icon);
+        aside.dataset.kind = source.kind;
+        const icon = options.showNoteIcons !== false && noteIcon(options[type.field] ?? type.icon);
+        if (icon) {
+          const mark = node('div', 'note-mark');
+          mark.append(icon);
+          aside.append(mark);
         }
-        label.append(type.label);
-        aside.append(label);
+        panel.append(node('div', 'note-label', type.label));
       }
-      aside.append(node('strong', '', source.title), rich(node('p'), source.text));
+      panel.append(node('strong', '', source.title), rich(node('p'), source.text));
+      aside.append(panel);
       return aside;
     }
     const table = node('table');
@@ -202,6 +205,8 @@ window.imprimible = (() => {
     sheet.style.setProperty('--leading', options.leading);
     sheet.style.setProperty('--serif', paperFonts[options.font] ?? paperFonts.georgia);
     sheet.dataset.alignment = options.textAlignment;
+    sheet.dataset.noteSide = options.noteSide === 'right' ? 'right' : 'left';
+    sheet.style.setProperty('--note-width', (options.noteWidth ?? 80) + '%');
     if (options.markCore) sheet.dataset.markCore = '';
     if (options.blockSpacing !== undefined) sheet.style.setProperty('--block-spacing', options.blockSpacing / 100);
     const inner = node('div', 'sheet-inner');

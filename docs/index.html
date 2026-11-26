@@ -7,15 +7,15 @@
   <title>Món a mà · Apunts i materials per explorar el medi</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png?v=0.1.4">
   <link rel="apple-touch-icon" href="assets/mon-a-ma.png?v=0.1.4">
-  <link rel="stylesheet" href="estils.css?v=0.1.37">
-  <script src="interficie.js?v=0.1.37" defer></script>
-  <script src="continguts/terra-i-mapes.js?v=0.1.37" defer></script>
-  <script src="continguts/variants-terra-i-mapes.js?v=0.1.37" defer></script>
-  <script src="imprimible.js?v=0.1.37" defer></script>
-  <script src="preferencies.js?v=0.1.37" defer></script>
-  <script src="continguts/curriculum.js?v=0.1.37" defer></script>
-  <script src="mapa-curricular.js?v=0.1.37" defer></script>
-  <script src="app.js?v=0.1.37" defer></script>
+  <link rel="stylesheet" href="estils.css?v=0.1.38">
+  <script src="interficie.js?v=0.1.38" defer></script>
+  <script src="continguts/terra-i-mapes.js?v=0.1.38" defer></script>
+  <script src="continguts/variants-terra-i-mapes.js?v=0.1.38" defer></script>
+  <script src="imprimible.js?v=0.1.38" defer></script>
+  <script src="preferencies.js?v=0.1.38" defer></script>
+  <script src="continguts/curriculum.js?v=0.1.38" defer></script>
+  <script src="mapa-curricular.js?v=0.1.38" defer></script>
+  <script src="app.js?v=0.1.38" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Ves al contingut</a>
@@ -255,8 +255,14 @@
                     </fieldset>
                     <label class="check full-width" id="core-format-option" hidden><input type="checkbox" name="markCore"> Destaca el text comú</label>
                     <details class="note-format full-width">
-                      <summary>Icones dels quadres</summary>
-                      <label class="check"><input type="checkbox" name="showNoteIcons"> Mostra les icones</label>
+                      <summary>Quadres</summary>
+                      <div class="option-group note-layout-options">
+                        <label>Barra i icona
+                          <select name="noteSide"><option value="left">Esquerra</option><option value="right">Dreta</option></select>
+                        </label>
+                        <label class="slider">Amplada <output id="note-width-value" for="note-width"></output><input type="range" id="note-width" name="noteWidth" min="60" max="100" step="5" aria-label="Amplada dels quadres" title="Quan hi ha icona, el quadre deixa prou espai perquè es vegi."></label>
+                        <label class="check full-width"><input type="checkbox" name="showNoteIcons"> Mostra les icones</label>
+                      </div>
                       <div class="option-group" id="note-icon-options"></div>
                     </details>
                   </div>
@@ -320,7 +326,7 @@
         <button type="button" id="reset-user" title="Restableix els ajustos de totes les fitxes, les plantilles, les col·leccions i les imatges pròpies.">Restableix preferències</button>
         <span id="reset-user-status" role="status"></span>
         <a href="https://github.com/aaronFortuno/mon-a-ma/blob/main/license.md">MIT</a>
-        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.37 · Historial de versions">v0.1.37</button>
+        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.38 · Historial de versions">v0.1.38</button>
         <button type="button" data-dialog="about" aria-haspopup="dialog" aria-label="V4V · Sobre el projecte">V4V</button>
       </nav>
     </div>
@@ -331,6 +337,10 @@
       <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
     </div>
     <div class="dialog-content">
+      <h3>v0.1.38</h3>
+      <ul>
+        <li>Dona als quadres icones grans, una paleta per tipus i controls per ajustar-ne l’amplada i el costat de la barra.</li>
+      </ul>
       <h3>v0.1.37</h3>
       <ul>
         <li>Publica l’esquema d’erosió en PNG d’alta resolució.</li>

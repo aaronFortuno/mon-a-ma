@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.38 · 26 de novembre de 2026
+
+- Dona als quadres icones grans, una paleta per tipus i controls per ajustar-ne l’amplada i el costat de la barra.
+
 ## 0.1.37 · 26 de novembre de 2026
 
 - Publica l’esquema d’erosió en PNG d’alta resolució.
