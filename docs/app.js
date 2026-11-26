@@ -2,7 +2,7 @@
   const locale = document.documentElement.lang;
   const cycleById = new Map(window.curriculum.cycles.map(cycle => [cycle.id, cycle]));
   const topics = window.quaderns.filter(topic => topic.lang === locale);
-  const { node, paragraphAnchor, loadPaperFont, paginate, figureSizing, normalizeFigureWidth, canWrapFigure } = window.imprimible;
+  const { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure } = window.imprimible;
   const preferences = window.preferencies;
   const { defaults } = preferences;
   const materialLevels = [
@@ -17,6 +17,9 @@
   const quickTemplateForm = byId('quick-template-form');
   const quickTemplateEntry = byId('quick-template-entry');
   const quickTemplateStatus = byId('quick-template-status');
+  const templateDialog = byId('templates-dialog');
+  const templateGallery = byId('template-gallery');
+  let browsingTemplate = 'inherit';
   let library = preferences.library();
   let activeCollection = null;
   const form = byId('options');
@@ -1860,12 +1863,44 @@
     ];
   }
 
+  const templateSample = {
+    id: 'mostra', lang: locale, code: 'M000', title: 'Un paisatge per observar',
+    intro: 'Un mateix paisatge canvia segons l’estació i el lloc des d’on el mires. Pots descriure què hi veus i comparar-ho amb el que veu una altra persona.',
+    sections: [{
+      id: 'observacio', title: 'Com és el paisatge?',
+      blocks: [
+        { type: 'paragraph', core: true, text: 'Comença per allò que tens més a prop. Fixa’t en el relleu, la vegetació i els camins. Busca un detall que t’ajudi a orientar-te.' },
+        { type: 'paragraph', text: 'Ara mira més lluny. Què canvia? Explica-ho amb exemples i compara la teva descripció amb la d’un company.' },
+      ],
+    }],
+    figures: [{
+      id: 'mostra-paisatge', section: 'observacio', anchor: 'lead', position: 'right', width: 45, wrap: true,
+      src: 'illustracions/m001/elements-pla.png', ratio: 23 / 14, alt: '',
+    }],
+  };
+
+  function templateName(id) {
+    if (id === 'inherit') {
+      const inherited = activeCollection?.templateId ?? library.defaultTemplateId;
+      return 'Per defecte · ' + (library.templates.find(item => item.id === inherited)?.name ?? 'Format original');
+    }
+    return library.templates.find(item => item.id === id)?.name ?? 'Format original';
+  }
+
+  function templatePreview(container, format) {
+    loadPaperFont(format.font);
+    const chapter = format.showFigures ? templateSample : { ...templateSample, figures: [] };
+    container.replaceChildren(previewPage(templateSample, chapter, 'observacio', { ...format, classroomCode: 'A5' }));
+  }
+
+  function templateSummary(format) {
+    const font = form.elements.font.querySelector('option[value="' + CSS.escape(format.font) + '"]')?.label ?? format.font;
+    return font + ' · ' + layoutNumber.format(format.fontSize) + ' pt · ' + layoutNumber.format(format.margin) + ' mm';
+  }
+
   function syncTemplateSelector() {
-    const select = byId('layout-template');
-    const inheritedId = activeCollection?.templateId ?? library.defaultTemplateId;
-    const inherited = library.templates.find(item => item.id === inheritedId)?.name ?? 'Format original';
-    select.replaceChildren(...templateOptions('Per defecte · ' + inherited));
-    select.value = settings.templateId ?? 'inherit';
+    byId('current-template-name').textContent = templateName(settings.templateId ?? 'inherit');
+    templatePreview(byId('current-template-thumb'), preferences.getBase(settings.templateId, activeCollection, library));
     const template = library.templates.find(item => item.id === settings.templateId);
     const save = byId('save-active-template');
     save.hidden = !template;
@@ -1904,17 +1939,42 @@
     requestPaper();
   }
 
-  function showTemplateManager(selected = '') {
+  function selectTemplatePreview(id) {
+    browsingTemplate = id;
+    const format = preferences.getBase(id === 'inherit' ? null : id, activeCollection, library);
+    for (const card of templateGallery.querySelectorAll('button')) {
+      card.setAttribute('aria-pressed', String(card.dataset.templateId === id));
+    }
+    byId('template-detail-name').textContent = templateName(id);
+    byId('template-detail-format').textContent = templateSummary(format);
+    templatePreview(byId('template-detail-preview'), format);
+
+    const defaultButton = byId('default-template');
+    defaultButton.hidden = id === 'inherit';
+    defaultButton.disabled = id === library.defaultTemplateId;
+    defaultButton.textContent = defaultButton.disabled ? 'Format per defecte' : 'Fes-la per defecte';
+    const template = library.templates.find(item => item.id === id);
     const manager = byId('template-form');
-    const picker = byId('default-template');
-    picker.replaceChildren(...templateOptions());
-    picker.value = library.defaultTemplateId;
-    const select = manager.elements.template;
-    select.replaceChildren(...library.templates.map(item => option(item.id, item.name)));
-    const template = library.templates.find(item => item.id === selected) ?? library.templates[0];
     manager.hidden = !template;
-    select.value = template?.id ?? '';
     manager.elements.title.value = template?.name ?? '';
+    byId('template-status').textContent = '';
+  }
+
+  function showTemplateManager(selected = 'inherit') {
+    const ids = ['inherit', '', ...library.templates.map(item => item.id)];
+    templateGallery.replaceChildren(...ids.map(id => {
+      const card = node('button', 'template-card');
+      card.type = 'button';
+      card.dataset.templateId = id;
+      const thumb = node('span', 'template-thumb');
+      thumb.setAttribute('aria-hidden', 'true');
+      const format = preferences.getBase(id === 'inherit' ? null : id, activeCollection, library);
+      templatePreview(thumb, format);
+      card.append(thumb, node('span', 'template-card-name', templateName(id)), node('small', 'template-card-format', templateSummary(format)));
+      card.addEventListener('click', () => selectTemplatePreview(id));
+      return card;
+    }));
+    selectTemplatePreview(ids.includes(selected) ? selected : 'inherit');
   }
 
   function updateLibrary(change) {
@@ -2178,9 +2238,10 @@
     menu.open = expanded;
     byId('outline-title').closest('summary').focus({ preventScroll: true });
   });
-  byId('layout-template').addEventListener('change', event => {
-    const selected = event.target.value;
-    applyTemplate(selected === 'inherit' ? null : selected);
+  byId('apply-template').addEventListener('click', () => {
+    applyTemplate(browsingTemplate === 'inherit' ? null : browsingTemplate);
+    templateDialog.close();
+    quickTemplateStatus.textContent = 'Format aplicat a la fitxa.';
   });
   byId('new-template').addEventListener('click', () => showQuickTemplate(true));
   function cancelQuickTemplate() {
@@ -2204,17 +2265,13 @@
     const template = library.templates.find(item => item.id === settings.templateId);
     if (template) saveCurrentTemplate(template.id, template.name);
   });
-  byId('manage-templates').addEventListener('click', () => {
-    byId('template-status').textContent = '';
-    showTemplateManager(settings.templateId ?? '');
-  });
-  byId('template-form').elements.template.addEventListener('change', event => showTemplateManager(event.target.value));
+  byId('manage-templates').addEventListener('click', () => showTemplateManager(settings.templateId ?? 'inherit'));
   byId('template-form').addEventListener('submit', event => {
     event.preventDefault();
     const manager = event.currentTarget;
     const name = manager.elements.title.value.trim();
     if (!name) return;
-    const id = manager.elements.template.value;
+    const id = browsingTemplate;
     const persisted = updateLibrary(data => {
       const template = data.templates.find(item => item.id === id);
       if (template) template.name = name;
@@ -2223,15 +2280,16 @@
     showTemplateManager(id);
     templateStatus('Nom de la plantilla actualitzat.', persisted);
   });
-  byId('default-template').addEventListener('change', event => {
-    const persisted = updateLibrary(data => { data.defaultTemplateId = event.target.value; });
+  byId('default-template').addEventListener('click', () => {
+    const persisted = updateLibrary(data => { data.defaultTemplateId = browsingTemplate; });
     settings = getOptions(route.topic);
     renderControls();
     requestPaper();
+    showTemplateManager(browsingTemplate);
     templateStatus('Format per defecte actualitzat.', persisted);
   });
   byId('remove-template').addEventListener('click', () => {
-    const id = byId('template-form').elements.template.value;
+    const id = browsingTemplate;
     const template = library.templates.find(item => item.id === id);
     if (!template || !window.confirm('Vols suprimir la plantilla «' + template.name + '»?')) return;
     const persisted = updateLibrary(data => {

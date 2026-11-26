@@ -7,15 +7,15 @@
   <title>Món a mà · Apunts i materials per explorar el medi</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png?v=0.1.4">
   <link rel="apple-touch-icon" href="assets/mon-a-ma.png?v=0.1.4">
-  <link rel="stylesheet" href="estils.css?v=0.1.34">
-  <script src="interficie.js?v=0.1.34" defer></script>
-  <script src="continguts/terra-i-mapes.js?v=0.1.34" defer></script>
-  <script src="continguts/variants-terra-i-mapes.js?v=0.1.34" defer></script>
-  <script src="imprimible.js?v=0.1.34" defer></script>
-  <script src="preferencies.js?v=0.1.34" defer></script>
-  <script src="continguts/curriculum.js?v=0.1.34" defer></script>
-  <script src="mapa-curricular.js?v=0.1.34" defer></script>
-  <script src="app.js?v=0.1.34" defer></script>
+  <link rel="stylesheet" href="estils.css?v=0.1.35">
+  <script src="interficie.js?v=0.1.35" defer></script>
+  <script src="continguts/terra-i-mapes.js?v=0.1.35" defer></script>
+  <script src="continguts/variants-terra-i-mapes.js?v=0.1.35" defer></script>
+  <script src="imprimible.js?v=0.1.35" defer></script>
+  <script src="preferencies.js?v=0.1.35" defer></script>
+  <script src="continguts/curriculum.js?v=0.1.35" defer></script>
+  <script src="mapa-curricular.js?v=0.1.35" defer></script>
+  <script src="app.js?v=0.1.35" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Ves al contingut</a>
@@ -192,7 +192,14 @@
                 <summary>Plantilles</summary>
                 <div class="sidebar-pane scroll-pane">
                   <div class="option-group">
-                    <label class="full-width">Format d’aquesta fitxa <select id="layout-template"></select></label>
+                    <button type="button" class="template-current full-width" id="manage-templates" data-dialog="templates-dialog" aria-haspopup="dialog" aria-label="Explora les plantilles">
+                      <span id="current-template-thumb" class="template-thumb" aria-hidden="true"></span>
+                      <span class="template-current-copy">
+                        <small>Format d’aquesta fitxa</small>
+                        <strong id="current-template-name"></strong>
+                        <span>Explora les plantilles <span aria-hidden="true">→</span></span>
+                      </span>
+                    </button>
                     <div class="full-width template-tools">
                       <div id="template-actions" class="template-actions">
                         <button type="button" class="primary" id="save-active-template" hidden>Desa els canvis</button>
@@ -205,7 +212,6 @@
                       </div>
                       <p class="hint" id="quick-template-status" role="status"></p>
                     </div>
-                    <button type="button" class="secondary full-width" id="manage-templates" data-dialog="templates-dialog" aria-haspopup="dialog">Gestiona les plantilles</button>
                   </div>
                 </div>
               </details>
@@ -309,7 +315,7 @@
         <button type="button" id="reset-user" title="Restableix els ajustos de totes les fitxes, les plantilles, les col·leccions i les imatges pròpies.">Restableix preferències</button>
         <span id="reset-user-status" role="status"></span>
         <a href="https://github.com/aaronFortuno/mon-a-ma/blob/main/license.md">MIT</a>
-        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.34 · Historial de versions">v0.1.34</button>
+        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.35 · Historial de versions">v0.1.35</button>
         <button type="button" data-dialog="about" aria-haspopup="dialog" aria-label="V4V · Sobre el projecte">V4V</button>
       </nav>
     </div>
@@ -320,6 +326,10 @@
       <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
     </div>
     <div class="dialog-content">
+      <h3>v0.1.35</h3>
+      <ul>
+        <li>Afegeix una galeria de plantilles amb miniatures comparables i una vista prèvia abans d’aplicar una maquetació.</li>
+      </ul>
       <h3>v0.1.34</h3>
       <ul>
         <li>Mostra BETA a la capçalera i el títol de la fitxa al desplegable esquerre.</li>
@@ -552,22 +562,32 @@
       </div>
     </div>
   </dialog>
-  <dialog id="templates-dialog" class="project-dialog management-dialog" aria-labelledby="templates-title">
+  <dialog id="templates-dialog" class="project-dialog management-dialog templates-dialog" aria-labelledby="templates-title">
     <div class="dialog-header">
       <h2 id="templates-title">Plantilles</h2>
       <form method="dialog"><button type="submit" class="secondary">Tanca</button></form>
     </div>
-    <div class="dialog-content">
-      <label>Plantilla per defecte de les fitxes <select id="default-template"></select></label>
-      <form id="template-form" class="management-form">
-        <label>Plantilla <select name="template"></select></label>
-        <label>Nom de la plantilla <input type="text" name="title" maxlength="60" required></label>
+    <div class="dialog-content template-browser">
+      <div>
+        <div id="template-gallery" class="template-gallery" role="group" aria-label="Tria una plantilla"></div>
+      </div>
+      <section class="template-detail" aria-labelledby="template-detail-name">
+        <h3 id="template-detail-name"></h3>
+        <p id="template-detail-format"></p>
+        <div class="template-thumb template-large-preview" id="template-detail-preview" aria-hidden="true"></div>
         <div class="management-actions">
-          <button type="submit" class="primary">Desa el nom</button>
-          <button type="button" class="secondary" id="remove-template">Suprimeix la plantilla</button>
+          <button type="button" class="primary" id="apply-template">Aplica a la fitxa</button>
+          <button type="button" class="secondary" id="default-template">Fes-la per defecte</button>
         </div>
-      </form>
-      <p class="hint" id="template-status" role="status"></p>
+        <form id="template-form" class="management-form">
+          <label>Nom de la plantilla <input type="text" name="title" maxlength="60" required></label>
+          <div class="management-actions">
+            <button type="submit" class="secondary">Desa el nom</button>
+            <button type="button" class="secondary" id="remove-template">Suprimeix la plantilla</button>
+          </div>
+        </form>
+        <p class="hint" id="template-status" role="status"></p>
+      </section>
     </div>
   </dialog>
   <dialog id="collection-dialog" class="project-dialog management-dialog" aria-labelledby="collection-title">

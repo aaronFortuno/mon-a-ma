@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.35 · 26 de novembre de 2026
+
+- Afegeix una galeria de plantilles amb miniatures comparables i una vista prèvia abans d’aplicar una maquetació.
+
 ## 0.1.34 · 26 de novembre de 2026
 
 - Mostra BETA a la capçalera i el títol de la fitxa al desplegable esquerre.
