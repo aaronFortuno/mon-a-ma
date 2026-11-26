@@ -167,7 +167,7 @@ window.imprimible = (() => {
     sheet.style.setProperty('--serif', paperFonts[options.font] ?? paperFonts.georgia);
     sheet.dataset.alignment = options.textAlignment;
     if (options.markCore) sheet.dataset.markCore = '';
-    if (options.paragraphSpacing) sheet.style.setProperty('--paragraph-spacing', options.paragraphSpacing);
+    if (options.blockSpacing !== undefined) sheet.style.setProperty('--block-spacing', options.blockSpacing / 100);
     const inner = node('div', 'sheet-inner');
     if (firstPage) {
       const row = node('div', 'sheet-header-fields');

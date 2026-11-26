@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.30 · 26 de novembre de 2026
+
+- Demana un segon clic al mateix botó per restablir la maquetació, l’ordre dels apartats o les il·lustracions.
+- Dona més espai als títols i als peus d’imatge, i afegeix un lliscador per ajustar la separació entre blocs.
+
 ## 0.1.29 · 26 de novembre de 2026
 
 - Mostra les il·lustracions a amplada completa, amb vora i sense text al voltant per defecte.

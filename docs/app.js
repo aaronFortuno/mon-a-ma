@@ -77,6 +77,7 @@
   let sectionEdit;
   let figureEdit = '';
   let paperAnimations = [];
+  let pendingReset;
 
   function imageStore() {
     imageDb ??= new Promise((resolve, reject) => {
@@ -691,6 +692,7 @@
   }
 
   function renderRoute(event) {
+    cancelResetConfirmation();
     const previous = route;
     route = extractRoute();
     const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
@@ -916,6 +918,7 @@
     byId('font-size-value').value = layoutNumber.format(settings.fontSize) + ' pt';
     byId('leading-value').value = layoutNumber.format(settings.leading);
     byId('margin-value').value = layoutNumber.format(settings.margin) + ' mm';
+    byId('block-spacing-value').value = layoutNumber.format(settings.blockSpacing) + ' %';
   }
 
   function syncFooterControls() {
@@ -1189,11 +1192,11 @@
     if (level === 'suport') {
       options.fontSize = Math.min(16, options.fontSize + .5);
       options.leading = Math.min(2.15, options.leading + .17);
-      options.paragraphSpacing = .82;
+      options.blockSpacing *= 1.2;
     } else if (level === 'ampliacio') {
       options.fontSize = Math.max(10, options.fontSize - .5);
       options.leading = Math.max(1.1, options.leading - .12);
-      options.paragraphSpacing = .5;
+      options.blockSpacing *= .76;
     }
     return options;
   }
@@ -1548,7 +1551,7 @@
     } else {
       if (!(input.name in defaults)) return;
       settings[input.name] = value;
-      if (['fontSize', 'leading', 'margin'].includes(input.name)) syncMeasurements();
+      if (['fontSize', 'leading', 'margin', 'blockSpacing'].includes(input.name)) syncMeasurements();
       if (input.name === 'showFigures') {
         figureOptions.hidden = !value;
         if (!value) closeFigureHelper();
@@ -1651,7 +1654,6 @@
     if (!route || imageWrite) return;
     const topic = route.topic.id;
     const collection = activeCollection;
-    if (!window.confirm('Vols esborrar les imatges pròpies i els ajustos d’il·lustració d’aquesta fitxa?')) return;
     imageWrite = true;
     try {
       await uploadsReady;
@@ -1814,6 +1816,37 @@
     else location.hash = hash;
   }
 
+  function cancelResetConfirmation() {
+    if (!pendingReset) return;
+    const { button, label } = pendingReset;
+    pendingReset = undefined;
+    button.textContent = label;
+    delete button.dataset.confirmingReset;
+  }
+
+  function registerReset(id, confirmationLabel, action) {
+    const button = byId(id);
+    const label = button.textContent;
+    button.addEventListener('click', () => {
+      if (!route) return;
+      if (pendingReset?.button === button) {
+        cancelResetConfirmation();
+        action();
+        return;
+      }
+      cancelResetConfirmation();
+      pendingReset = { button, label };
+      button.textContent = confirmationLabel;
+      button.dataset.confirmingReset = '';
+    });
+    button.addEventListener('blur', () => {
+      if (pendingReset?.button === button) cancelResetConfirmation();
+    });
+    button.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && event.repeat) event.preventDefault();
+    });
+  }
+
   function updateSections(message, edit) {
     sectionEdit = edit;
     storeOptions();
@@ -1972,9 +2005,12 @@
   });
   byId('figure-helper-close').addEventListener('click', () => closeFigureHelper(true));
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && helperFigure) closeFigureHelper(helperPinned);
+    if (event.key !== 'Escape') return;
+    cancelResetConfirmation();
+    if (helperFigure) closeFigureHelper(helperPinned);
   });
   document.addEventListener('pointerdown', event => {
+    if (pendingReset && !pendingReset.button.contains(event.target)) cancelResetConfirmation();
     if (helperFigure && !figureHelper.contains(event.target) && previewFigure(event.target)?.dataset.figure !== helperFigure) closeFigureHelper();
   });
   byId('material-intro-slider').addEventListener('input', event => {
@@ -1989,10 +2025,10 @@
     renderControls();
     requestPaper();
   });
-  byId('reset-figures').addEventListener('click', resetFigures);
+  registerReset('reset-figures', 'Confirma i esborra les imatges pròpies', resetFigures);
   figureUpload.addEventListener('change', addImage);
   byId('removed-sections').addEventListener('click', restoreSection);
-  byId('reset-section-order').addEventListener('click', () => {
+  registerReset('reset-section-order', 'Confirma l’ordre original', () => {
     delete settings.sectionOrder[route.chapter.id];
     updateSections('S’ha recuperat l’ordre original dels apartats.');
     byId('outline-title').focus({ preventScroll: true });
@@ -2141,7 +2177,7 @@
     renderControls();
     requestPaper();
   });
-  byId('reset').addEventListener('click', () => {
+  registerReset('reset', 'Confirma el restabliment', () => {
     logoUploadVersion++;
     headerLogoFeedback('');
     settings = {

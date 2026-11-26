@@ -7,15 +7,15 @@
   <title>Món a mà · Apunts i materials per explorar el medi</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png?v=0.1.4">
   <link rel="apple-touch-icon" href="assets/mon-a-ma.png?v=0.1.4">
-  <link rel="stylesheet" href="estils.css?v=0.1.29">
-  <script src="interficie.js?v=0.1.29" defer></script>
-  <script src="continguts/terra-i-mapes.js?v=0.1.29" defer></script>
-  <script src="continguts/variants-terra-i-mapes.js?v=0.1.29" defer></script>
-  <script src="imprimible.js?v=0.1.29" defer></script>
-  <script src="preferencies.js?v=0.1.29" defer></script>
-  <script src="continguts/curriculum.js?v=0.1.29" defer></script>
-  <script src="mapa-curricular.js?v=0.1.29" defer></script>
-  <script src="app.js?v=0.1.29" defer></script>
+  <link rel="stylesheet" href="estils.css?v=0.1.30">
+  <script src="interficie.js?v=0.1.30" defer></script>
+  <script src="continguts/terra-i-mapes.js?v=0.1.30" defer></script>
+  <script src="continguts/variants-terra-i-mapes.js?v=0.1.30" defer></script>
+  <script src="imprimible.js?v=0.1.30" defer></script>
+  <script src="preferencies.js?v=0.1.30" defer></script>
+  <script src="continguts/curriculum.js?v=0.1.30" defer></script>
+  <script src="mapa-curricular.js?v=0.1.30" defer></script>
+  <script src="app.js?v=0.1.30" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Ves al contingut</a>
@@ -207,6 +207,7 @@
                     <label class="slider">Cos <output id="font-size-value"></output><input type="range" name="fontSize" min="10" max="16" step="0.5" aria-label="Cos de lletra"></label>
                     <label class="slider">Interlineat <output id="leading-value"></output><input type="range" name="leading" min="1.1" max="2" step="0.05" aria-label="Interlineat"></label>
                     <label class="slider">Marges <output id="margin-value"></output><input type="range" name="margin" min="8" max="28" step="1" aria-label="Marges en mil·límetres"></label>
+                    <label class="slider full-width">Espai entre blocs <output id="block-spacing-value"></output><input type="range" name="blockSpacing" min="40" max="180" step="10" aria-label="Espai entre paràgrafs i apartats"></label>
                     <fieldset class="text-alignment full-width">
                       <legend>Alineació del text</legend>
                       <div class="alignment-options">
@@ -286,7 +287,7 @@
       <div class="footer-family">Un projecte d’<a href="https://ortogra.fi/" aria-label="ortogra.fi"><svg viewBox="0 0 48 48" width="22" height="22" fill="none" stroke-linecap="round" aria-hidden="true"><circle cx="22" cy="28" r="14" stroke="currentColor" stroke-width="5.5"/><path d="m27 9 7-6" stroke="var(--accent)" stroke-width="4.5"/></svg>ortogra.fi</a></div>
       <nav class="footer-links" aria-label="Sobre el projecte">
         <a href="https://github.com/aaronFortuno/mon-a-ma/blob/main/license.md">MIT</a>
-        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.29 · Historial de versions">v0.1.29</button>
+        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.30 · Historial de versions">v0.1.30</button>
         <button type="button" data-dialog="about" aria-haspopup="dialog" aria-label="V4V · Sobre el projecte">V4V</button>
       </nav>
     </div>
@@ -297,6 +298,11 @@
       <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
     </div>
     <div class="dialog-content">
+      <h3>v0.1.30</h3>
+      <ul>
+        <li>Demana un segon clic al mateix botó per restablir la maquetació, l’ordre dels apartats o les il·lustracions.</li>
+        <li>Dona més espai als títols i als peus d’imatge, i afegeix un lliscador per ajustar la separació entre blocs.</li>
+      </ul>
       <h3>v0.1.29</h3>
       <ul>
         <li>Mostra les il·lustracions a amplada completa, amb vora i sense text al voltant per defecte.</li>
