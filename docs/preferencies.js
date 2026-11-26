@@ -106,6 +106,15 @@
     });
   }
 
+  function clearLayout(topicId, collection) {
+    const layouts = read(layoutKey, {});
+    const key = recordKey(topicId, collection);
+    if (!Object.hasOwn(layouts, key)) return true;
+    const next = { ...layouts };
+    delete next[key];
+    return write(layoutKey, next);
+  }
+
   function clearCollectionLayouts(id) {
     const layouts = read(layoutKey, {});
     return write(layoutKey, Object.fromEntries(Object.entries(layouts).filter(([key]) => !key.startsWith('col:' + id + ':'))));
@@ -122,5 +131,5 @@
     return [...sorted, ...sections.values()];
   }
 
-  window.preferencies = { defaults, loadCatalogDrafts, saveCatalogDrafts, firstVisit, library, saveLibrary, format, getBase, loadLayout, saveLayout, clearCollectionLayouts, orderedSections };
+  window.preferencies = { defaults, loadCatalogDrafts, saveCatalogDrafts, firstVisit, library, saveLibrary, format, getBase, loadLayout, saveLayout, clearLayout, clearCollectionLayouts, orderedSections };
 })();

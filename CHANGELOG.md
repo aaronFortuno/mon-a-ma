@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.33 · 26 de novembre de 2026
+
+- Afegeix un restabliment general que esborra les personalitzacions i les imatges pròpies de la fitxa.
+- Situa el restabliment de l’ordre al costat del títol dels apartats.
+- Obre el menú de PDF sota la fletxa d’impressió.
+
 ## 0.1.32 · 26 de novembre de 2026
 
 - Filtra el catàleg amb el commutador En desenvolupament i mostra l’estat de cada material al mapa curricular.

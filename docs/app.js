@@ -58,6 +58,8 @@
   const zoomStep = 1.2;
   const motionLayer = byId('paper-motion');
   const printMenu = byId('print-menu');
+  const printOptions = byId('print-options');
+  const resetMaterialStatus = byId('reset-material-status');
   const printButtons = [byId('print'), byId('save-pdf')];
   const printStatus = byId('print-status');
   const catalogTitle = document.title;
@@ -751,6 +753,7 @@
     const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
     if (changedMaterial && byId('material-intro').open) byId('material-intro').close();
     if (changedMaterial && comparisonDialog.open) comparisonDialog.close();
+    if (changedMaterial && printMenu.matches(':popover-open')) printMenu.hidePopover();
     byId('catalog-home').href = route ? catalogAddress(activeCollection) : '#';
     byId('catalog').hidden = Boolean(route);
     const curriculumDialog = byId('curriculum-dialog');
@@ -766,7 +769,6 @@
     if (!route) {
       closeFigureHelper();
       stopPaperMotion();
-      if (printMenu.matches(':popover-open')) printMenu.hidePopover();
       sectionEdit = null;
       revision++;
       if (location.hash.startsWith('#conjunt/')) {
@@ -790,6 +792,7 @@
       figureEdit = '';
     }
     if (changedMaterial) {
+      resetMaterialStatus.textContent = '';
       showQuickTemplate(false);
       quickTemplateStatus.textContent = '';
       settings = getOptions(route.topic);
@@ -1720,22 +1723,64 @@
     }
   }
 
+  async function clearFigureUploads(topic, collection) {
+    await uploadsReady;
+    const uploads = knownUploads.filter(item => inFigureScope(item, topic, collection));
+    if (uploads.some(item => item.persisted)) {
+      await imageOperation('readwrite', store => {
+        for (const item of uploads) if (item.persisted) store.delete(item.id);
+        return store.count();
+      });
+    }
+    for (const item of uploads) releaseUpload(item);
+    knownUploads = knownUploads.filter(item => !inFigureScope(item, topic, collection));
+  }
+
+  async function resetMaterial() {
+    if (!route || imageWrite) return;
+    const { topic } = route;
+    const collection = activeCollection;
+    const isCurrent = () => route?.topic.id === topic.id && activeCollection?.id === collection?.id;
+    imageWrite = true;
+    byId('reset-material').disabled = true;
+    resetMaterialStatus.textContent = '';
+    try {
+      await clearFigureUploads(topic.id, collection);
+      const persisted = preferences.clearLayout(topic.id, collection);
+      if (!isCurrent()) return;
+      settings = getOptions(topic);
+      documentType = 'sheet';
+      previewMagnification = 1;
+      pendingSection = route.section ?? '';
+      sectionEdit = null;
+      figureEdit = '';
+      logoUploadVersion++;
+      closeFigureHelper();
+      if (comparisonDialog.open) comparisonDialog.close();
+      headerLogoFeedback('');
+      byId('upload-status').hidden = true;
+      byId('save-status').hidden = true;
+      stack.scrollTop = 0;
+      stack.scrollLeft = 0;
+      renderNavigation();
+      renderControls();
+      requestPaper();
+      resetMaterialStatus.textContent = persisted ? 'Fitxa restablerta.' : 'Fitxa restablerta durant aquesta sessió.';
+    } catch {
+      if (isCurrent()) resetMaterialStatus.textContent = 'No s’ha pogut restablir la fitxa. Torna-ho a provar.';
+    } finally {
+      imageWrite = false;
+      byId('reset-material').disabled = false;
+    }
+  }
+
   async function resetFigures() {
     if (!route || imageWrite) return;
     const topic = route.topic.id;
     const collection = activeCollection;
     imageWrite = true;
     try {
-      await uploadsReady;
-      const uploads = knownUploads.filter(item => inFigureScope(item, topic, collection));
-      if (uploads.some(item => item.persisted)) {
-        await imageOperation('readwrite', store => {
-          for (const item of uploads) if (item.persisted) store.delete(item.id);
-          return store.count();
-        });
-      }
-      for (const item of uploads) releaseUpload(item);
-      knownUploads = knownUploads.filter(item => !inFigureScope(item, topic, collection));
+      await clearFigureUploads(topic, collection);
       const current = route?.topic.id === topic && activeCollection?.id === collection?.id;
       const layout = current ? settings : preferences.loadLayout(topic, collection, library);
       layout.figureStyle = '';
@@ -1888,16 +1933,18 @@
 
   function cancelResetConfirmation() {
     if (!pendingReset) return;
-    const { button, label } = pendingReset;
+    const { button, labelElement, label } = pendingReset;
     pendingReset = undefined;
-    button.textContent = label;
+    labelElement.textContent = label;
     delete button.dataset.confirmingReset;
   }
 
   function registerReset(id, confirmationLabel, action) {
     const button = byId(id);
-    const label = button.textContent;
-    button.addEventListener('click', () => {
+    const labelElement = button.querySelector('[data-reset-label]') ?? button;
+    const label = labelElement.textContent;
+    button.addEventListener('click', event => {
+      event.preventDefault();
       if (!route) return;
       if (pendingReset?.button === button) {
         cancelResetConfirmation();
@@ -1905,8 +1952,8 @@
         return;
       }
       cancelResetConfirmation();
-      pendingReset = { button, label };
-      button.textContent = confirmationLabel;
+      pendingReset = { button, labelElement, label };
+      labelElement.textContent = confirmationLabel;
       button.dataset.confirmingReset = '';
     });
     button.addEventListener('blur', () => {
@@ -2096,12 +2143,16 @@
     requestPaper();
   });
   registerReset('reset-figures', 'Confirma i esborra les imatges pròpies', resetFigures);
+  registerReset('reset-material', 'Confirma i esborra els canvis i les imatges', resetMaterial);
   figureUpload.addEventListener('change', addImage);
   byId('removed-sections').addEventListener('click', restoreSection);
-  registerReset('reset-section-order', 'Confirma l’ordre original', () => {
+  registerReset('reset-section-order', 'Confirma', () => {
+    const menu = byId('chapter-menu');
+    const expanded = menu.open;
     delete settings.sectionOrder[route.chapter.id];
     updateSections('S’ha recuperat l’ordre original dels apartats.');
-    byId('outline-title').focus({ preventScroll: true });
+    menu.open = expanded;
+    byId('outline-title').closest('summary').focus({ preventScroll: true });
   });
   byId('layout-template').addEventListener('change', event => {
     const selected = event.target.value;
@@ -2263,6 +2314,16 @@
     renderControls();
     requestPaper();
   });
+  function positionPrintMenu() {
+    const trigger = printOptions.getBoundingClientRect();
+    printMenu.style.setProperty('--print-trigger-bottom', trigger.bottom + 'px');
+    printMenu.style.setProperty('--print-trigger-right', document.documentElement.clientWidth - trigger.right + 'px');
+  }
+
+  printMenu.addEventListener('beforetoggle', event => {
+    if (event.newState === 'open') positionPrintMenu();
+  });
+
   function printDocument() {
     if (!route || !paper || paper.oversized) return;
     const title = document.title;
@@ -2296,7 +2357,10 @@
     fitPaper();
     positionFigureHelper();
   }).observe(stack);
-  window.addEventListener('resize', positionFigureHelper);
+  window.addEventListener('resize', () => {
+    positionFigureHelper();
+    if (printMenu.matches(':popover-open')) positionPrintMenu();
+  });
   window.addEventListener('hashchange', event => {
     if (location.hash !== '#main') renderRoute(event);
   });
