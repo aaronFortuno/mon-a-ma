@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.28 · 26 de novembre de 2026
+
+- Redueix el quadre del comparador i aclareix el fons perquè es vegi la fitxa de sota.
+- Afegeix exemples resolts a la Base dels quatre temes de La Terra i els mapes.
+- Aprofundeix a Ampliació amb explicacions, dades i reptes de raonament.
+
 ## 0.1.27 · 26 de novembre de 2026
 
 - Sincronitza el desplaçament de les dues variants per apartats i adapta el ritme a la llargada de cada text.

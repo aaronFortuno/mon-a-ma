@@ -948,12 +948,15 @@ details[open]::details-content {
 .project-dialog.variant-comparison {
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr);
-  width: calc(100% - .8rem);
-  height: calc(100dvh - .8rem);
-  max-height: calc(100dvh - .8rem);
+  width: min(94rem, calc(100% - clamp(1.25rem, 8vw, 7.5rem)));
+  height: calc(100dvh - clamp(2rem, 12dvh, 6rem));
   overflow: hidden;
 }
 .project-dialog.variant-comparison:not([open]) { display: none; }
+.variant-comparison[open]::backdrop { background-color: #14261c73; }
+@starting-style {
+  .variant-comparison[open]::backdrop { background-color: transparent; }
+}
 .variant-comparison .dialog-header { padding: .55rem .85rem .4rem; }
 .comparison-sections {
   display: flex;
