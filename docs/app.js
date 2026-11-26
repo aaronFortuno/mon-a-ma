@@ -34,10 +34,16 @@
   const comparisonSections = byId('comparison-sections');
   const comparisonArrows = [byId('comparison-previous'), byId('comparison-next')];
   let comparisonOpener;
-  let comparisonSection = '';
+  const comparisonGrid = comparisonDialog.querySelector('.comparison-grid');
   const variantThumbPages = new WeakMap();
   let comparisonRevision = 0;
   let comparisonPages = [];
+  let comparisonAnchors = [];
+  let comparisonProgress = 0;
+  let comparisonScrollPositions = [];
+  let comparisonFrame = 0;
+  let comparisonPair;
+  let comparisonSwap;
   let helperFigure = '';
   let helperPinned = false;
   let helperTimer;
@@ -1241,54 +1247,119 @@
     }));
   }
 
-  function comparisonOffset(target, heading) {
-    return heading.getBoundingClientRect().top - target.getBoundingClientRect().top + target.scrollTop - 12;
-  }
-
-  function fitComparison(target, preview) {
-    if (!preview) return;
-    const scroll = target.scrollTop;
+  function comparisonOffsets(target, preview) {
     target.style.removeProperty('--comparison-tail');
     fitMaterial(target, preview);
-    const headings = target.querySelectorAll('[data-paper-section] .section-title');
-    const last = headings[headings.length - 1];
-    if (last) {
-      const end = target.scrollHeight - target.clientHeight;
-      const extra = Math.ceil(Math.max(0, comparisonOffset(target, last) - end));
-      target.style.setProperty('--comparison-tail', extra + 'px');
+    const viewport = target.getBoundingClientRect();
+    // The dialog scales while it opens, but scrollTop still uses layout pixels.
+    const scale = viewport.width / parseFloat(getComputedStyle(target).width) || 1;
+    const origin = target.scrollTop - 12;
+    const offsets = new Map();
+    for (const unit of target.querySelectorAll('[data-paper-section]')) {
+      const heading = unit.querySelector('.section-title');
+      if (heading) {
+        const section = unit.dataset.paperChapter + ':' + unit.dataset.paperSection;
+        const offset = (heading.getBoundingClientRect().top - viewport.top) / scale + origin;
+        offsets.set(section, Math.max(0, Math.round(offset)));
+      }
     }
-    target.scrollTop = scroll;
+    const last = [...offsets.values()].at(-1) ?? 0;
+    const extra = Math.max(0, last - (target.scrollHeight - target.clientHeight));
+    target.style.setProperty('--comparison-tail', extra + 'px');
+    return { offsets, end: target.scrollHeight - target.clientHeight };
   }
 
-  function markComparisonSection() {
-    for (const button of comparisonSections.querySelectorAll('button')) {
-      if (button.dataset.comparisonSection === comparisonSection) button.setAttribute('aria-current', 'location');
-      else button.removeAttribute('aria-current');
+  function fitComparison() {
+    const panes = comparisonBodies.map((target, index) => comparisonOffsets(target, comparisonPages[index]));
+    const anchors = [{ section: '', offsets: [0, 0] }];
+    for (const button of comparisonSections.querySelectorAll('[data-comparison-section]')) {
+      const section = button.dataset.comparisonSection;
+      if (panes.every(pane => pane.offsets.has(section))) {
+        anchors.push({ section, offsets: panes.map(pane => pane.offsets.get(section)), button });
+      }
     }
+    anchors.push({ section: null, offsets: panes.map(pane => pane.end) });
+    comparisonAnchors = anchors;
+  }
+
+  // Interpolate between matching headings, so each pane can travel a different distance.
+  function positionComparison(progress, source = -1) {
+    const last = comparisonAnchors.length - 1;
+    comparisonProgress = Math.min(last, Math.max(0, progress));
+    const index = Math.floor(comparisonProgress);
+    const from = comparisonAnchors[index];
+    const to = comparisonAnchors[Math.min(index + 1, last)];
+    const fraction = comparisonProgress - index;
+    comparisonBodies.forEach((target, pane) => {
+      if (pane !== source) {
+        target.scrollTop = from.offsets[pane] + fraction * (to.offsets[pane] - from.offsets[pane]);
+      }
+      comparisonScrollPositions[pane] = target.scrollTop;
+    });
+    const active = (index === last ? comparisonAnchors[index - 1] : from).button;
+    const previous = comparisonSections.querySelector('[aria-current]');
+    if (previous !== active) {
+      previous?.removeAttribute('aria-current');
+      active?.setAttribute('aria-current', 'location');
+    }
+  }
+
+  function followComparison(pane, target) {
+    const offset = target.scrollTop;
+    if (!comparisonAnchors.length || offset === comparisonScrollPositions[pane]) return;
+    stopComparisonScroll();
+    const next = comparisonAnchors.findIndex(anchor => anchor.offsets[pane] >= offset);
+    if (next <= 0) {
+      positionComparison(next === 0 ? 0 : comparisonAnchors.length - 1, pane);
+      return;
+    }
+    const start = comparisonAnchors[next - 1].offsets[pane];
+    const end = comparisonAnchors[next].offsets[pane];
+    positionComparison(next - 1 + (offset - start) / (end - start), pane);
+  }
+
+  function stopComparisonScroll() {
+    cancelAnimationFrame(comparisonFrame);
+    comparisonFrame = 0;
+  }
+
+  function comparisonDuration() {
+    return parseFloat(getComputedStyle(comparisonDialog).getPropertyValue('--motion-duration')) || 0;
   }
 
   function alignComparison(section) {
-    comparisonSection = section;
-    markComparisonSection();
-    for (const target of comparisonBodies) {
-      const unit = [...target.querySelectorAll('[data-paper-section]')].find(item =>
-        item.dataset.paperChapter + ':' + item.dataset.paperSection === section,
-      );
-      const heading = unit?.querySelector('.section-title');
-      if (heading) target.scrollTop = comparisonOffset(target, heading);
+    const destination = comparisonAnchors.findIndex(anchor => anchor.section === section);
+    if (destination < 0) return;
+    stopComparisonScroll();
+    const duration = comparisonDuration();
+    const from = comparisonProgress;
+    if (!duration || from === destination) {
+      positionComparison(destination);
+      return;
     }
+    const start = performance.now();
+    const frame = now => {
+      const elapsed = Math.max(0, Math.min((now - start) / duration, 1));
+      const eased = 1 - (1 - elapsed) ** 3;
+      positionComparison(from + (destination - from) * eased);
+      comparisonFrame = elapsed < 1 ? requestAnimationFrame(frame) : 0;
+    };
+    comparisonFrame = requestAnimationFrame(frame);
   }
 
-  function renderComparisonSections(chapters) {
-    const buttons = chapters.flatMap(chapter => chapter.sections.map(section => {
+  function renderComparisonSections(left, right) {
+    const sectionKey = (chapter, section) => chapter.id + ':' + section.id;
+    const shared = new Set(right.flatMap(chapter => chapter.sections.map(section => sectionKey(chapter, section))));
+    const buttons = left.flatMap(chapter => chapter.sections.map(section => {
+      const key = sectionKey(chapter, section);
+      if (!shared.has(key)) return null;
       const button = node('button', 'secondary', section.title);
       button.type = 'button';
-      button.dataset.comparisonSection = chapter.id + ':' + section.id;
+      button.dataset.comparisonSection = key;
       return button;
-    }));
+    })).filter(Boolean);
     comparisonSections.replaceChildren(...buttons);
     comparisonSections.hidden = !buttons.length;
-    markComparisonSection();
   }
 
   function setComparisonArrow(arrow, levels, index) {
@@ -1307,33 +1378,42 @@
     const pair = levels.slice(pairStart, pairStart + 2);
     if (pairStart < 0 || pair.length !== 2) return;
     const ticket = ++comparisonRevision;
+    byId('comparison-status').textContent = 'Preparant la comparació…';
+    const materials = await Promise.all(pair.map(level => loadMaterialPages(materialPages(level.id))));
+    if (ticket !== comparisonRevision || !comparisonDialog.open) return;
+    stopComparisonScroll();
+    const index = Math.floor(comparisonProgress);
+    const section = comparisonAnchors[index]?.section;
+    const fraction = comparisonProgress - index;
+    const previousPair = comparisonPair;
+    comparisonPair = pairStart;
     const focusedArrow = document.activeElement;
     setComparisonArrow(comparisonArrows[0], levels, pairStart - 1);
     setComparisonArrow(comparisonArrows[1], levels, pairStart + 1);
     if (comparisonArrows.includes(focusedArrow) && focusedArrow.hidden) {
       comparisonArrows.find(arrow => !arrow.hidden)?.focus({ preventScroll: true });
     }
-    comparisonHeadings.forEach((heading, index) => { heading.textContent = pair[index].label; });
-    byId('comparison-status').textContent = 'Preparant la comparació…';
-    const materials = await Promise.all(pair.map(level => loadMaterialPages(materialPages(level.id))));
-    if (ticket !== comparisonRevision || !comparisonDialog.open) return;
-    renderComparisonSections(materials[0].chapters);
-    comparisonPages = materials.map((material, index) => {
-      const target = comparisonBodies[index];
-      target.style.removeProperty('--comparison-tail');
-      const preview = layoutMaterial(material, target);
-      fitComparison(target, preview);
-      target.scrollTop = 0;
-      return preview;
-    });
-    if (comparisonSection) alignComparison(comparisonSection);
+    comparisonHeadings.forEach((heading, pane) => { heading.textContent = pair[pane].label; });
+    renderComparisonSections(materials[0].chapters, materials[1].chapters);
+    comparisonPages = materials.map((material, pane) => layoutMaterial(material, comparisonBodies[pane]));
+    fitComparison();
+    const corresponding = comparisonAnchors.findIndex(anchor => anchor.section === section);
+    positionComparison(corresponding >= 0 ? corresponding + fraction : 0);
+    const duration = comparisonDuration();
+    comparisonSwap?.cancel();
+    if (previousPair !== undefined && previousPair !== pairStart && duration) {
+      const distance = pairStart > previousPair ? 8 : -8;
+      comparisonSwap = comparisonGrid.animate(
+        [{ opacity: .45, translate: distance + 'px 0' }, { opacity: 1, translate: '0 0' }],
+        { duration, easing: 'ease-out' },
+      );
+    }
     byId('comparison-status').textContent = 'Comparació de ' + pair[0].label + ' i ' + pair[1].label;
   }
 
   function openComparison(event) {
     if (!route) return;
     comparisonOpener = event.currentTarget;
-    comparisonSection = '';
     comparisonDialog.showModal();
     renderComparison(Number(comparisonOpener.dataset.pairStart));
   }
@@ -2013,20 +2093,36 @@
     const section = event.target.closest('[data-comparison-section]')?.dataset.comparisonSection;
     if (section) alignComparison(section);
   });
-  const comparisonObserver = new ResizeObserver(() => {
-    comparisonBodies.forEach((target, index) => fitComparison(target, comparisonPages[index]));
-    if (comparisonDialog.open && comparisonSection && comparisonPages.length) alignComparison(comparisonSection);
+  const comparisonObserver = new ResizeObserver(entries => {
+    if (comparisonPages.length && comparisonDialog.open && entries.some(entry => comparisonBodies.includes(entry.target))) {
+      fitComparison();
+      positionComparison(comparisonProgress);
+    }
     for (const side of variantSides) {
       const thumbnail = side.querySelector('.variant-thumb');
       fitMaterial(thumbnail, variantThumbPages.get(thumbnail));
     }
   });
-  for (const target of comparisonBodies) comparisonObserver.observe(target);
+  comparisonBodies.forEach((target, pane) => {
+    target.addEventListener('scroll', () => followComparison(pane, target), { passive: true });
+    target.addEventListener('wheel', stopComparisonScroll, { passive: true });
+    target.addEventListener('pointerdown', stopComparisonScroll);
+    target.addEventListener('keydown', stopComparisonScroll);
+    comparisonObserver.observe(target);
+  });
   for (const side of variantSides) comparisonObserver.observe(side);
   comparisonDialog.addEventListener('close', () => {
     comparisonRevision++;
+    stopComparisonScroll();
+    comparisonSwap?.cancel();
+    comparisonSwap = undefined;
+    comparisonPair = undefined;
     comparisonPages = [];
+    comparisonAnchors = [];
+    comparisonProgress = 0;
+    comparisonScrollPositions = [];
     for (const target of comparisonBodies) target.replaceChildren();
+    comparisonSections.replaceChildren();
     comparisonOpener?.focus({ preventScroll: true });
     comparisonOpener = undefined;
   });

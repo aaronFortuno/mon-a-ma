@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.27 · 26 de novembre de 2026
+
+- Sincronitza el desplaçament de les dues variants per apartats i adapta el ritme a la llargada de cada text.
+- Anima els salts d’apartat i els canvis de parella, conservant el punt de lectura.
+
 ## 0.1.26 · 26 de novembre de 2026
 
 - Mostra miniatures més grans, girades lleugerament i centrades al costat de la fitxa principal.

@@ -961,7 +961,7 @@ details[open]::details-content {
   overflow-x: auto;
   padding: .15rem .65rem .48rem;
 }
-.comparison-sections button { flex: none; padding: .28rem .48rem; font-size: .75rem; white-space: nowrap; }
+.comparison-sections button { flex: none; padding: .28rem .48rem; font-size: .75rem; white-space: nowrap; transition: background-color var(--motion-duration) ease, border-color var(--motion-duration) ease; }
 .comparison-sections [aria-current] { background: var(--light); border-color: var(--green); }
 .comparison-stage { position: relative; display: grid; grid-template-rows: minmax(0, 1fr); min-height: 0; }
 .comparison-grid { display: grid; grid-template: minmax(0, 1fr) / repeat(2, minmax(0, 1fr)); gap: .4rem; min-height: 0; padding: 0 .35rem .35rem; }
