@@ -5,7 +5,7 @@ window.quaderns ??= [];
   const essencial = text => ({ ...p(text), core: true });
   const table = (headers, rows, rowHeadingWidth) => ({ type: 'table', headers, rows, rowHeadingWidth });
   const list = (...items) => ({ type: 'steps', items });
-  const box = (title, text) => ({ type: 'note', title, text });
+  const box = (kind, title, text) => ({ type: 'note', kind, title, text });
   const section = (id, title, ...blocks) => ({ id, title, blocks });
 
   const collection = Object.freeze({
@@ -87,6 +87,12 @@ window.quaderns ??= [];
           realista: { src: 'illustracions/m001/elements-realista.png', thumbnail: 'illustracions/m001/miniatures/elements-realista.png', alt: 'Paisatge de muntanya amb un vessant rocós, un riu, un cel amb pluja i plantes a la riba, retolats com a geosfera, hidrosfera, atmosfera i biosfera.' },
         },
       },
+      {
+        id: 'arrels-i-erosio', section: 'elements', name: 'Les arrels i l’erosió del sòl',
+        src: 'illustracions/m001/arrels-i-erosio.svg', ratio: 960 / 720,
+        alt: 'Dues safates amb el mateix pendent reben pluja. Una té plantes amb arrels. A la safata sense plantes, l’aigua s’endú més partícules de terra.',
+        caption: 'Dos vessants amb el mateix pendent reben la mateixa pluja. Compara la terra arrossegada i fixa’t en el paper de les arrels.',
+      },
     ],
     sections: [
       section('capes', 'Les capes del planeta Terra',
@@ -97,19 +103,19 @@ window.quaderns ??= [];
           ['Mantell', 'És la capa més gruixuda. Està format sobretot per roca sòlida molt calenta que es pot deformar lentament.'],
           ['Nucli', 'És al centre de la Terra i està format sobretot per ferro. La part externa és líquida i la part interna és sòlida.'],
         ], 24),
-        box('Com sabem què hi ha a dins?', 'En un model, una vibració tarda **6 segons** a travessar un material i **9 segons** a travessar-ne un altre a la mateixa distància. Viatja més de pressa pel primer. Quan els detectors registren canvis en la velocitat de les vibracions dels terratrèmols, els científics poden buscar on canvien els materials.')),
+        box('ampliacio', 'Com sabem què hi ha a dins?', 'En un model, una vibració tarda **6 segons** a travessar un material i **9 segons** a travessar-ne un altre a la mateixa distància. Viatja més de pressa pel primer. Quan els detectors registren canvis en la velocitat de les vibracions dels terratrèmols, els científics poden buscar on canvien els materials.')),
       section('moviment', 'Hi ha moviment a les capes de la Terra?',
         essencial('La capa rígida de fora de la Terra està dividida en grans peces, les **plaques tectòniques**. Les plaques es mouen molt a poc a poc.'),
         p('L’escorça i la part més superficial i rígida del mantell formen la **litosfera**. Les plaques es mouen uns quants centímetres cada any, aproximadament el que poden créixer les ungles en un any.'),
         p('La calor interna de la Terra contribueix a moviments molt lents al mantell. A la superfície, algunes plaques se separen, d’altres xoquen i d’altres llisquen de costat. Amb el pas de milions d’anys, aquests moviments desplacen els continents i poden aixecar serralades.'),
         p('Quan les roques es desplacen de cop al llarg d’una fractura, el terra pot tremolar. En moltes zones on es troben plaques també es forma **magma**, roca fosa que, quan surt a la superfície en una erupció, s’anomena **lava**.'),
-        box('Un moviment lent que s’acumula', 'Si dues plaques se separen **4 cm cada any**, en **100 anys** la distància augmenta **400 cm**, o sigui, **4 metres**. A un ritme semblant durant un milió d’anys, serien 40 km.'),
-        box('Del moviment al mapa', 'Un mapa de plaques i un mapa de terratrèmols ens permeten comprovar si les zones amb molts terratrèmols coincideixen amb els límits de les plaques.')),
+        box('curiositat', 'Un moviment lent que s’acumula', 'Si dues plaques se separen **4 cm cada any**, en **100 anys** la distància augmenta **400 cm**, o sigui, **4 metres**. A un ritme semblant durant un milió d’anys, serien 40 km.'),
+        box('observa', 'Del moviment al mapa', 'Un mapa de plaques i un mapa de terratrèmols ens permeten comprovar si les zones amb molts terratrèmols coincideixen amb els límits de les plaques.')),
       section('gravetat', 'La gravetat de la Terra',
         essencial('Si deixes anar una pilota, cau per la **gravetat**. A qualsevol lloc de la Terra, «avall» apunta cap al centre de la Terra.'),
         p('La gravetat també manté l’aire a prop de la Terra i contribueix a mantenir la Lluna en òrbita. Al paisatge es nota quan l’aigua corre pendent avall i quan les pedres cauen d’un vessant.'),
         p('La **massa** indica quanta matèria té un objecte. El **pes** és la força amb què la gravetat l’atrau. Una motxilla portada a la Lluna té la mateixa massa que a la Terra, però el seu pes és aproximadament una sisena part del pes que té a la Terra.'),
-        box('Dibuixa cap on cau', 'Imagina dues persones en punts oposats del globus, cadascuna amb una pilota. Dibuixa una fletxa des de cada pilota cap al centre. En el paper les fletxes tenen sentits oposats. Per a totes dues persones, la pilota cau cap avall.')),
+        box('prova', 'Dibuixa cap on cau', 'Imagina dues persones en punts oposats del globus, cadascuna amb una pilota. Dibuixa una fletxa des de cada pilota cap al centre. En el paper les fletxes tenen sentits oposats. Per a totes dues persones, la pilota cau cap avall.')),
       section('elements', 'Els elements del planeta Terra',
         essencial('Les **roques**, l’**aigua**, l’**aire** i els **éssers vius** formen parts de la Terra que es relacionen.'),
         table(['Part del sistema', 'Què hi trobem?'], [
@@ -120,7 +126,7 @@ window.quaderns ??= [];
         ]),
         p('Pensa en un riu. L’aigua que hi circula (hidrosfera) desgasta i transporta fragments de roca (geosfera). La pluja (que es forma a l’atmosfera) pot fer pujar el cabal, i el riu ofereix aigua i refugi a plantes i animals (biosfera).'),
         p('La relació també va en l’altre sentit. Les arrels ajuden a subjectar el sòl de la riba. Si es perd la vegetació, l’aigua pot arrossegar més terra. Un canvi en els éssers vius pot transformar el paisatge.'),
-        box('I ara, on ho situem?', 'Si volguéssim assenyalar el naixement d’un riu o el lloc d’un terratrèmol en un globus, ens caldria una manera de dir en quin punt del planeta es troba.')),
+        box('ampliacio', 'I ara, on ho situem?', 'Si volguéssim assenyalar el naixement d’un riu o el lloc d’un terratrèmol en un globus, ens caldria una manera de dir en quin punt del planeta es troba.')),
     ],
   }, {
     defaultFigureStyle: 'volum',
@@ -141,6 +147,7 @@ window.quaderns ??= [];
       ['NASA · La gravetat a la Lluna', 'https://science.nasa.gov/moon/top-moon-questions/'],
       ['USGS · Conques hidrogràfiques', 'https://www.usgs.gov/water-science-school/science/watersheds-and-drainage-basins'],
       ['USGS · L’aigua que corre sobre el terreny', 'https://www.usgs.gov/water-science-school/science/runoff-surface-and-overland-water-runoff'],
+      ['USGS · Vegetació i erosió de les ribes', 'https://water.usgs.gov/osw/techniques/bs/bs-assesswg.html'],
     ],
   });
 
@@ -161,7 +168,7 @@ window.quaderns ??= [];
       section('latitud', 'Amb els paral·lels coneixem la latitud',
         p('Imagina unes línies que fan la volta a la Terra d’est a oest. Són els **paral·lels**. El més llarg és l’**equador**, que divideix el planeta en dos hemisferis: nord i sud. Els paral·lels es fan més petits a mesura que ens acostem als pols.'),
         p('La **latitud** indica quants graus al nord o al sud de l’equador es troba un punt. A l’equador és de **0°**, al pol nord és de **90° N** i al pol sud és de **90° S**. Tots els llocs que hi ha sobre un mateix paral·lel tenen la mateixa latitud.'),
-        box('Un paral·lel, molts llocs', 'Dos vaixells envien la mateixa latitud, **30° N**. Sabem que naveguen sobre el mateix paral·lel, que fa tota la volta al món. Per saber si són a prop o molt lluny, necessitem la longitud.')),
+        box('curiositat', 'Un paral·lel, molts llocs', 'Dos vaixells envien la mateixa latitud, **30° N**. Sabem que naveguen sobre el mateix paral·lel, que fa tota la volta al món. Per saber si són a prop o molt lluny, necessitem la longitud.')),
       section('longitud', 'Amb els meridians coneixem la longitud',
         p('Els **meridians** són línies imaginàries que van d’un pol a l’altre. El de referència és el **meridià de Greenwich**, que té una longitud de **0°**. A partir d’aquest meridià podem anar cap a l’est o cap a l’oest.'),
         p('La **longitud** indica quants graus a l’est o a l’oest del meridià de Greenwich es troba un punt. Va de **0° a 180°**. Fem servir **E** per a l’est i **O** per a l’oest. En alguns mapes trobaràs **W** per a l’oest, de l’anglès *west*. Els valors 180° E i 180° O assenyalen el mateix meridià.'),
@@ -176,8 +183,8 @@ window.quaderns ??= [];
           'Llegeix la **longitud**: 40° O. Busca el meridià de 40° a l’oest de Greenwich.',
           'Segueix totes dues línies fins al punt on s’encreuen. Marca-hi la posició de la boia.'),
         p('Si parteixes d’un punt marcat en un mapa, fes el camí a l’inrevés: llegeix la latitud al costat del paral·lel i la longitud al costat del meridià. Quan el punt cau entre dues línies numerades, pots estimar els graus intermedis.'),
-        box('Una segona boia', 'Compara les posicions **20° N, 40° O** i **20° N, 30° O**. Com que comparteixen latitud, les situem al mateix paral·lel. La de **30° O** és a l’est de l’altra i més a prop del meridià de Greenwich.'),
-        box('De la posició al territori', 'Les coordenades ens diuen on és la boia. Per saber a quina distància és d’un port o què hi ha al seu voltant, ens cal un mapa que mostri aquesta informació.')),
+        box('observa', 'Una segona boia', 'Compara les posicions **20° N, 40° O** i **20° N, 30° O**. Com que comparteixen latitud, les situem al mateix paral·lel. La de **30° O** és a l’est de l’altra i més a prop del meridià de Greenwich.'),
+        box('ampliacio', 'De la posició al territori', 'Les coordenades ens diuen on és la boia. Per saber a quina distància és d’un port o què hi ha al seu voltant, ens cal un mapa que mostri aquesta informació.')),
     ],
   }, {
     description: 'Fes servir els paral·lels i els meridians per llegir la latitud i la longitud i localitzar un punt al mapa.',
@@ -198,7 +205,7 @@ window.quaderns ??= [];
       section('definicions', 'Què són els mapes i els plànols?',
         p('Un **mapa** és una representació plana i reduïda d’un territori. Pot mostrar el món sencer, un continent, un país o una comarca. Qui el fa tria quina informació hi posa segons què vol explicar. Per exemple, un mapa de muntanya pot mostrar camins, cims i fonts.'),
         p('Un **plànol** acostuma a representar un espai més petit amb molt de detall, com una escola, un barri o una ciutat. Els objectes s’hi dibuixen com si els miréssim des de dalt. En un plànol de l’escola podem veure on són les aules, les portes i les escales.'),
-        box('Dos trams d’un mateix viatge', 'Per anar a una altra ciutat amb autobús, busca un mapa que mostri les línies i les parades. Quan hi arribis, consulta un plànol de carrers per anar a peu fins a la biblioteca. Cada representació respon una pregunta diferent.')),
+        box('ampliacio', 'Dos trams d’un mateix viatge', 'Per anar a una altra ciutat amb autobús, busca un mapa que mostri les línies i les parades. Quan hi arribis, consulta un plànol de carrers per anar a peu fins a la biblioteca. Cada representació respon una pregunta diferent.')),
       section('llegenda', 'Els mapes i els plànols porten una llegenda',
         p('La **llegenda** explica què signifiquen els colors, els símbols i les línies del mapa. En un plànol de barri, un quadrat amb una E pot identificar l’escola, una línia blava pot mostrar un riu i una zona ombrejada pot representar un parc.'),
         p('Un mateix color pot tenir significats diferents segons el mapa. El verd pot indicar un parc en un plànol urbà o una zona de poca altitud en un mapa físic. Consulta la llegenda abans de decidir què vol dir.'),
@@ -209,10 +216,10 @@ window.quaderns ??= [];
           ['Numèrica', 'Si diu 1:10.000, cada centímetre del paper equival a 10.000 centímetres reals, és a dir, 100 metres.'],
           ['Gràfica', 'És una barra dividida en trams. Les xifres indiquen la distància real que representa cada tram.'],
         ]),
-        box('Fem de cartògrafs', 'En un altre plànol, a escala **1:10.000**, dos edificis són a **3 cm** l’un de l’altre. Com que cada centímetre representa 100 m, la distància en línia recta és de **300 m**. Per saber quant caminaríem, mesuraríem cada tram del recorregut i els sumaríem.'),
+        box('prova', 'Fem de cartògrafs', 'En un altre plànol, a escala **1:10.000**, dos edificis són a **3 cm** l’un de l’altre. Com que cada centímetre representa 100 m, la distància en línia recta és de **300 m**. Per saber quant caminaríem, mesuraríem cada tram del recorregut i els sumaríem.'),
         p('En un full de la mateixa mida, a escala **1:1.000** hi cap una zona més petita i s’hi poden dibuixar més detalls que a **1:100.000**. Si ampliem o reduïm un mapa, la barra de l’escala gràfica canvia de mida juntament amb el dibuix i continua sent útil.'),
-        box('La mateixa escala en dues còpies?', 'Si un plànol a **1:10.000** s’imprimeix al **200 %**, un tram que feia **1 cm** ara en fa **2**. La distància real continua sent **100 m**. Per tant, cada centímetre de la còpia representa **50 m** i l’escala numèrica efectiva és **1:5.000**.'),
-        box('Quin mapa ens convé?', 'Un mapa que ens funciona per trobar la biblioteca pot quedar curt si volem saber per quines comarques passa un riu. A més de l’escala, hem de triar el tipus de mapa.')),
+        box('curiositat', 'La mateixa escala en dues còpies?', 'Si un plànol a **1:10.000** s’imprimeix al **200 %**, un tram que feia **1 cm** ara en fa **2**. La distància real continua sent **100 m**. Per tant, cada centímetre de la còpia representa **50 m** i l’escala numèrica efectiva és **1:5.000**.'),
+        box('ampliacio', 'Quin mapa ens convé?', 'Un mapa que ens funciona per trobar la biblioteca pot quedar curt si volem saber per quines comarques passa un riu. A més de l’escala, hem de triar el tipus de mapa.')),
     ],
   }, {
     description: 'Distingeix un mapa d’un plànol i aprèn a llegir-ne la llegenda i l’escala per orientar-te i calcular distàncies.',
@@ -239,7 +246,7 @@ window.quaderns ??= [];
           ['Temàtic', 'Un tema concret, com les pluges, la població o el transport.', 'Per comparar on plou més o trobar una línia de tren.'],
         ]),
         p('Un mapa topogràfic pot mostrar el relleu amb **corbes de nivell**, línies que uneixen punts situats a la mateixa altitud. Quan són molt juntes, el terreny fa més pendent.'),
-        box('Tria els mapes de l’excursió', 'Per decidir si un recorregut és costerut, busca les corbes de nivell en un mapa topogràfic. Per saber si pots arribar al punt de sortida amb tren, consulta un mapa de la xarxa ferroviària i localitza-hi la parada més propera.')),
+        box('prova', 'Tria els mapes de l’excursió', 'Per decidir si un recorregut és costerut, busca les corbes de nivell en un mapa topogràfic. Per saber si pots arribar al punt de sortida amb tren, consulta un mapa de la xarxa ferroviària i localitza-hi la parada més propera.')),
       section('atles', 'L’atles',
         p('Un **atles** és un conjunt de mapes organitzats per territoris, per temes o per tots dos criteris. Pot ser un llibre o un recurs digital. Si busques un lloc, l’índex de noms et pot indicar en quina pàgina i en quin sector de la graella el trobaràs.'),
         p('Per estudiar un riu, pots obrir un mapa físic per veure on neix i on desemboca. Després pots consultar un mapa polític per descobrir quins països travessa o separa.'),
@@ -250,14 +257,14 @@ window.quaderns ??= [];
           'Consulta la **llegenda**. Interpreta els colors i els símbols que et fan falta.',
           'Comprova l’**escala** si necessites estimar distàncies. Fes servir les coordenades o la graella si vols situar un punt.',
           'Fixa’t en la **font i la data** si vols dades actualitzades, com una nova carretera o una ruta d’autobús.'),
-        box('Dos mapes de la mateixa línia', 'Un mapa antic i un de recent poden mostrar parades diferents. Si has d’agafar l’autobús avui, consulta el mapa vigent de l’operador i comprova si hi ha avisos de desviacions.')),
+        box('observa', 'Dos mapes de la mateixa línia', 'Un mapa antic i un de recent poden mostrar parades diferents. Si has d’agafar l’autobús avui, consulta el mapa vigent de l’operador i comprova si hi ha avisos de desviacions.')),
       section('fisic', 'El planisferi físic',
         p('Un **planisferi** o **mapamundi** representa tota la superfície terrestre en un pla. Com que la Terra és gairebé esfèrica, en passar-la a un full es deformen algunes mides, formes o distàncies. La manera de fer aquest pas s’anomena **projecció cartogràfica**.'),
         p('El **planisferi físic** mostra la distribució dels continents i oceans i destaca elements naturals com les serralades, els rius i les grans planes. La llegenda indica si els colors mostren l’altitud del terreny o la profunditat del mar. Per exemple, pots buscar la serralada dels Andes a l’oest d’Amèrica del Sud.'),
         p('Un color marró pot marcar terres altes i diversos blaus poden indicar profunditats del mar. Llegeix a la llegenda quins intervals representa cada color. Dos punts del mateix color poden tenir altituds diferents dins d’un mateix interval.')),
       section('politic', 'El planisferi polític',
         p('El **planisferi polític** mostra com s’organitza el territori del món en estats. Hi podem trobar els noms dels països, les fronteres, les capitals i algunes ciutats importants. Els colors ajuden a distingir països veïns i els punts o altres símbols indiquen les ciutats.'),
-        box('Dos mapes, un mateix lloc', 'Localitza els **Andes** al planisferi físic. Després busca la mateixa zona al polític i identifica dos països per on passa la serralada. Quina informació t’ha donat cadascun dels mapes?'),
+        box('observa', 'Dos mapes, un mateix lloc', 'Localitza els **Andes** al planisferi físic. Després busca la mateixa zona al polític i identifica dos països per on passa la serralada. Quina informació t’ha donat cadascun dels mapes?'),
         p('Una serralada pot travessar diversos països. Els Andes passen, per exemple, per Xile i el Perú. En comparar els dos planisferis, pots seguir la mateixa serralada encara que canviï el color del país.')),
     ],
   }, {

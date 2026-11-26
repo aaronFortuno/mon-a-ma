@@ -7,6 +7,7 @@
   const defaults = {
     scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.8, margin: 20, textAlignment: 'left', blockSpacing: 100,
     showPageFooter: true, pageNumbers: true, showMaterialCode: true, showTopicTitle: true, showFigures: true, markCore: true,
+    showNoteIcons: true, noteIconAmpliacio: 'llibre', noteIconCuriositat: 'espurnes', noteIconObserva: 'ull', noteIconProva: 'llapis',
     headerLogo: true, headerBrand: true, headerName: true, headerDate: true, headerLogoImage: '',
     showClassroomCode: false, classroomCode: '', classroomCodeSize: 20, classroomCodeStyle: 'solid',
   };

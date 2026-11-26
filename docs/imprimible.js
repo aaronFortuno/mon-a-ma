@@ -40,7 +40,33 @@ window.imprimible = (() => {
     return element;
   }
 
-  function block(source) {
+  const noteTypes = {
+    ampliacio: { label: 'Ampliació', field: 'noteIconAmpliacio', icon: 'llibre' },
+    curiositat: { label: 'Curiositat', field: 'noteIconCuriositat', icon: 'espurnes' },
+    observa: { label: 'Observa', field: 'noteIconObserva', icon: 'ull' },
+    prova: { label: 'Prova-ho', field: 'noteIconProva', icon: 'llapis' },
+  };
+  const noteIcons = {
+    llibre: ['Llibre obert', 'M12 6v14M12 6C8 3 5 4 3 5v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-2-1-5-2-9 1Z'],
+    espurnes: ['Espurnes', 'M10 4c0 5 2 7 7 7-5 0-7 2-7 7 0-5-2-7-7-7 5 0 7-2 7-7ZM19 3v5m-2.5-2.5h5m-2.5 10v5m-2.5-2.5h5'],
+    ull: ['Ull', 'M2 12S5.5 5.5 12 5.5 22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Zm13 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z'],
+    llapis: ['Llapis', 'm5 16 11-11a2.1 2.1 0 0 1 3 3L8 19l-4 1 1-4Zm9-9 3 3'],
+  };
+
+  function noteIcon(id) {
+    const definition = noteIcons[id];
+    if (!definition) return null;
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    const path = document.createElementNS(ns, 'path');
+    path.setAttribute('d', definition[1]);
+    svg.append(path);
+    return svg;
+  }
+
+  function block(source, options) {
     if (source.type === 'paragraph') return rich(node('p', source.core ? 'paper-core' : ''), source.text);
     if (source.type === 'steps') {
       const items = node('ol');
@@ -49,6 +75,16 @@ window.imprimible = (() => {
     }
     if (source.type === 'note') {
       const aside = node('aside', 'note');
+      const type = noteTypes[source.kind];
+      if (type) {
+        const label = node('div', 'note-label');
+        if (options.showNoteIcons !== false) {
+          const icon = noteIcon(options[type.field] ?? type.icon);
+          if (icon) label.append(icon);
+        }
+        label.append(type.label);
+        aside.append(label);
+      }
       aside.append(node('strong', '', source.title), rich(node('p'), source.text));
       return aside;
     }
@@ -128,7 +164,7 @@ window.imprimible = (() => {
     return anchor === 'lead' ? 0 : /^paragraph-\d+$/.test(anchor) ? Number(anchor.slice(10)) : null;
   }
 
-  function sectionUnits(section, figures) {
+  function sectionUnits(section, figures, options) {
     const units = [];
     const before = figures.filter(item => item.anchor === 'before');
     const after = figures.filter(item => item.anchor === 'after');
@@ -145,10 +181,10 @@ window.imprimible = (() => {
         unit.append(node('h3', 'section-title', section.title), ...before.slice(0, 1).map(figure));
       }
       if (anchored[0]) unit.append(figure(anchored[0]));
-      unit.append(block(section.blocks[index]));
+      unit.append(block(section.blocks[index], options));
       const nextHasFigure = figures.some(item => paragraphAnchor(item.anchor) === index + 1);
       if (anchored[0]?.wrap && !nextHasFigure && section.blocks[index + 1]?.type === 'paragraph') {
-        unit.append(block(section.blocks[++index]));
+        unit.append(block(section.blocks[++index], options));
       }
       units.push(unit);
       if (units.length === 1) before.slice(1).forEach(imageUnit);
@@ -218,7 +254,7 @@ window.imprimible = (() => {
     body.append(chapterHeader(chapter, options.documentType));
     if (section) {
       const figures = (chapter.figures ?? []).filter(item => item.section === section.id);
-      body.append(...sectionUnits(section, figures).slice(0, 2));
+      body.append(...sectionUnits(section, figures, options).slice(0, 2));
     }
     return sheet;
   }
@@ -252,7 +288,7 @@ window.imprimible = (() => {
       add(chapterHeader(chapter, options.documentType));
       const figures = figuresByChapter.get(chapter.id);
       for (const section of chapter.sections) {
-        const units = sectionUnits(section, figures.filter(item => item.section === section.id));
+        const units = sectionUnits(section, figures.filter(item => item.section === section.id), options);
         if (units[0]) {
           units[0].id = idPrefix + 'fitxa-' + chapter.id + '-' + section.id;
           units[0].tabIndex = -1;
@@ -278,5 +314,5 @@ window.imprimible = (() => {
     return { count: pages.length, width, height, oversized };
   }
 
-  return { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure };
+  return { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure, noteTypes, noteIcons };
 })();

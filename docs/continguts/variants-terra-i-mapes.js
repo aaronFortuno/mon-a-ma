@@ -4,7 +4,7 @@ window.variantsMaterials ??= {};
   const p = text => ({ type: 'paragraph', text });
   const passos = (...items) => ({ type: 'steps', items });
   const taula = (headers, rows, rowHeadingWidth) => ({ type: 'table', headers, rows, rowHeadingWidth });
-  const repte = (title, text) => ({ type: 'note', title, text });
+  const repte = (title, text) => ({ type: 'note', kind: 'prova', title, text });
 
   Object.assign(window.variantsMaterials, {
     M001: {

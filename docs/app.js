@@ -2,7 +2,7 @@
   const locale = document.documentElement.lang;
   const cycleById = new Map(window.curriculum.cycles.map(cycle => [cycle.id, cycle]));
   const topics = window.quaderns.filter(topic => topic.lang === locale);
-  const { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure } = window.imprimible;
+  const { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure, noteTypes, noteIcons } = window.imprimible;
   const preferences = window.preferencies;
   const { defaults } = preferences;
   const materialLevels = [
@@ -123,7 +123,7 @@
 
   function address(topic, chapter, section = '', collection = activeCollection) {
     const path = topic.chapters.length === 1 ? [topic.code] : [topic.code, chapter.id];
-    return [catalogAddress(collection), ...path, 'maqueta', section].filter(Boolean).join('/').replace(/^#\//, '#');
+    return [catalogAddress(collection), ...path, section].filter(Boolean).join('/').replace(/^#\//, '#');
   }
 
   function members(collection) {
@@ -245,7 +245,8 @@
     if (!topic || (activeCollection && !activeCollection.topicIds.includes(topic.id))) return null;
     const chapterId = topic.chapters.length > 1 ? path.shift() : topic.chapters[0].id;
     const chapter = topic.chapters.find(item => item.id === chapterId) ?? topic.chapters[0];
-    const section = path[1];
+    if (path[0] === 'maqueta') path.shift();
+    const section = path[0] || '';
     return { topic, chapter, section, collectionId: activeCollection?.id };
   }
 
@@ -751,6 +752,10 @@
     cancelResetConfirmation();
     const previous = route;
     route = extractRoute();
+    if (route) {
+      const canonical = address(route.topic, route.chapter, route.section);
+      if (location.hash !== canonical) history.replaceState(history.state, '', canonical);
+    }
     const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
     if (changedMaterial && byId('material-intro').open) byId('material-intro').close();
     if (changedMaterial && comparisonDialog.open) comparisonDialog.close();
@@ -1871,6 +1876,7 @@
       blocks: [
         { type: 'paragraph', core: true, text: 'Comença per allò que tens més a prop. Fixa’t en el relleu, la vegetació i els camins. Busca un detall que t’ajudi a orientar-te.' },
         { type: 'paragraph', text: 'Ara mira més lluny. Què canvia? Explica-ho amb exemples i compara la teva descripció amb la d’un company.' },
+        { type: 'note', kind: 'observa', title: 'El mateix lloc, dues mirades', text: 'Tria un detall del paisatge i explica per què t’hi has fixat.' },
       ],
     }],
     figures: [{
@@ -2452,6 +2458,15 @@
   window.addEventListener('hashchange', event => {
     if (location.hash !== '#main') renderRoute(event);
   });
+  for (const type of Object.values(noteTypes)) {
+    const picker = node('select');
+    picker.name = type.field;
+    picker.append(option('none', 'Sense icona'),
+      ...Object.entries(noteIcons).map(([id, [label]]) => option(id, label)));
+    const label = node('label', '', type.label);
+    label.append(picker);
+    byId('note-icon-options').append(label);
+  }
   const refreshCatalog = setupCatalog();
   window.setupCurriculum(topics, (topic, section) => {
     const chapter = topic.chapters.find(entry => entry.sections.some(item => item.id === section)) ?? topic.chapters[0];

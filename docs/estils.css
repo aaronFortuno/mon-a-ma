@@ -318,6 +318,19 @@ summary { color: var(--green); font-weight: 650; }
 .ink tbody th { width: var(--row-heading-width, auto); font-weight: 700; }
 .note { clear: both; margin: calc(var(--block-spacing) * .6em) 0 calc(var(--block-spacing) * .85em); border-left: .23em solid var(--paper-accent); background: var(--paper-tint); padding: .58em .8em; }
 .note strong { color: var(--paper-accent); }
+.note-label {
+  display: flex;
+  align-items: center;
+  gap: .38em;
+  margin-block-end: .28em;
+  color: var(--paper-accent);
+  font: 720 .76em/1.24 var(--sans);
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+.note-label svg { flex: none; width: 1.4em; height: 1.4em; fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
+.note-format > .check { margin-block: .45rem; }
+.note-format:has(input[name="showNoteIcons"]:not(:checked)) #note-icon-options { display: none; }
 .note > strong { display: block; font-family: var(--sans); font-size: .91em; margin-bottom: .2em; }
 .note p:last-child { margin-bottom: 0; }
 .illustration {

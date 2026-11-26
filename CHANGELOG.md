@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.36 · 26 de novembre de 2026
+
+- Identifica els quadres amb etiquetes i icones personalitzables que surten també a la impressió.
+- Afegeix un esquema per comparar el paper de les arrels en l’erosió del sòl.
+- Escurça les adreces de les fitxes i manté els enllaços antics.
+
 ## 0.1.35 · 26 de novembre de 2026
 
 - Afegeix una galeria de plantilles amb miniatures comparables i una vista prèvia abans d’aplicar una maquetació.
