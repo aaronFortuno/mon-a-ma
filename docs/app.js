@@ -52,6 +52,7 @@
   let helperTimer;
   let uploadTarget = null;
   let imageWrite = false;
+  const studio = byId('studio');
   const stack = byId('paper-stack');
   const zoomOut = byId('zoom-out');
   const zoomReset = byId('zoom-reset');
@@ -1056,10 +1057,20 @@
 
   function fitPaper() {
     if (!paper || !route) return;
-    const padding = getComputedStyle(stack);
-    const available = stack.clientWidth - parseFloat(padding.paddingLeft) - parseFloat(padding.paddingRight);
-    const fitted = Math.min(1, Math.max(0.1, available / paper.width));
+    const style = getComputedStyle(stack);
+    const viewportInsets = stack.offsetWidth - stack.clientWidth + parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+    const compareWidth = compareButtons.reduce((total, button) => total + button.getBoundingClientRect().width, 0);
+    // Measure the variants at their normal width so their movement never changes the zoom scale.
+    const variantWidth = variantSides.filter(side => !side.hidden).reduce((total, side) =>
+      total + (parseFloat(getComputedStyle(side).getPropertyValue('--variant-ideal-width')) || side.offsetWidth), 0);
+    const space = studio.clientWidth - viewportInsets - compareWidth;
+    const fitted = Math.min(1, Math.max(0.1, (space - variantWidth) / paper.width));
     const zoom = fitted * previewMagnification;
+    const pageWidth = paper.width * zoom;
+    const variantRoom = variantWidth ? Math.max(0, Math.min(1, (space - pageWidth) / variantWidth)) : 1;
+    const widePreview = previewMagnification > 1 && variantRoom < .42;
+    studio.style.setProperty('--variant-room', previewMagnification > 1 ? variantRoom : 1);
+    studio.classList.toggle('is-paper-wide', widePreview);
     sizePaperFrames(stack, paper, zoom);
     zoomOut.disabled = previewMagnification <= minPreviewMagnification;
     zoomReset.disabled = false;
@@ -1084,8 +1095,11 @@
     previewMagnification = next;
     fitPaper();
     const after = frame.getBoundingClientRect();
-    stack.scrollLeft += after.left + anchorX * after.width - x;
-    stack.scrollTop += after.top + anchorY * after.height - y;
+    const expandedView = stack.getBoundingClientRect();
+    const targetX = pointer?.clientX ?? expandedView.left + stack.clientLeft + stack.clientWidth / 2;
+    const targetY = pointer?.clientY ?? expandedView.top + stack.clientTop + stack.clientHeight / 2;
+    stack.scrollLeft += after.left + anchorX * after.width - targetX;
+    stack.scrollTop += after.top + anchorY * after.height - targetY;
     positionFigureHelper();
   }
 
@@ -2446,7 +2460,7 @@
     zoomPaper(1);
     stack.scrollLeft = 0;
   });
-  byId('studio').addEventListener('wheel', event => {
+  studio.addEventListener('wheel', event => {
     if (!event.ctrlKey) return;
     event.preventDefault();
     const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? stack.clientHeight : 1;
@@ -2456,7 +2470,7 @@
   new ResizeObserver(() => {
     fitPaper();
     positionFigureHelper();
-  }).observe(stack);
+  }).observe(studio);
   window.addEventListener('resize', () => {
     positionFigureHelper();
     if (printMenu.matches(':popover-open')) positionPrintMenu();

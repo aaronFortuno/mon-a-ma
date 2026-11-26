@@ -1194,6 +1194,11 @@ details[open]::details-content {
 }
 
 @page { size: A4; margin: 0; }
+@property --variant-ideal-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
 .studio { container-type: inline-size; grid-template-columns: auto auto minmax(0, 1fr) auto auto; }
 .studio-pickers { grid-area: 1 / 1 / 2 / -1; justify-content: center; }
 #paper-stack, .paper-motion { grid-area: 2 / 3; }
@@ -1202,8 +1207,10 @@ details[open]::details-content {
   grid-row: 2;
   align-self: center;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: .55rem;
-  width: clamp(4.75rem, 20cqi, 12rem);
+  --variant-ideal-width: clamp(4.75rem, 20cqi, 12rem);
+  width: calc(var(--variant-ideal-width) * var(--variant-room, 1));
   padding: .45rem;
   border: 0;
   border-radius: .5rem;
@@ -1212,6 +1219,7 @@ details[open]::details-content {
   font-size: .78rem;
   font-weight: 650;
 }
+.studio.is-paper-wide .variant-side { display: none; }
 .variant-side-left { grid-column: 1; --variant-tilt: -6deg; }
 .variant-side-right { grid-column: 5; --variant-tilt: 6deg; }
 .variant-thumb {
@@ -1237,7 +1245,7 @@ details[open]::details-content {
 .variant-compare-right { grid-column: 4; }
 .variant-compare svg { display: none; width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 @container (max-width: 620px) {
-  .variant-side { width: clamp(2.85rem, 20cqi, 8rem); padding: .32rem; font-size: .65rem; }
+  .variant-side { --variant-ideal-width: clamp(2.85rem, 20cqi, 8rem); padding: .32rem; font-size: .65rem; }
   .variant-compare { padding: .25rem; }
   .variant-compare svg { display: block; }
   .variant-compare span { display: none; }

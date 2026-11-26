@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.40 · 26 de novembre de 2026
+
+- Amplia el full A4 sencer al visor i aparta les miniatures de les variants per donar-li més espai.
+
 ## 0.1.39 · 26 de novembre de 2026
 
 - Permet triar el costat, la icona i el color de cada tipus de quadre. Augmenta l’amplada dels quadres al 90 % i dona més espai entre blocs.
