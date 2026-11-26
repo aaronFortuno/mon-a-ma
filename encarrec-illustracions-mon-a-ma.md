@@ -33,7 +33,7 @@ Amb marges laterals de 20 mm, l’A4 té 170 mm d’amplada útil. La primera fi
 | M001 | moviment · falla-san-andreas | m001/falla-san-andreas.jpg, complement compartit |
 | M001 | gravetat · reserva-gravetat | m001/gravetat-pla.png · m001/gravetat-volum.png · m001/gravetat-realista.png |
 | M001 | elements · reserva-elements | m001/elements-pla.png · m001/elements-volum.png · m001/elements-realista.png |
-| M001 | elements · arrels-i-erosio | m001/arrels-i-erosio.svg, complement compartit |
+| M001 | elements · arrels-i-erosio | m001/arrels-i-erosio.png, complement compartit |
 | M002 | localitzacio · graella | coordenades.png |
 | M002 | localitzacio · troba-la-flota | m002/troba-la-flota.svg, complement |
 | M003 | llegenda · barri | planol.png |

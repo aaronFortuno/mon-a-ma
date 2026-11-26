@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.37 · 26 de novembre de 2026
+
+- Publica l’esquema d’erosió en PNG d’alta resolució.
+
 ## 0.1.36 · 26 de novembre de 2026
 
 - Identifica els quadres amb etiquetes i icones personalitzables que surten també a la impressió.

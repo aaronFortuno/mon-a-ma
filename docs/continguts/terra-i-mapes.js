@@ -89,7 +89,7 @@ window.quaderns ??= [];
       },
       {
         id: 'arrels-i-erosio', section: 'elements', name: 'Les arrels i l’erosió del sòl',
-        src: 'illustracions/m001/arrels-i-erosio.svg', ratio: 960 / 720,
+        src: 'illustracions/m001/arrels-i-erosio.png', ratio: 4 / 3,
         alt: 'Dues safates amb el mateix pendent reben pluja. Una té plantes amb arrels. A la safata sense plantes, l’aigua s’endú més partícules de terra.',
         caption: 'Dos vessants amb el mateix pendent reben la mateixa pluja. Compara la terra arrossegada i fixa’t en el paper de les arrels.',
       },
