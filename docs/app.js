@@ -311,8 +311,9 @@
 
   function figureChoices(item) {
     const group = node('div', 'figure-style-choices');
-    group.setAttribute('role', 'group');
-    group.setAttribute('aria-label', 'Imatges de «' + item.name + '»');
+    const list = node('div', 'figure-style-list');
+    list.setAttribute('role', 'group');
+    list.setAttribute('aria-label', 'Imatges de «' + item.name + '»');
     for (const variant of item.variants) {
       const button = node('button', 'figure-style-choice');
       button.type = 'button';
@@ -323,15 +324,19 @@
       button.title = variant.label;
       if (variant.src) {
         const image = node('img');
-        image.src = variant.src;
+        image.src = variant.thumbnail ?? variant.src;
         image.alt = '';
+        image.loading = 'lazy';
+        image.decoding = 'async';
         button.append(image);
       } else {
         button.disabled = true;
         button.append(node('span', 'figure-style-pending', 'Pendent'));
       }
-      group.append(button);
+      button.append(node('span', 'figure-style-label', variant.label));
+      list.append(button);
     }
+    if (list.childElementCount) group.append(list);
     const personal = item.variants.some(variant => variant.id === 'custom');
     const upload = node('button', 'secondary figure-upload-button', personal ? 'Substitueix la imatge pròpia' : 'Puja una imatge');
     upload.type = 'button';
@@ -483,33 +488,48 @@
 
   function showMaterialIntro(topic) {
     if (!preferences.firstVisit(topic.code)) return;
-    const styles = topic.figureStyles?.slice(0, 2) ?? [];
-    const example = styles.length === 2 && topic.chapters.flatMap(chapter => chapter.figures ?? []).find(
+    const styles = topic.figureStyles ?? [];
+    const example = styles.length > 1 && topic.chapters.flatMap(chapter => chapter.figures ?? []).find(
       figure => styles.every(style => figure.variants?.[style.id]?.src),
     );
-    byId('material-intro-compare').hidden = !example;
+    const useSplit = Boolean(example && styles.length === 2);
+    const showPreviews = Boolean(example && styles.length > 2);
+    byId('material-intro-compare').hidden = styles.length < 2;
     byId('material-intro-styles').hidden = styles.length < 2;
     byId('material-intro-level').hidden = availableLevels(topic).length < 2;
-    if (example) {
-      const images = styles.map(style => {
-        const variant = example.variants[style.id];
-        const image = node('img');
-        image.src = variant.src;
-        image.alt = style.label + ' · ' + (variant.alt ?? example.alt ?? example.name);
-        return image;
-      });
-      byId('material-intro-example').textContent = example.name;
-      byId('material-intro-picture').replaceChildren(...images, node('span', 'intro-divider'));
-      byId('material-intro-slider').value = '50';
-      byId('material-intro-picture').style.setProperty('--split', '50%');
-      byId('material-intro-style-options').replaceChildren(...styles.map(style => {
-        const button = node('button', '', style.label);
-        button.type = 'button';
-        button.dataset.introStyle = style.id;
-        return button;
-      }));
-      syncIntroStyle(topic);
+    const heading = byId('material-intro-example');
+    heading.hidden = !example;
+    heading.textContent = example?.name ?? '';
+    const split = byId('material-intro-split');
+    split.hidden = !useSplit;
+    const picture = byId('material-intro-picture');
+    picture.replaceChildren();
+
+    function exampleImage(style, thumbnail = false) {
+      const variant = example.variants[style.id];
+      const image = node('img');
+      image.src = thumbnail ? variant.thumbnail ?? variant.src : variant.src;
+      image.alt = thumbnail ? '' : style.label + ' · ' + (variant.alt ?? example.alt ?? example.name);
+      return image;
     }
+
+    if (useSplit) {
+      picture.append(...styles.map(style => exampleImage(style)), node('span', 'intro-divider'));
+      byId('material-intro-slider').value = '50';
+      picture.style.setProperty('--split', '50%');
+    }
+
+    const options = byId('material-intro-style-options');
+    options.toggleAttribute('data-with-previews', showPreviews);
+    options.replaceChildren(...styles.map(style => {
+      const button = node('button', showPreviews ? 'figure-style-choice' : '');
+      button.type = 'button';
+      button.dataset.introStyle = style.id;
+      if (showPreviews) button.append(exampleImage(style, true), node('span', 'figure-style-label', style.label));
+      else button.textContent = style.label;
+      return button;
+    }));
+    syncIntroStyle(topic);
     byId('material-intro').showModal();
   }
 

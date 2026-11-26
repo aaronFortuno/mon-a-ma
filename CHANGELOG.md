@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.31 · 26 de novembre de 2026
+
+- Afegeix quatre il·lustracions realistes a El planeta Terra, preparades per a l’amplada imprimible de l’A4.
+- Refà la gravetat amb volum amb un tall de la Terra i tres fletxes que convergeixen al centre.
+- Mostra tres o més estils d’imatge amb una tira de miniatures al lateral i opcions addicionals al visor.
+
 ## 0.1.30 · 26 de novembre de 2026
 
 - Demana un segon clic al mateix botó per restablir la maquetació, l’ordre dels apartats o les il·lustracions.

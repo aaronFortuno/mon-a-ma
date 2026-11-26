@@ -46,6 +46,7 @@ window.quaderns ??= [];
         variants: {
           pla: { src: 'illustracions/capes.png' },
           volum: { src: 'illustracions/m001/capes.png', alt: 'Esfera de la Terra amb una porció retirada que mostra l’escorça, el mantell, el nucli extern i el nucli intern.' },
+          realista: { src: 'illustracions/m001/capes-realista.png', thumbnail: 'illustracions/m001/miniatures/capes-realista.png', alt: 'Terra en un cel estel·lar, amb un tall que mostra l’escorça, el mantell, el nucli extern i el nucli intern.' },
         },
       },
       {
@@ -55,6 +56,7 @@ window.quaderns ??= [];
         variants: {
           pla: { src: 'illustracions/m001/moviment-pla.png' },
           volum: { src: 'illustracions/m001/moviment-volum.png' },
+          realista: { src: 'illustracions/m001/moviment-realista.png', thumbnail: 'illustracions/m001/miniatures/moviment-realista.png', alt: 'Tres vinyetes de roca en perspectiva. Les fletxes mostren dues plaques que se separen, dues que s’acosten i formen una serralada, i dues que llisquen de costat.' },
         },
       },
       {
@@ -63,7 +65,8 @@ window.quaderns ??= [];
         caption: 'En qualsevol punt de la superfície, la gravetat atrau els objectes cap al centre de la Terra.',
         variants: {
           pla: { src: 'illustracions/m001/gravetat-pla.png' },
-          volum: { src: 'illustracions/m001/gravetat-volum.png' },
+          volum: { src: 'illustracions/m001/gravetat-volum.png?v=0.1.31', thumbnail: 'illustracions/m001/miniatures/gravetat-volum.png', alt: 'Tres fletxes van des de tres pilotes fins al punt Centre, visible entre les dues cares del tall de la Terra.' },
+          realista: { src: 'illustracions/m001/gravetat-realista.png', thumbnail: 'illustracions/m001/miniatures/gravetat-realista.png', alt: 'Tres fletxes van des de tres pilotes fins al punt Centre, visible entre les dues cares del tall de la Terra.' },
         },
       },
       {
@@ -73,6 +76,7 @@ window.quaderns ??= [];
         variants: {
           pla: { src: 'illustracions/m001/elements-pla.png' },
           volum: { src: 'illustracions/m001/elements-volum.png' },
+          realista: { src: 'illustracions/m001/elements-realista.png', thumbnail: 'illustracions/m001/miniatures/elements-realista.png', alt: 'Paisatge de muntanya amb un vessant rocós, un riu, un cel amb pluja i plantes a la riba, retolats com a geosfera, hidrosfera, atmosfera i biosfera.' },
         },
       },
     ],
@@ -115,6 +119,7 @@ window.quaderns ??= [];
     figureStyles: [
       { id: 'pla', label: 'Esquema pla', description: 'Vistes planes, contorns nets i colors uniformes.' },
       { id: 'volum', label: 'Il·lustració amb volum', description: 'Perspectiva i ombres suaus per veure la profunditat.' },
+      { id: 'realista', label: 'Il·lustració realista', description: 'Textura de roca, paisatge recreat i vistes de la Terra sobre un cel estel·lar.' },
     ],
     description: 'Descobreix les capes de la Terra, el moviment de les plaques, la gravetat i com es relacionen l’aigua, l’aire, les roques i els éssers vius.',
     curriculum: [{ row: 'medi:terra', section: 'elements', note: 'Explica les capes i com s’influeixen les roques, l’aigua, l’aire i els éssers vius.' }],

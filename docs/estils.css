@@ -656,7 +656,19 @@ summary { color: var(--green); font-weight: 650; }
 .figure-notes-fields { display: grid; gap: .45rem; margin-top: .4rem; font-size: .81rem; }
 .figure-notes-fields label { color: var(--muted); }
 #figure-settings .figure-notes-fields input { margin-top: .14rem; }
-.figure-style-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.5rem, 2vw, 1rem); }
+.figure-style-choices { display: grid; gap: .5rem; min-width: 0; }
+.figure-style-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .4rem; min-width: 0; }
+.figure-control .figure-style-list:has(> :nth-child(3)) {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: max(6.6rem, 43%);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scroll-snap-type: inline proximity;
+  padding: .15rem .15rem .28rem;
+}
+.figure-control .figure-style-list:has(> :nth-child(3)) > button { scroll-snap-align: start; }
 .figure-style-choice {
   display: flex;
   flex-direction: column;
@@ -677,12 +689,15 @@ summary { color: var(--green); font-weight: 650; }
   background: #fff;
 }
 .figure-style-choice img { object-fit: contain; }
+.figure-style-label { font-size: .77rem; line-height: 1.25; overflow-wrap: anywhere; }
 .figure-style-pending { font-size: .8rem; overflow-wrap: anywhere; }
 .figure-style-pending { display: grid; place-items: center; background: var(--light); }
 .figure-helper {
   position: fixed;
   z-index: 12;
   max-height: calc(100dvh - 16px);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
   padding: .55rem;
   border: 1px solid var(--line);
   border-radius: .6rem;
@@ -693,8 +708,8 @@ summary { color: var(--green); font-weight: 650; }
 .figure-helper-heading { display: flex; align-items: center; justify-content: space-between; gap: .35rem; margin-bottom: .45rem; }
 .figure-helper-heading h2 { margin: 0; font-size: .85rem; line-height: 1.2; overflow-wrap: anywhere; }
 .figure-helper-heading button { flex: none; width: 1.55rem; height: 1.55rem; }
-.figure-helper .figure-style-choices { gap: .3rem; }
-.figure-helper[data-orientation="landscape"] .figure-style-choices { grid-template-columns: minmax(0, 1fr); }
+.figure-helper .figure-style-choices, .figure-helper .figure-style-list { gap: .3rem; }
+.figure-helper[data-orientation="landscape"] .figure-style-list { grid-template-columns: minmax(0, 1fr); }
 .figure-helper[data-orientation="portrait"] .figure-style-choice img { aspect-ratio: 4 / 5; }
 .figure-helper .figure-upload-button { font-size: .78rem; padding: .32rem .45rem; }
 .figure-helper {
@@ -710,7 +725,6 @@ summary { color: var(--green); font-weight: 650; }
 .figure-style-choice { transition: border-color var(--motion-duration) ease, background-color var(--motion-duration) ease; }
 .figure-fade-out { position: absolute; object-fit: contain; }
 #figure-helper-status:not(:empty) { margin-top: .45rem; }
-.figure-upload-button { grid-column: 1 / -1; }
 .figure-style-choice:disabled { cursor: default; }
 .figure-wrap:has(:disabled) { color: var(--muted); }
 .upload { padding: .4rem; border: 1px solid var(--line); border-radius: .35rem; }
@@ -746,6 +760,14 @@ summary { color: var(--green); font-weight: 650; }
 }
 .material-intro-slider { display: block; width: min(100%, 34rem, 70dvh); margin: .35rem auto; accent-color: var(--green); }
 .material-intro-style-options { width: fit-content; max-width: 100%; flex-wrap: wrap; margin-inline: auto; }
+.material-intro-style-options[data-with-previews] {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: .5rem;
+}
+.material-intro-style-options[data-with-previews] .figure-style-choice { padding: .45rem; text-align: start; }
+.material-intro-style-options[data-with-previews] .figure-style-label { font-weight: 600; }
 .management-form { display: grid; gap: .65rem; margin-top: .8rem; }
 .management-dialog label:not(.check) { display: grid; gap: .2rem; min-width: 0; }
 .management-dialog :is(select, input[type="text"]) { width: 100%; min-width: 0; padding: .42rem .55rem; }
