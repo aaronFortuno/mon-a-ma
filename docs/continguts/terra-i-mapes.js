@@ -2,6 +2,7 @@ window.quaderns ??= [];
 
 {
   const p = text => ({ type: 'paragraph', text });
+  const essencial = text => ({ ...p(text), core: true });
   const table = (headers, rows, rowHeadingWidth) => ({ type: 'table', headers, rows, rowHeadingWidth });
   const list = (...items) => ({ type: 'steps', items });
   const box = (title, text) => ({ type: 'note', title, text });
@@ -77,7 +78,7 @@ window.quaderns ??= [];
     ],
     sections: [
       section('capes', 'Les capes del planeta Terra',
-        p('Si poguéssim fer un tall des de la superfície fins al centre de la Terra, hi distingiríem tres capes principals de la **geosfera**: l’escorça, el mantell i el nucli.'),
+        essencial('La **geosfera** és la part rocosa i metàl·lica de la Terra. Té tres capes principals: l’**escorça**, el **mantell** i el **nucli**.'),
         p('Els científics estudien l’interior del planeta observant, entre altres pistes, com hi viatgen les vibracions dels terratrèmols. Aquestes canvien de velocitat i de direcció segons els materials que travessen.'),
         table(['Capa', 'Com és?'], [
           ['Escorça', 'És la capa de roca més exterior i més prima. Forma el sòl rocós dels continents i el fons dels oceans.'],
@@ -85,15 +86,16 @@ window.quaderns ??= [];
           ['Nucli', 'És al centre de la Terra i està format sobretot per ferro. La part externa és líquida i la part interna és sòlida.'],
         ], 24)),
       section('moviment', 'Hi ha moviment a les capes de la Terra?',
-        p('L’escorça i la part més superficial i rígida del mantell formen la **litosfera**. Està dividida en grans fragments anomenats **plaques tectòniques**. Les plaques es mouen uns quants centímetres cada any, aproximadament el que poden créixer les ungles en un any.'),
+        essencial('La capa rígida de fora de la Terra està dividida en grans peces, les **plaques tectòniques**. Les plaques es mouen molt a poc a poc.'),
+        p('L’escorça i la part més superficial i rígida del mantell formen la **litosfera**. Les plaques es mouen uns quants centímetres cada any, aproximadament el que poden créixer les ungles en un any.'),
         p('La calor interna de la Terra contribueix a moviments molt lents al mantell. A la superfície, algunes plaques se separen, d’altres xoquen i d’altres llisquen de costat. Amb el pas de milions d’anys, aquests moviments desplacen els continents i poden aixecar serralades.'),
         p('Quan les roques es desplacen de cop al llarg d’una fractura, el terra pot tremolar. En moltes zones on es troben plaques també es forma **magma**, roca fosa que, quan surt a la superfície en una erupció, s’anomena **lava**.'),
         box('Del moviment al mapa', 'Un mapa de plaques i un mapa de terratrèmols ens permeten comprovar si les zones amb molts terratrèmols coincideixen amb els límits de les plaques.')),
       section('gravetat', 'La gravetat de la Terra',
-        p('Si deixes anar una pilota, cau cap a terra. La **gravetat** és la força d’atracció que fa que els objectes de prop de la superfície tendeixin a anar cap al centre del planeta. Per això, a qualsevol lloc de la Terra, «avall» apunta aproximadament cap al centre.'),
+        essencial('Si deixes anar una pilota, cau per la **gravetat**. A qualsevol lloc de la Terra, «avall» apunta cap al centre de la Terra.'),
         p('La gravetat també manté l’aire a prop de la Terra i contribueix a mantenir la Lluna en òrbita. Al paisatge es nota quan l’aigua corre pendent avall i quan les pedres cauen d’un vessant.')),
       section('elements', 'Els elements del planeta Terra',
-        p('Podem estudiar la Terra com un **sistema** format per parts que interaccionen.'),
+        essencial('Les **roques**, l’**aigua**, l’**aire** i els **éssers vius** formen parts de la Terra que es relacionen.'),
         table(['Part del sistema', 'Què hi trobem?'], [
           ['Geosfera', 'Les roques i els minerals del planeta, des de la superfície fins al nucli.'],
           ['Hidrosfera', 'L’aigua del planeta, com la dels oceans, els rius, els llacs, les glaceres i el subsol.'],

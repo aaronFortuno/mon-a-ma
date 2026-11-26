@@ -13,7 +13,6 @@ window.variantsMaterials ??= {};
           intro: 'Vivim a la superfície de la Terra. A sota hi ha roca i metall. A la superfície i al seu voltant hi ha aigua, aire i vida.',
           sections: {
             capes: [
-              p('Imagina un tall de la Terra, des de la superfície fins al centre. Hi veuríem tres capes principals.'),
               taula(['Capa', 'On és i com és?'], [
                 ['Escorça', 'És la capa de fora. És prima i feta de roca.'],
                 ['Mantell', 'És sota l’escorça. És la capa més gruixuda. La roca és molt calenta.'],
@@ -21,16 +20,13 @@ window.variantsMaterials ??= {};
               ], 24),
             ],
             moviment: [
-              p('La capa rígida de fora de la Terra està trencada en grans peces. S’anomenen **plaques tectòniques**. Es mouen molt a poc a poc.'),
               passos('Dues plaques es poden **separar**.', 'Dues plaques poden **xocar**.', 'Dues plaques poden lliscar de costat.'),
               p('Si les roques es mouen de cop, el terra pot tremolar. Això és un **terratrèmol**.'),
             ],
             gravetat: [
-              p('Deixa anar una pilota. Cau per la **gravetat**. Aquesta força estira els objectes cap al centre de la Terra.'),
               p('Tenim el centre de la Terra sota els peus. A l’altre costat del planeta, «avall» també apunta cap al centre.'),
             ],
             elements: [
-              p('La Terra té parts que es relacionen. Pensa en el paisatge d’un riu.'),
               taula(['Part', 'Exemple'], [
                 ['Geosfera', 'Les roques de la riba.'],
                 ['Hidrosfera', 'L’aigua del riu.'],

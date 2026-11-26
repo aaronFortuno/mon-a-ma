@@ -6,8 +6,8 @@
   const preferences = window.preferencies;
   const { defaults } = preferences;
   const materialLevels = [
-    { id: 'suport', label: 'Amb suport' },
-    { id: 'intermedia', label: 'Intermèdia' },
+    { id: 'suport', label: 'Suport' },
+    { id: 'intermedia', label: 'Base' },
     { id: 'ampliacio', label: 'Ampliació' },
   ];
   const byId = id => document.getElementById(id);
@@ -26,6 +26,14 @@
   const figureHelper = byId('figure-helper');
   const figureUpload = byId('figure-upload');
   const levelPicker = byId('material-level');
+  const variantSides = [byId('variant-left'), byId('variant-right')];
+  const comparisonDialog = byId('variant-comparison');
+  const comparisonBodies = [byId('comparison-left-paper'), byId('comparison-right-paper')];
+  const comparisonSelects = [byId('comparison-left'), byId('comparison-right')];
+  const comparisonScroll = new WeakMap();
+  const variantThumbPages = new WeakMap();
+  let comparisonRevision = 0;
+  let comparisonPages = [];
   let helperFigure = '';
   let helperPinned = false;
   let helperTimer;
@@ -57,6 +65,7 @@
   let logoUploadVersion = 0;
   let pendingSection = '';
   let sectionEdit;
+  let figureEdit = '';
   let paperAnimations = [];
 
   function imageStore() {
@@ -449,6 +458,7 @@
     const item = findFigure(choiceFigure);
     if (!item?.variants.some(choice => choice.id === variant && choice.src) || item.selectedVariant === variant) return;
     settings.figures[item.id] = { ...settings.figures[item.id], variant };
+    figureEdit = item.id;
     storeOptions();
     updateFigureChoices(item.id);
     requestPaper();
@@ -506,14 +516,23 @@
   function syncMaterialLevel() {
     const levels = availableLevels(route.topic);
     levelPicker.hidden = levels.length < 2;
+    byId('compare-variants').hidden = levels.length < 2 || documentType !== 'sheet';
     for (const button of levelPicker.querySelectorAll('button')) {
       button.hidden = !levels.some(level => level.id === button.dataset.materialLevel);
       button.setAttribute('aria-pressed', String(button.dataset.materialLevel === selectedLevel().id));
     }
+    const current = levels.findIndex(level => level.id === selectedLevel().id);
+    for (const [index, side] of variantSides.entries()) {
+      const level = levels[current + (index === 0 ? -1 : 1)];
+      side.hidden = !level || documentType !== 'sheet';
+      if (side.hidden) continue;
+      side.dataset.variantSide = level.id;
+      side.setAttribute('aria-label', 'Obre la variant ' + level.label);
+      side.querySelector('.variant-side-name').textContent = level.label;
+    }
   }
 
-  function chapterForLevel(chapter) {
-    const level = selectedLevel().id;
+  function chapterForLevel(chapter, level) {
     const content = window.variantsMaterials[route.topic.code]?.[chapter.id]?.[level];
     if (!content) return chapter;
     return {
@@ -522,13 +541,14 @@
       sections: chapter.sections.map(section => {
         const alternate = content.sections[section.id];
         if (!alternate) return section;
-        return { ...section, blocks: level === 'ampliacio' ? [...section.blocks, ...alternate] : alternate };
+        const shared = level === 'ampliacio' ? section.blocks : section.blocks.filter(block => block.core);
+        return { ...section, blocks: [...shared, ...alternate] };
       }),
     };
   }
 
-  function printableChapter(chapter) {
-    if (documentType === 'sheet') return arrangeChapter(chapterForLevel(chapter));
+  function printableChapter(chapter, level = selectedLevel().id, type = documentType) {
+    if (type === 'sheet') return arrangeChapter(chapterForLevel(chapter, level));
     const solution = chapter.solution;
     return solution && arrangeChapter({ ...solution, id: chapter.id, title: solution.title ?? chapter.title });
   }
@@ -661,6 +681,7 @@
     route = extractRoute();
     const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
     if (changedMaterial && byId('material-intro').open) byId('material-intro').close();
+    if (changedMaterial && comparisonDialog.open) comparisonDialog.close();
     byId('catalog-home').href = route ? catalogAddress(activeCollection) : '#';
     byId('catalog').hidden = Boolean(route);
     const curriculumDialog = byId('curriculum-dialog');
@@ -695,7 +716,10 @@
     }
 
     const changedChapter = changedMaterial || previous?.chapter.id !== route.chapter.id;
-    if (changedChapter) closeFigureHelper();
+    if (changedChapter) {
+      closeFigureHelper();
+      figureEdit = '';
+    }
     if (changedMaterial) {
       showQuickTemplate(false);
       quickTemplateStatus.textContent = '';
@@ -842,6 +866,9 @@
     byId('print-scope').hidden = route.topic.chapters.length === 1;
     syncDocumentPicker();
     syncMaterialLevel();
+    byId('core-format-option').hidden = !route.topic.chapters.some(chapter =>
+      chapter.sections.some(section => section.blocks.some(block => block.core)),
+    );
     for (const key of Object.keys(defaults)) {
       const input = form.elements.namedItem(key) ?? figureForm.elements.namedItem(key);
       if (!input) continue;
@@ -930,11 +957,7 @@
     const available = stack.clientWidth - parseFloat(padding.paddingLeft) - parseFloat(padding.paddingRight);
     const fitted = Math.min(1, Math.max(0.1, available / paper.width));
     const zoom = fitted * previewMagnification;
-    stack.style.setProperty('--zoom', zoom);
-    for (const frame of stack.children) {
-      frame.style.width = paper.width * zoom + 'px';
-      frame.style.height = paper.height * zoom + 'px';
-    }
+    sizePaperFrames(stack, paper, zoom);
     zoomOut.disabled = previewMagnification <= minPreviewMagnification;
     zoomReset.disabled = false;
     zoomIn.disabled = previewMagnification >= maxPreviewMagnification;
@@ -1107,36 +1130,199 @@
     });
   }
 
+  function animateFigureChange(previous, id) {
+    const duration = parseFloat(getComputedStyle(stack).getPropertyValue('--motion-duration'));
+    const current = stack.querySelector('figure[data-figure="' + CSS.escape(id) + '"] > :is(img, .image-placeholder)');
+    if (!duration || !current || typeof current.animate !== 'function') return;
+    const rect = current.getBoundingClientRect();
+    if (!inPreview(rect, stack.getBoundingClientRect())) return;
+    const timing = { duration, easing: 'ease-in-out' };
+    current.animate([{ opacity: .25 }, { opacity: 1 }], timing);
+    if (!previous) return;
+    const layer = motionLayer.getBoundingClientRect();
+    const ghost = previous.cloneNode(false);
+    ghost.classList.add('figure-fade-out');
+    Object.assign(ghost.style, {
+      left: rect.left - layer.left + 'px',
+      top: rect.top - layer.top + 'px',
+      width: rect.width + 'px',
+      height: rect.height + 'px',
+    });
+    motionLayer.append(ghost);
+    ghost.animate([{ opacity: .95 }, { opacity: 0 }], timing).finished.then(() => ghost.remove(), () => ghost.remove());
+  }
+
   function setPrintReady(ready) {
     for (const button of printButtons) button.disabled = !ready;
   }
 
+  function optionsForLevel(level, type) {
+    const options = { ...settings, documentType: type };
+    if (type === 'solution') return options;
+    options.markCore = options.markCore && level !== 'suport';
+    if (level === 'suport') {
+      options.fontSize = Math.min(16, options.fontSize + .5);
+      options.leading = Math.min(2.15, options.leading + .17);
+      options.paragraphSpacing = .82;
+    } else if (level === 'ampliacio') {
+      options.fontSize = Math.max(10, options.fontSize - .5);
+      options.leading = Math.max(1.1, options.leading - .12);
+      options.paragraphSpacing = .5;
+    }
+    return options;
+  }
+
+  function materialPages(level, type = 'sheet') {
+    const options = optionsForLevel(level, type);
+    const entries = options.scope === 'topic' ? route.topic.chapters : [route.chapter];
+    const chapters = entries.map(chapter => printableChapter(chapter, level, type)).filter(Boolean);
+    const figures = new Map(chapters.map(chapter => [
+      chapter.id,
+      options.showFigures ? figuresFor(chapter, type).filter(figure => figure.visible) : [],
+    ]));
+    return { options, chapters, figures };
+  }
+
+  async function loadMaterialPages(material) {
+    let missing = false;
+    const figures = await Promise.all([...material.figures].map(async ([id, candidates]) => [
+      id,
+      await Promise.all(candidates.map(async figure => {
+        if (!figure.src) return figure;
+        const size = await preload(figure.src);
+        if (size) return { ...figure, pixelWidth: size.width, pixelHeight: size.height };
+        missing = true;
+        return { ...figure, src: '' };
+      })),
+    ]));
+    await loadPaperFont(material.options.font);
+    return { ...material, figures: new Map(figures), missing };
+  }
+
+  function layoutMaterial(material, target) {
+    return paginate(route.topic, material.chapters, material.figures, material.options, byId('layout-probe'), target);
+  }
+
+  function fitMaterial(target, preview) {
+    if (!preview) return;
+    const style = getComputedStyle(target);
+    const width = target.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    if (width > 0) sizePaperFrames(target, preview, Math.min(1, width / preview.width));
+  }
+
+  function sizePaperFrames(target, preview, scale) {
+    target.style.setProperty('--zoom', scale);
+    for (const frame of target.children) {
+      frame.style.width = preview.width * scale + 'px';
+      frame.style.height = preview.height * scale + 'px';
+    }
+  }
+
+  async function renderVariantPreviews(ticket) {
+    await Promise.all(variantSides.filter(side => !side.hidden).map(async side => {
+      const thumbnail = side.querySelector('.variant-thumb');
+      const material = await loadMaterialPages(materialPages(side.dataset.variantSide));
+      if (ticket !== revision || !route) return;
+      const pages = node('div');
+      pages.id = side.id + '-miniatura';
+      const preview = layoutMaterial(material, pages);
+      thumbnail.replaceChildren(pages.firstElementChild);
+      variantThumbPages.set(thumbnail, preview);
+      fitMaterial(thumbnail, preview);
+    }));
+  }
+
+  function comparisonAnchors(target) {
+    const top = target.getBoundingClientRect().top;
+    const end = target.scrollHeight - target.clientHeight;
+    const offsets = new Map();
+    for (const section of target.querySelectorAll('[data-paper-section]')) {
+      offsets.set(section.dataset.paperChapter + ':' + section.dataset.paperSection,
+        section.getBoundingClientRect().top - top + target.scrollTop - 8);
+    }
+    return { offsets, end: Math.max(0, end) };
+  }
+
+  function syncComparison(source, peer) {
+    const before = comparisonAnchors(source);
+    const after = comparisonAnchors(peer);
+    const points = [[0, 0]];
+    for (const [section, offset] of before.offsets) {
+      const other = after.offsets.get(section);
+      if (offset > 0 && offset < before.end && other > 0 && other < after.end) points.push([offset, other]);
+    }
+    points.push([before.end, after.end]);
+    const top = source.scrollTop;
+    const next = points.findIndex(([offset], index) => index > 0 && offset >= top);
+    if (next < 1) return;
+    const [start, from] = points[next - 1];
+    const [end, to] = points[next];
+    const value = end > start ? from + (top - start) / (end - start) * (to - from) : 0;
+    if (Math.abs(peer.scrollTop - value) < 1) return;
+    peer.scrollTop = value;
+    comparisonScroll.set(peer, peer.scrollTop);
+  }
+
+  async function renderComparison() {
+    const ticket = ++comparisonRevision;
+    const codes = comparisonSelects.map(select => select.value);
+    for (const [index, select] of comparisonSelects.entries()) {
+      for (const option of select.options) option.disabled = option.value === codes[1 - index];
+    }
+    byId('comparison-status').textContent = 'Preparant les variants…';
+    const materials = await Promise.all(codes.map(id => loadMaterialPages(materialPages(id))));
+    if (ticket !== comparisonRevision || !comparisonDialog.open) return;
+    comparisonPages = materials.map((material, index) => {
+      const target = comparisonBodies[index];
+      const preview = layoutMaterial(material, target);
+      fitMaterial(target, preview);
+      target.scrollTop = 0;
+      comparisonScroll.set(target, target.scrollTop);
+      return preview;
+    });
+    byId('comparison-status').textContent = '';
+  }
+
+  function openComparison() {
+    const levels = availableLevels(route.topic);
+    const selected = selectedLevel().id;
+    const left = !variantSides[0].hidden ? variantSides[0].dataset.variantSide : selected;
+    const right = !variantSides[1].hidden ? variantSides[1].dataset.variantSide : selected;
+    for (const [index, select] of comparisonSelects.entries()) {
+      select.replaceChildren(...levels.map(level => option(level.id, level.label)));
+      select.value = index === 0 ? left : right;
+      if (select.selectedIndex < 0) select.selectedIndex = index === 0 ? 0 : levels.length - 1;
+    }
+    if (comparisonSelects[0].value === comparisonSelects[1].value) {
+      comparisonSelects[1].value = levels.find(level => level.id !== comparisonSelects[0].value).id;
+    }
+    comparisonDialog.showModal();
+    renderComparison();
+  }
+
+  function selectMaterialLevel(level) {
+    if (!route || !availableLevels(route.topic).some(item => item.id === level) || level === selectedLevel().id) return;
+    settings.materialLevel = level;
+    sectionEdit = null;
+    storeOptions();
+    renderControls();
+    requestPaper();
+  }
+
   async function refreshPaper() {
     const ticket = ++revision;
-    const { topic, chapter } = route;
-    const options = { ...settings, documentType };
-    const chapters = (options.scope === 'topic' ? topic.chapters : [chapter]).map(printableChapter).filter(Boolean);
+    const { chapter } = route;
     setPrintReady(false);
     printStatus.hidden = true;
-    const fontReady = loadPaperFont(options.font);
-    const selected = chapters.map(entry => [entry.id, options.showFigures ? figuresFor(entry).filter(item => item.visible) : []]);
-    let missing = false;
-    const resolved = await Promise.all(selected.map(async ([id, candidates]) => {
-      const figures = await Promise.all(candidates.map(async item => {
-        if (!item.src) return item;
-        const size = await preload(item.src);
-        if (!size) {
-          missing = true;
-          return { ...item, src: '' };
-        }
-        return { ...item, pixelWidth: size.width, pixelHeight: size.height };
-      }));
-      return [id, figures.filter(Boolean)];
-    }));
-    await fontReady;
+    const material = await loadMaterialPages(materialPages(selectedLevel().id, documentType));
     if (ticket !== revision || !route) return;
     const edit = sectionEdit;
     sectionEdit = null;
+    const changedFigure = figureEdit;
+    figureEdit = '';
+    const previousFigure = changedFigure && stack.querySelector(
+      'figure[data-figure="' + CSS.escape(changedFigure) + '"] > :is(img, .image-placeholder)',
+    );
     const scrollTop = stack.scrollTop;
     const scrollLeft = stack.scrollLeft;
     const viewTop = stack.getBoundingClientRect().top;
@@ -1147,8 +1333,8 @@
     const snapshot = edit && capturePaperMotion(edit);
     stopPaperMotion();
     const focusedStyleFigure = document.activeElement?.dataset.styleFigure;
-    paper = paginate(topic, chapters, new Map(resolved), options, byId('layout-probe'), stack);
-    if (documentType === 'sheet') renderSectionTools(chapters);
+    paper = layoutMaterial(material, stack);
+    if (documentType === 'sheet') renderSectionTools(material.chapters);
     renderFigureStyleTools();
     fitPaper();
     if (focusedStyleFigure) {
@@ -1170,13 +1356,15 @@
       focusMovedSection(edit);
     }
     if (snapshot) animatePaper(snapshot, edit);
+    if (changedFigure) animateFigureChange(previousFigure, changedFigure);
     positionFigureHelper();
     const warnings = [];
-    if (missing) warnings.push('Alguna imatge no s’ha pogut carregar.');
+    if (material.missing) warnings.push('Alguna imatge no s’ha pogut carregar.');
     if (paper.oversized) warnings.push('Redueix la lletra, l’interlineat o els marges per encabir el contingut.');
     printStatus.textContent = warnings.join(' ');
     printStatus.hidden = !warnings.length;
     setPrintReady(!paper.oversized);
+    renderVariantPreviews(ticket);
   }
 
   function requestPaper() {
@@ -1321,7 +1509,10 @@
       layout.figures[item.id] = { ...saved, variant: 'custom' };
       if (current) {
         storeOptions();
-        if (documentType === type) updateFigureChoices(item.id, true);
+        if (documentType === type) {
+          updateFigureChoices(item.id, true);
+          figureEdit = item.id;
+        }
         requestPaper();
         imageFeedback(persisted ? 'Imatge pròpia desada en aquest navegador.' : 'Imatge pròpia disponible durant aquesta sessió.');
       } else {
@@ -1769,14 +1960,40 @@
     byId('header-logo-upload').focus({ preventScroll: true });
     requestPaper();
   });
-  levelPicker.addEventListener('click', event => {
-    const level = event.target.closest('button')?.dataset.materialLevel;
-    if (!availableLevels(route.topic).some(item => item.id === level) || level === selectedLevel().id) return;
-    settings.materialLevel = level;
-    sectionEdit = null;
-    storeOptions();
-    renderControls();
-    requestPaper();
+  levelPicker.addEventListener('click', event => selectMaterialLevel(event.target.closest('button')?.dataset.materialLevel));
+  for (const side of variantSides) {
+    side.addEventListener('click', () => {
+      selectMaterialLevel(side.dataset.variantSide);
+      levelPicker.querySelector('[aria-pressed="true"]')?.focus({ preventScroll: true });
+    });
+  }
+  byId('compare-variants').addEventListener('click', openComparison);
+  byId('comparison-sync').addEventListener('change', event => {
+    if (event.target.checked) syncComparison(comparisonBodies[0], comparisonBodies[1]);
+  });
+  for (const [index, target] of comparisonBodies.entries()) {
+    target.addEventListener('scroll', () => {
+      const expected = comparisonScroll.get(target);
+      comparisonScroll.delete(target);
+      if (expected !== undefined && Math.abs(target.scrollTop - expected) < 1) return;
+      if (byId('comparison-sync').checked) syncComparison(target, comparisonBodies[1 - index]);
+    }, { passive: true });
+  }
+  for (const select of comparisonSelects) select.addEventListener('change', renderComparison);
+  const comparisonObserver = new ResizeObserver(() => {
+    comparisonBodies.forEach((target, index) => fitMaterial(target, comparisonPages[index]));
+    for (const side of variantSides) {
+      const thumbnail = side.querySelector('.variant-thumb');
+      fitMaterial(thumbnail, variantThumbPages.get(thumbnail));
+    }
+  });
+  for (const target of comparisonBodies) comparisonObserver.observe(target);
+  for (const side of variantSides) comparisonObserver.observe(side);
+  comparisonDialog.addEventListener('close', () => {
+    comparisonRevision++;
+    comparisonPages = [];
+    for (const target of comparisonBodies) target.replaceChildren();
+    byId('compare-variants').focus({ preventScroll: true });
   });
   byId('document-picker').addEventListener('click', event => {
     const type = event.target.closest('button')?.dataset.document;

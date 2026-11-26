@@ -1,5 +1,12 @@
 # Historial de versions
 
+## 0.1.25 · 26 de novembre de 2026
+
+- Afegeix miniatures de les variants i un comparador amb desplaçament sincronitzat per apartats.
+- Anomena les variants Suport, Base i Ampliació, amb una densitat de text adaptada.
+- Prova a M001 fragments amb el mateix redactat, destacats a Base i Ampliació amb una marca opcional.
+- Suavitza l’obertura i el tancament del selector i el canvi de les imatges.
+
 ## 0.1.24 · 26 de novembre de 2026
 
 - La benvinguda compara els dos estils amb un separador i permet triar l’estil inicial de la fitxa.

@@ -5,7 +5,7 @@
   const visitsKey = 'mon-a-ma:fitxes-vistes:v1';
   const defaults = {
     scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.8, margin: 20, textAlignment: 'left',
-    showPageFooter: true, pageNumbers: true, showMaterialCode: true, showTopicTitle: true, showFigures: true,
+    showPageFooter: true, pageNumbers: true, showMaterialCode: true, showTopicTitle: true, showFigures: true, markCore: true,
     headerLogo: true, headerBrand: true, headerName: true, headerDate: true, headerLogoImage: '',
     showClassroomCode: false, classroomCode: '', classroomCodeSize: 20, classroomCodeStyle: 'solid',
   };

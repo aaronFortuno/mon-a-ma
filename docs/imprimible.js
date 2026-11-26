@@ -40,7 +40,7 @@ window.imprimible = (() => {
   }
 
   function block(source) {
-    if (source.type === 'paragraph') return rich(node('p'), source.text);
+    if (source.type === 'paragraph') return rich(node('p', source.core ? 'paper-core' : ''), source.text);
     if (source.type === 'steps') {
       const items = node('ol');
       items.append(...source.items.map(value => rich(node('li'), value)));
@@ -153,6 +153,8 @@ window.imprimible = (() => {
     sheet.style.setProperty('--leading', options.leading);
     sheet.style.setProperty('--serif', paperFonts[options.font] ?? paperFonts.georgia);
     sheet.dataset.alignment = options.textAlignment;
+    if (options.markCore) sheet.dataset.markCore = '';
+    if (options.paragraphSpacing) sheet.style.setProperty('--paragraph-spacing', options.paragraphSpacing);
     const inner = node('div', 'sheet-inner');
     if (firstPage) {
       const row = node('div', 'sheet-header-fields');
@@ -210,6 +212,7 @@ window.imprimible = (() => {
 
   function paginate(topic, chapters, figuresByChapter, options, measuring, target) {
     measuring.replaceChildren();
+    const idPrefix = target.id === 'paper-stack' ? '' : (target.id || 'miniatura') + '-';
     const pages = [];
     let page;
     let oversized = false;
@@ -238,7 +241,7 @@ window.imprimible = (() => {
       for (const section of chapter.sections) {
         const units = sectionUnits(section, figures.filter(item => item.section === section.id));
         if (units[0]) {
-          units[0].id = 'fitxa-' + chapter.id + '-' + section.id;
+          units[0].id = idPrefix + 'fitxa-' + chapter.id + '-' + section.id;
           units[0].tabIndex = -1;
           units[0].dataset.paperChapter = chapter.id;
           units[0].dataset.paperSection = section.id;

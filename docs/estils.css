@@ -687,6 +687,18 @@ summary { color: var(--green); font-weight: 650; }
 .figure-helper[data-orientation="landscape"] .figure-style-choices { grid-template-columns: minmax(0, 1fr); }
 .figure-helper[data-orientation="portrait"] .figure-style-choice img { aspect-ratio: 4 / 5; }
 .figure-helper .figure-upload-button { font-size: .78rem; padding: .32rem .45rem; }
+.figure-helper {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity var(--motion-duration) ease, transform var(--motion-duration) ease,
+    display var(--motion-duration) allow-discrete;
+}
+.figure-helper[hidden] { opacity: 0; transform: translateY(4px) scale(.98); pointer-events: none; }
+@starting-style {
+  .figure-helper:not([hidden]) { opacity: 0; transform: translateY(4px) scale(.98); }
+}
+.figure-style-choice { transition: border-color var(--motion-duration) ease, background-color var(--motion-duration) ease; }
+.figure-fade-out { position: absolute; object-fit: contain; }
 #figure-helper-status:not(:empty) { margin-top: .45rem; }
 .figure-upload-button { grid-column: 1 / -1; }
 .figure-style-choice:disabled { cursor: default; }
@@ -885,11 +897,58 @@ details[open]::details-content {
 }
 
 @page { size: A4; margin: 0; }
+.studio { grid-template-columns: auto minmax(0, 1fr) auto; }
+.studio-pickers { grid-area: 1 / 2; justify-content: center; }
+#paper-stack, .paper-motion { grid-area: 2 / 2; }
+.zoom-controls { grid-area: 2 / 2; }
+.variant-side {
+  grid-row: 2;
+  align-self: start;
+  display: grid;
+  gap: .35rem;
+  width: clamp(3rem, 8vw, 6.7rem);
+  padding: .45rem;
+  margin: .85rem .25rem 0;
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  background: var(--surface);
+  min-width: 0;
+  font-size: .75rem;
+  font-weight: 650;
+}
+.variant-side:hover { border-color: var(--green); background: var(--light); }
+.variant-side-left { grid-column: 1; }
+.variant-side-right { grid-column: 3; }
+.variant-thumb { display: block; width: 100%; min-height: 2.5rem; pointer-events: none; }
+.variant-thumb .sheet-frame { overflow: hidden; display: block; }
+.variant-side-name { overflow-wrap: anywhere; }
+#compare-variants { white-space: nowrap; }
+.project-dialog.variant-comparison { display: grid; grid-template-rows: auto auto minmax(0, 1fr); width: min(70rem, 100% - 1.4rem); height: min(48rem, 100% - 1.4rem); }
+.project-dialog.variant-comparison:not([open]) { display: none; }
+.comparison-sync { padding: 0 1.35rem .65rem; }
+.comparison-grid { display: grid; grid-template: minmax(0, 1fr) / repeat(2, minmax(0, 1fr)); gap: .6rem; min-height: 0; padding: 0 .65rem .65rem; }
+.comparison-column { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: .3rem; min-width: 0; min-height: 0; }
+.comparison-column label { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; font-size: .8rem; }
+.comparison-column select { min-width: 0; max-width: 100%; padding: .22rem; }
+.comparison-paper { padding: .35rem; background: var(--tray); overflow-anchor: none; scrollbar-gutter: stable; }
+.comparison-paper .sheet-frame { overflow: hidden; }
+.sheet .paper-unit > p { margin-block-end: calc(var(--paragraph-spacing, .68) * 1em); }
+.sheet[data-mark-core] .paper-core {
+  border-inline-start: 2px solid var(--paper-accent);
+  padding-inline-start: .55em;
+  font-weight: 600;
+}
+@media (max-width: 620px) {
+  .variant-side { padding: .23rem; margin-inline: .1rem; width: clamp(2.65rem, 11vw, 4.25rem); font-size: .63rem; }
+  .studio-pickers { padding: .25rem .15rem; gap: .2rem; }
+  .studio-pickers button { padding: .22rem .3rem; font-size: .71rem; }
+}
+
 @media print {
   html, body { background: white; overflow: visible; }
   body { position: static; display: block; height: auto; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .skip, .site-header, #catalog, .site-footer, #layout-probe,
-  .sidebar-column, .studio-pickers, .zoom-controls, .print-menu, .section-preview-tools, .figure-style-trigger, .figure-helper, .paper-motion, dialog, noscript { display: none !important; }
+  .sidebar-column, .studio-pickers, .variant-side, .zoom-controls, .print-menu, .section-preview-tools, .figure-style-trigger, .figure-helper, .paper-motion, dialog, noscript { display: none !important; }
   main, .workspace, .workspace-grid, .studio, .paper-stack { display: block; height: auto; width: auto; margin: 0; padding: 0; border: 0; background: white; overflow: visible; }
   .paper-stack { scrollbar-gutter: auto; }
   .sheet-frame { position: static; width: auto !important; height: auto !important; margin: 0 !important; break-after: page; }
