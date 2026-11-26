@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.26 · 26 de novembre de 2026
+
+- Mostra miniatures més grans, girades lleugerament i centrades al costat de la fitxa principal.
+- Compara Suport amb Base o Base amb Ampliació en un visor ampli, amb fletxes laterals per canviar de parella.
+- Permet alinear el títol d’un apartat als dos fulls amb un clic.
+
 ## 0.1.25 · 26 de novembre de 2026
 
 - Afegeix miniatures de les variants i un comparador amb desplaçament sincronitzat per apartats.

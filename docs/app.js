@@ -29,8 +29,12 @@
   const variantSides = [byId('variant-left'), byId('variant-right')];
   const comparisonDialog = byId('variant-comparison');
   const comparisonBodies = [byId('comparison-left-paper'), byId('comparison-right-paper')];
-  const comparisonSelects = [byId('comparison-left'), byId('comparison-right')];
-  const comparisonScroll = new WeakMap();
+  const compareButtons = [byId('compare-left'), byId('compare-right')];
+  const comparisonHeadings = [byId('comparison-left-title'), byId('comparison-right-title')];
+  const comparisonSections = byId('comparison-sections');
+  const comparisonArrows = [byId('comparison-previous'), byId('comparison-next')];
+  let comparisonOpener;
+  let comparisonSection = '';
   const variantThumbPages = new WeakMap();
   let comparisonRevision = 0;
   let comparisonPages = [];
@@ -516,7 +520,6 @@
   function syncMaterialLevel() {
     const levels = availableLevels(route.topic);
     levelPicker.hidden = levels.length < 2;
-    byId('compare-variants').hidden = levels.length < 2 || documentType !== 'sheet';
     for (const button of levelPicker.querySelectorAll('button')) {
       button.hidden = !levels.some(level => level.id === button.dataset.materialLevel);
       button.setAttribute('aria-pressed', String(button.dataset.materialLevel === selectedLevel().id));
@@ -524,8 +527,14 @@
     const current = levels.findIndex(level => level.id === selectedLevel().id);
     for (const [index, side] of variantSides.entries()) {
       const level = levels[current + (index === 0 ? -1 : 1)];
-      side.hidden = !level || documentType !== 'sheet';
+      const compare = compareButtons[index];
+      side.hidden = compare.hidden = !level || documentType !== 'sheet';
       if (side.hidden) continue;
+      const start = index === 0 ? current - 1 : current;
+      compare.dataset.pairStart = String(start);
+      const description = 'Compara ' + levels[start].label + ' i ' + levels[start + 1].label;
+      compare.setAttribute('aria-label', description);
+      compare.title = description;
       side.dataset.variantSide = level.id;
       side.setAttribute('aria-label', 'Obre la variant ' + level.label);
       side.querySelector('.variant-side-name').textContent = level.label;
@@ -1232,72 +1241,101 @@
     }));
   }
 
-  function comparisonAnchors(target) {
-    const top = target.getBoundingClientRect().top;
-    const end = target.scrollHeight - target.clientHeight;
-    const offsets = new Map();
-    for (const section of target.querySelectorAll('[data-paper-section]')) {
-      offsets.set(section.dataset.paperChapter + ':' + section.dataset.paperSection,
-        section.getBoundingClientRect().top - top + target.scrollTop - 8);
-    }
-    return { offsets, end: Math.max(0, end) };
+  function comparisonOffset(target, heading) {
+    return heading.getBoundingClientRect().top - target.getBoundingClientRect().top + target.scrollTop - 12;
   }
 
-  function syncComparison(source, peer) {
-    const before = comparisonAnchors(source);
-    const after = comparisonAnchors(peer);
-    const points = [[0, 0]];
-    for (const [section, offset] of before.offsets) {
-      const other = after.offsets.get(section);
-      if (offset > 0 && offset < before.end && other > 0 && other < after.end) points.push([offset, other]);
+  function fitComparison(target, preview) {
+    if (!preview) return;
+    const scroll = target.scrollTop;
+    target.style.removeProperty('--comparison-tail');
+    fitMaterial(target, preview);
+    const headings = target.querySelectorAll('[data-paper-section] .section-title');
+    const last = headings[headings.length - 1];
+    if (last) {
+      const end = target.scrollHeight - target.clientHeight;
+      const extra = Math.ceil(Math.max(0, comparisonOffset(target, last) - end));
+      target.style.setProperty('--comparison-tail', extra + 'px');
     }
-    points.push([before.end, after.end]);
-    const top = source.scrollTop;
-    const next = points.findIndex(([offset], index) => index > 0 && offset >= top);
-    if (next < 1) return;
-    const [start, from] = points[next - 1];
-    const [end, to] = points[next];
-    const value = end > start ? from + (top - start) / (end - start) * (to - from) : 0;
-    if (Math.abs(peer.scrollTop - value) < 1) return;
-    peer.scrollTop = value;
-    comparisonScroll.set(peer, peer.scrollTop);
+    target.scrollTop = scroll;
   }
 
-  async function renderComparison() {
+  function markComparisonSection() {
+    for (const button of comparisonSections.querySelectorAll('button')) {
+      if (button.dataset.comparisonSection === comparisonSection) button.setAttribute('aria-current', 'location');
+      else button.removeAttribute('aria-current');
+    }
+  }
+
+  function alignComparison(section) {
+    comparisonSection = section;
+    markComparisonSection();
+    for (const target of comparisonBodies) {
+      const unit = [...target.querySelectorAll('[data-paper-section]')].find(item =>
+        item.dataset.paperChapter + ':' + item.dataset.paperSection === section,
+      );
+      const heading = unit?.querySelector('.section-title');
+      if (heading) target.scrollTop = comparisonOffset(target, heading);
+    }
+  }
+
+  function renderComparisonSections(chapters) {
+    const buttons = chapters.flatMap(chapter => chapter.sections.map(section => {
+      const button = node('button', 'secondary', section.title);
+      button.type = 'button';
+      button.dataset.comparisonSection = chapter.id + ':' + section.id;
+      return button;
+    }));
+    comparisonSections.replaceChildren(...buttons);
+    comparisonSections.hidden = !buttons.length;
+    markComparisonSection();
+  }
+
+  function setComparisonArrow(arrow, levels, index) {
+    const left = levels[index];
+    const right = levels[index + 1];
+    arrow.hidden = !left || !right;
+    if (arrow.hidden) return;
+    arrow.dataset.pairStart = String(index);
+    const label = 'Compara ' + left.label + ' i ' + right.label;
+    arrow.setAttribute('aria-label', label);
+    arrow.title = label;
+  }
+
+  async function renderComparison(pairStart) {
+    const levels = availableLevels(route.topic);
+    const pair = levels.slice(pairStart, pairStart + 2);
+    if (pairStart < 0 || pair.length !== 2) return;
     const ticket = ++comparisonRevision;
-    const codes = comparisonSelects.map(select => select.value);
-    for (const [index, select] of comparisonSelects.entries()) {
-      for (const option of select.options) option.disabled = option.value === codes[1 - index];
+    const focusedArrow = document.activeElement;
+    setComparisonArrow(comparisonArrows[0], levels, pairStart - 1);
+    setComparisonArrow(comparisonArrows[1], levels, pairStart + 1);
+    if (comparisonArrows.includes(focusedArrow) && focusedArrow.hidden) {
+      comparisonArrows.find(arrow => !arrow.hidden)?.focus({ preventScroll: true });
     }
-    byId('comparison-status').textContent = 'Preparant les variants…';
-    const materials = await Promise.all(codes.map(id => loadMaterialPages(materialPages(id))));
+    comparisonHeadings.forEach((heading, index) => { heading.textContent = pair[index].label; });
+    byId('comparison-status').textContent = 'Preparant la comparació…';
+    const materials = await Promise.all(pair.map(level => loadMaterialPages(materialPages(level.id))));
     if (ticket !== comparisonRevision || !comparisonDialog.open) return;
+    renderComparisonSections(materials[0].chapters);
     comparisonPages = materials.map((material, index) => {
       const target = comparisonBodies[index];
+      target.style.removeProperty('--comparison-tail');
       const preview = layoutMaterial(material, target);
-      fitMaterial(target, preview);
+      fitComparison(target, preview);
       target.scrollTop = 0;
-      comparisonScroll.set(target, target.scrollTop);
       return preview;
     });
-    byId('comparison-status').textContent = '';
+    if (comparisonSection) alignComparison(comparisonSection);
+    byId('comparison-status').textContent = 'Comparació de ' + pair[0].label + ' i ' + pair[1].label;
   }
 
-  function openComparison() {
-    const levels = availableLevels(route.topic);
-    const selected = selectedLevel().id;
-    const left = !variantSides[0].hidden ? variantSides[0].dataset.variantSide : selected;
-    const right = !variantSides[1].hidden ? variantSides[1].dataset.variantSide : selected;
-    for (const [index, select] of comparisonSelects.entries()) {
-      select.replaceChildren(...levels.map(level => option(level.id, level.label)));
-      select.value = index === 0 ? left : right;
-      if (select.selectedIndex < 0) select.selectedIndex = index === 0 ? 0 : levels.length - 1;
-    }
-    if (comparisonSelects[0].value === comparisonSelects[1].value) {
-      comparisonSelects[1].value = levels.find(level => level.id !== comparisonSelects[0].value).id;
-    }
+  function openComparison(event) {
+    if (!route) return;
+    comparisonOpener = event.currentTarget;
+    comparisonSection = '';
     comparisonDialog.showModal();
-    renderComparison();
+    renderComparison(Number(comparisonOpener.dataset.pairStart));
   }
 
   function selectMaterialLevel(level) {
@@ -1967,21 +2005,17 @@
       levelPicker.querySelector('[aria-pressed="true"]')?.focus({ preventScroll: true });
     });
   }
-  byId('compare-variants').addEventListener('click', openComparison);
-  byId('comparison-sync').addEventListener('change', event => {
-    if (event.target.checked) syncComparison(comparisonBodies[0], comparisonBodies[1]);
-  });
-  for (const [index, target] of comparisonBodies.entries()) {
-    target.addEventListener('scroll', () => {
-      const expected = comparisonScroll.get(target);
-      comparisonScroll.delete(target);
-      if (expected !== undefined && Math.abs(target.scrollTop - expected) < 1) return;
-      if (byId('comparison-sync').checked) syncComparison(target, comparisonBodies[1 - index]);
-    }, { passive: true });
+  for (const button of compareButtons) button.addEventListener('click', openComparison);
+  for (const arrow of comparisonArrows) {
+    arrow.addEventListener('click', () => renderComparison(Number(arrow.dataset.pairStart)));
   }
-  for (const select of comparisonSelects) select.addEventListener('change', renderComparison);
+  comparisonSections.addEventListener('click', event => {
+    const section = event.target.closest('[data-comparison-section]')?.dataset.comparisonSection;
+    if (section) alignComparison(section);
+  });
   const comparisonObserver = new ResizeObserver(() => {
-    comparisonBodies.forEach((target, index) => fitMaterial(target, comparisonPages[index]));
+    comparisonBodies.forEach((target, index) => fitComparison(target, comparisonPages[index]));
+    if (comparisonDialog.open && comparisonSection && comparisonPages.length) alignComparison(comparisonSection);
     for (const side of variantSides) {
       const thumbnail = side.querySelector('.variant-thumb');
       fitMaterial(thumbnail, variantThumbPages.get(thumbnail));
@@ -1993,7 +2027,8 @@
     comparisonRevision++;
     comparisonPages = [];
     for (const target of comparisonBodies) target.replaceChildren();
-    byId('compare-variants').focus({ preventScroll: true });
+    comparisonOpener?.focus({ preventScroll: true });
+    comparisonOpener = undefined;
   });
   byId('document-picker').addEventListener('click', event => {
     const type = event.target.closest('button')?.dataset.document;
