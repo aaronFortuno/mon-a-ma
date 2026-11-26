@@ -5,7 +5,7 @@
   const countLabel = count => count === 1 ? '1 material' : count + ' materials';
   const cycleLabel = cycle => cycle.label + (cycle.stage === 'ESO' ? ' · ESO' : '');
 
-  function setupCurriculum(topics, materialAddress) {
+  function setupCurriculum(topics, materialAddress, isDefinitive) {
     const dialog = byId('curriculum-dialog');
     const form = byId('curriculum-filters');
     const table = byId('curriculum-table');
@@ -25,6 +25,7 @@
     let helpTimer;
     const helpContents = new WeakMap();
     const matches = new Map();
+    const statusLabel = topic => isDefinitive(topic) ? 'Definitiu' : 'En desenvolupament';
 
     for (const topic of topics) {
       for (const entry of topic.curriculum ?? []) {
@@ -99,7 +100,7 @@
       const chapter = topic.chapters.find(item => item.sections.some(part => part.id === section)) ?? topic.chapters[0];
       const content = node('div', 'curriculum-help-material');
       const text = node('div');
-      text.append(helpHeading(topic.title, topic.code + ' · ' + cycleLabel(cycle)), node('p', '', note));
+      text.append(helpHeading(topic.title, topic.code + ' · ' + cycleLabel(cycle)), node('p', '', statusLabel(topic)), node('p', '', note));
       const miniature = node('div', 'curriculum-thumbnail');
       miniature.setAttribute('aria-hidden', 'true');
       miniature.append(previewPage(topic, chapter, section, window.preferencies.defaults));
@@ -112,7 +113,8 @@
       const anchor = node('a', square ? 'curriculum-square' : '', square ? '' : label);
       anchor.href = materialAddress(entry.topic, entry.section);
       anchor.dataset.material = '';
-      if (square) anchor.setAttribute('aria-label', label);
+      anchor.setAttribute('aria-label', label + ' · ' + statusLabel(entry.topic));
+      if (square && !isDefinitive(entry.topic)) anchor.classList.add('is-draft');
       return anchor;
     }
 
@@ -134,7 +136,7 @@
         const list = node('ul', 'curriculum-materials');
         for (const entry of linked) {
           const item = node('li');
-          item.append(materialLink(entry), node('p', '', entry.note));
+          item.append(materialLink(entry), node('small', 'curriculum-material-status', statusLabel(entry.topic)), node('p', '', entry.note));
           list.append(item);
         }
         detail.append(list);

@@ -1,5 +1,11 @@
 # Historial de versions
 
+## 0.1.32 · 26 de novembre de 2026
+
+- Filtra el catàleg amb el commutador En desenvolupament i mostra l’estat de cada material al mapa curricular.
+- Fa servir les il·lustracions disponibles com a portades de la galeria.
+- Permet afegir diverses il·lustracions a cada apartat i maquetar-les per separat.
+
 ## 0.1.31 · 26 de novembre de 2026
 
 - Afegeix quatre il·lustracions realistes a El planeta Terra, preparades per a l’amplada imprimible de l’A4.

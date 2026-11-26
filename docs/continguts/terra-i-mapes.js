@@ -26,6 +26,7 @@ window.quaderns ??= [];
       collection,
       subject: 'Medi',
       cycle: 'p3',
+      status: 'en-desenvolupament',
       theme: 'Geografia',
       difficulty: 'Intermèdia',
       ...details,
@@ -140,7 +141,7 @@ window.quaderns ??= [];
     title: 'Les coordenades geogràfiques',
     intro: 'Un mateix riu pot passar per molts llocs. Per assenyalar un punt concret, com ara on neix o on desemboca, fem servir dues dades: la latitud i la longitud. Juntes formen les seves coordenades geogràfiques.',
     figures: [
-      { id: 'graella', section: 'localitzacio', anchor: 'before', name: 'Graella de coordenades', ratio: 1110 / 550, alt: 'Graella amb l’equador i Greenwich destacats. El punt A és a 20 graus nord i 40 graus oest.', caption: 'El punt A es troba a l’encreuament del paral·lel 20° N i el meridià 40° O.', position: 'center' },
+      { id: 'graella', section: 'localitzacio', anchor: 'before', name: 'Graella de coordenades', src: 'illustracions/coordenades.png', ratio: 1110 / 550, alt: 'Graella amb l’equador i Greenwich destacats. El punt A és a 20 graus nord i 40 graus oest.', caption: 'El punt A es troba a l’encreuament del paral·lel 20° N i el meridià 40° O.', position: 'center' },
     ],
     sections: [
       section('latitud', 'Amb els paral·lels coneixem la latitud',
@@ -177,7 +178,7 @@ window.quaderns ??= [];
     title: 'Els mapes i els plànols geogràfics',
     intro: 'Un globus ens mostra la forma general del planeta. Un mapa ens permet posar tota la Terra, o només una part, sobre un paper o una pantalla. Si volem conèixer de prop un lloc, com els carrers que envolten l’escola, podem fer servir un plànol.',
     figures: [
-      { id: 'barri', section: 'llegenda', anchor: 'before', name: 'Plànol del barri', ratio: 1170 / 600, alt: 'Plànol esquemàtic amb escola, biblioteca, parc, pont, riu, nord i escala gràfica de 0, 50 i 100 metres.', caption: 'Plànol esquemàtic d’un barri imaginari. Fixa’t en la fletxa del nord, la llegenda i l’escala gràfica.', position: 'center' },
+      { id: 'barri', section: 'llegenda', anchor: 'before', name: 'Plànol del barri', src: 'illustracions/planol.png', ratio: 1170 / 600, alt: 'Plànol esquemàtic amb escola, biblioteca, parc, pont, riu, nord i escala gràfica de 0, 50 i 100 metres.', caption: 'Plànol esquemàtic d’un barri imaginari. Fixa’t en la fletxa del nord, la llegenda i l’escala gràfica.', position: 'center' },
     ],
     sections: [
       section('definicions', 'Què són els mapes i els plànols?',

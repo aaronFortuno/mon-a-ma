@@ -3,6 +3,7 @@
   const layoutKey = 'quadern-obert:layout:v1';
   const libraryKey = 'mon-a-ma:organitzacio:v1';
   const visitsKey = 'mon-a-ma:fitxes-vistes:v1';
+  const catalogDraftsKey = 'mon-a-ma:cataleg-en-desenvolupament';
   const defaults = {
     scope: 'chapter', font: 'georgia', fontSize: 12, leading: 1.8, margin: 20, textAlignment: 'left', blockSpacing: 100,
     showPageFooter: true, pageNumbers: true, showMaterialCode: true, showTopicTitle: true, showFigures: true, markCore: true,
@@ -28,6 +29,14 @@
       temporary.set(key, value);
       return false;
     }
+  }
+
+  function loadCatalogDrafts() {
+    return read(catalogDraftsKey, true);
+  }
+
+  function saveCatalogDrafts(value) {
+    write(catalogDraftsKey, value);
   }
 
   function firstVisit(code) {
@@ -113,5 +122,5 @@
     return [...sorted, ...sections.values()];
   }
 
-  window.preferencies = { defaults, firstVisit, library, saveLibrary, format, getBase, loadLayout, saveLayout, clearCollectionLayouts, orderedSections };
+  window.preferencies = { defaults, loadCatalogDrafts, saveCatalogDrafts, firstVisit, library, saveLibrary, format, getBase, loadLayout, saveLayout, clearCollectionLayouts, orderedSections };
 })();

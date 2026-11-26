@@ -61,6 +61,7 @@
   const printButtons = [byId('print'), byId('save-pdf')];
   const printStatus = byId('print-status');
   const catalogTitle = document.title;
+  const isDefinitive = topic => topic.status === 'definitiu';
   const layoutNumber = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
   const images = new Map();
   let knownUploads = [];
@@ -130,6 +131,8 @@
 
   function setupCatalog() {
     const filters = byId('catalog-filters');
+    const drafts = byId('catalog-drafts');
+    drafts.checked = preferences.loadCatalogDrafts();
     const size = topic => {
       const count = topic.chapters.reduce((total, chapter) => total + chapter.sections.length, 0);
       return count + (count === 1 ? ' apartat' : ' apartats');
@@ -155,11 +158,15 @@
     function makeCard(topic, grouped) {
       const card = link('', address(topic, topic.chapters[0]), 'topic-card');
       card.dataset.topic = topic.id;
-      const picture = node('div', topic.cover ? 'topic-cover' : 'topic-cover image-placeholder');
+      const covers = topic.chapters.flatMap(chapter => chapter.figures ?? [])
+        .map(figure => figure.variants?.[topic.defaultFigureStyle]?.src ?? figure.src ??
+          Object.values(figure.variants ?? {}).find(variant => variant.src)?.src);
+      const coverSrc = topic.cover || covers.find(Boolean);
+      const picture = node('div', coverSrc ? 'topic-cover' : 'topic-cover image-placeholder');
       picture.setAttribute('aria-hidden', 'true');
-      if (topic.cover) {
+      if (coverSrc) {
         const cover = node('img');
-        cover.src = topic.cover;
+        cover.src = coverSrc;
         cover.alt = '';
         cover.loading = 'lazy';
         picture.append(cover);
@@ -181,7 +188,8 @@
       byId('edit-collection').hidden = !activeCollection;
       byId('catalog-title').textContent = activeCollection?.name ?? 'Temes';
       const candidates = activeCollection ? members(activeCollection) : topics;
-      const matching = candidates.filter(topic => controls.every(({ select, values }) => !select.value || values(topic).includes(select.value)));
+      const visible = candidates.filter(topic => isDefinitive(topic) === !drafts.checked);
+      const matching = visible.filter(topic => controls.every(({ select, values }) => !select.value || values(topic).includes(select.value)));
       const groups = new Map();
       for (const topic of matching) {
         const collection = activeCollection ? null : topic.collection ?? null;
@@ -199,10 +207,17 @@
         return group;
       }));
       byId('empty').hidden = matching.length > 0;
-      byId('empty').textContent = activeCollection && !candidates.length ? 'La col·lecció encara és buida.' : 'No hi ha cap tema amb aquests filtres.';
+      const empty = byId('empty');
+      if (activeCollection && !candidates.length) empty.textContent = 'La col·lecció encara és buida.';
+      else if (!visible.length) empty.textContent = drafts.checked ? 'No hi ha cap tema en desenvolupament.' : 'Encara no hi ha cap tema definitiu.';
+      else empty.textContent = 'No hi ha cap tema amb aquests filtres.';
       byId('topic-count').value = matching.length + (matching.length === 1 ? ' tema' : ' temes');
       filters.querySelector('button[type="reset"]').hidden = !controls.some(({ select }) => select.value);
     }
+    drafts.addEventListener('change', () => {
+      preferences.saveCatalogDrafts(drafts.checked);
+      if (!route) refresh();
+    });
     filters.addEventListener('change', refresh);
     filters.addEventListener('reset', event => {
       event.preventDefault();
@@ -252,26 +267,43 @@
     return { ...chapter, sections: sections.filter(section => !removed.has(section.id)) };
   }
 
-  function reservedFigures(chapter) {
+  function reservedFigures(chapter, uploads) {
     const figures = chapter.figures ?? [];
     return chapter.sections.flatMap((section, index) => {
       const [original, ...extra] = figures.filter(figure => figure.section === section.id);
-      const startsWithText = section.blocks[0]?.type === 'paragraph';
-      return [{
+      const side = index % 2 ? 'left' : 'right';
+      const first = {
         id: 'reserva-' + section.id, section: section.id, name: section.title, ratio: 1.7,
+        anchor: section.blocks[0]?.type === 'paragraph' ? 'lead' : 'before',
+        position: side,
         ...original,
-        anchor: startsWithText ? 'lead' : 'before',
-        position: index % 2 ? 'left' : 'right',
-      }, ...extra];
+      };
+      const additions = extra.concat(uploads.filter(figure => figure.section === section.id));
+      const taken = new Set([first, ...additions].map(figure => paragraphAnchor(settings.figures[figure.id]?.anchor ?? figure.anchor)));
+      const paragraphSlots = section.blocks.flatMap((block, number) => block.type === 'paragraph' && !taken.has(number) ? [number] : []);
+      const firstSide = first.position === 'center' ? side : first.position;
+      return [first, ...additions.map((figure, i) => {
+        const paragraph = figure.anchor || settings.figures[figure.id]?.anchor ? undefined : paragraphSlots.shift();
+        const position = (i % 2 === 0) === (firstSide === 'right') ? 'left' : 'right';
+        return {
+          name: figure.alt || 'Imatge complementària',
+          width: 45, position, wrap: true,
+          anchor: paragraph === undefined ? 'after' : paragraph === 0 ? 'lead' : 'paragraph-' + paragraph,
+          ...figure,
+        };
+      })];
     });
   }
 
   function figuresFor(chapter, type = documentType) {
     const uploads = knownUploads.filter(item => item.topic === route.topic.id && item.chapter === chapter.id &&
       (item.collectionId ?? '') === (activeCollection?.id ?? '') && (item.documentType ?? 'sheet') === type);
-    const planned = type === 'sheet' ? reservedFigures(chapter) : chapter.figures ?? [];
+    const additions = uploads.filter(upload => !upload.figure)
+      .sort((a, b) => (a.addedAt ?? 0) - (b.addedAt ?? 0))
+      .map(upload => ({ ...upload, section: settings.figures[upload.id]?.section ?? upload.section }));
+    const planned = type === 'sheet' ? reservedFigures(chapter, additions) : [...(chapter.figures ?? []), ...additions];
     const sections = new Map(chapter.sections.map(section => [section.id, section]));
-    return [...planned, ...uploads.filter(upload => !upload.figure)].map(item => {
+    return planned.map(item => {
       const saved = settings.figures[item.id];
       const personal = uploads.find(upload => upload.figure === item.id);
       const styles = route.topic.figureStyles ?? [];
@@ -459,14 +491,15 @@
   }
 
   function editFigureChoice(event) {
-    const button = event.target.closest('[data-choice-figure], [data-upload-figure]');
+    const button = event.target.closest('[data-choice-figure], [data-upload-figure], [data-add-figure]');
     if (!route || !button) return;
-    const { choiceFigure, variant, uploadFigure } = button.dataset;
-    if (uploadFigure) {
+    const { choiceFigure, variant, uploadFigure, addFigure } = button.dataset;
+    if (uploadFigure || addFigure) {
       if (imageWrite) return;
-      const item = findFigure(uploadFigure);
-      if (!item) return;
-      uploadTarget = { item, topic: route.topic.id, collection: activeCollection, type: documentType };
+      const item = uploadFigure ? findFigure(uploadFigure) : null;
+      if (uploadFigure && !item) return;
+      const chapterId = item?.chapterId ?? route.chapter.id;
+      uploadTarget = { item, section: addFigure, chapterId, topic: route.topic.id, collection: activeCollection, type: documentType };
       figureUpload.click();
       return;
     }
@@ -929,7 +962,18 @@
     syncTemplateSelector();
     const chapter = printableChapter(route.chapter);
     const figures = chapter ? figuresFor(chapter) : [];
-    figureOptions.replaceChildren(...figures.map(item => figureControl(item, chapter)));
+    const cards = chapter?.sections.flatMap(section => {
+      const controls = figures.filter(item => item.section === section.id).map(item => figureControl(item, chapter));
+      if (documentType === 'sheet') {
+        const add = node('button', 'secondary add-section-figure', 'Afegeix una imatge');
+        add.type = 'button';
+        add.dataset.addFigure = section.id;
+        add.setAttribute('aria-label', 'Afegeix una imatge a «' + section.title + '»');
+        controls.push(add);
+      }
+      return controls;
+    }) ?? [];
+    figureOptions.replaceChildren(...cards);
     figureOptions.hidden = !settings.showFigures;
     if (helperFigure && (!settings.showFigures || !findFigure(helperFigure)?.visible)) closeFigureHelper();
   }
@@ -1559,7 +1603,7 @@
         if (!value && helperFigure === id) closeFigureHelper();
       }
       if (key === 'section') {
-        settings.figures[id].anchor = 'lead';
+        delete settings.figures[id].anchor;
         renderControls();
         figureForm.querySelector('[data-figure-id="' + id + '"] [data-setting="section"]').focus({ preventScroll: true });
       } else if (key === 'anchor' || key === 'position' || key === 'width') {
@@ -1613,11 +1657,12 @@
       imageFeedback('Tria una imatge PNG, JPG, WebP, GIF o AVIF de fins a 12 MB.');
       return;
     }
-    const { item, topic, collection, type } = target;
+    const { item, section, chapterId, topic, collection, type } = target;
     const collectionId = collection?.id ?? '';
-    const id = 'slot:' + JSON.stringify([collectionId, topic, item.chapterId, type, item.id]);
+    const id = item ? 'slot:' + JSON.stringify([collectionId, topic, chapterId, type, item.id]) : 'img-' + crypto.randomUUID();
     const source = {
-      id, figure: item.id, topic, chapter: item.chapterId, collectionId, documentType: type,
+      id, topic, chapter: chapterId, collectionId, documentType: type,
+      ...(item ? { figure: item.id } : { section, addedAt: Date.now() }),
       blob: file, alt: file.name.replace(/\.[^.]+$/, '').slice(0, 75),
     };
     const upload = addUrl(source);
@@ -1651,19 +1696,24 @@
       knownUploads.push({ ...upload, persisted });
 
       const current = route && inFigureScope(source, route.topic.id, activeCollection);
-      const layout = current ? settings : preferences.loadLayout(topic, collection, library);
-      const saved = layout.figures[item.id];
-      layout.figures[item.id] = { ...saved, variant: 'custom' };
+      if (item) {
+        const layout = current ? settings : preferences.loadLayout(topic, collection, library);
+        layout.figures[item.id] = { ...layout.figures[item.id], variant: 'custom' };
+        if (current) storeOptions();
+        else preferences.saveLayout(topic, collection, layout, library);
+      }
       if (current) {
-        storeOptions();
-        if (documentType === type) {
-          updateFigureChoices(item.id, true);
-          figureEdit = item.id;
+        if (documentType === type && route.chapter.id === chapterId) {
+          if (item) {
+            updateFigureChoices(item.id, true);
+            figureEdit = item.id;
+          } else {
+            renderControls();
+            figureOptions.querySelector('[data-add-figure="' + CSS.escape(section) + '"]')?.focus();
+          }
         }
         requestPaper();
         imageFeedback(persisted ? 'Imatge pròpia desada en aquest navegador.' : 'Imatge pròpia disponible durant aquesta sessió.');
-      } else {
-        preferences.saveLayout(topic, collection, layout, library);
       }
     } finally {
       imageWrite = false;
@@ -2254,7 +2304,7 @@
   window.setupCurriculum(topics, (topic, section) => {
     const chapter = topic.chapters.find(entry => entry.sections.some(item => item.id === section)) ?? topic.chapters[0];
     return address(topic, chapter, section, null);
-  });
+  }, isDefinitive);
   renderRoute();
   const uploadsReady = imageOperation('readonly', store => store.getAll()).then(items => {
     knownUploads.push(...items.map(item => ({ ...addUrl(item), persisted: true })));
