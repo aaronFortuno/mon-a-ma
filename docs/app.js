@@ -547,7 +547,7 @@
   }
 
   function showMaterialIntro(topic) {
-    if (!preferences.firstVisit(topic.code)) return;
+    if (!preferences.firstVisit()) return;
     const styles = topic.figureStyles ?? [];
     const example = styles.length > 1 && topic.chapters.flatMap(chapter => chapter.figures ?? []).find(
       figure => styles.every(style => figure.variants?.[style.id]?.src),

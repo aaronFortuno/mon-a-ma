@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.57 · 27 de novembre de 2026
+
+- Mostra la benvinguda del visor una sola vegada per navegador i respecta els avisos ja vistos.
+
 ## 0.1.56 · 27 de novembre de 2026
 
 - Valida Del mapa al plànol (M003), aprofita l’amplada de la galeria i agrupa Extensió i Dificultat sota Altres filtres. El filtre Conjunt passa a dir-se Itinerari.

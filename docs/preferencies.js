@@ -44,10 +44,11 @@
     write(catalogDraftsKey, value);
   }
 
-  function firstVisit(code) {
-    const visits = read(visitsKey, {});
-    if (visits[code]) return false;
-    write(visitsKey, { ...visits, [code]: true });
+  function firstVisit() {
+    const seen = read(visitsKey, false);
+    // Earlier versions recorded the welcome separately for each material.
+    if (seen === true || Object.values(seen).includes(true)) return false;
+    write(visitsKey, true);
     return true;
   }
 
@@ -120,7 +121,7 @@
   }
 
   function resetAll() {
-    return [write(layoutKey, {}), write(libraryKey, {}), write(visitsKey, {}),
+    return [write(layoutKey, {}), write(libraryKey, {}), write(visitsKey, false),
       write(catalogDraftsKey, true)].every(Boolean);
   }
 
