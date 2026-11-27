@@ -441,11 +441,80 @@ window.quaderns ??= [];
     title: 'El nostre lloc al sistema solar',
     intro: 'Quan diem on vivim, podem començar pel carrer i anar ampliant el mapa. Més enllà del nostre planeta, també tenim una adreça: la Terra és al sistema solar, i el sistema solar és a la Via Làctia.',
     figures: [
-      { id: 'via-lactia', section: 'galaxia', name: 'El sistema solar a la Via Làctia', ratio: 2.4, caption: 'El punt assenyala la zona de la Via Làctia on hi ha el sistema solar.' },
-      { id: 'orbites-solars', section: 'sistema', name: 'Òrbites al voltant del Sol', ratio: 2.4, caption: 'Representació de les òrbites. Les mides i les distàncies s’han simplificat.' },
-      { id: 'vuit-planetes', section: 'planetes', name: 'Els vuit planetes en ordre', ratio: 3.1, caption: 'L’ordre va de Mercuri a Neptú. La separació del dibuix no representa la distància real.' },
-      { id: 'terra-lluna', section: 'terra-lluna', name: 'La Terra, la Lluna i la llum del Sol', ratio: 2.4, caption: 'Podem veure una part diferent de la meitat il·luminada de la Lluna segons la seva posició.' },
-      { id: 'cossos-menors', section: 'altres-cossos', name: 'Un asteroide, un cometa i un planeta nan', ratio: 2.7, caption: 'Tres cossos del sistema solar representats per comparar els seus trets.' },
+      {
+        id: 'via-lactia', section: 'galaxia', name: 'El sistema solar a la Via Làctia', ratio: 2.4, position: 'center',
+        alt: 'Reconstrucció en espiral de la Via Làctia, amb una barra central i un punt al braç d’Orió. Una ampliació identifica el Sol i la Terra.',
+        caption: 'Reconstrucció de la Via Làctia vista des de dalt. El marcador situa la regió on hi ha el sistema solar.',
+        variants: {
+          pla: { src: 'illustracions/m005/via-lactia-pla.png', thumbnail: 'illustracions/m005/miniatures/via-lactia-pla.jpg' },
+          atles: {
+            src: 'illustracions/m005/via-lactia-atles.png', thumbnail: 'illustracions/m005/miniatures/via-lactia-atles.jpg',
+            credit: 'Reconstrucció NASA/JPL-Caltech/R. Hurt (SSC/Caltech). Detall: NASA/GSFC/SDO i Apollo 17.',
+          },
+        },
+      },
+      {
+        id: 'via-lactia-cel', section: 'galaxia', name: 'La Via Làctia des de la Terra', ratio: 14 / 9,
+        src: 'illustracions/m005/via-lactia-cel.jpg',
+        alt: 'Una banda d’estrelles s’alça sobre l’horitzó fosc de Bryce Canyon i el mirador de Sunrise Point.',
+        caption: 'Des de la Terra veiem part del disc de la Via Làctia com una banda de llum al cel.',
+        credit: 'NPS Photo / Keith Moore',
+      },
+      {
+        id: 'orbites-solars', section: 'sistema', name: 'Òrbites al voltant del Sol', ratio: 2.4, position: 'center',
+        alt: 'Dos esquemes al voltant del Sol. El primer amplia les òrbites de Mercuri, Venus, la Terra i Mart. El segon situa la zona interior dins de les òrbites de Júpiter, Saturn, Urà i Neptú.',
+        caption: 'El requadre A correspon a la zona ampliada dels planetes rocosos. Les òrbites són aproximades, les posicions són exemples i les mides dels astres s’han ampliat.',
+        variants: {
+          pla: { src: 'illustracions/m005/orbites-solars-pla.png', thumbnail: 'illustracions/m005/miniatures/orbites-solars-pla.jpg' },
+          atles: {
+            src: 'illustracions/m005/orbites-solars-atles.png', thumbnail: 'illustracions/m005/miniatures/orbites-solars-atles.jpg',
+            credit: 'Disc solar en fals color: NASA/GSFC/Solar Dynamics Observatory. Retrats planetaris: vegeu els crèdits de la fitxa.',
+          },
+        },
+      },
+      {
+        id: 'vuit-planetes', section: 'planetes', name: 'Els vuit planetes en ordre', ratio: 3.1, position: 'center',
+        alt: 'Mercuri, Venus, Terra, Mart, Júpiter, Saturn, Urà i Neptú en ordre, agrupats en quatre rocosos, dos gegants gasosos i dos gegants gelats.',
+        caption: 'Els vuit planetes en ordre de distància al Sol. Les mides dels retrats i la separació entre planetes no són a escala.',
+        variants: {
+          pla: { src: 'illustracions/m005/vuit-planetes-pla.png', thumbnail: 'illustracions/m005/miniatures/vuit-planetes-pla.jpg' },
+          atles: {
+            src: 'illustracions/m005/vuit-planetes-atles.png', thumbnail: 'illustracions/m005/miniatures/vuit-planetes-atles.jpg',
+            credit: 'Retrats de missions de la NASA. Urà i Neptú: Patrick Irwin/University of Oxford/NASA (CC BY 4.0).',
+          },
+        },
+      },
+      {
+        id: 'terra-lluna', section: 'terra-lluna', name: 'La Terra, la Lluna i la llum del Sol', ratio: 2.4, position: 'center',
+        alt: 'Quatre posicions de la Lluna al voltant de la Terra, totes il·luminades des del mateix costat. Quatre vinyetes numerades mostren com es veu cada fase des de la Terra.',
+        caption: 'Veiem una part diferent de la meitat il·luminada de la Lluna al llarg de l’òrbita. Dibuix simplificat, sense escala. La inclinació de l’òrbita fa que habitualment no hi hagi eclipsi en lluna nova ni en lluna plena.',
+        variants: {
+          pla: { src: 'illustracions/m005/terra-lluna-pla.png', thumbnail: 'illustracions/m005/miniatures/terra-lluna-pla.jpg' },
+          atles: {
+            src: 'illustracions/m005/terra-lluna-atles.png', thumbnail: 'illustracions/m005/miniatures/terra-lluna-atles.jpg',
+            credit: 'Vinyetes esquemàtiques amb mosaic de la Lluna: NASA’s Scientific Visualization Studio. Terra: NASA/Apollo 17.',
+          },
+        },
+      },
+      {
+        id: 'sortida-terra', section: 'terra-lluna', name: 'Sortida de la Terra', ratio: 14 / 9,
+        src: 'illustracions/m005/sortida-terra.jpg',
+        alt: 'La Terra blava emergeix per sobre de l’horitzó rocós de la Lluna.',
+        caption: 'La Terra apareix sobre l’horitzó de la Lluna en una fotografia feta des de l’Apollo 8 el 1968.',
+        credit: 'NASA · Apollo 8 · William Anders',
+      },
+      {
+        id: 'cossos-menors', section: 'altres-cossos', name: 'Un asteroide, un cometa i un planeta nan', ratio: 2.7, position: 'center',
+        alt: 'Tres panells mostren l’asteroide irregular Bennu, el cometa NEOWISE amb una cua visible i el planeta nan Plutó de forma arrodonida.',
+        caption: 'Bennu, NEOWISE i Plutó mostren tres tipus de cossos del sistema solar. Les imatges es mostren a escales diferents.',
+        variants: {
+          pla: { src: 'illustracions/m005/cossos-menors-pla.png', thumbnail: 'illustracions/m005/miniatures/cossos-menors-pla.jpg' },
+          atles: {
+            src: 'illustracions/m005/cossos-menors-atles.png', thumbnail: 'illustracions/m005/miniatures/cossos-menors-atles.jpg',
+            credit: 'Bennu: NASA/Goddard/University of Arizona. NEOWISE: NASA/JSC, Expedició 63. Plutó: NASA/JHUAPL/SwRI.',
+          },
+        },
+      },
     ],
     sections: [
       section('galaxia', 'La Via Làctia, la nostra galàxia',
@@ -479,9 +548,15 @@ window.quaderns ??= [];
     ],
   }, {
     theme: 'Astronomia',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i retolació sobre blanc.' },
+      { id: 'atles', label: 'Atles espacial', description: 'Observacions i reconstruccions en panells foscos.' },
+    ],
     description: 'Situa el sistema solar a la Via Làctia, compara els vuit planetes i explica la relació entre el Sol, la Terra i la Lluna.',
     curriculum: [{ row: 'medi:terra', section: 'terra-lluna', note: 'Situa la Terra al sistema solar i relaciona els moviments de la Terra i la Lluna amb el dia i la nit i les fases lunars.' }],
     sources: [
+      ['Crèdits i fonts de les il·lustracions', 'illustracions/m005/credits.txt'],
+      ['JPL · Elements orbitals dels planetes', 'https://ssd.jpl.nasa.gov/planets/approx_pos.html'],
       ['NASA · El sistema solar', 'https://science.nasa.gov/solar-system/solar-system-facts/'],
       ['NASA · Els planetes', 'https://science.nasa.gov/solar-system/planets/'],
       ['NASA · Les fases de la Lluna', 'https://science.nasa.gov/moon/moon-phases/'],

@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.59 · 27 de novembre de 2026
+
+- Vincula les il·lustracions d’El nostre lloc al sistema solar (M005), amb els lots Pla i Atles espacial i tres complements.
+
 ## 0.1.58 · 27 de novembre de 2026
 
 - Prepara l’encàrrec visual de M005 amb els lots Pla i Atles espacial i tres complements d’observació i escala.

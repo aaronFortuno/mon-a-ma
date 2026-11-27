@@ -633,6 +633,7 @@
     return {
       ...chapter,
       intro: content.intro ?? chapter.intro,
+      figures: (chapter.figures ?? []).concat(content.figures ?? []),
       sections: chapter.sections.map(section => {
         const alternate = content.sections[section.id];
         if (!alternate) return section;

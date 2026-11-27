@@ -195,6 +195,14 @@ window.variantsMaterials ??= {};
           },
         },
         ampliacio: {
+          figures: [
+            {
+              id: 'distancies-ua', section: 'sistema', name: 'Distàncies al Sol', ratio: 15 / 4,
+              src: 'illustracions/m005/distancies-ua.png', anchor: 'after', width: 100, position: 'center', wrap: false,
+              alt: 'Regle de 0 a 30 unitats astronòmiques amb el Sol a 0, la Terra a 1 i Neptú aproximadament a 30.',
+              caption: 'Una unitat astronòmica és aproximadament la distància mitjana de la Terra al Sol. Neptú és a prop de 30 UA del Sol.',
+            },
+          ],
           sections: {
             galaxia: [p('Com que som dins del disc de la Via Làctia, quan mirem al llarg del disc veiem la llum de moltes estrelles juntes. En un cel fosc, aquesta llum forma una banda clara.'), repte('Dues mirades', 'Per què veiem la Via Làctia com una banda des de la Terra i com una espiral en molts dibuixos?')],
             sistema: [repte('Un model d’òrbites', 'Si 1 cm representa la distància mitjana de la Terra al Sol, Neptú queda a uns 30 cm del Sol. Per què pot ser difícil dibuixar també els planetes amb aquesta mateixa escala?')],
