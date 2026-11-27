@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.47 · 27 de novembre de 2026
+
+- Revisa les tres variants d’Els mapes i els plànols geogràfics amb un mateix cas de barri i tres reserves d’il·lustració.
+
 ## 0.1.46 · 27 de novembre de 2026
 
 - Marca Les coordenades geogràfiques com a material definitiu i les incorpora al catàleg de materials validats.

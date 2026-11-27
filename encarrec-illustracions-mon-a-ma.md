@@ -31,7 +31,7 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | --- | --- | --- |
 | M001 · El planeta Terra | 6, quatre principals i dos complements | 3 lots de 5 figures (Pla, Volum i Realista) i una fotografia compartida. 16 originals. |
 | M002 · Les coordenades geogràfiques | 4 principals i 1 exemple de joc opcional | 2 estils per globus, 2 versions de la graella de les boies i 2 figures de la flota. 8 PNG. |
-| M003 · Els mapes i els plànols geogràfics | 1, plànol del barri | 1 lot cartogràfic. 1 original. |
+| M003 · Els mapes i els plànols geogràfics | 3, canvi d’enquadrament, llegenda i escala | 3 figures pendents amb una mateixa geometria de barri. |
 | M004 · Els tipus de mapes | 2, planisferis físic i polític | 1 lot cartogràfic amb el mateix enquadrament i projecció. 2 originals pendents. |
 
 | Fitxa | Apartat · ID de figura | Fitxers dins de docs/illustracions/ |
@@ -47,7 +47,9 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | M002 | localitzacio · graella | m002/graella-boies.png · m002/graella-boies-planisferi.png |
 | M002 | localitzacio · troba-la-flota | m002/troba-la-flota.png, tauler de joc |
 | M002 | localitzacio · troba-la-flota-exemple | m002/troba-la-flota-exemple.png, exemple opcional |
-| M003 | llegenda · barri | planol.png |
+| M003 | definicions · reserva-definicions | m003/municipi-i-barri.png, pendent, 2.160 × 900 px |
+| M003 | llegenda · barri | m003/planol-barri.png, pendent, 2.100 × 1.000 px |
+| M003 | escala · reserva-escala | m003/distancies-barri.png, pendent, 2.250 × 900 px |
 | M004 | fisic · planisferi-fisic | m004/planisferi-fisic.png, pendent, 2.600 × 1.300 px |
 | M004 | politic · planisferi-politic | m004/planisferi-politic.png, pendent, 2.600 × 1.300 px |
 
@@ -139,21 +141,32 @@ A tota l’amplada de la fitxa, posa dues graelles buides idèntiques de costat,
 
 L’exemple opcional assenyala el vaixell 1 a 20° S, 40° E i planteja que l’alumnat trobi el vaixell 2. Si s’activa, es mostra abans del tauler buit.
 
-## M003 · Plànol d’un barri imaginari
+## M003 · Els mapes i els plànols geogràfics
 
-**Què ha de fer l’alumne.** Relacionar els símbols amb la llegenda, orientar el plànol amb el nord i usar la barra per comparar distàncies.
+Les tres imatges comparteixen un barri imaginari, orientat amb el nord cap amunt. L’escola i la biblioteca són a l’oest del riu i el parc és a l’est. Conserva els carrers, els símbols i la posició d’aquests elements quan passis d’una imatge a l’altra. Traça el barri en metres abans d’exportar i mantén les proporcions quan en facis un retall.
 
-**Composició.** Vista zenital del barri, amb carrers i illes senzills a l’esquerra i una llegenda ben separada a la dreta. Orienta el nord cap amunt i posa-hi una fletxa amb «N». Dibuixa el riu de nord a sud, un pont sobre el riu alineat amb un carrer, l’escola i la biblioteca a l’oest, i el parc a l’est.
+### Del mapa del municipi al plànol del barri
 
-| Element | Símbol al plànol i a la llegenda |
+Mostra dos dibuixos de costat. Al mapa del municipi, inclou una carretera, la línia d’autobús i la parada que deixa més a prop de la biblioteca. Un requadre identifica el barri ampliat. Al plànol del barri, repeteix la parada i la biblioteca en la posició corresponent. Mostra prou carrers per seguir el tram a peu. Retola «Mapa del municipi» i «Plànol del barri».
+
+### Plànol del barri
+
+Fes servir una vista zenital i una llegenda separada. Identifica el nord amb una fletxa i la lletra «N». Dibuixa el riu de nord a sud i un carrer que el travessa per un pont. La llegenda i el plànol fan servir aquests mateixos símbols.
+
+| Element | Símbol |
 | --- | --- |
-| Escola | Quadrat amb una «E» |
-| Biblioteca | Quadrat amb una «B», ben distingible del de l’escola |
-| Parc | Superfície verda amb ratllat fi o arbres esquemàtics |
-| Pont | Dues vores curtes que abracen el pas per damunt del riu |
-| Riu | Traç o banda blava amb vores recognoscibles |
+| Escola | Quadrat amb «E» |
+| Biblioteca | Quadrat amb «B» |
+| Parc | Zona amb ratllat i arbres esquemàtics |
+| Pont | Dues vores que marquen el pas sobre el riu |
+| Riu | Banda amb vores ondulades |
+| Parada d’autobús | Pictograma d’autobús |
 
-Dibuixa el plànol en unitats de metres i usa el mateix factor per a la barra. Per concretar la geometria, separa horitzontalment els centres dels símbols de l’escola i la biblioteca **100 m** i posa’ls a la mateixa alçada. La barra té dos trams iguals i es retola **0**, **50** i **100 m**. En la imatge final, la barra completa ha de tenir la mateixa longitud que el segment recte que uneix els centres dels dos símbols. Mantén la barra i el dibuix junts quan facis qualsevol canvi de mida. [Referència de l’ICGC sobre l’escala cartogràfica](https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Escala).
+### De l’escola a la biblioteca
+
+Fes servir el mateix plànol per comparar un segment recte i un itinerari a peu. Separa horitzontalment **100 m** els centres dels símbols E i B i situa’ls a la mateixa alçada. El camí té tres trams. Des d’E va **50 m al nord**, **100 m a l’est** i **50 m al sud** fins a B. Dibuixa carrers accessibles en els tres trams. Diferencia el segment recte i l’itinerari amb línies o patrons que es distingeixin en grisos, i posa una clau que identifiqui els dos traços.
+
+La barra d’escala retola **0**, **50** i **100 m** amb dos trams iguals. La barra sencera ha de mesurar el mateix que el segment E–B i que el tram horitzontal de l’itinerari. Els dos trams verticals han de mesurar la meitat. L’alumnat dedueix les distàncies a partir de la barra. Comprova que els resultats són **100 m en línia recta** i **200 m pel camí**. Mantén la barra unida al dibuix en redimensionar-lo. [Referència de l’ICGC sobre l’escala cartogràfica](https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Escala).
 
 ## M004 · Dos planisferis que es poden comparar
 

@@ -101,36 +101,34 @@ window.variantsMaterials ??= {};
     M003: {
       'mapes-i-planols': {
         suport: {
-          intro: 'Amb un mapa podem veure un territori des de dalt. Per veure amb detall un lloc petit, com el barri de l’escola, podem fer servir un plànol.',
+          intro: 'Has d’anar a la biblioteca d’un altre municipi. Primer hi vas en autobús. Després, a peu. Què et pot ajudar a trobar el camí?',
           sections: {
             definicions: [
-              p('Un **mapa** representa un territori en petit. Per exemple, un mapa de Catalunya mostra pobles, rius i muntanyes.'),
-              p('Un **plànol** mostra un lloc més petit amb més detall. Al plànol de l’escola pots trobar les aules, les portes i les escales.'),
+              p('Al **mapa del municipi** hi ha la parada. Al **plànol del barri** hi ha els carrers i la biblioteca. Ara ets al barri i has de girar. Quin dibuix consultaràs?'),
             ],
             llegenda: [
-              p('La **llegenda** explica què volen dir els símbols i els colors d’un mapa o un plànol.'),
-              p('Si la llegenda diu que **E** és l’escola, busca el símbol **E** al plànol. El trobaràs al lloc on hi ha l’escola.'),
+              passos('Busca a la llegenda què volen dir les lletres **E** i **B**.', 'Troba les dues lletres al plànol.', 'Busca la fletxa amb una **N**. T’indica el **nord**.'),
+              repte('Travessa el riu', 'Mira a la llegenda com es dibuixa el **pont**. Troba’l al plànol.'),
             ],
             escala: [
-              p('L’**escala** ens ajuda a saber quina distància real representa una distància del dibuix.'),
-              p('Si **1 cm** al paper representa **100 m** al carrer, **2 cm** representen **200 m**.'),
-              p('L’**escala gràfica** és una barra amb nombres. Pots comparar la llargada de la barra amb la distància que vols mesurar.'),
+              p('Mira la **barra d’escala**. Va de **0 a 100 m**. Té dos trams iguals de **50 m**.'),
+              passos('Busca la línia recta que va de l’escola a la biblioteca.', 'Compara-la amb la barra sencera. Quants metres hi ha en línia recta?', 'Segueix amb el dit el camí que va pels carrers. Té la mateixa llargada que la línia recta?'),
             ],
           },
         },
         ampliacio: {
           sections: {
             definicions: [
-              p('Un mapa selecciona informació. En passar d’un plànol detallat a un mapa que cobreix més territori, pot caldre simplificar el traçat del riu, deixar carrers fora o representar una ciutat amb un punt. Aquesta tria s’anomena **generalització cartogràfica**.'),
-              repte('Un full per a tot el municipi', 'Un plànol del centre aplega tots els carrers i portes dels edificis. Si vols encabir tot el municipi en un full de la mateixa mida, explica què conservaries per orientar algú que hi arriba en autobús i què simplificaries.'),
+              p('Per mostrar tot un municipi en un full, cal triar quins elements s’hi dibuixen i amb quin detall. En un mapa, un poble es pot representar amb un punt. En un plànol, s’hi poden dibuixar els seus carrers. Aquesta simplificació s’anomena **generalització cartogràfica**.'),
+              repte('El mateix municipi en un sol full', 'En el mapa municipal hi has de mantenir la informació que necessita algú que hi arriba en autobús. Quins dos elements conservaries del plànol del barri? Què simplificaries? Justifica la tria.'),
             ],
             llegenda: [
-              p('Les llegendes també poden agrupar valors amb **intervals**. Per exemple, si un mapa de pluja d’un mes pinta amb el mateix blau les zones de **40 a menys de 60 mm**, dos llocs de color igual poden haver rebut 42 i 57 mm. El color ens ajuda a comparar zones, però només ens dona un rang.'),
-              repte('Revisa la llegenda', 'En un mapa de pluja, algú ha escrit «0–20 mm» i «20–40 mm» com a categories. On posaries un lloc que ha rebut exactament **20 mm**? Reescriu les categories perquè es pugui decidir en tots els casos.'),
+              p('En un mapa de pluja, un color pot representar un **interval**. Si el blau clar indica de **40 a menys de 60 mm**, dos llocs del mateix color poden haver rebut 42 i 57 mm de pluja.'),
+              repte('A quin color correspon?', 'Una llegenda indica «de 0 a 20 mm» i «de 20 a 40 mm». Un poble ha rebut exactament **20 mm**. Reescriu la llegenda perquè cada valor entre 0 i 40 mm tingui un sol color.'),
             ],
             escala: [
-              p('Un regle dona la distància en línia recta. Per mesurar un camí amb revolts al paper, pots resseguir-lo amb un fil, estirar el fil i mesurar-lo. Després converteix la mesura amb l’escala del mapa. Amb revolts petits o un traç gruixut, el resultat és una estimació.'),
-              repte('Mesura dues distàncies', 'En un mapa a **1:25.000**, entre dos refugis mesures **2,4 cm** en línia recta i **3,6 cm** seguint el sender. Calcula les dues distàncies reals i la diferència. Quina faries servir per estimar el temps de l’excursió?'),
+              p('Si un camí fa revolts, pots resseguir-lo amb un fil. Després estira el fil i compara’l amb la barra d’escala. La distància obtinguda és una **estimació**.'),
+              repte('Què passa si ampliem el plànol?', 'Un plànol a **1:5.000** s’imprimeix al **200 %**. El segment que representa 100 m passa de 2 a 4 cm. Quants metres representa ara cada centímetre de la còpia? Escriu la nova escala numèrica i explica per què la barra continua funcionant.'),
             ],
           },
         },
