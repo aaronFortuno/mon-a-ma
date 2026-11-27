@@ -92,6 +92,17 @@ window.quaderns ??= [];
         src: 'illustracions/m001/arrels-i-erosio.png', ratio: 4 / 3,
         alt: 'Dues safates amb el mateix pendent reben pluja. Una té plantes amb arrels. A la safata sense plantes, l’aigua s’endú més partícules de terra.',
         caption: 'Dos vessants amb el mateix pendent reben la mateixa pluja. Compara la terra arrossegada i fixa’t en el paper de les arrels.',
+        variants: {
+          pla: { src: 'illustracions/m001/arrels-i-erosio.png', thumbnail: 'illustracions/m001/miniatures/arrels-i-erosio-pla.jpg' },
+          volum: {
+            src: 'illustracions/m001/arrels-i-erosio-volum.png', thumbnail: 'illustracions/m001/miniatures/arrels-i-erosio-volum.jpg',
+            alt: 'Dos vessants de terra en relleu. El vessant amb plantes mostra les arrels i l’aigua del seu recipient és més clara que la del vessant sense plantes.',
+          },
+          realista: {
+            src: 'illustracions/m001/arrels-i-erosio-realista.png', thumbnail: 'illustracions/m001/miniatures/arrels-i-erosio-realista.jpg', ratio: 3 / 2,
+            alt: 'Dos talls de sòl. A dalt es veuen les arrels de les plantes i un recipient amb aigua clara. A baix, el sòl nu aboca aigua marronosa en un altre recipient.',
+          },
+        },
       },
     ],
     sections: [

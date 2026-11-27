@@ -22,7 +22,7 @@ Amb marges laterals de 20 mm, l’A4 té 170 mm d’amplada útil. La primera fi
 
 | Fitxa | Figures diferents | Lots i arxius previstos |
 | --- | --- | --- |
-| M001 · El planeta Terra | 6, quatre principals i dos complements | 3 lots de 4 figures (Pla, Volum i Realista), una fotografia i un esquema compartits. 14 originals. |
+| M001 · El planeta Terra | 6, quatre principals i dos complements | 3 lots de 5 figures (Pla, Volum i Realista) i una fotografia compartida. 16 originals. |
 | M002 · Les coordenades geogràfiques | 2, graella de la boia i joc de localització | 1 lot de 2 esquemes de geometria controlada. 2 originals. |
 | M003 · Els mapes i els plànols geogràfics | 1, plànol del barri | 1 lot cartogràfic. 1 original. |
 | M004 · Els tipus de mapes | 2, planisferis físic i polític | 1 lot cartogràfic amb el mateix enquadrament i projecció. 2 originals pendents. |
@@ -34,7 +34,7 @@ Amb marges laterals de 20 mm, l’A4 té 170 mm d’amplada útil. La primera fi
 | M001 | moviment · falla-san-andreas | m001/falla-san-andreas.jpg, complement compartit |
 | M001 | gravetat · reserva-gravetat | m001/gravetat-pla.png · m001/gravetat-volum.png · m001/gravetat-realista.png |
 | M001 | elements · reserva-elements | m001/elements-pla.png · m001/elements-volum.png · m001/elements-realista.png |
-| M001 | elements · arrels-i-erosio | m001/arrels-i-erosio.png, complement compartit |
+| M001 | elements · arrels-i-erosio | m001/arrels-i-erosio.png · m001/arrels-i-erosio-volum.png · m001/arrels-i-erosio-realista.png |
 | M002 | localitzacio · graella | coordenades.png |
 | M002 | localitzacio · troba-la-flota | m002/troba-la-flota.svg, complement |
 | M003 | llegenda · barri | planol.png |
@@ -98,7 +98,7 @@ En pla, el disc mostra quatre zones concèntriques. Amb volum, l’esfera té un
 
 **Comprovació.** Cada guia acaba en un element inequívoc. Es pot resseguir el riu des del vessant fins a la riba amb vegetació.
 
-**Complement compartit.** Compara dos vessants amb el mateix pendent i la mateixa pluja. Mostra la terra que arriba al recipient de cada vessant i deixa les arrels visibles al tall del sòl. Les partícules són indicatives. Fes servir la il·lustració principal per identificar les parts de la Terra i aquest complement per observar com interactuen.
+**Complement en tres estils.** Compara dos vessants amb el mateix pendent i la mateixa pluja. Mostra la terra que arriba al recipient de cada vessant i deixa les arrels visibles al tall del sòl. Les partícules són indicatives. Fes servir la il·lustració principal per identificar les parts de la Terra i aquest complement per observar com interactuen.
 
 ## M002 · Graella per localitzar una boia
 

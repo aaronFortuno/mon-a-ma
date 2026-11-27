@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.42 · 27 de novembre de 2026
+
+- Afegeix les variants amb volum i realista a la il·lustració sobre les arrels i l’erosió del sòl.
+
 ## 0.1.41 · 27 de novembre de 2026
 
 - Mostra les miniatures sense subtítols al lateral i tria per defecte l’última il·lustració disponible de cada pack.

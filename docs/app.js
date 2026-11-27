@@ -319,15 +319,18 @@
       const saved = settings.figures[item.id];
       const personal = uploads.find(upload => upload.figure === item.id);
       const variants = figureVariants(route.topic, item);
+      const previousOriginal = item.src && variants.find(variant => variant.src === item.src);
       if (!variants.length && item.src && !item.blob) variants.push({ id: 'original', label: 'Original', src: item.src });
       const defaultVariant = variants.find(variant => variant.id === settings.figureStyle && variant.src) ??
         variants.findLast(variant => variant.src);
       if (personal) variants.push({ id: 'custom', label: 'Imatge pròpia', src: personal.src, alt: personal.alt });
-      const selected = variants.find(variant => variant.id === saved?.variant && variant.src) ?? defaultVariant;
+      const savedVariant = saved?.variant === 'original' && previousOriginal ? previousOriginal.id : saved?.variant;
+      const selected = variants.find(variant => variant.id === savedVariant && variant.src) ?? defaultVariant;
       const config = {
         wrap: false, border: true, ...item, ...selected, id: item.id, visible: true, ...saved,
         variants, selectedVariant: selected?.id ?? '', chapterId: chapter.id,
         ...(selected?.id === 'custom' ? { caption: '', credit: '' } : {}),
+        ...(previousOriginal && selected === previousOriginal ? saved?.byStyle?.original : undefined),
         ...saved?.byStyle?.[selected?.id],
       };
       const paragraph = paragraphAnchor(config.anchor);
