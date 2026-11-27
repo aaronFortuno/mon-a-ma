@@ -325,8 +325,64 @@ window.quaderns ??= [];
     title: 'Un territori, molts mapes',
     intro: 'Imagina que prepares un viatge al Perú. Vols saber per on passen els Andes, quins països té al costat i en quines zones plou més. Quins mapes consultaries?',
     figures: [
-      { id: 'planisferi-fisic', name: 'Planisferi físic', section: 'fisic', anchor: 'after', ratio: 2, position: 'center' },
-      { id: 'planisferi-politic', name: 'Planisferi polític', section: 'politic', anchor: 'lead', ratio: 2, position: 'center' },
+      {
+        id: 'quatre-mapes-peru', section: 'tipus', name: 'Quatre mapes del Perú', ratio: 13 / 8, position: 'center',
+        alt: 'Quatre mapes del Perú mostren el relleu andí, els països veïns, les corbes de nivell al voltant de Cusco i la pluja mitjana de juliol.',
+        caption: 'El mapa físic, el polític, el topogràfic i el temàtic responen preguntes diferents sobre un mateix territori.',
+        variants: {
+          pla: { src: 'illustracions/m004/quatre-mapes-peru-pla.png', thumbnail: 'illustracions/m004/miniatures/quatre-mapes-peru-pla.jpg' },
+          atles: { src: 'illustracions/m004/quatre-mapes-peru-atles.png', thumbnail: 'illustracions/m004/miniatures/quatre-mapes-peru-atles.jpg' },
+        },
+      },
+      {
+        id: 'corbes-de-nivell', section: 'tipus', name: 'Corbes juntes i corbes separades', ratio: 26 / 17,
+        src: 'illustracions/m004/corbes-de-nivell.png',
+        alt: 'Vista superior i perfil d’un turó esquemàtic. Les corbes de nivell són més juntes al vessant A que al B.',
+        caption: 'Cada corba marca una altitud. Compara l’espai entre corbes als vessants A i B. El perfil és esquemàtic i té l’escala vertical exagerada.',
+      },
+      {
+        id: 'atles-andes-d4', section: 'atles', name: 'Del nom a la casella D4', ratio: 52 / 23, position: 'center', anchor: 'after',
+        src: 'illustracions/m004/atles-andes-d4.png',
+        alt: 'Una entrada de l’índex amb el nom Andes, pàgina 12, casella D4, i un mapa quadriculat d’Amèrica del Sud.',
+        caption: 'En aquest atles d’exemple, l’índex t’envia a la pàgina 12 i t’indica la casella on comença la cerca.',
+      },
+      {
+        id: 'llegendes-trac-puntejat', section: 'lectura', name: 'La mateixa línia, dos significats', ratio: 52 / 21, position: 'center', anchor: 'after',
+        src: 'illustracions/m004/llegendes-trac-puntejat.png',
+        alt: 'Dos mapes esquemàtics fan servir la mateixa línia de punts. Una llegenda la identifica com un camí i l’altra, com una frontera.',
+        caption: 'La mateixa línia de punts pot tenir significats diferents. Què indica en cada exemple?',
+      },
+      {
+        id: 'planisferi-fisic', name: 'Planisferi físic', section: 'fisic', anchor: 'after', ratio: 2, position: 'center',
+        alt: 'Planisferi amb continents, oceans i colors d’altitud. Una línia guia assenyala els Andes a l’oest d’Amèrica del Sud.',
+        caption: 'Busca els Andes a l’oest d’Amèrica del Sud i consulta la llegenda per interpretar els colors del relleu.',
+        variants: {
+          pla: { src: 'illustracions/m004/planisferi-fisic-pla.png', thumbnail: 'illustracions/m004/miniatures/planisferi-fisic-pla.jpg' },
+          atles: { src: 'illustracions/m004/planisferi-fisic-atles.png', thumbnail: 'illustracions/m004/miniatures/planisferi-fisic-atles.jpg' },
+        },
+      },
+      {
+        id: 'canon-colca', section: 'fisic', name: 'El canó del Colca', ratio: 2200 / 1463,
+        src: 'illustracions/m004/canon-colca.jpg',
+        alt: 'Cim nevat entre núvols i vessants rocosos costeruts al canó del Colca.',
+        caption: 'Vessants del canó del Colca, als Andes del Perú. Fixa’t en el pendent i en les canals que baixen per la muntanya.',
+        credit: 'world-wide-gifts.com · Wikimedia Commons · CC BY-SA 2.0',
+      },
+      {
+        id: 'comparativa-projeccions', section: 'fisic', name: 'Mercator i Equal Earth', ratio: 26 / 15,
+        src: 'illustracions/m004/comparativa-projeccions.png', visible: false, anchor: 'after', width: 100, position: 'center', wrap: false,
+        alt: 'Mercator i Equal Earth mostren Groenlàndia i Amèrica del Sud amb proporcions diferents. Groenlàndia sembla relativament més gran en Mercator.',
+        caption: 'Compara la mida aparent de Groenlàndia i Amèrica del Sud en les dues projeccions.',
+      },
+      {
+        id: 'planisferi-politic', name: 'Planisferi polític', section: 'politic', anchor: 'lead', ratio: 2, position: 'center',
+        alt: 'Planisferi amb països, fronteres i capitals. El Perú, Xile i l’Argentina estan retolats a l’oest i al sud d’Amèrica del Sud.',
+        caption: 'Localitza el Perú i Xile i compara aquesta zona amb la del planisferi físic.',
+        variants: {
+          pla: { src: 'illustracions/m004/planisferi-politic-pla.png', thumbnail: 'illustracions/m004/miniatures/planisferi-politic-pla.jpg' },
+          atles: { src: 'illustracions/m004/planisferi-politic-atles.png', thumbnail: 'illustracions/m004/miniatures/planisferi-politic-atles.jpg' },
+        },
+      },
     ],
     sections: [
       section('tipus', 'Un mapa per a cada pregunta',
@@ -360,10 +416,18 @@ window.quaderns ??= [];
         box('observa', 'Els Andes en dos mapes', 'Amb els dos planisferis de la fitxa o d’un atles, segueix els Andes al mapa físic. Després busca la mateixa zona al mapa polític i localitza el Perú i Xile, dos països per on passa la serralada. Quina informació has tret de cada mapa?')),
     ],
   }, {
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Masses de color planes i línies nítides.' },
+      { id: 'atles', label: 'Atles amb textura', description: 'Ombrejat suau del relleu i tintes més clares.' },
+    ],
     description: 'Tria el mapa que et convé, consulta un atles i compara què mostren els planisferis físics i polítics.',
     curriculum: [{ row: 'medi:cartografia', section: 'lectura', note: 'Tria el mapa segons la pregunta, interpreta la llegenda i compara el relleu amb les fronteres.' }],
     resources: worldMaps,
     sources: [
+      ['Natural Earth · Costes, països i límits', 'https://www.naturalearthdata.com/about/disputed-boundaries-policy/'],
+      ['NOAA NCEI · Relleu ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['NOAA CoastWatch · Pluja mensual CHIRPS 2.0', 'https://coastwatch.pfeg.noaa.gov/erddap/griddap/chirps20GlobalMonthlyP05.html'],
+      ['Wikimedia Commons · Canó del Colca, CC BY-SA 2.0', 'https://commons.wikimedia.org/wiki/File:Colca_Canyon.jpg'],
       ['ICGC · Atles', 'https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Atles'],
       ['ICGC · Planisferi', 'https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Planisferi'],
       ['USGS · Com es fan servir les projeccions cartogràfiques', 'https://www.usgs.gov/faqs/how-are-different-map-projections-used'],

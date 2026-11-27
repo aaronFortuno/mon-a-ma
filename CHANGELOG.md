@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.55 · 27 de novembre de 2026
+
+- Incorpora les il·lustracions de l’M004, Un territori, molts mapes, amb els lots Pla i Atles amb textura.
+
 ## 0.1.54 · 27 de novembre de 2026
 
 - Afegeix tres fitxes amb variants de Suport, Base i Ampliació a La Terra i les seves representacions, amb pràctiques imprimibles d’altitud i de quatre colors.
