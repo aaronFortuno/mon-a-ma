@@ -137,53 +137,46 @@ window.variantsMaterials ??= {};
     M004: {
       'tipus-de-mapes': {
         suport: {
-          intro: 'Hi ha mapes de muntanyes, de països i fins i tot de trens. Abans de buscar un mapa, pensa què vols saber.',
+          intro: 'Imagina que prepares un viatge al Perú. Vols trobar una serralada, saber quins països hi ha al costat i veure on plou més. Quin mapa et pot ajudar en cada cas?',
           sections: {
             tipus: [
-              taula(['Mapa', 'Què mostra?'], [
-                ['Físic', 'Muntanyes, planes i rius.'],
-                ['Polític', 'Països, fronteres i capitals.'],
-                ['Topogràfic', 'Pendents del terreny i camins.'],
-                ['Temàtic', 'Un tema, com el transport o la pluja.'],
-              ], 25),
+              repte('Tria un mapa', 'Vols trobar una serralada. Busca a la taula quin mapa mostra les muntanyes. Quin mapa triaries per saber on plou més?'),
             ],
             atles: [
-              p('Un **atles** és un conjunt de mapes. Pot ser de paper o digital. Consulta l’índex per trobar el mapa d’un lloc.'),
+              p('Busca el lloc per nom a l’**índex** de l’atles. Imagina que al costat d’«Andes» hi diu **pàgina 12, D4**.'),
+              passos('Obre l’atles per la pàgina 12.', 'Busca la columna D i la fila 4. Es troben a la casella D4.'),
             ],
             lectura: [
-              passos('Llegeix el **títol** per saber què mostra el mapa.', 'Busca el **nord** per orientar-te.', 'Consulta la **llegenda** per entendre els símbols.', 'Fes servir l’**escala** per saber les distàncies.'),
+              passos('Llegeix el **títol** per saber quin lloc mostra el mapa.', 'Busca la **fletxa del nord**. Si la trobes, fixa’t cap on apunta.', 'Tria un símbol i busca’l a la **llegenda**.', 'Si vols estimar una distància, consulta l’**escala**.'),
             ],
             fisic: [
-              p('Un **planisferi** és un mapa de tot el món. El planisferi **físic** mostra continents, oceans, muntanyes i rius.'),
-              p('Busca els **Andes** a l’oest d’Amèrica del Sud. Consulta la llegenda per saber què indiquen els colors.'),
+              p('Busca **Amèrica del Sud** en un planisferi físic. Els **Andes** són una serralada que s’estén per l’oest del continent.'),
+              p('Tria un color del relleu i busca què indica a la llegenda.'),
             ],
             politic: [
-              p('El planisferi **polític** mostra els països i les seves fronteres. Els colors separen països. Un punt pot indicar una ciutat.'),
-              p('Torna a mirar la zona dels Andes i busca-hi el nom d’un país.'),
+              p('Busca **Amèrica del Sud** al planisferi polític. Troba el **Perú** i ressegueix-ne la frontera amb el dit.'),
+              repte('El mateix lloc en dos mapes', 'Torna a mirar el mapa físic. Quin mapa t’ha ajudat a trobar la serralada dels Andes? Quin t’ha ajudat a trobar la frontera del Perú?'),
             ],
           },
         },
         ampliacio: {
           sections: {
             tipus: [
-              p('Un mapa temàtic pot mostrar el **total** d’habitants de cada municipi o la **densitat de població**, que relaciona habitants i superfície. Un municipi molt extens pot tenir més persones en total i, alhora, menys habitants per quilòmetre quadrat.'),
-              repte('El mateix tema, resultats diferents', 'Un municipi té **1.600 habitants** en **8 km²** i un altre en té **900** en **3 km²**. Quin destaca si pintem el mapa segons el total? I si dividim els habitants pels quilòmetres quadrats? Explica quin mapa triaries per comparar com de densament poblat està cada territori.'),
+              repte('Dos mapes de pluja', 'Un mapa mostra la pluja d’una setmana de juliol. Un altre mostra la pluja mitjana del juliol a partir de molts anys de dades. Quin consultaries per saber on sol ploure més al juliol? Què et diu l’altre?'),
             ],
             atles: [
-              p('Pots relacionar mapes de l’atles localitzant el mateix punt a cada un. Si estudies un riu, segueix el curs pel mapa físic i situa al polític les poblacions a prop de la llera. Un mapa temàtic de pluges pot aportar una tercera dada sobre la conca.'),
-              repte('Organitza la consulta', 'Vols investigar per què un poble a prop de la desembocadura pot rebre més aigua després de pluges que han caigut lluny. Tria quins mapes consultaries i ordena la cerca. Digues quina dada hauries de comprovar fora de l’atles per saber si el cabal va augmentar aquell dia.'),
+              p('Si l’índex dona una sola casella, comença per allà. Després segueix la serralada per les caselles veïnes. En un mapa d’Amèrica del Sud podràs seguir el relleu amb més detall.'),
             ],
             lectura: [
-              p('En un mapa topogràfic, l’**equidistància** és el desnivell entre dues corbes de nivell consecutives. Si compares dos mapes, comprova l’equidistància i l’escala. La separació de les línies al paper, tota sola, no permet afirmar quin camí fa més pendent.'),
-              repte('Compara dos pendents', 'Dos camins de la mateixa llargada horitzontal creuen cinc intervals. En el primer mapa cada interval val **10 m** d’altitud i en el segon en val **20**. Si en tots dos casos el camí puja tota l’estona, calcula el desnivell de cada camí i explica quin fa més pendent.'),
+              repte('Abans de comparar els colors', 'El blau fort representa **de 50 a menys de 100 mm** de pluja en un mapa i **de 100 a menys de 200 mm** en l’altre. Dos llocs tenen aquest color. Hi ha plogut igual? Què cal comprovar sobre les dates abans de comparar les dades?'),
             ],
             fisic: [
-              p('En un mapamundi amb la projecció de **Mercator**, les superfícies s’engrandeixen molt a mesura que ens acostem als pols. Per comparar la mida de dues regions, és més adient una **projecció equivalent**, que manté les proporcions de superfície encara que en canviïn les formes.'),
-              repte('Tria la projecció per comparar', 'Vols comparar la superfície de dues illes, una propera al tròpic i l’altra a prop de l’Àrtic. En un mapa de Mercator semblen iguals. Explica per què aquesta observació no és suficient i quin tipus de mapamundi consultaries.'),
+              p('Quan representem la Terra sobre un pla, fem servir una **projecció cartogràfica**. En la de Mercator, les terres properes als pols semblen molt més grans en comparació amb les de l’equador. Una **projecció equivalent** manté les proporcions de superfície, encara que canviï la forma dels continents.'),
+              repte('Groenlàndia i Amèrica del Sud', 'Vols comparar la superfície de Groenlàndia amb la d’Amèrica del Sud. Quina de les dues projeccions triaries? Quin dels dos sembla més gran del que li correspon en la projecció de Mercator?'),
             ],
             politic: [
-              p('Les fronteres són límits entre territoris. Poden seguir un riu o una serralada, o bé passar per zones on el paisatge continua a banda i banda. Alguns mapes fan servir un traç diferent quan un límit és disputat. Per interpretar-lo, cal mirar què indica la llegenda i qui ha publicat el mapa.'),
-              repte('Dues línies sobre un riu', 'Un mapa marca la frontera amb una línia contínua i un altre la marca amb ratlles al mateix tram. Explica què consultaries per saber si és una diferència de dibuix o si els dos mapes tenen criteris diferents sobre el límit.'),
+              p('Les fronteres poden seguir elements del paisatge, com un riu o una carena. El paisatge pot ser semblant a totes dues bandes del límit. La línia del mapa representa un límit entre territoris.'),
+              repte('Una frontera entre muntanyes', 'Localitza Xile i l’Argentina al mapa polític. Et serviria el planisferi per dir per quin cim passa exactament la frontera? Quin mapa consultaries per comprovar-ho?'),
             ],
           },
         },

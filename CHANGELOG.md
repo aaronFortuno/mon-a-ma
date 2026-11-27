@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.50 · 27 de novembre de 2026
+
+- Revisa les tres variants d’Els tipus de mapes amb un nucli comú i una mateixa cerca cartogràfica al voltant del Perú i els Andes.
+
 ## 0.1.49 · 27 de novembre de 2026
 
 - Desplega les fitxes relacionades per defecte i reserva espai per a cinc enllaços de l’itinerari.
