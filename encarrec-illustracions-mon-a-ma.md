@@ -31,7 +31,7 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | --- | --- | --- |
 | M001 · El planeta Terra | 6, quatre principals i dos complements | 3 lots de 5 figures (Pla, Volum i Realista) i una fotografia compartida. 16 originals. |
 | M002 · Les coordenades geogràfiques | 4 principals i 1 exemple de joc opcional | 2 estils per globus, 2 versions de la graella de les boies i 2 figures de la flota. 8 PNG. |
-| M003 · Els mapes i els plànols geogràfics | 3, canvi d’enquadrament, llegenda i escala | 3 figures pendents amb una mateixa geometria de barri. |
+| M003 · Els mapes i els plànols geogràfics | 3, canvi d’enquadrament, llegenda i escala | 3 lots de 3 figures (Pla, Atles escolar i Vista aèria il·lustrada) amb una mateixa geometria de barri. |
 | M004 · Els tipus de mapes | 8, cinc principals i tres complements | 2 lots de 3 figures i 5 peces compartides. 11 originals i 6 miniatures. |
 
 | Fitxa | Apartat · ID de figura | Fitxers dins de docs/illustracions/ |
@@ -47,9 +47,9 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | M002 | localitzacio · graella | m002/graella-boies.png · m002/graella-boies-planisferi.png |
 | M002 | localitzacio · troba-la-flota | m002/troba-la-flota.png, tauler de joc |
 | M002 | localitzacio · troba-la-flota-exemple | m002/troba-la-flota-exemple.png, exemple opcional |
-| M003 | definicions · reserva-definicions | m003/municipi-i-barri.png, pendent, 2.160 × 900 px |
-| M003 | llegenda · barri | m003/planol-barri.png, pendent, 2.100 × 1.000 px |
-| M003 | escala · reserva-escala | m003/distancies-barri.png, pendent, 2.250 × 900 px |
+| M003 | definicions · reserva-definicions | m003/municipi-i-barri.png · m003/municipi-i-barri-atles.png · m003/municipi-i-barri-aeria.png, 2.160 × 900 px per imatge |
+| M003 | llegenda · barri | m003/planol-barri.png · m003/planol-barri-atles.png · m003/planol-barri-aeria.png, 2.100 × 1.000 px per imatge |
+| M003 | escala · reserva-escala | m003/distancies-barri.png · m003/distancies-barri-atles.png · m003/distancies-barri-aeria.png, 2.250 × 900 px per imatge |
 | M004 | Vegeu la taula del [lot M004](#m004--els-tipus-de-mapes) | `m004/` i `m004/miniatures/` |
 
 ## M001 · El planeta Terra

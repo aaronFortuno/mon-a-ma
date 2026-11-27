@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.52 · 27 de novembre de 2026
+
+- Incorpora nou il·lustracions a la fitxa M003, en els estils Pla, Atles escolar i Vista aèria il·lustrada.
+
 ## 0.1.51 · 27 de novembre de 2026
 
 - Amplia l’encàrrec visual d’Els tipus de mapes a vuit figures, amb dos estils cartogràfics, rutes de lliurament i pautes de lectura impresa.
