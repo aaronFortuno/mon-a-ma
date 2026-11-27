@@ -30,7 +30,7 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | Fitxa | Figures diferents | Lots i arxius previstos |
 | --- | --- | --- |
 | M001 · El planeta Terra | 6, quatre principals i dos complements | 3 lots de 5 figures (Pla, Volum i Realista) i una fotografia compartida. 16 originals. |
-| M002 · Les coordenades geogràfiques | 4, dos globus, la graella de les boies i el joc de la flota | 4 reserves pendents. Les graelles s’han de construir amb geometria controlada. |
+| M002 · Les coordenades geogràfiques | 4 principals i 1 exemple de joc opcional | 2 estils per globus, 2 versions de la graella de les boies i 2 figures de la flota. 8 PNG. |
 | M003 · Els mapes i els plànols geogràfics | 1, plànol del barri | 1 lot cartogràfic. 1 original. |
 | M004 · Els tipus de mapes | 2, planisferis físic i polític | 1 lot cartogràfic amb el mateix enquadrament i projecció. 2 originals pendents. |
 
@@ -42,10 +42,11 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | M001 | gravetat · reserva-gravetat | m001/gravetat-pla.png · m001/gravetat-volum.png · m001/gravetat-realista.png |
 | M001 | elements · reserva-elements | m001/elements-pla.png · m001/elements-volum.png · m001/elements-realista.png |
 | M001 | elements · arrels-i-erosio | m001/arrels-i-erosio.png · m001/arrels-i-erosio-volum.png · m001/arrels-i-erosio-realista.png |
-| M002 | latitud · reserva-latitud | m002/parallels.png, pendent |
-| M002 | longitud · reserva-longitud | m002/meridians.png, pendent |
-| M002 | localitzacio · graella | m002/graella-boies.png, pendent |
-| M002 | localitzacio · troba-la-flota | m002/troba-la-flota.png, pendent |
+| M002 | latitud · reserva-latitud | m002/parallels-pla.png · m002/parallels-volum.png |
+| M002 | longitud · reserva-longitud | m002/meridians-pla.png · m002/meridians-volum.png |
+| M002 | localitzacio · graella | m002/graella-boies.png · m002/graella-boies-planisferi.png |
+| M002 | localitzacio · troba-la-flota | m002/troba-la-flota.png, tauler de joc |
+| M002 | localitzacio · troba-la-flota-exemple | m002/troba-la-flota-exemple.png, exemple opcional |
 | M003 | llegenda · barri | planol.png |
 | M004 | fisic · planisferi-fisic | m004/planisferi-fisic.png, pendent, 2.600 × 1.300 px |
 | M004 | politic · planisferi-politic | m004/planisferi-politic.png, pendent, 2.600 × 1.300 px |
@@ -111,7 +112,7 @@ En pla, el disc mostra quatre zones concèntriques. Amb volum, l’esfera té un
 
 ## M002 · Les coordenades geogràfiques
 
-Les quatre figures s’utilitzen en les variants Suport, Base i Ampliació. Fes que les etiquetes i els punts de referència es puguin llegir a A4 i en escala de grisos. [Referència de la NOAA sobre paral·lels i meridians](https://oceanservice.noaa.gov/education/tutorial_nautical_charts/nautical_charts02_information_2b.html).
+Les quatre figures principals i l’exemple opcional estan disponibles a Suport, Base i Ampliació. Fes que les etiquetes i els punts de referència es puguin llegir a A4 i en escala de grisos. [Referència de la NOAA sobre paral·lels i meridians](https://oceanservice.noaa.gov/education/tutorial_nautical_charts/nautical_charts02_information_2b.html).
 
 ### Els paral·lels en un globus
 
@@ -135,6 +136,8 @@ Marca «A» a **20° N, 40° O**, «B» a **20° N, 20° O** i «C» a **20° S,
 ### Troba la flota
 
 A tota l’amplada de la fitxa, posa dues graelles buides idèntiques de costat, amb els títols «La meva flota» i «Els meus intents». Cada graella té set meridians de **60° O** a **60° E** i cinc paral·lels de **40° N** a **40° S**, en passos de 20°. Diferencia l’equador i Greenwich i deixa prou espai a cada encreuament per marcar-hi un vaixell o registrar-hi un intent. Les regles van al peu de la figura.
+
+L’exemple opcional assenyala el vaixell 1 a 20° S, 40° E i planteja que l’alumnat trobi el vaixell 2. Si s’activa, es mostra abans del tauler buit.
 
 ## M003 · Plànol d’un barri imaginari
 

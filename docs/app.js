@@ -326,7 +326,7 @@
       const savedVariant = saved?.variant === 'original' && previousOriginal ? previousOriginal.id : saved?.variant;
       const selected = variants.find(variant => variant.id === savedVariant && variant.src) ?? defaultVariant;
       const config = {
-        wrap: false, border: true, ...item, ...selected, id: item.id, visible: true, ...saved,
+        wrap: false, border: true, visible: true, ...item, ...selected, id: item.id, ...saved,
         variants, selectedVariant: selected?.id ?? '', chapterId: chapter.id,
         ...(selected?.id === 'custom' ? { caption: '', credit: '' } : {}),
         ...(previousOriginal && selected === previousOriginal ? saved?.byStyle?.original : undefined),

@@ -169,18 +169,45 @@ window.quaderns ??= [];
     figures: [
       {
         id: 'reserva-latitud', section: 'latitud', name: 'Els paral·lels en un globus', ratio: 2.35,
+        alt: 'Globus amb l’equador marcat a 0° i el paral·lel de 20° N ressaltat. El tram ocult del paral·lel es mostra amb una línia discontínua.',
         caption: 'L’equador marca 0°. Els paral·lels del nord i del sud es fan més petits a mesura que s’acosten als pols.',
+        variants: {
+          pla: { src: 'illustracions/m002/parallels-pla.png' },
+          volum: { src: 'illustracions/m002/parallels-volum.png' },
+        },
       },
       {
         id: 'reserva-longitud', section: 'longitud', name: 'Els meridians en un globus', ratio: 2.35,
+        alt: 'Globus amb arcs que uneixen els pols. El meridià de Greenwich marca 0°, amb el de 40° O a l’esquerra i el de 40° E a la dreta.',
         caption: 'Els meridians es troben als pols. El de Greenwich és la referència per comptar els graus cap a l’est i cap a l’oest.',
+        variants: {
+          pla: { src: 'illustracions/m002/meridians-pla.png' },
+          volum: { src: 'illustracions/m002/meridians-volum.png' },
+        },
       },
       {
         id: 'graella', section: 'localitzacio', name: 'Graella de les boies', ratio: 2, position: 'center',
-        caption: 'El punt A marca la boia de l’exemple. Fes servir el mateix mapa per llegir la posició dels punts B i C.',
+        alt: 'Graella amb la longitud a dalt i la latitud a l’esquerra. Un traç discontinu guia fins a A, a 20° N i 40° O. B és una divisió a l’est d’A. C és una divisió al sud de l’equador i una a l’est de Greenwich.',
+        caption: 'El traç discontinu guia fins a la boia A. Fes servir la mateixa graella per llegir les coordenades de B i C.',
+        variants: {
+          pla: { src: 'illustracions/m002/graella-boies.png', label: 'Graella esquemàtica' },
+          volum: {
+            src: 'illustracions/m002/graella-boies-planisferi.png', thumbnail: 'illustracions/m002/miniatures/graella-boies-planisferi.jpg', label: 'Amb planisferi',
+            alt: 'Planisferi amb un sector de l’Atlàntic ampliat. El traç discontinu guia fins a A, a 20° N i 40° O. B és una divisió a l’est d’A i també és al mar. C és a terra, una divisió al sud de l’equador i una a l’est de Greenwich.',
+          },
+        },
+      },
+      {
+        id: 'troba-la-flota-exemple', section: 'localitzacio', name: 'Exemple de Troba la flota', ratio: 2.05,
+        src: 'illustracions/m002/troba-la-flota-exemple.png', visible: false,
+        anchor: 'after', width: 100, position: 'center', wrap: false,
+        alt: 'Graella sobre el mar amb dos vaixells. Un traç discontinu guia fins al vaixell 1, a 20° S i 40° E. El vaixell 2 és una divisió al nord de l’equador i dues a l’oest de Greenwich.',
+        caption: 'El traç discontinu situa el vaixell 1 a 20° S, 40° E. Quines coordenades té el vaixell 2?',
       },
       {
         id: 'troba-la-flota', section: 'localitzacio', name: 'Troba la flota', ratio: 2.05,
+        src: 'illustracions/m002/troba-la-flota.png',
+        alt: 'Dues graelles buides, «La meva flota» i «Els meus intents». Van de 60° O a 60° E i de 40° N a 40° S en passos de 20°. L’equador i Greenwich tenen un traç més gruixut.',
         anchor: 'after', width: 100, position: 'center', wrap: false,
         caption: 'Troba la flota. Jugueu en parelles. Cadascú marca en secret tres vaixells en encreuaments diferents de la graella «La meva flota». Per torns, digueu unes coordenades, primer la latitud i després la longitud. L’altra persona respon «trobat» o «aigua». Anoteu el resultat a «Els meus intents». Guanya qui troba primer els tres vaixells.',
       },
@@ -205,15 +232,20 @@ window.quaderns ??= [];
         list('Busca el paral·lel de **20° N** al nord de l’equador.',
           'Busca el meridià de **40° O** a l’oest de Greenwich.',
           'Segueix les dues línies fins que es creuin. En aquest punt hi ha la boia **A**.'),
-        p('Per llegir la posició d’un punt ja marcat, segueix el seu paral·lel fins al marge lateral del mapa i el seu meridià fins al marge superior. Si el punt cau entre dues línies numerades, pots estimar la coordenada.'),
-        box('observa', 'Dues boies al mateix paral·lel', 'La boia **B** és a **20° N, 20° O**. Quina de les dues coordenades comparteix amb la boia A? Quina boia és més a prop del meridià de Greenwich?'),
-        box('prova', 'Llegeix el punt C', 'Busca **C** a la graella i escriu les seves coordenades. Fes servir els dos 0° per comprovar si cal posar **N** o **S**, i **E** o **O**.')),
+        box('prova', 'Llegeix els punts B i C', 'Llegeix la longitud de **B** al marge de dalt. Quina boia és més a prop de Greenwich? Escriu les dues coordenades de **C**. Guia’t pels dos 0°.'),
+        p('Per comprovar la posició d’un punt, segueix el paral·lel fins al marge esquerre i el meridià fins al de dalt. Si el punt cau entre dues línies numerades, pots estimar la coordenada.')),
     ],
   }, {
+    figureStyles: [
+      { id: 'pla', label: 'Esquema pla', description: 'Globus plans i graella esquemàtica.' },
+      { id: 'volum', label: 'Il·lustració amb volum', description: 'Globus amb ombres i graella sobre un mapa de l’Atlàntic.' },
+    ],
     description: 'Fes servir els paral·lels i els meridians per llegir la latitud i la longitud i localitzar un punt al mapa.',
     curriculum: [{ row: 'medi:cartografia', section: 'localitzacio', note: 'Situa punts al mapa amb la latitud i la longitud.' }],
     sources: [
       ['NOAA · Latitud i longitud', 'https://oceanservice.noaa.gov/education/tutorial_nautical_charts/nautical_charts02_information_2b.html'],
+      ['Natural Earth · Contorns de terra dels globus', 'https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/'],
+      ['Natural Earth · Relleu i aigua del planisferi', 'https://www.naturalearthdata.com/downloads/50m-natural-earth-1/50m-natural-earth-i-with-shaded-relief-and-water/'],
     ],
   });
 

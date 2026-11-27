@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.45 · 27 de novembre de 2026
+
+- Incorpora les il·lustracions de Les coordenades geogràfiques amb dos estils de globus i dues versions de la graella de les boies.
+- Afegeix el tauler de Troba la flota i un exemple opcional per practicar.
+
 ## 0.1.44 · 27 de novembre de 2026
 
 - Ajusta a 12 pt la retolació de les figures principals d’El planeta Terra als tres estils i concreta les amplades d’impressió a la pauta.
