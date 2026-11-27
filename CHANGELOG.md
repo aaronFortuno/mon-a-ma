@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.51 · 27 de novembre de 2026
+
+- Amplia l’encàrrec visual d’Els tipus de mapes a vuit figures, amb dos estils cartogràfics, rutes de lliurament i pautes de lectura impresa.
+
 ## 0.1.50 · 27 de novembre de 2026
 
 - Revisa les tres variants d’Els tipus de mapes amb un nucli comú i una mateixa cerca cartogràfica al voltant del Perú i els Andes.

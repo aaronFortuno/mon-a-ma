@@ -32,7 +32,7 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | M001 · El planeta Terra | 6, quatre principals i dos complements | 3 lots de 5 figures (Pla, Volum i Realista) i una fotografia compartida. 16 originals. |
 | M002 · Les coordenades geogràfiques | 4 principals i 1 exemple de joc opcional | 2 estils per globus, 2 versions de la graella de les boies i 2 figures de la flota. 8 PNG. |
 | M003 · Els mapes i els plànols geogràfics | 3, canvi d’enquadrament, llegenda i escala | 3 figures pendents amb una mateixa geometria de barri. |
-| M004 · Els tipus de mapes | 2, planisferis físic i polític | 1 lot cartogràfic amb el mateix enquadrament i projecció. 2 originals pendents. |
+| M004 · Els tipus de mapes | 8, cinc principals i tres complements | 2 lots de 3 figures i 5 peces compartides. 11 originals i 6 miniatures. |
 
 | Fitxa | Apartat · ID de figura | Fitxers dins de docs/illustracions/ |
 | --- | --- | --- |
@@ -50,8 +50,7 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | M003 | definicions · reserva-definicions | m003/municipi-i-barri.png, pendent, 2.160 × 900 px |
 | M003 | llegenda · barri | m003/planol-barri.png, pendent, 2.100 × 1.000 px |
 | M003 | escala · reserva-escala | m003/distancies-barri.png, pendent, 2.250 × 900 px |
-| M004 | fisic · planisferi-fisic | m004/planisferi-fisic.png, pendent, 2.600 × 1.300 px |
-| M004 | politic · planisferi-politic | m004/planisferi-politic.png, pendent, 2.600 × 1.300 px |
+| M004 | Vegeu la taula del [lot M004](#m004--els-tipus-de-mapes) | `m004/` i `m004/miniatures/` |
 
 ## M001 · El planeta Terra
 
@@ -168,19 +167,103 @@ Fes servir el mateix plànol per comparar un segment recte i un itinerari a peu.
 
 La barra d’escala retola **0**, **50** i **100 m** amb dos trams iguals. La barra sencera ha de mesurar el mateix que el segment E–B i que el tram horitzontal de l’itinerari. Els dos trams verticals han de mesurar la meitat. L’alumnat dedueix les distàncies a partir de la barra. Comprova que els resultats són **100 m en línia recta** i **200 m pel camí**. Mantén la barra unida al dibuix en redimensionar-lo. [Referència de l’ICGC sobre l’escala cartogràfica](https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Escala).
 
-## M004 · Dos planisferis que es poden comparar
+## M004 · Els tipus de mapes
 
-**Què ha de fer l’alumne.** Trobar els Andes al mapa físic i identificar al mapa polític almenys dos països per on passa la serralada.
+**Encàrrec prioritari.** Treballa a partir de la [fitxa de Món a mà](https://monama.ortogra.fi/#M004). El Perú i els Andes són el fil conductor de Suport, Base i Ampliació. Prepara cinc figures principals, una per apartat, i tres complements. Els dos planisferis són una parella i s’han de lliurar junts. La primera figura de la secció `tipus` també servirà com a imatge de la targeta del catàleg.
 
-**Composició compartida.** Fes servir el mateix marc, projecció Equal Earth centrada a Greenwich (EPSG:8857), escala de dibuix i costa als dos PNG. Col·loca la llegenda en una franja blanca comuna a sota. Inclou l’Antàrtida i comprova que els dos mapes se superposin en la línia de costa. Mantén Amèrica del Sud sencera i deixa marge per retolar la seva façana pacífica. La base cartogràfica de Natural Earth es pot reutilitzar i modificar. [Capes físiques de Natural Earth](https://www.naturalearthdata.com/downloads/110m-physical-vectors/) · [Condicions d’ús de Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/).
+### Lots, mides i noms
 
-### Planisferi físic
+| Ordre dins de l’apartat | Apartat · ID de figura | Amplada prevista | Fitxers dins de `docs/illustracions/m004/` |
+| --- | --- | --- | --- |
+| Principal | tipus · `quatre-mapes-peru` | 170 mm · 2.600 × 1.600 px | `quatre-mapes-peru-pla.png`, `quatre-mapes-peru-atles.png` |
+| Complement | tipus · `corbes-de-nivell` | 85 mm · 1.300 × 850 px | `corbes-de-nivell.png` |
+| Principal | atles · `atles-andes-d4` | 170 mm · 2.600 × 1.150 px | `atles-andes-d4.png` |
+| Principal | lectura · `llegendes-trac-puntejat` | 170 mm · 2.600 × 1.050 px | `llegendes-trac-puntejat.png` |
+| Principal | fisic · `planisferi-fisic` | 170 mm · 2.600 × 1.300 px | `planisferi-fisic-pla.png`, `planisferi-fisic-atles.png` |
+| Complement | fisic · `canon-colca` | 85 mm · 2.200 × 1.463 px | `canon-colca.jpg` |
+| Complement opcional per al repte d’Ampliació | fisic · `comparativa-projeccions` | 170 mm · 2.600 × 1.500 px | `comparativa-projeccions.png` |
+| Principal | politic · `planisferi-politic` | 170 mm · 2.600 × 1.300 px | `planisferi-politic-pla.png`, `planisferi-politic-atles.png` |
 
-Mostra els continents i els oceans i distingeix l’altitud de la profunditat marina. Deriva els colors de dades reals d’elevació i batimetria. Usa verd, ocre i marró en tres franges terrestres, i blau clar i fosc per a dues franges marines. Per al terra, aplica menys de 500 m, de 500 m a menys de 2.000 m i 2.000 m o més d’altitud. Per al mar, aplica menys de 2.000 m i 2.000 m o més de profunditat. Retola aquests mateixos intervals a la llegenda. Retola com a mínim «Andes», «Himàlaia», «Oceà Pacífic», «Oceà Atlàntic» i «Oceà Índic». Situa «Andes» al costat de la franja de relleu de l’oest d’Amèrica del Sud, amb una línia guia si fa falta. Mantén la costa i el relleu com a referències principals. [Model global de relleu ETOPO de la NOAA](https://www.ncei.noaa.gov/products/etopo-global-relief-model).
+- **Pla**, primera opció. Masses planes, línies precises, fons blanc i llegendes de contrast alt.
+- **Atles amb textura**, opció per defecte. Conserva el mateix mapa, les mateixes dades i la mateixa retolació. Afegeix un ombrejat discret derivat del relleu al mapa físic i tintes suaus sobre fons blanc al polític i a la làmina de quatre mapes. Mantén les fronteres i els símbols nítids. Conserva l’enquadrament dels dos lots perquè es puguin combinar en una mateixa fitxa.
+- Lliura **11 originals** i les **sis miniatures** de les figures amb dos estils. Les miniatures són JPEG de **360 px d’ample**, amb el mateix enquadrament que l’original, a `docs/illustracions/m004/miniatures/` i amb el mateix nom base. Per exemple, `miniatures/planisferi-fisic-atles.jpg`.
+- Exporta els gràfics en PNG RGB sRGB. Als gràfics de 2.600 px a 170 mm i als de 1.300 px a 85 mm, un rètol de **12 pt equival a uns 65 px**. Procura que els noms necessaris per resoldre les activitats tinguin almenys **11 pt** i la resta de rètols, almenys **9 pt**. Prova una còpia en grisos als dos amples d’impressió.
+- Fes servir dades cartogràfiques verificables per a les costes, el relleu, la pluja, els límits i les ciutats. Les pàgines de l’atles, els dos fragments de llegenda i l’esquema de corbes són composicions didàctiques. Afegeix-hi a mà el text i la geometria perquè els rètols, la graella i els traços siguin exactes. [Natural Earth i condicions d’ús](https://www.naturalearthdata.com/about/terms-of-use/) · [Model de relleu ETOPO de la NOAA](https://www.ncei.noaa.gov/products/etopo-global-relief-model) · [CHIRPS, dades obertes de pluja](https://chc.ucsb.edu/data/chirps/).
 
-### Planisferi polític
+### Quatre mapes per preparar el viatge · `quatre-mapes-peru`
 
-Dibuixa els països a partir dels polígons d’Admin 0. Separa els veïns amb un límit nítid i colors suaus alternats. Retola com a mínim «Perú», «Xile» i «Argentina» i marca «Lima» i «Santiago de Xile» amb un símbol de capital, també explicat a la llegenda. Si les etiquetes del Perú o Xile no hi caben, posa-les a l’oceà amb línies guia cap al país corresponent. Mantén els colors dels països i les fronteres com a referències principals. Fes servir un traç diferenciat quan representis els límits que la font marca com a disputats. [Capes administratives de Natural Earth](https://www.naturalearthdata.com/downloads/110m-cultural-vectors/).
+Munta una làmina de quatre finestres amb els rètols **«Físic»**, **«Polític»**, **«Topogràfic»** i **«Temàtic»**, en aquest ordre. Fes servir el mateix marc del Perú i l’entorn als mapes físic, polític i temàtic. Dona al topogràfic un enquadrament propi.
+
+| Mapa | Detall que s’ha de poder trobar |
+| --- | --- |
+| Físic | «Andes» i «Oceà Pacífic». Mostra la franja de muntanya amb dades d’altitud. Mantén el contorn del Perú com a referència discreta. |
+| Polític | «Perú», «Equador», «Colòmbia», «Brasil», «Bolívia», «Xile» i «Lima». Separa els països amb una línia nítida i marca la capital amb el mateix símbol que al planisferi polític. |
+| Topogràfic | Un retall dels Andes a l’entorn de Cusco, d’uns 40 km d’amplada, amb la retolació «Entorn de Cusco» i algunes corbes d’altitud llegibles. Traça-les a partir d’ETOPO a 15″ o d’una font d’elevació equivalent. Escull un interval uniforme, com ara 200 m, i indica’l. Marca l’àrea ampliada en un petit requadre al mapa físic amb la mateixa referència visual. |
+| Temàtic | «Pluja mitjana de juliol (1991–2020)». Calcula la mitjana dels totals de juliol dels 30 anys de CHIRPS al Perú, en mil·límetres. Busca classes que separin bé els valors del mapa i mostra’n els intervals i la unitat a la llegenda. Distingeix les zones sense dades si n’hi ha. |
+
+**Peu.** «El mapa físic, el polític, el topogràfic i el temàtic responen preguntes diferents sobre un mateix territori.»  
+**Text alternatiu.** «Quatre mapes del Perú mostren el relleu andí, els països veïns, les corbes de nivell al voltant de Cusco i la pluja mitjana de juliol.»  
+**Comprovació.** Es poden assenyalar la serralada, els països veïns i la zona més plujosa amb tres mapes diferents. El requadre de Cusco coincideix amb el retall topogràfic.
+
+### Corbes juntes i corbes separades · `corbes-de-nivell`
+
+Dibuixa un turó imaginari amb quatre corbes tancades niades, de **100 m**, **120 m**, **140 m** i **160 m**, etiquetades des de fora cap endins. Desplaça els contorns interiors perquè s’acostin pel costat esquerre i se separin pel dret. Marca **A** al vessant esquerre i **B** al dret. Fes-hi passar un mateix tall horitzontal pel centre. A sota, dibuixa el perfil amb cada altitud situada a la mateixa posició horitzontal on el tall travessa la corba. Si l’eix vertical està exagerat, el peu ha d’indicar que el perfil és esquemàtic.
+
+**Peu.** «Cada corba marca una altitud. Compara l’espai entre corbes als vessants A i B.»  
+**Text alternatiu.** «Vista superior i perfil d’un turó esquemàtic. Les corbes de nivell són més juntes al vessant A que al B.»  
+**Comprovació.** El pendent de l’esquerra es veu més fort en totes dues vistes. Les altituds augmenten 20 m entre corbes.
+
+### Del nom a la casella D4 · `atles-andes-d4`
+
+Prepara una composició de paper amb un extracte de l’índex a l’esquerra i una pàgina d’atles a la dreta. A l’índex, posa els encapçalaments **«Nom»**, **«Pàgina»** i **«Casella»** i l’entrada **«Andes · 12 · D4»**. A la dreta, posa una pàgina **12** titulada **«Amèrica del Sud»**, amb columnes **A–F** d’esquerra a dreta i files **1–6** de dalt a baix. Munta el mapa sobre una costa real, en una projecció cilíndrica equidistant amb l’equador com a paral·lel estàndard. Pots usar l’extensió **135° O a 30° O**, **60° S a 15° N**, deixant una franja del Pacífic a l’oest. Amb sis columnes i sis files iguals, D4 cobreix de 82,5° O a 65° O i de 35° S a 22,5° S. Posa-hi el rètol «Andes» i la seva línia guia cap al tram de la serralada que envolta l’Aconcagua. Deixa que el relleu andí continuï per les caselles veïnes. Remarca discretament les capçaleres **D** i **4** i deixa la casella sense pintar.
+
+**Peu.** «En aquest atles d’exemple, l’índex t’envia a la pàgina 12 i t’indica la casella on comença la cerca.»  
+**Text alternatiu.** «Una entrada de l’índex amb el nom Andes, pàgina 12, casella D4, i un mapa quadriculat d’Amèrica del Sud.»  
+**Comprovació.** Una persona que segueixi només la columna D i la fila 4 troba el rètol «Andes» al lloc correcte.
+
+### La mateixa línia, dos significats · `llegendes-trac-puntejat`
+
+Dibuixa dos fragments esquemàtics de mapa amb fletxa del nord. A l’esquerra, **«Itinerari de muntanya»**, amb un sender marcat mitjançant punts negres. A la dreta, **«Dos territoris veïns»**, amb una frontera marcada amb punts exactament iguals. Sota cada fragment, posa «Llegenda», una mostra del traç i el mot **«Camí»** o **«Frontera»**. Dóna als fragments formes senzilles i diferents, i reserva un filet clar al voltant del traç allí on calgui. Afegeix el rètol petit **«Exemples esquemàtics»**. Les dades i els traços serveixen només per interpretar el símbol.
+
+**Peu.** «La mateixa línia de punts pot tenir significats diferents. Què indica en cada exemple?»  
+**Text alternatiu.** «Dos mapes esquemàtics fan servir la mateixa línia de punts. Una llegenda la identifica com un camí i l’altra, com una frontera.»  
+**Comprovació.** Els dos traços es veuen idèntics a l’A4 i la mostra de cada llegenda coincideix amb el seu mapa.
+
+### La parella de planisferis · `planisferi-fisic` i `planisferi-politic`
+
+Fes servir **Equal Earth centrat a Greenwich (EPSG:8857)**, el mateix marc mundial, la mateixa costa de Natural Earth, el nord a dalt i la mateixa amplada de mapa a totes les variants. Inclou-hi l’Antàrtida. Reserva una franja blanca sota cada mapa per a la llegenda i espai a l’oest d’Amèrica del Sud per a les línies guia. Conserva exactament la posició de les costes si se superposen els PNG. [Projecció Equal Earth](https://proj.org/en/stable/operations/projections/eqearth.html) · [Capes físiques Natural Earth](https://www.naturalearthdata.com/downloads/110m-physical-vectors/) · [Capes culturals Natural Earth](https://www.naturalearthdata.com/downloads/110m-cultural-vectors/).
+
+**Físic.** Deriva l’altitud terrestre, la profunditat marina i l’ombrejat de relleu d’ETOPO. Usa quatre trams d’altitud, **menys de 500 m**, **500 a menys de 2.000 m**, **2.000 a menys de 4.000 m** i **4.000 m o més**. Si distingeixes profunditats al mar, retola dos trams, **menys de 2.000 m** i **2.000 m o més**. Mantén la llegenda coherent amb el mapa. Retola com a mínim **«Andes»**, **«Himàlaia»**, **«Oceà Pacífic»**, **«Oceà Atlàntic»** i **«Oceà Índic»**. Dona al rètol «Andes» una guia visible cap a la serralada.
+
+**Peu del físic.** «Busca els Andes a l’oest d’Amèrica del Sud i consulta la llegenda per interpretar els colors del relleu.»  
+**Text alternatiu del físic.** «Planisferi amb continents, oceans i colors d’altitud. Una línia guia assenyala els Andes a l’oest d’Amèrica del Sud.»
+
+**Polític.** Dibuixa els països amb els polígons Admin 0 de Natural Earth, marca amb traç diferenciat els límits que la font indica com a disputats i explica aquest símbol a la llegenda. Retola com a mínim **«Perú»**, **«Xile»**, **«Argentina»**, **«Lima»** i **«Santiago de Xile»**. Marca les dues capitals amb el mateix símbol i inclou-lo a la llegenda. Usa línies guia en zones denses. Mantén el traç fronterer visible en grisos i documenta l’edició i el criteri de límits de la font. [Criteri de límits de Natural Earth](https://www.naturalearthdata.com/about/disputed-boundaries-policy/).
+
+**Peu del polític.** «Localitza el Perú i Xile i compara aquesta zona amb la del planisferi físic.»  
+**Text alternatiu del polític.** «Planisferi amb països, fronteres i capitals. El Perú, Xile i l’Argentina estan retolats a l’oest i al sud d’Amèrica del Sud.»  
+**Comprovació de la parella.** Una vegada localitzats els Andes al físic, la mateixa zona es reconeix al polític pels contorns de la costa. «Andes», «Perú», «Xile» i «Lima» es llegeixen a l’amplada d’impressió.
+
+### Fotografia del canó del Colca · `canon-colca`
+
+Desa el JPEG original de [Colca Canyon.jpg a Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Colca_Canyon.jpg), fotografia de **world-wide-gifts.com**, llicència **CC BY-SA 2.0**. Mantén el marc horitzontal complet. L’objectiu és que es vegin les parets inclinades i el fons de la vall. Mantén la fotografia i el seu crèdit com a recurs independent.
+
+**Peu.** «El canó del Colca, als Andes del Perú. Fixa’t en la forma de la vall i en el pendent dels vessants.»  
+**Text alternatiu.** «Fotografia del canó del Colca amb vessants costeruts que baixen cap al fons de la vall.»  
+**Crèdit.** «world-wide-gifts.com · Wikimedia Commons · CC BY-SA 2.0».  
+**Comprovació.** La llicència i la pàgina original consten al lliurament. La vall es distingeix a 85 mm, també en grisos.
+
+### Mercator i Equal Earth cara a cara · `comparativa-projeccions`
+
+Munta dos mapes de costat amb el mateix meridià central, les mateixes costes de Natural Earth, el mateix interval de latitud (**80° S a 84° N**) i el mateix ample d’equador a la imatge. Renderitza a l’esquerra **«Mercator»** (EPSG:3395) i a la dreta **«Equal Earth · projecció equivalent»** (EPSG:8857). Ajusta cada mapa conservant les proporcions del renderitzat, dins del seu marc. Ressalta les siluetes de **Groenlàndia** i **Amèrica del Sud** amb els mateixos dos tractaments a cada mapa, per exemple contorn gruixut i ratllat. Repeteix les dues etiquetes. La resta del món va en gris clar.
+
+**Peu.** «Compara la mida aparent de Groenlàndia i Amèrica del Sud en les dues projeccions.»  
+**Text alternatiu.** «Mercator i Equal Earth mostren Groenlàndia i Amèrica del Sud amb proporcions diferents. Groenlàndia sembla relativament més gran en Mercator.»  
+**Comprovació.** Groenlàndia queda sencera als dos marcs. Es pot comparar la proporció de les dues superfícies amb una còpia en grisos. [Projecció de Mercator](https://proj.org/en/stable/operations/projections/merc.html).
+
+### Ordre de lliurament
+
+Prepara primer els dos planisferis d’estil Atles i una prova de la graella D4 per validar les referències del text. Completa les altres figures principals i les tres variants Pla. Acaba amb l’esquema de corbes, la fotografia i el comparador de projeccions. Envia una taula final amb el nom de cada fitxer, el peu, el text alternatiu, el crèdit o font de les dades i el resultat de la prova en A4. Compta les miniatures per separat.
 
 ## Per descriure una figura nova
 
