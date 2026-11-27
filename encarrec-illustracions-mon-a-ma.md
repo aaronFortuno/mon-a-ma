@@ -11,14 +11,21 @@ Per a cada tema, acorda els lots, les figures que comparteixen i les referèncie
 - **Ordre dels lots.** Presenta els estils del més esquemàtic al més detallat o realista. L’última imatge disponible de cada figura és la que s’obre per defecte a la fitxa. Situa al final l’estil que vulguis que s’hi mostri d’entrada, per exemple Pla, Volum, Realista.
 - **Finalitat.** Fes il·lustracions que ajudin l’alumnat de 10–11 anys a entendre o aplicar el que explica el text. Fes evident d’un cop d’ull què s’ha d’observar.
 - **Estil.** Atles escolar contemporani. Fons blanc llis, formes netes, línia fina però visible, masses de color suaus i contorns foscos. Fes servir blau per a l’aigua, verd i ocre per al terreny i un accent teula per destacar un element. Mantén la coherència amb la referència escollida. Reserva la fotografia o la textura per als encàrrecs que les demanin.
-- **Lectura impresa.** Comprova cada imatge a l’amplada A4 indicada a la taula. Fes servir una tipografia de pal sec amb accents correctes i etiquetes clau d’almenys 9 pt a la mida d’impressió. Combina el color amb el gruix del traç, els patrons o els símbols perquè també es pugui interpretar en grisos.
-- **Retolació.** Afegeix els noms, els números i les llegendes en una capa de text, amb els literals catalans indicats. La fitxa ja hi posa el peu i el títol. Deixa un marge net al voltant del contingut i dona més espai als elements que cal llegir.
+- **Lectura impresa.** Comprova cada imatge a escala real en un A4 vertical, a l’amplada que li correspon pel seu ordre dins de l’apartat. Fes servir una tipografia de pal sec amb accents correctes. Pren 11–13 pt com a punt de partida per als rètols i mantén les etiquetes clau a 9 pt o més. Combina el color amb el gruix del traç, els patrons o els símbols perquè la figura també es pugui interpretar en grisos.
+- **Retolació.** Dimensiona els noms, els números i les llegendes per a l’amplada final abans de dibuixar la figura. Si una figura passa del 50 % al 100 %, reajusta la capa de text perquè els rètols mantinguin el cos previst a l’A4. Fes servir els literals catalans indicats i deixa un marge net al voltant del contingut. La fitxa ja hi posa el peu i el títol.
 - **Precisió.** Construeix les graelles i els plànols amb geometria controlada. Munta els mapes geogràfics a partir de dades verificables. Pots generar motius purament visuals quan el brief ho indiqui. Per als elements que expressen posició, escala, relleu o fronteres, dibuixa o renderitza les dades i valida-les abans d’exportar.
 - **Lliurament.** Exporta la il·lustració en PNG RGB amb perfil sRGB. Conserva en SVG els esquemes vectorials que hagin de mantenir traços i text nítids. Per a una fotografia, conserva el JPEG i anota font, autoria i permís d’ús. Lliura miniatures lleugeres per als selectors quan es demanin. Les rutes parteixen de l’arrel del repositori `mon-a-ma`. Crea la carpeta si cal. Mantén els noms i les ubicacions exactes. L’encàrrec és de producció d’imatges. La incorporació de les rutes al catàleg i la publicació són passos posteriors.
 
 ## Fitxers i encaix a les fitxes
 
-Amb marges laterals de 20 mm, l’A4 té 170 mm d’amplada útil. La primera figura de cada apartat ocupa el 100 %. Les complementàries ocupen el 50 % (85 mm) per defecte, alternen esquerra i dreta i s’ancoren a un paràgraf amb text envoltant, si n’hi ha un de disponible. Dissenya la retolació per a l’amplada que tindrà la figura impresa. Per a nous arxius de mapa de bits, preveu uns 2.000 px d’amplada per a figures principals i uns 1.000 px per a figures complementàries.
+En un A4 vertical amb marges laterals de 20 mm, l’amplada útil és de 170 mm.
+
+| Ordre dins de cada apartat | Amplada útil per defecte | Amplada impresa | Amplada orientativa del PNG |
+| --- | --- | --- | --- |
+| Primera figura | 100 % | 170 mm | 2.000 px |
+| Segona figura i següents | 50 % | 85 mm | 1.000 px |
+
+Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràgraf amb text envoltant, si n’hi ha un de disponible. A les resolucions de la taula, un cos de 12 pt a la impressió correspon a uns 50 px al fitxer. Si les dimensions de l’arxiu són diferents, reajusta el cos proporcionalment i comprova’l a l’amplada impresa.
 
 | Fitxa | Figures diferents | Lots i arxius previstos |
 | --- | --- | --- |

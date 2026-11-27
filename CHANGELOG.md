@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.44 · 27 de novembre de 2026
+
+- Ajusta a 12 pt la retolació de les figures principals d’El planeta Terra als tres estils i concreta les amplades d’impressió a la pauta.
+
 ## 0.1.43 · 27 de novembre de 2026
 
 - Marca El planeta Terra com a material definitiu i mostra a les targetes la imatge per defecte del primer apartat.

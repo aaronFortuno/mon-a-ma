@@ -45,9 +45,9 @@ window.quaderns ??= [];
         caption: 'Tall esquemàtic de la Terra. El gruix de les capes no està dibuixat a escala.',
         position: 'right',
         variants: {
-          pla: { src: 'illustracions/capes.png' },
-          volum: { src: 'illustracions/m001/capes.png', alt: 'Esfera de la Terra amb una porció retirada que mostra l’escorça, el mantell, el nucli extern i el nucli intern.' },
-          realista: { src: 'illustracions/m001/capes-realista.png', thumbnail: 'illustracions/m001/miniatures/capes-realista.png', alt: 'Terra en un cel estel·lar, amb un tall que mostra l’escorça, el mantell, el nucli extern i el nucli intern.' },
+          pla: { src: 'illustracions/capes.png?v=0.1.44' },
+          volum: { src: 'illustracions/m001/capes.png?v=0.1.44', alt: 'Esfera de la Terra amb una porció retirada que mostra l’escorça, el mantell, el nucli extern i el nucli intern.' },
+          realista: { src: 'illustracions/m001/capes-realista.png?v=0.1.44', thumbnail: 'illustracions/m001/miniatures/capes-realista.png?v=0.1.44', alt: 'Terra en un cel estel·lar, amb un tall que mostra l’escorça, el mantell, el nucli extern i el nucli intern.' },
         },
       },
       {
@@ -55,9 +55,9 @@ window.quaderns ??= [];
         alt: 'Tres límits entre plaques amb fletxes de separació, acostament i lliscament lateral.',
         caption: 'Les plaques tectòniques poden separar-se, acostar-se o lliscar de costat.',
         variants: {
-          pla: { src: 'illustracions/m001/moviment-pla.png' },
-          volum: { src: 'illustracions/m001/moviment-volum.png' },
-          realista: { src: 'illustracions/m001/moviment-realista.png', thumbnail: 'illustracions/m001/miniatures/moviment-realista.png', alt: 'Tres vinyetes de roca en perspectiva. Les fletxes mostren dues plaques que se separen, dues que s’acosten i formen una serralada, i dues que llisquen de costat.' },
+          pla: { src: 'illustracions/m001/moviment-pla.png?v=0.1.44' },
+          volum: { src: 'illustracions/m001/moviment-volum.png?v=0.1.44' },
+          realista: { src: 'illustracions/m001/moviment-realista.png?v=0.1.44', thumbnail: 'illustracions/m001/miniatures/moviment-realista.png?v=0.1.44', alt: 'Tres vinyetes de roca en perspectiva. Les fletxes mostren dues plaques que se separen, dues que s’acosten i formen una serralada, i dues que llisquen de costat.' },
         },
       },
       {
@@ -72,9 +72,9 @@ window.quaderns ??= [];
         alt: 'Tres fletxes, des de diferents punts de la superfície, apunten cap al centre de la Terra.',
         caption: 'En qualsevol punt de la superfície, la gravetat atrau els objectes cap al centre de la Terra.',
         variants: {
-          pla: { src: 'illustracions/m001/gravetat-pla.png' },
-          volum: { src: 'illustracions/m001/gravetat-volum.png?v=0.1.31', thumbnail: 'illustracions/m001/miniatures/gravetat-volum.png', alt: 'Tres fletxes van des de tres pilotes fins al punt Centre, visible entre les dues cares del tall de la Terra.' },
-          realista: { src: 'illustracions/m001/gravetat-realista.png', thumbnail: 'illustracions/m001/miniatures/gravetat-realista.png', alt: 'Tres fletxes van des de tres pilotes fins al punt Centre, visible entre les dues cares del tall de la Terra.' },
+          pla: { src: 'illustracions/m001/gravetat-pla.png?v=0.1.44' },
+          volum: { src: 'illustracions/m001/gravetat-volum.png?v=0.1.44', thumbnail: 'illustracions/m001/miniatures/gravetat-volum.png?v=0.1.44', alt: 'Tres fletxes van des de tres pilotes fins al punt Centre, visible entre les dues cares del tall de la Terra.' },
+          realista: { src: 'illustracions/m001/gravetat-realista.png?v=0.1.44', thumbnail: 'illustracions/m001/miniatures/gravetat-realista.png?v=0.1.44', alt: 'Tres fletxes van des de tres pilotes fins al punt Centre, visible entre les dues cares del tall de la Terra.' },
         },
       },
       {
@@ -82,9 +82,9 @@ window.quaderns ??= [];
         alt: 'Paisatge amb un riu, roca, cel amb pluja i vegetació a la riba.',
         caption: 'El riu connecta l’aigua, les roques, l’aire i els éssers vius.',
         variants: {
-          pla: { src: 'illustracions/m001/elements-pla.png' },
-          volum: { src: 'illustracions/m001/elements-volum.png' },
-          realista: { src: 'illustracions/m001/elements-realista.png', thumbnail: 'illustracions/m001/miniatures/elements-realista.png', alt: 'Paisatge de muntanya amb un vessant rocós, un riu, un cel amb pluja i plantes a la riba, retolats com a geosfera, hidrosfera, atmosfera i biosfera.' },
+          pla: { src: 'illustracions/m001/elements-pla.png?v=0.1.44' },
+          volum: { src: 'illustracions/m001/elements-volum.png?v=0.1.44' },
+          realista: { src: 'illustracions/m001/elements-realista.png?v=0.1.44', thumbnail: 'illustracions/m001/miniatures/elements-realista.png?v=0.1.44', alt: 'Paisatge de muntanya amb un vessant rocós, un riu, un cel amb pluja i plantes a la riba, retolats com a geosfera, hidrosfera, atmosfera i biosfera.' },
         },
       },
       {
