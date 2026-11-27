@@ -29,10 +29,10 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 
 | Fitxa | Figures diferents | Lots i arxius previstos |
 | --- | --- | --- |
-| M001 · El planeta Terra | 6, quatre principals i dos complements | 3 lots de 5 figures (Pla, Volum i Realista) i una fotografia compartida. 16 originals. |
-| M002 · Les coordenades geogràfiques | 4 principals i 1 exemple de joc opcional | 2 estils per globus, 2 versions de la graella de les boies i 2 figures de la flota. 8 PNG. |
-| M003 · Els mapes i els plànols geogràfics | 3, canvi d’enquadrament, llegenda i escala | 3 lots de 3 figures (Pla, Atles escolar i Vista aèria il·lustrada) amb una mateixa geometria de barri. |
-| M004 · Els tipus de mapes | 8, cinc principals i tres complements | 2 lots de 3 figures i 5 peces compartides. 11 originals i 6 miniatures. |
+| M001 · La Terra per dins i per fora | 6, quatre principals i dos complements | 3 lots de 5 figures (Pla, Volum i Realista) i una fotografia compartida. 16 originals. |
+| M002 · Un lloc, dues coordenades | 4 principals i 1 exemple de joc opcional | 2 estils per globus, 2 versions de la graella de les boies i 2 figures de la flota. 8 PNG. |
+| M003 · Del mapa al plànol | 3, canvi d’enquadrament, llegenda i escala | 3 lots de 3 figures (Pla, Atles escolar i Vista aèria il·lustrada) amb una mateixa geometria de barri. |
+| M004 · Un territori, molts mapes | 8, cinc principals i tres complements | 2 lots de 3 figures i 5 peces compartides. 11 originals i 6 miniatures. |
 
 | Fitxa | Apartat · ID de figura | Fitxers dins de docs/illustracions/ |
 | --- | --- | --- |
@@ -50,9 +50,9 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | M003 | definicions · reserva-definicions | m003/municipi-i-barri.png · m003/municipi-i-barri-atles.png · m003/municipi-i-barri-aeria.png, 2.160 × 900 px per imatge |
 | M003 | llegenda · barri | m003/planol-barri.png · m003/planol-barri-atles.png · m003/planol-barri-aeria.png, 2.100 × 1.000 px per imatge |
 | M003 | escala · reserva-escala | m003/distancies-barri.png · m003/distancies-barri-atles.png · m003/distancies-barri-aeria.png, 2.250 × 900 px per imatge |
-| M004 | Vegeu la taula del [lot M004](#m004--els-tipus-de-mapes) | `m004/` i `m004/miniatures/` |
+| M004 | Vegeu la taula del [lot M004](#m004--un-territori-molts-mapes) | `m004/` i `m004/miniatures/` |
 
-## M001 · El planeta Terra
+## M001 · La Terra per dins i per fora
 
 ### Lots d’estil
 
@@ -81,7 +81,7 @@ En pla, el disc mostra quatre zones concèntriques. Amb volum, l’esfera té un
 
 **Complement compartit.** La fotografia de la falla de San Andreas mostra la traça superficial del límit entre plaques a la plana de Carrizo. Conserva el crèdit de Scott Haefner (USGS) i la referència de domini públic. [Fitxa original de l’USGS](https://www.usgs.gov/media/images/view-san-andreas-fault).
 
-### La gravetat de la Terra · `reserva-gravetat`
+### La gravetat i el sentit d’avall · `reserva-gravetat`
 
 **Què ha de veure l’alumne.** «Avall» apunta cap al centre de la Terra des de qualsevol punt de la superfície.
 
@@ -95,7 +95,7 @@ En pla, el disc mostra quatre zones concèntriques. Amb volum, l’esfera té un
 
 **Comprovació.** Les prolongacions de les tres fletxes coincideixen en el punt «Centre», i la fletxa de sota apunta cap amunt en el paper.
 
-### Els elements del planeta Terra · `reserva-elements`
+### Aigua, aire, roques i vida · `reserva-elements`
 
 **Què ha de veure l’alumne.** Al paisatge del riu interactuen la roca, l’aigua, l’aire i els éssers vius.
 
@@ -111,7 +111,7 @@ En pla, el disc mostra quatre zones concèntriques. Amb volum, l’esfera té un
 
 **Complement en tres estils.** Compara dos vessants amb el mateix pendent i la mateixa pluja. Mostra la terra que arriba al recipient de cada vessant i deixa les arrels visibles al tall del sòl. Les partícules són indicatives. Fes servir la il·lustració principal per identificar les parts de la Terra i aquest complement per observar com interactuen.
 
-## M002 · Les coordenades geogràfiques
+## M002 · Un lloc, dues coordenades
 
 Les quatre figures principals i l’exemple opcional estan disponibles a Suport, Base i Ampliació. Fes que les etiquetes i els punts de referència es puguin llegir a A4 i en escala de grisos. [Referència de la NOAA sobre paral·lels i meridians](https://oceanservice.noaa.gov/education/tutorial_nautical_charts/nautical_charts02_information_2b.html).
 
@@ -140,7 +140,7 @@ A tota l’amplada de la fitxa, posa dues graelles buides idèntiques de costat,
 
 L’exemple opcional assenyala el vaixell 1 a 20° S, 40° E i planteja que l’alumnat trobi el vaixell 2. Si s’activa, es mostra abans del tauler buit.
 
-## M003 · Els mapes i els plànols geogràfics
+## M003 · Del mapa al plànol
 
 Les tres imatges comparteixen un barri imaginari, orientat amb el nord cap amunt. L’escola i la biblioteca són a l’oest del riu i el parc és a l’est. Conserva els carrers, els símbols i la posició d’aquests elements quan passis d’una imatge a l’altra. Traça el barri en metres abans d’exportar i mantén les proporcions quan en facis un retall.
 
@@ -167,7 +167,7 @@ Fes servir el mateix plànol per comparar un segment recte i un itinerari a peu.
 
 La barra d’escala retola **0**, **50** i **100 m** amb dos trams iguals. La barra sencera ha de mesurar el mateix que el segment E–B i que el tram horitzontal de l’itinerari. Els dos trams verticals han de mesurar la meitat. L’alumnat dedueix les distàncies a partir de la barra. Comprova que els resultats són **100 m en línia recta** i **200 m pel camí**. Mantén la barra unida al dibuix en redimensionar-lo. [Referència de l’ICGC sobre l’escala cartogràfica](https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Escala).
 
-## M004 · Els tipus de mapes
+## M004 · Un territori, molts mapes
 
 **Encàrrec prioritari.** Treballa a partir de la [fitxa de Món a mà](https://monama.ortogra.fi/#M004). El Perú i els Andes són el fil conductor de Suport, Base i Ampliació. Prepara cinc figures principals, una per apartat, i tres complements. Els dos planisferis són una parella i s’han de lliurar junts. La primera figura de la secció `tipus` també servirà com a imatge de la targeta del catàleg.
 

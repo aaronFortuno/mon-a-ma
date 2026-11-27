@@ -36,7 +36,7 @@ window.quaderns ??= [];
 
   addTopic('M001', {
     id: 'planeta-terra',
-    title: 'El planeta Terra',
+    title: 'La Terra per dins i per fora',
     intro: 'Quan trepitgem el terra, només veiem una part molt petita del planeta. Sota els peus hi ha capes de roca i metall. A la superfície i al seu voltant hi trobem aigua, aire i éssers vius. Tots aquests elements es relacionen.',
     figures: [
       {
@@ -106,7 +106,7 @@ window.quaderns ??= [];
       },
     ],
     sections: [
-      section('capes', 'Les capes del planeta Terra',
+      section('capes', 'De l’escorça al nucli',
         essencial('La **geosfera** és la part rocosa i metàl·lica de la Terra. Té tres capes principals: l’**escorça**, el **mantell** i el **nucli**.'),
         p('Els científics estudien l’interior del planeta observant, entre altres pistes, com hi viatgen les vibracions dels terratrèmols. Aquestes canvien de velocitat i de direcció segons els materials que travessen.'),
         table(['Capa', 'Com és?'], [
@@ -115,19 +115,19 @@ window.quaderns ??= [];
           ['Nucli', 'És al centre de la Terra i està format sobretot per ferro. La part externa és líquida i la part interna és sòlida.'],
         ], 24),
         box('ampliacio', 'Com sabem què hi ha a dins?', 'En un model, una vibració tarda **6 segons** a travessar un material i **9 segons** a travessar-ne un altre a la mateixa distància. Viatja més de pressa pel primer. Quan els detectors registren canvis en la velocitat de les vibracions dels terratrèmols, els científics poden buscar on canvien els materials.')),
-      section('moviment', 'Hi ha moviment a les capes de la Terra?',
+      section('moviment', 'Plaques en moviment',
         essencial('La capa rígida de fora de la Terra està dividida en grans peces, les **plaques tectòniques**. Les plaques es mouen molt a poc a poc.'),
         p('L’escorça i la part més superficial i rígida del mantell formen la **litosfera**. Les plaques es mouen uns quants centímetres cada any, aproximadament el que poden créixer les ungles en un any.'),
         p('La calor interna de la Terra contribueix a moviments molt lents al mantell. A la superfície, algunes plaques se separen, d’altres xoquen i d’altres llisquen de costat. Amb el pas de milions d’anys, aquests moviments desplacen els continents i poden aixecar serralades.'),
         p('Quan les roques es desplacen de cop al llarg d’una fractura, el terra pot tremolar. En moltes zones on es troben plaques també es forma **magma**, roca fosa que, quan surt a la superfície en una erupció, s’anomena **lava**.'),
         box('curiositat', 'Un moviment lent que s’acumula', 'Si dues plaques se separen **4 cm cada any**, en **100 anys** la distància augmenta **400 cm**, o sigui, **4 metres**. A un ritme semblant durant un milió d’anys, serien 40 km.'),
         box('observa', 'Del moviment al mapa', 'Un mapa de plaques i un mapa de terratrèmols ens permeten comprovar si les zones amb molts terratrèmols coincideixen amb els límits de les plaques.')),
-      section('gravetat', 'La gravetat de la Terra',
+      section('gravetat', 'La gravetat i el sentit d’avall',
         essencial('Si deixes anar una pilota, cau per la **gravetat**. A qualsevol lloc de la Terra, «avall» apunta cap al centre de la Terra.'),
         p('La gravetat també manté l’aire a prop de la Terra i contribueix a mantenir la Lluna en òrbita. Al paisatge es nota quan l’aigua corre pendent avall i quan les pedres cauen d’un vessant.'),
         p('La **massa** indica quanta matèria té un objecte. El **pes** és la força amb què la gravetat l’atrau. Una motxilla portada a la Lluna té la mateixa massa que a la Terra, però el seu pes és aproximadament una sisena part del pes que té a la Terra.'),
         box('prova', 'Dibuixa cap on cau', 'Imagina dues persones en punts oposats del globus, cadascuna amb una pilota. Dibuixa una fletxa des de cada pilota cap al centre. En el paper les fletxes tenen sentits oposats. Per a totes dues persones, la pilota cau cap avall.')),
-      section('elements', 'Els elements del planeta Terra',
+      section('elements', 'Aigua, aire, roques i vida',
         essencial('Les **roques**, l’**aigua**, l’**aire** i els **éssers vius** formen parts de la Terra que es relacionen.'),
         table(['Part del sistema', 'Què hi trobem?'], [
           ['Geosfera', 'Les roques i els minerals del planeta, des de la superfície fins al nucli.'],
@@ -164,7 +164,7 @@ window.quaderns ??= [];
 
   addTopic('M002', {
     id: 'coordenades',
-    title: 'Les coordenades geogràfiques',
+    title: 'Un lloc, dues coordenades',
     intro: 'Una boia de l’Atlàntic envia un missatge amb dos nombres. Podem saber on és sense veure-la? Amb un mapa i les seves **coordenades geogràfiques**, sí.',
     figures: [
       {
@@ -213,12 +213,12 @@ window.quaderns ??= [];
       },
     ],
     sections: [
-      section('latitud', 'Amb els paral·lels coneixem la latitud',
+      section('latitud', 'Latitud al nord i al sud',
         essencial('La **latitud** indica quants graus al nord o al sud de l’**equador** es troba un punt.'),
         p('Els **paral·lels** són línies imaginàries que fan la volta a la Terra d’est a oest. L’equador és el més llarg i divideix el planeta en els **hemisferis nord i sud**. Els altres paral·lels es fan més petits a mesura que ens acostem als pols.'),
         p('A l’equador, la latitud és de **0°**. Al pol nord és de **90° N** i al pol sud, de **90° S**. Tots els punts d’un mateix paral·lel tenen la mateixa latitud.'),
         box('curiositat', 'Un paral·lel, molts llocs', 'Dos vaixells són a **30° N**. Són al mateix paral·lel, però podrien ser molt lluny l’un de l’altre. Per situar cadascun amb precisió també ens cal la longitud.')),
-      section('longitud', 'Amb els meridians coneixem la longitud',
+      section('longitud', 'Longitud a l’est i a l’oest',
         essencial('La **longitud** indica quants graus a l’est o a l’oest del **meridià de Greenwich** es troba un punt.'),
         p('Els **meridians** són línies imaginàries que van del pol nord al pol sud. Són més separats a l’equador i es troben als pols. El meridià de Greenwich, que passa prop de Londres, marca **0°**.'),
         p('La longitud es mesura fins a **180°** cap a cada costat de Greenwich. Escrivim **E** per a l’est i **O** per a l’oest. En mapes en anglès, hi trobaràs **W** per a l’oest (*west*).'),
@@ -226,7 +226,7 @@ window.quaderns ??= [];
           ['Latitud', 'Paral·lels', 'Equador', 'Nord (N) i sud (S)'],
           ['Longitud', 'Meridians', 'Meridià de Greenwich', 'Est (E) i oest (O)'],
         ])),
-      section('localitzacio', 'Com es localitza un punt al mapa',
+      section('localitzacio', 'Trobar una posició a la graella',
         essencial('Escrivim primer la **latitud** i després la **longitud**. El punt és on s’encreuen el paral·lel i el meridià corresponents.'),
         p('La boia **A** envia la seva posició, **20° N, 40° O**. Busca-la a la graella.'),
         list('Busca el paral·lel de **20° N** al nord de l’equador.',
@@ -252,7 +252,7 @@ window.quaderns ??= [];
 
   addTopic('M003', {
     id: 'mapes-i-planols',
-    title: 'Els mapes i els plànols geogràfics',
+    title: 'Del mapa al plànol',
     intro: 'Has d’anar a la biblioteca d’un altre municipi. Hi vas en autobús i, quan baixes, continues a peu. Et servirà el mateix mapa per als dos trams?',
     figures: [
       {
@@ -288,16 +288,16 @@ window.quaderns ??= [];
       },
     ],
     sections: [
-      section('definicions', 'Què són els mapes i els plànols?',
+      section('definicions', 'El municipi i el barri des de dalt',
         essencial('Un **mapa** representa un territori en petit i sobre una superfície plana. Un **plànol** acostuma a mostrar amb més detall un espai més reduït.'),
         p('Un mapa del municipi pot mostrar carreteres i parades d’autobús. Quan baixes, el plànol et mostra els carrers i els edificis del barri vistos des de dalt. Així pots seguir el camí fins a la biblioteca.'),
         box('prova', 'Quin dibuix et convé?', 'Quin dibuix faries servir per trobar la parada d’autobús? Quin, per decidir en quin carrer has de girar?')),
-      section('llegenda', 'Els mapes i els plànols porten una llegenda',
+      section('llegenda', 'La llegenda desxifra els símbols',
         essencial('La **llegenda** explica què signifiquen els símbols, les línies i els colors d’un mapa o un plànol.'),
         p('Al plànol del barri, **E** indica l’escola i **B**, la biblioteca. El parc es reconeix pel ratllat i el riu, per la banda amb vores ondulades. La fletxa amb una **N** ens indica cap on apunta el nord. En aquest plànol, el nord és a dalt.'),
         box('observa', 'Llegeix el plànol', 'Dels tres llocs, l’escola, la biblioteca i el parc, quin és a l’est del riu? Quin element del plànol et permet passar d’una riba a l’altra?'),
         p('Un color pot representar coses diferents. El verd pot indicar un parc aquí i poca altitud en un mapa físic. Els ratllats ajuden a llegir una còpia en blanc i negre.')),
-      section('escala', 'Els mapes i els plànols es dibuixen a escala',
+      section('escala', 'De centímetres a metres amb l’escala',
         essencial('L’**escala** relaciona una distància del dibuix amb la distància real que representa.'),
         box('prova', 'De l’escola a la biblioteca', 'Quants metres representa el segment recte? Compara’l amb la barra. Fes el mateix amb els tres trams del camí a peu i suma’n les distàncies.'),
         table(['Tipus d’escala', 'Com es llegeix?'], [
@@ -322,14 +322,14 @@ window.quaderns ??= [];
 
   addTopic('M004', {
     id: 'tipus-de-mapes',
-    title: 'Els tipus de mapes',
+    title: 'Un territori, molts mapes',
     intro: 'Imagina que prepares un viatge al Perú. Vols saber per on passen els Andes, quins països té al costat i en quines zones plou més. Quins mapes consultaries?',
     figures: [
       { id: 'planisferi-fisic', name: 'Planisferi físic', section: 'fisic', anchor: 'after', ratio: 2, position: 'center' },
       { id: 'planisferi-politic', name: 'Planisferi polític', section: 'politic', anchor: 'lead', ratio: 2, position: 'center' },
     ],
     sections: [
-      section('tipus', 'Quins tipus de mapes hi ha?',
+      section('tipus', 'Un mapa per a cada pregunta',
         essencial('Cada tipus de mapa destaca una informació diferent. La pregunta que et fas t’ajuda a triar el mapa.'),
         { ...table(['Tipus de mapa', 'Què destaca?'], [
           ['Físic', 'Muntanyes, planes, rius i altres elements naturals.'],
@@ -339,22 +339,22 @@ window.quaderns ??= [];
         ]), core: true },
         p('En un mapa **topogràfic**, les **corbes de nivell** uneixen punts que són a la mateixa altitud. En un mateix mapa, quan les corbes són molt juntes, el pendent és més fort. Et poden ajudar a preparar una caminada.'),
         box('prova', 'Quin mapa consultaries?', 'Tria un mapa per situar els Andes i un altre per descobrir quins països tenen frontera amb el Perú. Quin et serviria per saber en quines zones sol ploure més?')),
-      section('atles', 'L’atles',
+      section('atles', 'Trobar un lloc a l’atles',
         essencial('Un **atles** és un conjunt de mapes organitzats. Pot ser un llibre o un recurs digital.'),
         p('El **sumari** et permet trobar un mapa per territori o per tema, com ara un mapa físic d’Amèrica del Sud. L’**índex de noms** et permet buscar un lloc concret, per exemple la serralada dels Andes.'),
         p('Imagina que al costat del nom «Andes» hi diu **pàgina 12, D4**. Obre la pàgina 12 i busca la casella D4, on es troben la columna D i la fila 4. En un mapa amb graella, aquesta referència et diu en quina part del dibuix pots trobar el nom.')),
-      section('lectura', 'Com es llegeix un mapa?',
+      section('lectura', 'Pistes per llegir un mapa',
         essencial('El **títol** et diu què mostra el mapa. La **llegenda** t’explica què volen dir els símbols i els colors.'),
         list('Llegeix el **títol** i comprova que el mapa cobreix la zona que busques. Un mapa centrat en el Perú acostuma a mostrar més detalls del país que un planisferi.',
           'Orienta’t amb la **fletxa del nord** o la rosa dels vents, si n’hi ha. Així podràs saber què queda a l’oest o a l’est.',
           'Consulta la **llegenda** abans d’interpretar un color o una línia. Una línia de punts, per exemple, pot marcar un camí o una frontera segons el mapa.',
           'Busca la **graella** per localitzar un lloc o l’**escala** per estimar una distància, segons què necessitis.',
           'Comprova la **font** i la **data**. Si vols saber quant ha plogut, mira també de quin període són les dades.')),
-      section('fisic', 'El planisferi físic',
+      section('fisic', 'Relleu i aigües al planisferi',
         essencial('Un **planisferi** és un mapa de tot el món. El **planisferi físic** destaca el relleu i les aigües.'),
         p('Hi pots localitzar continents, oceans, serralades, planes i grans rius. Els Andes són una serralada llarga que recorre l’oest d’Amèrica del Sud.'),
         p('En alguns mapes físics, cada color correspon a un **interval d’altitud**, és a dir, a un tram d’altures sobre el nivell del mar. Si un color indica de **2.000 a menys de 4.000 metres**, pot representar tant un lloc a 2.400 m com un de 3.700 m. La llegenda t’ajuda a interpretar-lo.')),
-      section('politic', 'El planisferi polític',
+      section('politic', 'Països i fronteres al planisferi',
         essencial('El **planisferi polític** mostra els països i les fronteres. També hi podem trobar capitals i altres ciutats.'),
         p('Sovint es fan servir colors diferents per separar països veïns. La llegenda pot indicar quin símbol correspon a una capital. Per exemple, en un mapa que distingeixi les capitals, podràs identificar-hi Lima, la capital del Perú.'),
         box('observa', 'Els Andes en dos mapes', 'Amb els dos planisferis de la fitxa o d’un atles, segueix els Andes al mapa físic. Després busca la mateixa zona al mapa polític i localitza el Perú i Xile, dos països per on passa la serralada. Quina informació has tret de cada mapa?')),

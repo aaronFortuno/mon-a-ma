@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.53 · 27 de novembre de 2026
+
+- Reanomena els quatre temes i els quinze apartats de La Terra i els mapes amb títols ajustats a cada lectura.
+
 ## 0.1.52 · 27 de novembre de 2026
 
 - Incorpora nou il·lustracions a la fitxa M003, en els estils Pla, Atles escolar i Vista aèria il·lustrada.
