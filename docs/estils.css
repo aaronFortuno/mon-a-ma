@@ -331,9 +331,10 @@ summary { color: var(--green); font-weight: 650; }
 .ink ol { padding-inline-start: 1.45em; }
 .ink li + li { margin-top: .27em; }
 
-.ink table { clear: both; border: 1px solid var(--paper-line); border-collapse: collapse; width: 100%; margin: calc(var(--block-spacing) * .6em) 0 calc(var(--block-spacing) * .85em); text-align: start; font-size: .94em; }
+.ink table { clear: both; border: 1px solid var(--paper-line); border-collapse: collapse; width: 100%; margin: calc(var(--block-spacing) * .6em) 0 calc(var(--block-spacing) * .85em); text-align: start; font-size: .86em; }
 .ink :is(th, td) { border: 1px solid var(--paper-line); padding: .43em .58em; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
-.ink thead th { background: var(--paper-tint); font-family: var(--sans); }
+.ink tr > :first-child { overflow-wrap: normal; hyphens: none; }
+.ink thead th { background: var(--paper-tint); font-family: var(--sans); font-weight: 600; }
 .ink tbody th { width: var(--row-heading-width, auto); font-weight: 700; }
 .note {
   --note-accent: var(--paper-accent);

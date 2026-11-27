@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.60 · 27 de novembre de 2026
+
+- Valida El nostre lloc al sistema solar (M005). Redueix el cos de les taules i ajusta la primera columna de les fitxes definitives perquè les paraules es mantinguin senceres.
+
 ## 0.1.59 · 27 de novembre de 2026
 
 - Vincula les il·lustracions d’El nostre lloc al sistema solar (M005), amb els lots Pla i Atles espacial i tres complements.

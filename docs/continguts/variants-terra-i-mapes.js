@@ -17,7 +17,7 @@ window.variantsMaterials ??= {};
                 ['Escorça', 'És la capa de fora. És prima i feta de roca.'],
                 ['Mantell', 'És sota l’escorça. És la capa més gruixuda. La roca és molt calenta.'],
                 ['Nucli', 'És al centre. Té una part de fora líquida i una part de dins sòlida.'],
-              ], 24),
+              ], 26),
             ],
             moviment: [
               passos('Dues plaques es poden **separar**.', 'Dues plaques poden **xocar**.', 'Dues plaques poden lliscar de costat.'),
@@ -32,7 +32,7 @@ window.variantsMaterials ??= {};
                 ['Hidrosfera', 'L’aigua del riu.'],
                 ['Atmosfera', 'L’aire que envolta la Terra.'],
                 ['Biosfera', 'Les plantes i els animals del riu.'],
-              ], 26),
+              ], 30),
               p('Quan plou, arriba més aigua al riu. El riu pot arrossegar pedretes i dona aigua a les plantes.'),
             ],
           },

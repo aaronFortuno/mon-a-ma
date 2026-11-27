@@ -113,7 +113,7 @@ window.quaderns ??= [];
           ['Escorça', 'És la capa de roca més exterior i més prima. Forma el sòl rocós dels continents i el fons dels oceans.'],
           ['Mantell', 'És la capa més gruixuda. Està format sobretot per roca sòlida molt calenta que es pot deformar lentament.'],
           ['Nucli', 'És al centre de la Terra i està format sobretot per ferro. La part externa és líquida i la part interna és sòlida.'],
-        ], 24),
+        ], 26),
         box('ampliacio', 'Com sabem què hi ha a dins?', 'En un model, una vibració tarda **6 segons** a travessar un material i **9 segons** a travessar-ne un altre a la mateixa distància. Viatja més de pressa pel primer. Quan els detectors registren canvis en la velocitat de les vibracions dels terratrèmols, els científics poden buscar on canvien els materials.')),
       section('moviment', 'Plaques en moviment',
         essencial('La capa rígida de fora de la Terra està dividida en grans peces, les **plaques tectòniques**. Les plaques es mouen molt a poc a poc.'),
@@ -134,7 +134,7 @@ window.quaderns ??= [];
           ['Hidrosfera', 'L’aigua del planeta, com la dels oceans, els rius, els llacs, les glaceres i el subsol.'],
           ['Atmosfera', 'La capa de gasos que envolta la Terra. L’aire que respirem en forma part.'],
           ['Biosfera', 'El conjunt dels éssers vius i els llocs de la Terra on hi ha vida.'],
-        ]),
+        ], 30),
         p('Pensa en un riu. L’aigua que hi circula (hidrosfera) desgasta i transporta fragments de roca (geosfera). La pluja (que es forma a l’atmosfera) pot fer pujar el cabal, i el riu ofereix aigua i refugi a plantes i animals (biosfera).'),
         p('La relació també va en l’altre sentit. Les arrels ajuden a subjectar el sòl de la riba. Si es perd la vegetació, l’aigua pot arrossegar més terra. Un canvi en els éssers vius pot transformar el paisatge.'),
         box('ampliacio', 'I ara, on ho situem?', 'Si volguéssim assenyalar el naixement d’un riu o el lloc d’un terratrèmol en un globus, ens caldria una manera de dir en quin punt del planeta es troba.')),
@@ -225,7 +225,7 @@ window.quaderns ??= [];
         table(['Coordenada', 'Línies que seguim', 'On és el 0°?', 'Direccions'], [
           ['Latitud', 'Paral·lels', 'Equador', 'Nord (N) i sud (S)'],
           ['Longitud', 'Meridians', 'Meridià de Greenwich', 'Est (E) i oest (O)'],
-        ])),
+        ], 22)),
       section('localitzacio', 'Trobar una posició a la graella',
         essencial('Escrivim primer la **latitud** i després la **longitud**. El punt és on s’encreuen el paral·lel i el meridià corresponents.'),
         p('La boia **A** envia la seva posició, **20° N, 40° O**. Busca-la a la graella.'),
@@ -303,7 +303,7 @@ window.quaderns ??= [];
         table(['Tipus d’escala', 'Com es llegeix?'], [
           ['Gràfica', 'És una barra amb trams numerats. En el plànol del barri, el tram de 0 a 50 representa 50 m reals.'],
           ['Numèrica', 'A escala 1:5.000, 1 cm del plànol equival a 5.000 cm reals, és a dir, 50 m. Per tant, 2 cm representen 100 m.'],
-        ], 26),
+        ], 29),
         p('Si el plànol i la barra canvien de mida alhora, la barra continua sent útil. Per saber on neix el riu, ens convindrà un mapa que mostri més territori.')),
     ],
   }, {
@@ -531,7 +531,7 @@ window.quaderns ??= [];
           ['Rocosos', 'Mercuri, Venus, Terra i Mart.', 'Més petits i amb una superfície sòlida.'],
           ['Gegants gasosos', 'Júpiter i Saturn.', 'Formats sobretot per hidrogen i heli.'],
           ['Gegants gelats', 'Urà i Neptú.', 'A més dels gasos, tenen una gran proporció de materials com l’aigua, el metà i l’amoníac al seu interior.'],
-        ]),
+        ], 28),
         box('observa', 'A banda i banda de la Terra', 'Quin planeta té l’òrbita immediatament més a prop del Sol que la Terra? Quin la té immediatament més lluny? A quin grup pertanyen tots dos?')),
       section('terra-lluna', 'La Terra i la Lluna en moviment',
         essencial('La **Terra** gira sobre si mateixa i fa una volta al Sol en un any. La **Lluna** és el satèl·lit natural de la Terra i gira al seu voltant.'),
@@ -543,10 +543,11 @@ window.quaderns ??= [];
           ['Asteroide', 'Sol ser rocós o metàl·lic. N’hi ha molts entre les òrbites de Mart i Júpiter.'],
           ['Cometa', 'Conté gels, pols i roca. Quan s’acosta al Sol, pot formar una cua de gas i pols.'],
           ['Planeta nan', 'Té una forma gairebé esfèrica i orbita el Sol. Comparteix la seva regió orbital amb altres cossos i no hi predomina com hi predomina un planeta. Plutó i Ceres en són exemples.'],
-        ]),
+        ], 26),
         box('prova', 'Segueix la pista', 'Un cos que orbita el Sol desenvolupa una cua quan s’hi acosta. A quin grup el situaries? Quina pista t’ha fet decidir?')),
     ],
   }, {
+    status: 'definitiu',
     theme: 'Astronomia',
     figureStyles: [
       { id: 'pla', label: 'Pla', description: 'Formes planes i retolació sobre blanc.' },
