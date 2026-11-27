@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.58 · 27 de novembre de 2026
+
+- Prepara l’encàrrec visual de M005 amb els lots Pla i Atles espacial i tres complements d’observació i escala.
+
 ## 0.1.57 · 27 de novembre de 2026
 
 - Mostra la benvinguda del visor una sola vegada per navegador i respecta els avisos ja vistos.

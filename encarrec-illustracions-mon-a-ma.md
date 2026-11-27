@@ -34,6 +34,7 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | M002 · Un lloc, dues coordenades | 4 principals i 1 exemple de joc opcional | 2 estils per globus, 2 versions de la graella de les boies i 2 figures de la flota. 8 PNG. |
 | M003 · Del mapa al plànol | 3, canvi d’enquadrament, llegenda i escala | 3 lots de 3 figures (Pla, Atles escolar i Vista aèria il·lustrada) amb una mateixa geometria de barri. |
 | M004 · Un territori, molts mapes | 8, cinc principals i tres complements | 2 lots de 3 figures i 5 peces compartides. 11 originals i 6 miniatures. |
+| M005 · El nostre lloc al sistema solar | 8, cinc principals i tres complements | 2 lots de 5 figures (Pla i Atles espacial), 3 complements compartits i 10 miniatures. |
 
 | Fitxa | Apartat · ID de figura | Fitxers dins de docs/illustracions/ |
 | --- | --- | --- |
@@ -52,6 +53,7 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | M003 | llegenda · barri | m003/planol-barri.png · m003/planol-barri-atles.png · m003/planol-barri-aeria.png, 2.100 × 1.000 px per imatge |
 | M003 | escala · reserva-escala | m003/distancies-barri.png · m003/distancies-barri-atles.png · m003/distancies-barri-aeria.png, 2.250 × 900 px per imatge |
 | M004 | Vegeu la taula del [lot M004](#m004--un-territori-molts-mapes) | `m004/` i `m004/miniatures/` |
+| M005 | Vegeu la taula del [lot M005](#m005--el-nostre-lloc-al-sistema-solar) | `m005/` i `m005/miniatures/` |
 
 ## M001 · La Terra per dins i per fora
 
@@ -265,6 +267,95 @@ Munta dos mapes de costat amb el mateix meridià central, les mateixes costes de
 ### Ordre de lliurament
 
 Prepara primer els dos planisferis d’estil Atles i una prova de la graella D4 per validar les referències del text. Completa les altres figures principals i les tres variants Pla. Acaba amb l’esquema de corbes, la fotografia i el comparador de projeccions. Envia una taula final amb el nom de cada fitxer, el peu, el text alternatiu, el crèdit o font de les dades i el resultat de la prova en A4. Compta les miniatures per separat.
+
+## M005 · El nostre lloc al sistema solar
+
+La [fitxa M005](https://monama.ortogra.fi/#M005) ha passat la revisió pedagògica. Prepara **cinc figures principals**, una per apartat, i **tres complements compartits**. Els mateixos visuals han de servir per a Suport, Base i Ampliació. La Via Làctia en estil Atles espacial serà també la imatge de la targeta del catàleg.
+
+### Lots d’estil i lliurament
+
+| Lot | Tractament |
+| --- | --- |
+| **Pla**, primera opció | Esquemes sobre fons blanc, formes netes, contrast alt, poca tinta i color amb funció explicativa. Identifica cada referència amb text o símbols. |
+| **Atles espacial**, opció per defecte | Combina fotografies o mosaics d’observació, reconstruccions acreditades i geometria exacta. Fes que el relleu, les textures i la llum es vegin en miniatura. Reserva el fons fosc als panells d’imatge i posa els rètols i les claus sobre paper clar. Mantén les mateixes etiquetes, la geometria i l’ordre de lectura que al lot Pla. |
+
+Exporta **10 PNG principals**, **3 complements** i **10 miniatures**. Desa els originals a `docs/illustracions/m005/` i les miniatures a `docs/illustracions/m005/miniatures/`. Fes les miniatures en JPEG, a uns **360 px d’ample**, amb el mateix nom base i enquadrament. Exporta en sRGB i deixa espai al voltant de les etiquetes i elements clau. Posa el text en una capa editable del fitxer de treball i lliura els originals preparats per incorporar-se directament a la fitxa. Per als PNG principals de 2.400 px impresos a 170 mm, un cos de **12 pt** són aproximadament **60 px** al fitxer. Comprova les dues sèries en color i en grisos amb els marges A4 de 20 mm. Reserva un marge segur perquè títols i símbols no quedin tallats.
+
+| Apartat · ID de figura | Mida i amplada impresa | Fitxers dins de `m005/` |
+| --- | --- | --- |
+| galaxia · `via-lactia` | 2.400 × 1.000 px · 170 mm | `via-lactia-pla.png`, `via-lactia-atles.png` |
+| galaxia · `via-lactia-cel` | 1.400 × 900 px · 85 mm · complement | `via-lactia-cel.jpg` |
+| sistema · `orbites-solars` | 2.400 × 1.000 px · 170 mm | `orbites-solars-pla.png`, `orbites-solars-atles.png` |
+| sistema · `distancies-ua` | 2.400 × 640 px · 170 mm · complement per al repte d’Ampliació | `distancies-ua.png` |
+| planetes · `vuit-planetes` | 2.480 × 800 px · 170 mm | `vuit-planetes-pla.png`, `vuit-planetes-atles.png` |
+| terra-lluna · `terra-lluna` | 2.400 × 1.000 px · 170 mm | `terra-lluna-pla.png`, `terra-lluna-atles.png` |
+| terra-lluna · `sortida-terra` | 1.400 × 900 px · 85 mm · complement | `sortida-terra.jpg` |
+| altres-cossos · `cossos-menors` | 2.430 × 900 px · 170 mm | `cossos-menors-pla.png`, `cossos-menors-atles.png` |
+
+Les mides dels JPEG admeten ajustos si l’enquadrament original ho demana. Si una observació té fals color, és un mosaic o és una composició, indica-ho al peu o al crèdit. Per a cada derivat, anota la pàgina de l’original, l’instrument o la missió, el crèdit literal, les condicions d’ús i les modificacions fetes. Documenta els drets de cada peça separadament i respecta els crèdits de tercers que consten a la font. [Pauta de NASA sobre ús d’imatges](https://www.nasa.gov/nasa-brand-center/images-and-media/) · [Política d’imatges del JPL](https://www.jpl.nasa.gov/jpl-image-use-policy/).
+
+### De la Via Làctia fins a casa · `via-lactia`
+
+Mostra una vista frontal de la **Via Làctia**, amb barra central, disc i braços en espiral. Posa un marcador amb línia guia a la regió del **braç d’Orió**, entre els braços de Sagitari i de Perseu, guiant-te pel model anotat de NASA/JPL-Caltech/R. Hurt. Retola «Via Làctia» i «Aquí hi ha el sistema solar». Separa el marcador del centre galàctic. Si afegeixes una vinyeta amb el Sol i la Terra, uneix-la amb una línia guia i retola «Detall ampliat». La Terra i el Sol només han d’aparèixer com a cossos distingibles en aquesta ampliació. Al lot Atles espacial, treballa amb la versió del model sense etiquetes i afegeix la retolació catalana. [Model de la Via Làctia i posició del Sol](https://science.nasa.gov/resource/the-milky-way-galaxy/).
+
+**Peu.** «Reconstrucció de la Via Làctia vista des de dalt. El marcador situa la regió on hi ha el sistema solar.»  
+**Text alternatiu.** «Vista reconstruïda d’una galàxia en espiral amb una barra central. Un punt lluny del centre indica la posició del sistema solar.»  
+**Comprovació.** L’alumnat pot explicar l’ordre Terra, sistema solar i Via Làctia a partir de la figura. La paraula «reconstrucció» acompanya el model.
+
+**Complement compartit · `via-lactia-cel`.** Cerca la fotografia de Keith Moore que mostra la Via Làctia arquejada sobre Bryce Canyon. Conserva l’horitzó i la franja lluminosa. L’horitzó ajuda a veure que la fotografia està feta des de la Terra. Només incorpora aquesta font si les condicions de la imatge permeten la reutilització. [Fotografia i crèdit del National Park Service](https://www.nps.gov/thingstodo/see-the-night-sky.htm).
+
+**Peu.** «Des de la Terra veiem part del disc de la Via Làctia com una banda de llum al cel.»  
+**Text alternatiu.** «Una banda d’estrelles s’arqueja sobre l’horitzó fosc de Bryce Canyon.»
+
+### Vuit camins al voltant d’una estrella · `orbites-solars`
+
+Fes una vista esquemàtica des de dalt, sobre un pla de referència comú. Distribueix-la en dos panells. **«Planetes rocosos»** mostra el Sol i les òrbites de Mercuri, Venus, la Terra i Mart. **«Vista del conjunt»** mostra el Sol, la zona interior ampliada pel primer panell i les òrbites de Júpiter, Saturn, Urà i Neptú. Marca l’enllaç entre els dos enquadraments. Usa una sola escala de radis dins de cada panell, amb **òrbites circulars aproximades** a partir dels semieixos majors. Valors arrodonits en unitats astronòmiques (UA) en ordre des del Sol **0,39 · 0,72 · 1,00 · 1,52 · 5,20 · 9,54 · 19,2 · 30,1**. Retola els cossos amb línies guia curtes si cal. Situa cada planeta damunt de la seva òrbita i separa’ls visualment. Qualsevol fletxa de sentit orbital ha d’anar en sentit antihorari, segons aquesta vista des de dalt pel costat nord de l’eclíptica. Al lot Atles espacial es poden usar un petit disc solar captat per SDO i icones amb textures d’observació. [Dades orbitals del JPL](https://ssd.jpl.nasa.gov/planets/approx_pos.html) · [Disc solar observat per SDO](https://science.nasa.gov/photojournal/image-of-sun-from-nasas-solar-dynamics-observatory/).
+
+**Peu.** «El requadre amplia la zona dels planetes rocosos. Les òrbites s’han simplificat i les mides dels astres s’han ampliat.»  
+**Text alternatiu.** «Dos esquemes al voltant del Sol. El primer amplia les òrbites de Mercuri, Venus, la Terra i Mart. El segon les situa dins de les òrbites de Júpiter, Saturn, Urà i Neptú.»  
+**Comprovació.** Es pot seguir cada òrbita amb el dit. Els dos panells indiquen nivells d’ampliació diferents. Les posicions dels planetes són exemples i no corresponen a una data concreta.
+
+**Complement per al repte d’Ampliació · `distancies-ua`.** Dibuixa una recta graduada lineal de **0 a 30 UA**, amb el Sol a 0, la Terra a 1 i Neptú a la marca aproximada de 30. Fes divisions clares cada 5 UA i mostra les marques de la Terra i Neptú amb les etiquetes al costat. La recta ha de fer uns 15 cm al full perquè hi hagi marge per als noms. El model de **1 UA = 1 cm** del text és un encàrrec de dibuix separat que faria una recta de 30 cm. No hi afegeixis discos planetaris que es puguin interpretar com a diàmetres a la mateixa escala. [Les distàncies a l’escala del sistema solar](https://science.nasa.gov/photojournal/voyager-2-and-the-scale-of-the-solar-system-artists-concept/).
+
+**Peu.** «Una unitat astronòmica és aproximadament la distància mitjana de la Terra al Sol. Neptú és a prop de 30 UA del Sol.»  
+**Text alternatiu.** «Regle de 0 a 30 unitats astronòmiques amb el Sol a 0, la Terra a 1 i Neptú a 30.»
+
+### Els planetes, de Mercuri a Neptú · `vuit-planetes`
+
+Prepara una tira amb vuit retrats ordenats d’esquerra a dreta. Retola «Mercuri», «Venus», «Terra», «Mart», «Júpiter», «Saturn», «Urà» i «Neptú». Divideix la tira amb tres claus clares amb els literals «Rocosos», «Gegants gasosos» i «Gegants gelats». Si hi ha espai, afegeix una fletxa fina de «Més a prop del Sol» a «Més lluny del Sol». Als retrats conserva trets diagnòstics com els cràters de Mercuri, els núvols espessos de Venus, el color rogenc de Mart, les bandes de Júpiter i els anells de Saturn. Fes retrats prou grans per reconèixer-los tots amb una nota visible de «Mides sense escala» o amb el peu corresponent. Al lot Atles espacial, usa vistes amb detalls d’observació i conserva per a cadascuna el seu crèdit. Evita fer servir blau molt saturat com a tret distintiu de Neptú. [Ordre, grandàries i referències visuals de NASA](https://science.nasa.gov/solar-system/planets/planet-sizes-and-locations-in-our-solar-system/).
+
+**Peu.** «Els vuit planetes en ordre de distància al Sol. Les mides dels retrats i la separació entre planetes no són a escala.»  
+**Text alternatiu.** «Tira amb vuit planetes agrupats en quatre rocosos, dos gegants gasosos i dos gegants gelats, en ordre a partir del Sol.»  
+**Comprovació.** Mirant només la tira es pot respondre que Venus va abans de la Terra, Mart va després i tots dos són rocosos.
+
+### Una òrbita, quatre fases · `terra-lluna`
+
+Posa la Terra al centre. Representa quatre posicions de la mateixa Lluna i la direcció de la «Llum del Sol», amb fletxes de l’esquerra cap a la dreta. Fes servir una vista des de sobre del pol nord terrestre, amb sentit orbital antihorari. Amb l’esquerra com a direcció cap al Sol, posa la **lluna nova a l’esquerra**, el **quart creixent a baix**, la **lluna plena a la dreta** i el **quart minvant a dalt**. En cadascun dels quatre discs vistos des de l’espai, il·lumina la meitat encarada a l’esquerra. Al costat, posa una tira de quatre vinyetes «Vista des de la Terra», vinculades amb nombres als punts de l’òrbita. Identifica «Lluna nova», «Quart creixent», «Lluna plena» i «Quart minvant». Mostra els quarts amb una meitat visible il·luminada i l’altra fosca. En la representació esquemàtica amb el nord lunar a dalt, la part il·luminada del quart creixent queda a la dreta i la del minvant a l’esquerra. Evita dibuixar ombres de la Terra damunt la Lluna. El peu explica que l’òrbita està simplificada i que la seva inclinació fa que en general les alineacions es produeixin sense eclipsi. Si es fan servir fotogrames del SVS, reserva’ls per a les quatre vinyetes terrestres del lot Atles espacial i mantén els hemisferis il·luminats del diagrama amb geometria controlada. [Fases lunars i il·luminació segons NASA](https://science.nasa.gov/moon/moon-phases/) · [Visualització i fotogrames del NASA SVS](https://svs.gsfc.nasa.gov/5587/).
+
+**Peu.** «Veiem una part diferent de la meitat il·luminada de la Lluna al llarg de l’òrbita. Dibuix simplificat, sense escala. La inclinació de l’òrbita fa que habitualment no hi hagi eclipsi en lluna nova ni en lluna plena.»  
+**Text alternatiu.** «Quatre posicions de la Lluna al voltant de la Terra, totes il·luminades des del mateix costat, amb quatre vinyetes que mostren com es veu cada fase des de la Terra.»  
+**Comprovació.** Es pot resseguir el cicle en l’ordre correcte i distingir d’una ullada la vista espacial de la vista des de la Terra.
+
+**Complement compartit · `sortida-terra`.** Usa la fotografia *Earthrise* feta per William Anders durant l’Apollo 8. Retalla amb aire suficient perquè es vegin la Terra i l’horitzó de la Lluna. Indica qualsevol rotació o retall significatiu al registre de lliurament. [NASA · Earthrise](https://science.nasa.gov/resource/image-earthrise/).
+
+**Peu.** «La Terra apareix sobre l’horitzó de la Lluna en una fotografia feta des de l’Apollo 8 el 1968.»  
+**Text alternatiu.** «La Terra blava emergeix per sobre de l’horitzó rocós de la Lluna.»  
+**Crèdit proposat.** «NASA · Apollo 8 · William Anders». Verifica el crèdit de la còpia usada.
+
+### Tres cossos, tres pistes per distingir-los · `cossos-menors`
+
+Munta tres fitxes visuals amb el nom i la categoria de cada objecte. Empra **«Bennu · Asteroide»** i deixa visible la seva forma irregular. Per a **«NEOWISE · Cometa»**, tria una vista en què la cua es distingeixi bé, a partir d’una fotografia de la NASA captada des de l’Estació Espacial Internacional. Usa **«Plutó · Planeta nan»** i deixa visible el disc gairebé esfèric. A Pla, dibuixa els cossos amb estil d’esquema a partir dels trets comprovats i destaca la cua. A Atles espacial, integra les tres observacions en panells separats i retola la peça en català. Conserva cada fotografia com a registre independent i indica al peu que les mides no es poden comparar. [Mosaic de Bennu](https://science.nasa.gov/resource/bennu-mosaic/) · [NEOWISE des de l’Estació Espacial Internacional](https://science.nasa.gov/earth/earth-observatory/comet-neowise-brightens-the-night-146996/) · [Mosaic de Plutó en color](https://science.nasa.gov/photojournal/pluto-in-true-color/).
+
+**Peu.** «Bennu, NEOWISE i Plutó mostren tres tipus de cossos del sistema solar. Les imatges no són a la mateixa escala.»  
+**Text alternatiu.** «Tres panells mostren l’asteroide irregular Bennu, el cometa NEOWISE amb una cua visible i el planeta nan Plutó de forma arrodonida.»  
+**Comprovació.** La cua del cometa es reconeix a la còpia en grisos i l’alumnat pot usar-la per respondre el repte de la fitxa.
+
+### Ordre de producció i comprovacions
+
+1. Lliura una prova de la Via Làctia en tots dos estils, amb miniatures, per validar el contrast entre els lots i la imatge de catàleg.
+2. Acaba les làmines d’òrbites, planetes i fases. Comprova les etiquetes, les posicions i la lectura a 170 mm abans d’exportar l’altre estil.
+3. Completa la làmina de cossos menors i els tres complements. Assegura’t que els dos JPEG es llegeixin bé a 85 mm.
+4. Resumeix el lliurament per fitxer amb el peu, el text alternatiu, la font original, el crèdit, les condicions de reutilització i els canvis fets. Anota si la prova en grisos s’ha fet sobre paper o en una simulació.
 
 ## Per descriure una figura nova
 
