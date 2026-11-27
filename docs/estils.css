@@ -248,6 +248,7 @@ select { padding: .45rem .6rem; border: 1px solid var(--control-line); backgroun
 }
 .sidebar-menu > summary:hover, .sidebar-menu[open] > summary { background: var(--light); }
 .sidebar-footer { flex-direction: column-reverse; margin-block-start: auto; max-block-size: min(10rem, 36%); }
+.related-nav[open] { block-size: 14rem; max-block-size: min(14rem, 42%); }
 .sidebar-footer[open] > summary { border-bottom: 0; border-top: 1px solid var(--line); }
 .sidebar-footer > summary:hover, .sidebar-footer[open] > summary { background: var(--light); }
 .sidebar-menu summary::marker { color: var(--green); }
@@ -304,6 +305,7 @@ summary { color: var(--green); font-weight: 650; }
 .resources p, .resources li { font-size: .89rem; }
 .resources ul { margin: .45rem 0 0; padding-inline-start: 1.05rem; }
 .resources li { margin-bottom: .3rem; }
+.related-nav nav a { padding-block: .34rem; line-height: 1.35; }
 .related-nav nav .all-related { margin-top: .32rem; text-decoration: underline; }
 
 

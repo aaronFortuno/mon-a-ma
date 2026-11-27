@@ -668,13 +668,17 @@
     const related = membersOfGroup.filter(item => item.id !== topic.id);
     const nav = container.querySelector('nav');
     nav.replaceChildren();
+    const wasHidden = container.hidden;
     container.hidden = !related.length;
     if (container.hidden) {
       container.open = false;
       return;
     }
-    for (const item of related.slice(0, 3)) nav.append(link(item.title, address(item, item.chapters[0])));
-    if (related.length > 3) {
+    if (wasHidden) container.open = true;
+
+    const visibleCount = 5;
+    for (const item of related.slice(0, visibleCount)) nav.append(link(item.title, address(item, item.chapters[0])));
+    if (related.length > visibleCount) {
       const target = activeCollection ? catalogAddress(activeCollection) : '#conjunt/' + group.id;
       nav.append(link('Mostra tot el conjunt', target, 'all-related'));
     }

@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.49 · 27 de novembre de 2026
+
+- Desplega les fitxes relacionades per defecte i reserva espai per a cinc enllaços de l’itinerari.
+
 ## 0.1.48 · 27 de novembre de 2026
 
 - Manté les columnes buides al catàleg perquè les targetes conservin la mida, amb un màxim de quatre columnes.
