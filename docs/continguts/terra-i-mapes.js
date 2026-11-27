@@ -10,7 +10,7 @@ window.quaderns ??= [];
 
   const collection = Object.freeze({
     id: 'terra-i-mapes',
-    title: 'La Terra i els mapes',
+    title: 'La Terra i les seves representacions',
   });
   const worldMaps = [
     { type: 'mapa', title: 'El món en català', provider: 'ICGC', url: 'https://www.icgc.cat/ca/Eines-i-visors/Visors/Didactics-i-ludics/El-Mon-en-catala' },
@@ -368,6 +368,165 @@ window.quaderns ??= [];
       ['ICGC · Planisferi', 'https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Planisferi'],
       ['USGS · Com es fan servir les projeccions cartogràfiques', 'https://www.usgs.gov/faqs/how-are-different-map-projections-used'],
       ['ICGC · Cartografia topogràfica', 'https://www.icgc.cat/ca/Geoinformacio-i-mapes/Dades-i-productes/Geoinformacio-cartografica/Cartografia-topografica-11000'],
+    ],
+  });
+
+  addTopic('M005', {
+    id: 'sistema-solar',
+    title: 'El nostre lloc al sistema solar',
+    intro: 'Quan diem on vivim, podem començar pel carrer i anar ampliant el mapa. Més enllà del nostre planeta, també tenim una adreça: la Terra és al sistema solar, i el sistema solar és a la Via Làctia.',
+    figures: [
+      { id: 'via-lactia', section: 'galaxia', name: 'El sistema solar a la Via Làctia', ratio: 2.4, caption: 'El punt assenyala la zona de la Via Làctia on hi ha el sistema solar.' },
+      { id: 'orbites-solars', section: 'sistema', name: 'Òrbites al voltant del Sol', ratio: 2.4, caption: 'Representació de les òrbites. Les mides i les distàncies s’han simplificat.' },
+      { id: 'vuit-planetes', section: 'planetes', name: 'Els vuit planetes en ordre', ratio: 3.1, caption: 'L’ordre va de Mercuri a Neptú. La separació del dibuix no representa la distància real.' },
+      { id: 'terra-lluna', section: 'terra-lluna', name: 'La Terra, la Lluna i la llum del Sol', ratio: 2.4, caption: 'Podem veure una part diferent de la meitat il·luminada de la Lluna segons la seva posició.' },
+      { id: 'cossos-menors', section: 'altres-cossos', name: 'Un asteroide, un cometa i un planeta nan', ratio: 2.7, caption: 'Tres cossos del sistema solar representats per comparar els seus trets.' },
+    ],
+    sections: [
+      section('galaxia', 'La Via Làctia, la nostra galàxia',
+        essencial('Una **galàxia** és un gran conjunt d’estrelles, gas i pols. La **Via Làctia** és la galàxia on hi ha el Sol.'),
+        p('La Via Làctia té forma de disc amb braços en espiral. El Sol és una de les seves estrelles i és en una zona allunyada del centre. Les estrelles que veiem escampades pel cel de nit són, en la gran majoria, estrelles de la nostra galàxia.'),
+        box('prova', 'L’adreça de la Terra', 'Ordena de més petit a més gran: **Via Làctia**, **Terra** i **sistema solar**. Explica amb una frase què conté què.')),
+      section('sistema', 'El Sol i els cossos que l’orbiten',
+        essencial('El **sistema solar** està format pel Sol i els cossos que l’orbiten. El **Sol** és una estrella i emet llum pròpia.'),
+        p('Una **òrbita** és el camí que segueix un cos al voltant d’un altre. La gravetat del Sol manté els planetes en òrbita. Els planetes reflecteixen la llum solar i, per això, alguns es poden veure al cel des de la Terra.'),
+        p('En un dibuix podem exagerar la mida dels planetes per veure’ls bé. Abans de comparar mides o distàncies, comprova si el dibuix està fet a escala.')),
+      section('planetes', 'Vuit planetes al voltant del Sol',
+        essencial('De més a prop a més lluny del Sol, els planetes són **Mercuri, Venus, Terra, Mart, Júpiter, Saturn, Urà i Neptú**.'),
+        table(['Grup', 'Planetes', 'Com són?'], [
+          ['Rocosos', 'Mercuri, Venus, Terra i Mart.', 'Més petits i amb una superfície sòlida.'],
+          ['Gegants gasosos', 'Júpiter i Saturn.', 'Formats sobretot per hidrogen i heli.'],
+          ['Gegants gelats', 'Urà i Neptú.', 'A més dels gasos, tenen una gran proporció de materials com l’aigua, el metà i l’amoníac al seu interior.'],
+        ]),
+        box('observa', 'A banda i banda de la Terra', 'Quin planeta té l’òrbita immediatament més a prop del Sol que la Terra? Quin la té immediatament més lluny? A quin grup pertanyen tots dos?')),
+      section('terra-lluna', 'La Terra i la Lluna en moviment',
+        essencial('La **Terra** gira sobre si mateixa i fa una volta al Sol en un any. La **Lluna** és el satèl·lit natural de la Terra i gira al seu voltant.'),
+        p('Anomenem **rotació** el gir sobre un mateix eix. La Terra tarda unes 24 hores a fer-lo. Quan la nostra part de la Terra mira cap al Sol, és de dia. Unes hores després, la rotació ens porta a la part que queda a l’ombra.'),
+        p('El Sol il·lumina una meitat de la Lluna. A mesura que la Lluna es mou en la seva òrbita, des de la Terra veiem una part més gran o més petita d’aquesta meitat. Això dona lloc a les **fases**. De lluna nova a lluna nova passen uns 29 dies i mig.')),
+      section('altres-cossos', 'Asteroides, cometes i planetes nans',
+        essencial('A més dels planetes i els satèl·lits, al sistema solar hi ha **asteroides**, **cometes** i **planetes nans**.'),
+        table(['Cos', 'Una pista per reconèixer-lo'], [
+          ['Asteroide', 'Sol ser rocós o metàl·lic. N’hi ha molts entre les òrbites de Mart i Júpiter.'],
+          ['Cometa', 'Conté gels, pols i roca. Quan s’acosta al Sol, pot formar una cua de gas i pols.'],
+          ['Planeta nan', 'Té una forma gairebé esfèrica i orbita el Sol. Comparteix la seva regió orbital amb altres cossos i no hi predomina com hi predomina un planeta. Plutó i Ceres en són exemples.'],
+        ]),
+        box('prova', 'Segueix la pista', 'Un cos que orbita el Sol desenvolupa una cua quan s’hi acosta. A quin grup el situaries? Quina pista t’ha fet decidir?')),
+    ],
+  }, {
+    theme: 'Astronomia',
+    description: 'Situa el sistema solar a la Via Làctia, compara els vuit planetes i explica la relació entre el Sol, la Terra i la Lluna.',
+    curriculum: [{ row: 'medi:terra', section: 'terra-lluna', note: 'Situa la Terra al sistema solar i relaciona els moviments de la Terra i la Lluna amb el dia i la nit i les fases lunars.' }],
+    sources: [
+      ['NASA · El sistema solar', 'https://science.nasa.gov/solar-system/solar-system-facts/'],
+      ['NASA · Els planetes', 'https://science.nasa.gov/solar-system/planets/'],
+      ['NASA · Les fases de la Lluna', 'https://science.nasa.gov/moon/moon-phases/'],
+    ],
+  });
+
+  addTopic('M006', {
+    id: 'planisferi-fisic',
+    title: 'Llegim el relleu del món',
+    intro: 'Des del cel, una plana i una muntanya poden semblar del mateix color. En un planisferi físic podem fer servir els colors per representar l’altitud. Aprendrem a llegir aquest codi i a comparar llocs llunyans.',
+    figures: [
+      { id: 'altituds-del-mon', section: 'punts-altitud', anchor: 'lead', name: 'Planisferi d’altituds', ratio: 2, position: 'center',
+        src: 'illustracions/m006/altituds-del-mon.png',
+        alt: 'Mapa mundial amb quatre franges d’altitud a la llegenda i cinc punts marcats de la A a la E.',
+        caption: 'Compara el color de sota cada punt amb la llegenda. Els intervals s’expressen en metres enters.',
+        credit: 'Relleu de NOAA ETOPO1 i costes de Natural Earth. Elaboració pròpia.' },
+      { id: 'reserva-relleu', section: 'relleu', name: 'Plana, altiplà i serralada', ratio: 2.6, visible: false },
+      { id: 'reserva-colors-altitud', section: 'colors-altitud', name: 'Del perfil als colors d’altitud', ratio: 2.6, visible: false },
+    ],
+    sections: [
+      section('relleu', 'Les formes del paisatge al mapa',
+        essencial('Un **planisferi físic** representa el relleu i les aigües del món. Hi podem situar oceans, serralades i extenses zones planes.'),
+        p('Una **plana** té poc desnivell. Un **altiplà** també és força pla, però es troba a una altitud elevada en relació amb l’entorn. Una **serralada** és un conjunt de muntanyes enllaçades. Al planisferi podem seguir les grans formes del relleu, però per estudiar un cim concret ens cal un mapa amb més detall.')),
+      section('colors-altitud', 'Els colors indiquen intervals',
+        essencial('L’**altitud** és l’altura d’un lloc respecte del nivell del mar. Cada color de la llegenda representa un **interval**, és a dir, un conjunt d’altituds.'),
+        p('En aquest mapa, a mesura que pugem, passem dels verds als ocres i al marró fosc. En un altre mapa els colors poden canviar. Un punt que es troba a **2.000 m** entra al tram que comença a 2.000 m.'),
+        box('observa', 'Altitud i pendent', 'Un altiplà pot ser molt alt i tenir poc pendent. Busca al mapa una zona extensa d’un color d’altitud alta. Què pots dir de l’altitud? Quina informació et faria falta per comprovar-ne el pendent?')),
+      section('punts-altitud', 'Cinc punts per comparar',
+        essencial('Per llegir un punt, busca el color del terreny al lloc marcat i comprova quin interval li correspon a la **llegenda**.'),
+        list('Localitza **A**, a l’Amazònia, i **B**, al sud d’Àfrica. Anota l’interval d’altitud de cadascun.',
+          'Busca **C**, a l’altiplà del Tibet, i **D**, a Groenlàndia. Quin punt correspon al tram més alt? Escriu com ho has sabut.',
+          'Troba **E**, a l’interior d’Austràlia. Amb quin altre punt comparteix interval? Podem saber quin dels dos és més alt mirant només aquest mapa?')),
+    ],
+    solution: {
+      intro: 'Respostes de referència per comentar la lectura dels intervals i els límits del planisferi.',
+      sections: [
+        section('colors-altitud', 'Com interpretem els colors?',
+          p('Una zona d’un color d’altitud alta és dins del tram que indica la llegenda. Pot tenir pendent o ser força plana. Per comprovar-ho, convindria un mapa topogràfic més detallat, amb corbes de nivell.'),
+          p('A Ampliació, 1.999 m cau al segon tram i 2.000 m al tercer. Dos colors diferents poden correspondre a altituds molt properes.')),
+        section('punts-altitud', 'Cinc punts per comparar',
+          list('A és al tram de menys de **500 m** i B va de **500 a menys de 2.000 m**.',
+            'C és al tram de **4.000 m o més**. D va de **2.000 a menys de 4.000 m**. Per tant, C es troba en un interval més alt.',
+            'E comparteix el tram de menys de **500 m** amb A. El color no permet ordenar-los dins del mateix interval.'),
+          p('A Ampliació, per saber l’altitud sota el gel cal un model que representi la superfície del terreny coberta pel gel.')),
+      ],
+    },
+  }, {
+    description: 'Practica amb un planisferi acolorit per intervals d’altitud. Interpreta la llegenda i compara cinc punts del planeta.',
+    curriculum: [{ row: 'medi:cartografia', section: 'punts-altitud', note: 'Interpreta els colors d’un planisferi físic i compara intervals d’altitud.' }],
+    resources: worldMaps,
+    sources: [
+      ['ICGC · Planisferi', 'https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Planisferi'],
+      ['NOAA · Malla d’elevació ETOPO1', 'https://cwcgom.aoml.noaa.gov/erddap/griddap/etopo180.html'],
+      ['Natural Earth · Costes de referència', 'https://www.naturalearthdata.com/downloads/110m-physical-vectors/'],
+    ],
+  });
+
+  addTopic('M007', {
+    id: 'planisferi-politic',
+    title: 'Fronteres i colors al mapa',
+    intro: 'Com podem distingir d’un cop d’ull dos països veïns? El planisferi polític fa visibles les fronteres, i els colors ens ajuden a seguir-les. Ho provarem amb un retall de mapa real i dos mapes per acolorir.',
+    figures: [
+      { id: 'planisferi-fronteres', section: 'fronteres', anchor: 'lead', name: 'Planisferi polític', ratio: 2, position: 'center',
+        src: 'illustracions/m007/planisferi-fronteres.png',
+        alt: 'Mapamundi amb països acolorits i fronteres. Un requadre al sud-oest d’Europa assenyala el detall de la península Ibèrica.',
+        caption: 'Observa el requadre que situa la península Ibèrica i l’entorn. El detall ampliat apareix a l’apartat següent.',
+        credit: 'Natural Earth 1:110.000.000. Elaboració pròpia.' },
+      { id: 'fronteres-peninsula', section: 'veinat', anchor: 'lead', name: 'Fronteres a la península Ibèrica', ratio: 2.05, position: 'center',
+        src: 'illustracions/m007/fronteres-peninsula.png',
+        alt: 'Mapa retallat amb Portugal, Espanya i França, i les fronteres terrestres entre aquests països.',
+        caption: 'Detall regional d’un mapa polític. El traç fosc a terra indica una frontera.',
+        credit: 'Natural Earth 1:50.000.000, via World Atlas. Elaboració pròpia.' },
+      { id: 'mapes-muts-quatre-colors', section: 'acoloreix', anchor: 'lead', name: 'Dos mapes muts per acolorir', ratio: 2.35, position: 'center',
+        src: 'illustracions/m007/mapes-muts-quatre-colors.png',
+        alt: 'Dos mapes imaginaris amb regions etiquetades. El primer té tres regions veïnes entre si. Al segon s’hi afegeix una regió central que toca les altres tres.',
+        caption: 'Acoloreix només les regions amb lletres. També pots fer servir ratllats o escriure números dins de les regions.',
+        credit: 'Elaboració pròpia.' },
+    ],
+    sections: [
+      section('fronteres', 'Què ens diu una frontera?',
+        essencial('Un **mapa polític** ens ajuda a localitzar països i a reconèixer els límits entre territoris. Una **frontera** separa dos territoris.'),
+        p('Algunes fronteres segueixen un riu o una carena. D’altres travessen camps, boscos o pobles. Els colors distingeixen països i la llegenda ens ajuda a interpretar els traços. En un planisferi, alguns detalls són massa petits i podem consultar un mapa regional. Busca el requadre de la península Ibèrica al planisferi i localitza la mateixa zona al detall de l’apartat següent.')),
+      section('veinat', 'Quines regions han de tenir colors diferents?',
+        essencial('Dues regions són **veïnes** en aquest joc si comparteixen un tros de frontera. Si només es toquen en una punta, poden portar el mateix color.'),
+        box('observa', 'Tres països a la vista', 'Al retall, segueix la frontera entre **Portugal i Espanya** i la d’**Espanya i França**. Portugal i França comparteixen cap tram de frontera? Què observes al dibuix?'),
+        p('Acolorim cada regió sencera amb un color. Podem repetir un color en una altra regió si entre totes dues no hi ha cap tram de frontera compartit. El color només ens ajuda a seguir els límits.'),
+        box('curiositat', 'El teorema dels quatre colors', 'En un mapa pla finit com els del joc, amb regions d’una sola peça, **quatre colors sempre són suficients** per distingir les regions veïnes. En alguns mapes en sobren i en d’altres els necessitem tots quatre.')),
+      section('acoloreix', 'Tres colors o quatre?',
+        essencial('Comença amb **tres colors**. Repeteix un color només quan les dues regions no comparteixin un tros de frontera.'),
+        list('Acoloreix el **mapa 1** amb tres colors. Repassa les fronteres amb el dit i comprova que a banda i banda hi hagi colors diferents.',
+          'Al **mapa 2**, posa un color a cadascuna de les regions de fora. Amb quines regions comparteix frontera la regió **D** del mig?',
+          'Prova de trobar un color per a D amb els tres que tens. Si no n’hi ha cap de lliure, agafa un quart color. Explica per què el necessites.')),
+    ],
+    solution: {
+      intro: 'Les lletres A, B, C i D indiquen les regions del mapa mut. Qualsevol canvi en l’ordre dels colors que conservi la regla de les fronteres és vàlid.',
+      sections: [
+        section('veinat', 'Tres països a la vista',
+          p('Espanya comparteix frontera amb Portugal i França. Portugal i França no comparteixen cap tram de frontera.')),
+        section('acoloreix', 'Tres colors o quatre?',
+          p('Al mapa 1, A, B i C són veïnes entre si. Cal donar-los tres colors diferents. Al mapa 2, les tres regions de fora continuen sent veïnes entre si i **D** les toca totes tres amb un tram de frontera. Qualsevol dels tres colors ja es troba al costat de D, així que en cal un quart.'),
+          p('A Ampliació, totes sis parelles de regions del mapa 2 comparteixen frontera. Si unim A i D, queden tres regions veïnes entre si. N’hi ha prou amb tres colors i cal fer-los servir tots tres.')),
+      ],
+    },
+  }, {
+    description: 'Segueix fronteres en un mapa real i descobreix per què alguns mapes es poden acolorir amb tres colors i d’altres en necessiten quatre.',
+    curriculum: [{ row: 'medi:cartografia', section: 'fronteres', note: 'Identifica la funció de les fronteres i compara països veïns en una representació política del territori.' }],
+    resources: worldMaps,
+    sources: [
+      ['Natural Earth · Capes administratives', 'https://www.naturalearthdata.com/downloads/50m-cultural-vectors/'],
+      ['Wolfram MathWorld · Teorema dels quatre colors', 'https://mathworld.wolfram.com/Four-ColorTheorem.html'],
     ],
   });
 }

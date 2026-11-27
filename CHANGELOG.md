@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.54 · 27 de novembre de 2026
+
+- Afegeix tres fitxes amb variants de Suport, Base i Ampliació a La Terra i les seves representacions, amb pràctiques imprimibles d’altitud i de quatre colors.
+
 ## 0.1.53 · 27 de novembre de 2026
 
 - Reanomena els quatre temes i els quinze apartats de La Terra i els mapes amb títols ajustats a cada lectura.

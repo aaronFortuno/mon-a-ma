@@ -1,6 +1,6 @@
 # Món a mà
 
-Apunts i materials per explorar el medi a primària i preparar carpetes d’aprenentatge. El primer conjunt, **La Terra i els mapes**, agrupa quatre temes de 5è de primària.
+Apunts i materials per explorar el medi a primària i preparar carpetes d’aprenentatge. El primer conjunt, **La Terra i les seves representacions**, agrupa set temes de cicle superior de primària.
 
 ## Obre el catàleg
 

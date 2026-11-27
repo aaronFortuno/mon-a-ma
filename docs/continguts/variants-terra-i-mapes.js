@@ -182,5 +182,66 @@ window.variantsMaterials ??= {};
         },
       },
     },
+    M005: {
+      'sistema-solar': {
+        suport: {
+          intro: 'La Terra és el nostre planeta. La Terra forma part del sistema solar. El sistema solar és dins d’una galàxia que es diu Via Làctia.',
+          sections: {
+            galaxia: [p('Completa en veu alta amb **Terra**, **sistema solar** i **Via Làctia**. «Vivim a la ___. El nostre planeta pertany al ___. Tot això és dins de la ___.»')],
+            sistema: [p('El camí que fa un planeta al voltant del Sol és la seva **òrbita**. Busca el Sol al dibuix i ressegueix una òrbita amb el dit.')],
+            planetes: [p('Els quatre planetes més propers al Sol són **rocosos**. Els altres quatre són **gegants**.'), repte('Els veïns de la Terra', 'Llegeix els noms en ordre. Quin planeta hi ha just abans de la Terra? I just després?')],
+            'terra-lluna': [p('El Sol il·lumina la Lluna. Des de la Terra, de vegades en veiem un tros petit i de vegades la veiem gairebé rodona.'), repte('Qui gira al voltant de qui?', 'Digues quin cos gira al voltant del Sol i quin gira al voltant de la Terra.')],
+            'altres-cossos': [p('Un **asteroide** sol ser rocós. Un **cometa** pot fer una cua prop del Sol. **Plutó** és un planeta nan.'), repte('La pista de la cua', 'Quin d’aquests cossos pot fer una cua quan s’acosta al Sol?')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            galaxia: [p('Com que som dins del disc de la Via Làctia, quan mirem al llarg del disc veiem la llum de moltes estrelles juntes. En un cel fosc, aquesta llum forma una banda clara.'), repte('Dues mirades', 'Per què veiem la Via Làctia com una banda des de la Terra i com una espiral en molts dibuixos?')],
+            sistema: [repte('Un model d’òrbites', 'Si 1 cm representa la distància mitjana de la Terra al Sol, Neptú queda a uns 30 cm del Sol. Per què pot ser difícil dibuixar també els planetes amb aquesta mateixa escala?')],
+            planetes: [p('Saturn té anells molt vistosos, però Júpiter, Urà i Neptú també en tenen. Els anells estan formats per partícules que orbiten el planeta.')],
+            'terra-lluna': [p('La Lluna fa una volta al voltant de la Terra en uns 27 dies i alhora fa un gir sobre si mateixa. Per això ens mostra gairebé sempre la mateixa cara. El cicle de fases és una mica més llarg perquè, mentrestant, la Terra també es mou al voltant del Sol.'), repte('Prova amb una marca', 'Amb una pilota marcada, fes una volta al voltant d’un objecte mantenint la marca encarada cap a ell. Quantes vegades has hagut de girar la pilota sobre si mateixa?')],
+            'altres-cossos': [p('Ceres és al cinturó d’asteroides. Plutó és al cinturó de Kuiper, més enllà de Neptú. Tots dos pertanyen al grup dels planetes nans encara que es trobin en regions molt diferents.')],
+          },
+        },
+      },
+    },
+    M006: {
+      'planisferi-fisic': {
+        suport: {
+          intro: 'Els colors d’aquest mapa ens donen pistes. Aprendrem a relacionar el color d’un lloc amb la seva altitud.',
+          sections: {
+            relleu: [p('En un mapa del món podem veure la forma dels continents i dels oceans. En aquest mapa, el blau indica l’aigua del mar.')],
+            'colors-altitud': [p('A la llegenda, el verd més clar indica menys de **500 m**. El marró fosc indica **4.000 m o més**.'), passos('Busca una zona de verd clar al mapa.', 'Busca una zona de marró fosc.', 'Assenyala quina de les dues representa més altitud.')],
+            'punts-altitud': [passos('Troba la lletra **A**. Mira el color de sota el punt.', 'Busca el mateix color a la llegenda i llegeix el seu interval d’altitud.', 'Fes el mateix amb **C**. Quin dels dos és en un tram d’altitud més alt?')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            relleu: [p('El canvi de color al dibuix es produeix en passar d’un interval a un altre. Al paisatge, l’altitud pot anar canviant a poc a poc sense cap tall visible.')],
+            'colors-altitud': [repte('Just al límit', 'Assigna aquests dos llocs als seus intervals: un a **1.999 m** i l’altre a **2.000 m**. Què ens diu aquest cas sobre dos colors diferents?')],
+            'punts-altitud': [repte('El gruix del gel', 'A Groenlàndia, el mapa mostra l’altitud de la superfície del gel. Si volguessis saber l’altitud del terreny que hi ha a sota, podries llegir-la en aquest mateix mapa? Explica quina dada hi falta.')],
+          },
+        },
+      },
+    },
+    M007: {
+      'planisferi-politic': {
+        suport: {
+          intro: 'En un mapa polític podem descobrir on és cada país. Després provarem com els colors ens ajuden a separar uns territoris dels altres.',
+          sections: {
+            fronteres: [p('Busca el requadre al planisferi. Hi ha la zona que veuràs més gran al mapa següent.')],
+            veinat: [passos('Busca **Portugal** i **Espanya** al detall del mapa.', 'Posa el dit sobre la línia que tenen en comú.', 'Ara busca **França**. Troba amb quin dels altres dos països comparteix frontera.'), p('Imagina dues rajoles. Si les vores es toquen en un tram, necessiten colors diferents. Si només es toquen per una punta, poden repetir color.')],
+            acoloreix: [passos('Al **mapa 1**, pinta A, B i C de tres colors diferents.', 'Al **mapa 2**, posa aquests mateixos colors a A, B i C.', 'Segueix la vora de **D**. Digues quins colors toca. Tria un color nou per a D.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            fronteres: [p('El color d’un país depèn de les decisions de qui ha dibuixat el mapa. En un altre mapa el mateix país pot tenir un color diferent, amb la frontera al mateix lloc.')],
+            veinat: [repte('Fes una llista de veïns', 'Escriu les parelles de regions veïnes del mapa 2. Hi ha cap parella que pugui repetir color? Usa la llista per justificar la resposta.')],
+            acoloreix: [repte('Esborra una frontera', 'Imagina que A i D del mapa 2 s’uneixen en un sol territori i esborres el tram entre tots dos. Quants colors necessites ara? Dibuixa o explica quins territoris continuen sent veïns.')],
+          },
+        },
+      },
+    },
   });
 }
