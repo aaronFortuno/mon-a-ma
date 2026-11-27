@@ -8,6 +8,7 @@ Cada encàrrec indica quantes **figures diferents** calen per apartat i quins **
 
 Per a cada tema, acorda els lots, les figures que comparteixen i les referències abans de començar. Cada sèrie ha de poder-se emprar com un lot complet, amb una composició i una retolació pròpies que siguin coherents de la primera imatge a l’última. Per a cada figura, anota l’ID de l’apartat, l’ordre, què ha de veure o fer l’alumnat, les etiquetes literals i els fitxers per lot.
 
+- **Ordre dels lots.** Presenta els estils del més esquemàtic al més detallat o realista. L’última imatge disponible de cada figura és la que s’obre per defecte a la fitxa. Situa al final l’estil que vulguis que s’hi mostri d’entrada, per exemple Pla, Volum, Realista.
 - **Finalitat.** Fes il·lustracions que ajudin l’alumnat de 10–11 anys a entendre o aplicar el que explica el text. Fes evident d’un cop d’ull què s’ha d’observar.
 - **Estil.** Atles escolar contemporani. Fons blanc llis, formes netes, línia fina però visible, masses de color suaus i contorns foscos. Fes servir blau per a l’aigua, verd i ocre per al terreny i un accent teula per destacar un element. Mantén la coherència amb la referència escollida. Reserva la fotografia o la textura per als encàrrecs que les demanin.
 - **Lectura impresa.** Comprova cada imatge a l’amplada A4 indicada a la taula. Fes servir una tipografia de pal sec amb accents correctes i etiquetes clau d’almenys 9 pt a la mida d’impressió. Combina el color amb el gruix del traç, els patrons o els símbols perquè també es pugui interpretar en grisos.

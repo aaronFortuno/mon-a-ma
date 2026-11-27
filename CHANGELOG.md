@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.41 · 27 de novembre de 2026
+
+- Mostra les miniatures sense subtítols al lateral i tria per defecte l’última il·lustració disponible de cada pack.
+
 ## 0.1.40 · 26 de novembre de 2026
 
 - Amplia el full A4 sencer al visor i aparta les miniatures de les variants per donar-li més espai.

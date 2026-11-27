@@ -164,9 +164,10 @@
     function makeCard(topic, grouped) {
       const card = link('', address(topic, topic.chapters[0]), 'topic-card');
       card.dataset.topic = topic.id;
-      const covers = topic.chapters.flatMap(chapter => chapter.figures ?? [])
-        .map(figure => figure.variants?.[topic.defaultFigureStyle]?.src ?? figure.src ??
-          Object.values(figure.variants ?? {}).find(variant => variant.src)?.src);
+      const covers = topic.chapters.flatMap(chapter => chapter.figures ?? []).map(figure => {
+        const variant = figureVariants(topic, figure).findLast(item => item.src);
+        return variant?.thumbnail ?? variant?.src ?? figure.src;
+      });
       const coverSrc = topic.cover || covers.find(Boolean);
       const picture = node('div', coverSrc ? 'topic-cover' : 'topic-cover image-placeholder');
       picture.setAttribute('aria-hidden', 'true');
@@ -300,6 +301,12 @@
     });
   }
 
+  function figureVariants(topic, figure) {
+    return (topic.figureStyles ?? []).filter(style => figure.variants?.[style.id]).map(style => ({
+      ...style, ...figure.variants[style.id],
+    }));
+  }
+
   function figuresFor(chapter, type = documentType) {
     const uploads = knownUploads.filter(item => item.topic === route.topic.id && item.chapter === chapter.id &&
       (item.collectionId ?? '') === (activeCollection?.id ?? '') && (item.documentType ?? 'sheet') === type);
@@ -311,14 +318,11 @@
     return planned.map(item => {
       const saved = settings.figures[item.id];
       const personal = uploads.find(upload => upload.figure === item.id);
-      const styles = route.topic.figureStyles ?? [];
-      const variants = styles.filter(style => item.variants?.[style.id]).map(style => ({
-        ...style, ...item.variants[style.id],
-      }));
+      const variants = figureVariants(route.topic, item);
       if (!variants.length && item.src && !item.blob) variants.push({ id: 'original', label: 'Original', src: item.src });
+      const defaultVariant = variants.find(variant => variant.id === settings.figureStyle && variant.src) ??
+        variants.findLast(variant => variant.src);
       if (personal) variants.push({ id: 'custom', label: 'Imatge pròpia', src: personal.src, alt: personal.alt });
-      const defaultVariant = variants.find(variant => variant.id === (settings.figureStyle || route.topic.defaultFigureStyle) && variant.src) ??
-        variants.find(variant => variant.id !== 'custom' && variant.src);
       const selected = variants.find(variant => variant.id === saved?.variant && variant.src) ?? defaultVariant;
       const config = {
         wrap: false, border: true, ...item, ...selected, id: item.id, visible: true, ...saved,
@@ -518,7 +522,7 @@
   }
 
   function syncIntroStyle(topic) {
-    const preferred = settings.figureStyle || topic.defaultFigureStyle || topic.figureStyles?.[0]?.id;
+    const preferred = settings.figureStyle || topic.figureStyles?.at(-1)?.id;
     for (const button of byId('material-intro-style-options').children) {
       button.setAttribute('aria-pressed', String(button.dataset.introStyle === preferred));
     }

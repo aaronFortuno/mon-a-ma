@@ -899,7 +899,7 @@ summary { color: var(--green); font-weight: 650; }
 .figure-control .figure-style-list:has(> :nth-child(3)) {
   grid-template-columns: none;
   grid-auto-flow: column;
-  grid-auto-columns: max(6.6rem, 43%);
+  grid-auto-columns: max(4.3rem, calc((100% - .8rem) / 3));
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scrollbar-width: thin;
@@ -928,6 +928,8 @@ summary { color: var(--green); font-weight: 650; }
 }
 .figure-style-choice img { object-fit: contain; }
 .figure-style-label { font-size: .77rem; line-height: 1.25; overflow-wrap: anywhere; }
+.figure-control .figure-style-choice { padding: .24rem; border-radius: .42rem; }
+.figure-control .figure-style-label { display: none; }
 .figure-style-pending { font-size: .8rem; overflow-wrap: anywhere; }
 .figure-style-pending { display: grid; place-items: center; background: var(--light); }
 .figure-helper {
