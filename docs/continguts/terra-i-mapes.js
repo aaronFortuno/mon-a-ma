@@ -312,6 +312,7 @@ window.quaderns ??= [];
       { id: 'atles', label: 'Atles escolar', description: 'Colors del sòl, carrers i parcel·les diferenciats.' },
       { id: 'aeria', label: 'Vista aèria il·lustrada', description: 'Teulades, capçades i ombres amb el barri vist des de dalt.' },
     ],
+    status: 'definitiu',
     description: 'Distingeix un mapa d’un plànol i aprèn a llegir-ne la llegenda i l’escala per orientar-te i calcular distàncies.',
     curriculum: [{ row: 'medi:cartografia', section: 'escala', note: 'Interpreta la llegenda i compara distàncies en línia recta i per un itinerari amb l’escala gràfica.' }],
     sources: [

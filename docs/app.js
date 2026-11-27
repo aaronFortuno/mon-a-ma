@@ -161,6 +161,19 @@
       return { select, values };
     });
 
+    const itinerary = filters.elements.collection;
+    itinerary.labels[0].firstChild.textContent = 'Itinerari ';
+    itinerary.options[0].text = 'Tots els itineraris';
+
+    const extra = node('details', 'filter-options sidebar-menu');
+    const extraSummary = node('summary', '', 'Altres filtres');
+    const extraFields = node('div', 'filter-options-fields');
+    const extraSelects = ['length', 'difficulty'].map(name => filters.elements.namedItem(name));
+    extraFields.append(...extraSelects.map(select => select.labels[0]));
+    extra.append(extraSummary, extraFields);
+    const reset = filters.querySelector('button[type="reset"]');
+    reset.before(extra);
+
     function makeCard(topic, grouped) {
       const card = link('', address(topic, topic.chapters[0]), 'topic-card');
       card.dataset.topic = topic.id;
@@ -218,7 +231,10 @@
       else if (!visible.length) empty.textContent = drafts.checked ? 'No hi ha cap tema en desenvolupament.' : 'Encara no hi ha cap tema definitiu.';
       else empty.textContent = 'No hi ha cap tema amb aquests filtres.';
       byId('topic-count').value = matching.length + (matching.length === 1 ? ' tema' : ' temes');
-      filters.querySelector('button[type="reset"]').hidden = !controls.some(({ select }) => select.value);
+      const extraCount = extraSelects.filter(select => select.value).length;
+      extraSummary.textContent = extraCount ? 'Altres filtres (' + extraCount + ')' : 'Altres filtres';
+      itinerary.title = itinerary.value;
+      reset.hidden = !controls.some(({ select }) => select.value);
     }
     drafts.addEventListener('change', () => {
       preferences.saveCatalogDrafts(drafts.checked);
@@ -680,7 +696,7 @@
     for (const item of related.slice(0, visibleCount)) nav.append(link(item.title, address(item, item.chapters[0])));
     if (related.length > visibleCount) {
       const target = activeCollection ? catalogAddress(activeCollection) : '#conjunt/' + group.id;
-      nav.append(link('Mostra tot el conjunt', target, 'all-related'));
+      nav.append(link(activeCollection ? 'Mostra tota la col·lecció' : 'Mostra tot l’itinerari', target, 'all-related'));
     }
   }
 

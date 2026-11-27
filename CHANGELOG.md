@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.56 · 27 de novembre de 2026
+
+- Valida Del mapa al plànol (M003), aprofita l’amplada de la galeria i agrupa Extensió i Dificultat sota Altres filtres. El filtre Conjunt passa a dir-se Itinerari.
+
 ## 0.1.55 · 27 de novembre de 2026
 
 - Incorpora les il·lustracions de l’M004, Un territori, molts mapes, amb els lots Pla i Atles amb textura.
