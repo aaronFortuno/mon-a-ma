@@ -62,35 +62,37 @@ window.variantsMaterials ??= {};
     M002: {
       coordenades: {
         suport: {
-          intro: 'Per trobar un lloc en un mapa fem servir dues dades. Són la **latitud** i la **longitud**.',
+          intro: 'Una boia envia dos nombres. Són la **latitud** i la **longitud**. Amb els dos nombres podem trobar-la en un mapa.',
           sections: {
             latitud: [
-              p('Els **paral·lels** són línies imaginàries. L’**equador** és el paral·lel de **0°**. Separa la meitat nord i la meitat sud de la Terra.'),
-              p('La **latitud** indica els graus al nord (**N**) o al sud (**S**) de l’equador. Per exemple, **20° N** és al nord de l’equador.'),
+              p('Els **paral·lels** fan la volta a la Terra. L’equador és el paral·lel de **0°**. Separa la meitat nord de la meitat sud.'),
+              p('La lletra **N** vol dir *nord* i la **S**, *sud*. Per trobar **20° N**, mira al nord de la línia de l’equador.'),
             ],
             longitud: [
-              p('Els **meridians** són línies imaginàries que van d’un pol a l’altre. El de **Greenwich** marca **0°**.'),
-              p('La **longitud** indica els graus a l’est (**E**) o a l’oest (**O**) de Greenwich. Per exemple, **40° O** és a l’oest de Greenwich.'),
+              p('Els **meridians** uneixen els dos pols. El de Greenwich és el meridià de **0°**.'),
+              p('La lletra **E** vol dir *est* i la **O**, *oest*. Per trobar **40° O**, mira a l’oest de la línia de Greenwich.'),
             ],
             localitzacio: [
-              p('Busquem una boia a **20° N, 40° O**.'),
-              passos('Busca la línia de **20° N**. És un paral·lel.', 'Busca la línia de **40° O**. És un meridià.', 'Marca el punt on es creuen les dues línies. Allà hi ha la boia.'),
+              p('Busquem la boia **A** a **20° N, 40° O**.'),
+              passos('Posa un dit sobre la línia de **20° N**. És un paral·lel.',
+                'Posa un altre dit sobre la línia de **40° O**. És un meridià.',
+                'Segueix les dues línies fins que els dits es trobin. Marca-hi el punt **A**.'),
+              repte('Canvia només una coordenada', 'Si la boia passa de **20° N, 40° O** a **20° N, 20° O**, quina dada ha canviat? Busca la nova posició al punt **B**.'),
             ],
           },
         },
         ampliacio: {
           sections: {
             latitud: [
-              p('Un canvi de latitud correspon a un desplaçament cap al nord o cap al sud. En un mateix meridià, anar de **35° S** a **35° N** suposa recórrer **70°** de latitud i travessar l’equador. En canvi, canviar de longitud mantenint la latitud vol dir seguir el mateix paral·lel.'),
-              repte('Dues rutes de la mateixa boia', 'Des de **35° S, 20° E**, una boia deriva primer cap a **25° S, 20° E** i una altra cap a **35° S, 10° E**. Indica quina va cap a l’equador i quina cap a Greenwich. Explica què s’ha mantingut igual en cada trajecte.'),
+              repte('Dos canvis de rumb', 'Des de **20° N, 40° O** imagina dos trajectes. El primer acaba a **10° N, 40° O**. El segon, a **20° N, 20° O**. Quin s’acosta a l’equador? Quin s’acosta a Greenwich? Digues quina coordenada es manté en cada trajecte.'),
             ],
             longitud: [
-              p('Deu graus de longitud corresponen a la mateixa diferència de coordenada a l’equador i a prop dels pols. Però, si seguim el paral·lel, recorrem menys distància prop dels pols perquè els meridians s’acosten.'),
-              repte('Prop de l’altre costat del mapa', 'Dues boies són a **15° N**, una a **179° E** i l’altra a **179° O**. Dibuixa-les prop del meridià de **180°** en un globus esquemàtic. Quants graus de longitud les separen per la banda més curta? Explica per què en un mapamundi les pots veure a vores oposades.'),
+              p('A la mateixa latitud, un canvi de longitud ens fa seguir un paral·lel. Si canviem **10°** de longitud a prop d’un pol, recorrem menys distància que canviant **10°** a l’equador. Els paral·lels de prop dels pols són més petits.'),
+              repte('Què passa al meridià de 180°?', 'Les longituds **180° E** i **180° O** corresponen al mateix meridià. Dues boies a **15° N** són a **179° E** i **179° O**. Quants graus de longitud les separen pel camí més curt? Situa-les a banda i banda del meridià de 180°.'),
             ],
             localitzacio: [
-              p('Si els graus sencers no són prou precisos, es poden dividir en **60 minuts d’arc**. Per exemple, **20° 30′ N** és a mig camí entre **20° N** i **21° N**. També ho podem escriure en graus decimals, **20,5° N**. Un minut d’arc és una part d’un angle.'),
-              repte('Posició estimada o posició exacta?', 'Una graella només marca els paral·lels de **20° N** i **21° N**. Una boia queda visiblement una mica més a prop del de 21°. Entre quins valors ha d’estar la seva latitud? Pots assegurar que és a **20° 40′ N** només mirant aquesta graella? Justifica la resposta.'),
+              p('Cada grau es pot dividir en **60 minuts d’arc**. Per exemple, **20° 30′ N** és a mig camí entre **20° N** i **21° N**. També es pot escriure **20,5° N**.'),
+              repte('Quina precisió ens dona el mapa?', 'En un altre mapa, una boia és entre **20° N** i **21° N**, més a prop de la segona línia. És al nord o al sud de **20° 30′ N**? Amb aquesta informació, podries saber si és exactament a **20° 40′ N**? Justifica-ho.'),
             ],
           },
         },

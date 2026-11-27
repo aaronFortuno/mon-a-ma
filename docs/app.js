@@ -164,11 +164,10 @@
     function makeCard(topic, grouped) {
       const card = link('', address(topic, topic.chapters[0]), 'topic-card');
       card.dataset.topic = topic.id;
-      const covers = topic.chapters.flatMap(chapter => chapter.figures ?? []).map(figure => {
-        const variant = figureVariants(topic, figure).findLast(item => item.src);
-        return variant?.thumbnail ?? variant?.src ?? figure.src;
-      });
-      const coverSrc = topic.cover || covers.find(Boolean);
+      const chapter = topic.chapters[0];
+      const firstFigure = (chapter.figures ?? []).find(figure => figure.section === chapter.sections[0]?.id);
+      const variant = firstFigure && figureVariants(topic, firstFigure).findLast(item => item.src);
+      const coverSrc = variant?.thumbnail ?? variant?.src ?? firstFigure?.src;
       const picture = node('div', coverSrc ? 'topic-cover' : 'topic-cover image-placeholder');
       picture.setAttribute('aria-hidden', 'true');
       if (coverSrc) {

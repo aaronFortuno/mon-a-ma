@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.43 · 27 de novembre de 2026
+
+- Marca El planeta Terra com a material definitiu i mostra a les targetes la imatge per defecte del primer apartat.
+- Revisa les tres variants de Les coordenades geogràfiques i reserva els espais per a les quatre il·lustracions.
+
 ## 0.1.42 · 27 de novembre de 2026
 
 - Afegeix les variants amb volum i realista a la il·lustració sobre les arrels i l’erosió del sòl.

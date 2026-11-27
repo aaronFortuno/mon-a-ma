@@ -23,7 +23,7 @@ Amb marges laterals de 20 mm, l’A4 té 170 mm d’amplada útil. La primera fi
 | Fitxa | Figures diferents | Lots i arxius previstos |
 | --- | --- | --- |
 | M001 · El planeta Terra | 6, quatre principals i dos complements | 3 lots de 5 figures (Pla, Volum i Realista) i una fotografia compartida. 16 originals. |
-| M002 · Les coordenades geogràfiques | 2, graella de la boia i joc de localització | 1 lot de 2 esquemes de geometria controlada. 2 originals. |
+| M002 · Les coordenades geogràfiques | 4, dos globus, la graella de les boies i el joc de la flota | 4 reserves pendents. Les graelles s’han de construir amb geometria controlada. |
 | M003 · Els mapes i els plànols geogràfics | 1, plànol del barri | 1 lot cartogràfic. 1 original. |
 | M004 · Els tipus de mapes | 2, planisferis físic i polític | 1 lot cartogràfic amb el mateix enquadrament i projecció. 2 originals pendents. |
 
@@ -35,8 +35,10 @@ Amb marges laterals de 20 mm, l’A4 té 170 mm d’amplada útil. La primera fi
 | M001 | gravetat · reserva-gravetat | m001/gravetat-pla.png · m001/gravetat-volum.png · m001/gravetat-realista.png |
 | M001 | elements · reserva-elements | m001/elements-pla.png · m001/elements-volum.png · m001/elements-realista.png |
 | M001 | elements · arrels-i-erosio | m001/arrels-i-erosio.png · m001/arrels-i-erosio-volum.png · m001/arrels-i-erosio-realista.png |
-| M002 | localitzacio · graella | coordenades.png |
-| M002 | localitzacio · troba-la-flota | m002/troba-la-flota.svg, complement |
+| M002 | latitud · reserva-latitud | m002/parallels.png, pendent |
+| M002 | longitud · reserva-longitud | m002/meridians.png, pendent |
+| M002 | localitzacio · graella | m002/graella-boies.png, pendent |
+| M002 | localitzacio · troba-la-flota | m002/troba-la-flota.png, pendent |
 | M003 | llegenda · barri | planol.png |
 | M004 | fisic · planisferi-fisic | m004/planisferi-fisic.png, pendent, 2.600 × 1.300 px |
 | M004 | politic · planisferi-politic | m004/planisferi-politic.png, pendent, 2.600 × 1.300 px |
@@ -100,22 +102,32 @@ En pla, el disc mostra quatre zones concèntriques. Amb volum, l’esfera té un
 
 **Complement en tres estils.** Compara dos vessants amb el mateix pendent i la mateixa pluja. Mostra la terra que arriba al recipient de cada vessant i deixa les arrels visibles al tall del sòl. Les partícules són indicatives. Fes servir la il·lustració principal per identificar les parts de la Terra i aquest complement per observar com interactuen.
 
-## M002 · Graella per localitzar una boia
+## M002 · Les coordenades geogràfiques
 
-**Què ha d’entendre l’alumne.** El paral·lel de **20° N** i el meridià de **40° O** s’encreuen a la posició de la boia.
+Les quatre figures s’utilitzen en les variants Suport, Base i Ampliació. Fes que les etiquetes i els punts de referència es puguin llegir a A4 i en escala de grisos. [Referència de la NOAA sobre paral·lels i meridians](https://oceanservice.noaa.gov/education/tutorial_nautical_charts/nautical_charts02_information_2b.html).
 
-**Composició.** Dibuixa una graella rectangular simplificada amb el nord a dalt i l’oest a l’esquerra. Espacia les divisions regularment. Pots deixar la graella sobre fons blanc. Situa les etiquetes de longitud a la vora superior i les de latitud a l’esquerra, fora de la graella.
+### Els paral·lels en un globus
+
+Mostra el globus amb el pol nord a dalt i el pol sud a baix. Identifica «Equador · 0°» i ressalta el paral·lel «20° N», al nord de l’equador. Inclou com a mínim un paral·lel al sud i fes visible com s’escurcen els cercles cap als pols.
+
+### Els meridians en un globus
+
+Repeteix l’orientació del primer globus. Dibuixa meridians que s’uneixen als dos pols i marca «Greenwich · 0°». Assenyala «40° O» a l’oest de Greenwich i un meridià a l’est. Conserva només les etiquetes necessàries per identificar el 0° i llegir les direccions.
+
+### Graella de les boies
+
+Dibuixa una graella didàctica rectangular amb el nord a dalt i l’oest a l’esquerra. Posa les etiquetes de longitud al marge superior i les de latitud al marge esquerre. Marca l’equador i Greenwich amb traços de referència distintius i etiqueta els dos 0°.
 
 | Eix | Etiquetes en l’ordre visual |
 | --- | --- |
 | Longitud, d’esquerra a dreta | 80° O · 60° O · 40° O · 20° O · 0° · 20° E · 40° E |
-| Latitud, de dalt a baix | 40° N · 20° N · 0° · 20° S |
+| Latitud, de dalt a baix | 40° N · 20° N · 0° · 20° S · 40° S |
 
-Diferencia l’**Equador** i el meridià de **Greenwich** amb un traç de referència més gruixut. Afegeix «Equador» i «Greenwich» al costat de la línia que toca. Ressalta el paral·lel 20° N i el meridià 40° O amb un altre traç i marca l’encreuament amb un punt gran i una **A** una mica separada del punt. La boia és al punt **A**. Verifica l’encreuament comptant dues divisions a l’oest de Greenwich i una al nord de l’equador. [Referència de la NOAA sobre paral·lels i meridians](https://oceanservice.noaa.gov/education/tutorial_nautical_charts/nautical_charts02_information_2b.html).
+Marca «A» a **20° N, 40° O**, «B» a **20° N, 20° O** i «C» a **20° S, 20° E**. Ressalta el recorregut fins a A amb un traç discontinu. Marca B i C només amb la lletra al costat del punt. L’alumnat en deduirà les coordenades a partir de les etiquetes dels marges de la graella. C és un lloc de pràctica i es representa amb un punt.
 
-### Troba la flota · Complement al 50 %
+### Troba la flota
 
-Prepara una graella buida amb set meridians, de 60° O a 60° E en passos de 20°, i cinc paral·lels, de 40° N a 40° S en passos de 20°. Identifica l’Equador i el meridià de Greenwich amb traços diferents. Situa els nombres sobre les línies perquè l’alumnat pugui marcar interseccions. Cada jugador hi amaga tres vaixells i els busca dient latitud i longitud, en aquest ordre. La graella queda en SVG vectorial i es pot imprimir en grisos.
+A tota l’amplada de la fitxa, posa dues graelles buides idèntiques de costat, amb els títols «La meva flota» i «Els meus intents». Cada graella té set meridians de **60° O** a **60° E** i cinc paral·lels de **40° N** a **40° S**, en passos de 20°. Diferencia l’equador i Greenwich i deixa prou espai a cada encreuament per marcar-hi un vaixell o registrar-hi un intent. Les regles van al peu de la figura.
 
 ## M003 · Plànol d’un barri imaginari
 
