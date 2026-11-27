@@ -240,6 +240,7 @@ window.quaderns ??= [];
       { id: 'pla', label: 'Esquema pla', description: 'Globus plans i graella esquemàtica.' },
       { id: 'volum', label: 'Il·lustració amb volum', description: 'Globus amb ombres i graella sobre un mapa de l’Atlàntic.' },
     ],
+    status: 'definitiu',
     description: 'Fes servir els paral·lels i els meridians per llegir la latitud i la longitud i localitzar un punt al mapa.',
     curriculum: [{ row: 'medi:cartografia', section: 'localitzacio', note: 'Situa punts al mapa amb la latitud i la longitud.' }],
     sources: [

@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.46 · 27 de novembre de 2026
+
+- Marca Les coordenades geogràfiques com a material definitiu i les incorpora al catàleg de materials validats.
+
 ## 0.1.45 · 27 de novembre de 2026
 
 - Incorpora les il·lustracions de Les coordenades geogràfiques amb dos estils de globus i dues versions de la graella de les boies.
