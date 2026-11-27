@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.48 · 27 de novembre de 2026
+
+- Manté les columnes buides al catàleg perquè les targetes conservin la mida, amb un màxim de quatre columnes.
+
 ## 0.1.47 · 27 de novembre de 2026
 
 - Revisa les tres variants d’Els mapes i els plànols geogràfics amb un mateix cas de barri i tres reserves d’il·lustració.

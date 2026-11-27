@@ -141,10 +141,15 @@ button, select, input { color: inherit; }
 select { padding: .45rem .6rem; border: 1px solid var(--control-line); background: var(--surface); border-radius: .35rem; max-width: 100%; font-weight: 400; }
 .filter-reset, .footer-links button { padding: 0; border: 0; background: transparent; color: var(--green); }
 .filter-reset { justify-self: start; font-size: .9rem; text-decoration: underline; text-underline-offset: .2em; }
-.topic-groups { display: grid; gap: 1.6rem; }
+.topic-groups { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
 .topic-group-title { margin: 0 0 .7rem; font: 700 1.27rem/1.25 var(--serif); }
-.topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); align-items: stretch; gap: .85rem; }
-.topics > :only-child { max-width: 28rem; }
+.topics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  max-inline-size: 75rem;
+  align-items: stretch;
+  gap: .85rem;
+}
 .topic-card { display: flex; flex-direction: column; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: .78rem; color: var(--ink); box-shadow: 0 6px 18px var(--shadow); text-decoration: none; }
 .topic-card:hover { border-color: var(--green); }
 .topic-cover { aspect-ratio: 2; max-height: 12rem; overflow: hidden; background: var(--light); }
