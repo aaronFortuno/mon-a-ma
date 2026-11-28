@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.86 · 28 de novembre de 2026
+
+- Incorpora els lots Pla i Atles de l’M028 a l’M032, amb l’Atles per defecte.
+- Distingeix els esborranys, les il·lustracions en validació i els materials definitius amb tres farciments al mapa curricular.
+
 ## 0.1.85 · 28 de novembre de 2026
 
 - Completa les il·lustracions de l’M006 i l’M007 i incorpora la tanda M023–M027, amb l’Atles per defecte.

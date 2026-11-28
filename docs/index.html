@@ -7,17 +7,17 @@
   <title>Món a mà · Apunts i materials per explorar el medi</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png?v=0.1.4">
   <link rel="apple-touch-icon" href="assets/mon-a-ma.png?v=0.1.4">
-  <link rel="stylesheet" href="estils.css?v=0.1.85">
-  <script src="interficie.js?v=0.1.85" defer></script>
-  <script src="continguts/terra-i-mapes.js?v=0.1.85" defer></script>
-  <script src="continguts/variants-terra-i-mapes.js?v=0.1.85" defer></script>
-  <script src="continguts/temes-3r-cicle-2.js?v=0.1.85" defer></script>
-  <script src="imprimible.js?v=0.1.85" defer></script>
-  <script src="preferencies.js?v=0.1.85" defer></script>
-  <script src="continguts/curriculum.js?v=0.1.85" defer></script>
-  <script src="mapa-curricular.js?v=0.1.85" defer></script>
-  <script src="incidencies.js?v=0.1.85" defer></script>
-  <script src="app.js?v=0.1.85" defer></script>
+  <link rel="stylesheet" href="estils.css?v=0.1.86">
+  <script src="interficie.js?v=0.1.86" defer></script>
+  <script src="continguts/terra-i-mapes.js?v=0.1.86" defer></script>
+  <script src="continguts/variants-terra-i-mapes.js?v=0.1.86" defer></script>
+  <script src="continguts/temes-3r-cicle-2.js?v=0.1.86" defer></script>
+  <script src="imprimible.js?v=0.1.86" defer></script>
+  <script src="preferencies.js?v=0.1.86" defer></script>
+  <script src="continguts/curriculum.js?v=0.1.86" defer></script>
+  <script src="mapa-curricular.js?v=0.1.86" defer></script>
+  <script src="incidencies.js?v=0.1.86" defer></script>
+  <script src="app.js?v=0.1.86" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Ves al contingut</a>
@@ -328,7 +328,7 @@
         <button type="button" id="reset-user" title="Restableix els ajustos de totes les fitxes, les plantilles, les col·leccions i les imatges pròpies.">Restableix preferències</button>
         <span id="reset-user-status" role="status"></span>
         <a href="https://github.com/aaronFortuno/mon-a-ma/blob/main/license.md">MIT</a>
-        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.85 · Historial de versions">v0.1.85</button>
+        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.86 · Historial de versions">v0.1.86</button>
         <button type="button" data-dialog="about" aria-haspopup="dialog" aria-label="V4V · Sobre el projecte">V4V</button>
       </nav>
     </div>
@@ -339,6 +339,11 @@
       <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
     </div>
     <div class="dialog-content">
+      <h3>v0.1.86</h3>
+      <ul>
+        <li>Incorpora els lots Pla i Atles de l’M028 a l’M032, amb l’Atles per defecte.</li>
+        <li>Distingeix els esborranys, les il·lustracions en validació i els materials definitius amb tres farciments al mapa curricular.</li>
+      </ul>
       <h3>v0.1.85</h3>
       <ul>
         <li>Completa les il·lustracions de l’M006 i l’M007 i incorpora la tanda M023–M027, amb l’Atles per defecte.</li>
@@ -910,9 +915,9 @@
         </form>
       </div>
       <ul class="curriculum-legend" aria-label="Estat dels materials">
-        <li><span aria-hidden="true"></span> Definitiu</li>
-        <li><span class="is-draft" aria-hidden="true"></span> En desenvolupament</li>
+        <li><span class="is-draft" aria-hidden="true"></span> Esborrany</li>
         <li><span class="is-illustrated" aria-hidden="true"></span> Il·lustracions en validació</li>
+        <li><span class="is-definitive" aria-hidden="true"></span> Definitiu</li>
       </ul>
       <div class="curriculum-layout" id="curriculum-panel" role="tabpanel" aria-labelledby="curriculum-primary">
         <div class="curriculum-grid" role="region" aria-label="Blocs per cicle">

@@ -2127,6 +2127,42 @@ window.quaderns ??= [];
     id: 'hispania-romana',
     title: 'De l’arribada a Empúries a la Hispània romana',
     intro: 'L’any 218 aC, una flota romana va fer servir el port d’Empúries. Era un episodi d’una guerra i també el començament d’un procés llarg de conquestes a la Península.',
+    coverFigure: 'empuries-i-tarraco-dos-moments',
+    figures: [
+      {
+        id: 'empuries-i-tarraco-dos-moments', section: 'arribada', name: 'Empúries i Tàrraco en dos moments', ratio: 2280 / 1790,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dos mapes amb el mateix enquadrament. A dalt, una fletxa esquemàtica arriba a Empúries des del mar. A baix, una línia de calçada surt de Tàrraco cap al nord-est i Empúries apareix com un punt a la costa.',
+        caption: 'El 218 aC les tropes romanes van arribar per mar a Empúries durant la guerra amb Cartago. El mapa inferior mostra un tram de la Via Augusta a l’entorn de Tàrraco en època imperial. Els dos mapes fan servir la costa actual.',
+        credit: 'Via Augusta: Itiner-e, segment 26715, Pau de Soto (2010), CC BY 4.0. Traçat aproximat i generalitzat. Bases NOAA/NCEI ETOPO 2022 i Natural Earth.',
+        variants: {
+          pla: { src: 'illustracions/m028/empuries-i-tarraco-dos-moments-pla.png', thumbnail: 'illustracions/m028/miniatures/empuries-i-tarraco-dos-moments-pla.jpg' },
+          atles: { src: 'illustracions/m028/empuries-i-tarraco-dos-moments-atles.png', thumbnail: 'illustracions/m028/miniatures/empuries-i-tarraco-dos-moments-atles.jpg' },
+        },
+      },
+      {
+        id: 'pobles-de-la-peninsula', section: 'pobles', name: 'Una península amb pobles diversos', ratio: 2280 / 1450,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa de la península amb trames esvaïdes per a exemples de pobles ibers a l’est i al sud, grups de cultura cèltica al nord-oest i l’oest i pobles celtibers a l’interior oriental.',
+        caption: 'Àrees orientatives cap al segle III aC. Els noms generals abracen comunitats diferents. Empúries i Numància serveixen de referència geogràfica.',
+        credit: 'Síntesi del mapa epigràfic de Beltrán Lloris i Jordán Cólera. Bases NOAA/NCEI ETOPO 2022 i Natural Earth.',
+        variants: {
+          pla: { src: 'illustracions/m028/pobles-de-la-peninsula-pla.png', thumbnail: 'illustracions/m028/miniatures/pobles-de-la-peninsula-pla.jpg' },
+          atles: { src: 'illustracions/m028/pobles-de-la-peninsula-atles.png', thumbnail: 'illustracions/m028/miniatures/pobles-de-la-peninsula-atles.jpg' },
+        },
+      },
+      {
+        id: 'inscripcio-bilingue-de-numas', section: 'canvis', name: 'Dues llengües en una mateixa inscripció', ratio: 2280 / 1530,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres fragments d’una inscripció. Les línies llatines són a dalt i les gregues a baix. Les interrupcions marquen les parts de la pedra que falten.',
+        caption: 'Inscripció de Numas, Empúries, segle I aC. El redibuix esquemàtic diferencia els fragments coneguts i les parts perdudes. Quines altres restes ens ajudarien a saber quines llengües s’hi feien servir?',
+        credit: 'Redibuix a partir de la figura 22 i la transcripció de l’estudi. Referència epigràfica IRC III, 15 i CIL II, 6185.',
+        variants: {
+          pla: { src: 'illustracions/m028/inscripcio-bilingue-de-numas-pla.png', thumbnail: 'illustracions/m028/miniatures/inscripcio-bilingue-de-numas-pla.jpg' },
+          atles: { src: 'illustracions/m028/inscripcio-bilingue-de-numas-atles.png', thumbnail: 'illustracions/m028/miniatures/inscripcio-bilingue-de-numas-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('arribada', 'Les tropes romanes arriben per mar',
         essencial('Les tropes romanes van arribar a **Empúries** el **218 aC**, durant la guerra amb Cartago.'),
@@ -2145,9 +2181,19 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'roma', title: 'En temps dels romans' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Situa l’arribada romana a Empúries i estudia què va canviar a Hispània amb les ciutats i les calçades.',
     curriculum: [{ row: 'medi:passat', section: 'xarxa', note: 'Situa l’arribada romana a Empúries i estudia què va canviar a Hispània amb les ciutats i les calçades.' }],
     sources: [
+      ['Itiner-e · Atles digital de les calçades romanes', 'https://itiner-e.org/documentation'],
+      ['Ajuntament de Tarragona · Arc de Berà i Via Augusta', 'https://www.tarragona.cat/patrimoni/conjunt-arqueologic-de-tarraco-1/arc-de-triomf-de-bera/'],
+      ['NOAA/NCEI · ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['Natural Earth · Vectors físics', 'https://www.naturalearthdata.com/downloads/10m-physical-vectors/'],
+      ['Estudi epigràfic · Inscripció de Numas, figura 22', 'https://www.tdx.cat/bitstream/handle/10803/457665/tacs_20170915.pdf?sequence=5'],
+      ['Institución Fernando el Católico · Continuum celtibèric i mapa preromà', 'https://ifc.dpz.es/recursos/publicaciones/38/77/18beltranjordan.pdf'],
       ['MAC Empúries · La ciutat grega', 'https://www.macempuries.cat/Sobre-el-MAC-Empuries/Itinerari-arqueologic/Ciutat-grega'],
       ['Patrimoni cultural · Tàrraco', 'https://patrimoni.gencat.cat/ca/tarraco'],
     ],
@@ -2157,6 +2203,42 @@ window.quaderns ??= [];
     id: 'vida-dels-ibers',
     title: 'Els ibers, poblats i intercanvis',
     intro: 'Al costat d’una muralla apareixen ceràmiques fetes a la zona i d’altres que han arribat per mar. Com podem saber a qui pertanyien i què ens expliquen dels contactes?',
+    coverFigure: 'puig-castellar-i-sant-sebastia',
+    figures: [
+      {
+        id: 'puig-castellar-i-sant-sebastia', section: 'jaciments', name: 'Dos poblats, dos entorns', ratio: 2280 / 1765,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Un mapa de Catalunya situa Puig Castellar i Sant Sebastià de la Guarda. Dos retalls orientats al nord indiquen el Besòs i la Mediterrània prop dels jaciments.',
+        caption: 'Dos jaciments sobre la cartografia del paisatge actual. Compara el turó del Puig Castellar, a prop del Besòs, amb la posició litoral de Sant Sebastià de la Guarda.',
+        credit: 'Costes IGN i Natural Earth, Besòs ACA, relleu NOAA/NCEI ETOPO 2022, límit català © EuroGeographics via GISCO 2024.',
+        variants: {
+          pla: { src: 'illustracions/m029/puig-castellar-i-sant-sebastia-pla.png', thumbnail: 'illustracions/m029/miniatures/puig-castellar-i-sant-sebastia-pla.jpg' },
+          atles: { src: 'illustracions/m029/puig-castellar-i-sant-sebastia-atles.png', thumbnail: 'illustracions/m029/miniatures/puig-castellar-i-sant-sebastia-atles.jpg' },
+        },
+      },
+      {
+        id: 'vas-grec-i-context-iber', section: 'grecs', name: 'Un vas grec en una casa ibera', ratio: 2280 / 1360,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Un vaixell és al port d’Empòrion. En una casa ibera hi ha un fragment de copa de vernís negre. Un interrogant uneix les dues escenes.',
+        caption: 'Escenes imaginades. El detall pren com a model la base d’una copa àtica trobada a Ullastret. La línia discontínua obre una pregunta. Com hi podria haver arribat?',
+        credit: 'Model segons MAC-ULL 1896, Puig de Sant Andreu, fitxa CIG 6730. Dibuix propi.',
+        variants: {
+          pla: { src: 'illustracions/m029/vas-grec-i-context-iber-pla.png', thumbnail: 'illustracions/m029/miniatures/vas-grec-i-context-iber-pla.jpg' },
+          atles: { src: 'illustracions/m029/vas-grec-i-context-iber-atles.png', thumbnail: 'illustracions/m029/miniatures/vas-grec-i-context-iber-atles.jpg' },
+        },
+      },
+      {
+        id: 'detall-inscripcio-iberica', section: 'cultura', name: 'Què es veu en una inscripció?', ratio: 1200 / 935,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Fotografia del suport sencer, una làmina allargada de plom amb vores irregulars. Un retall ampliat mostra part d’una línia de signes.',
+        caption: 'Carta ibèrica sobre plom del Puig de Sant Andreu, Ullastret, segle III aC. El requadre permet observar de prop alguns dels signes incisos.',
+        credit: 'MAC Ullastret, MAC ULL-03309. Imatge via Visitmuseum, fitxa actualitzada el 31/10/2026. Retall i ampliació a partir de la fotografia publicada.',
+        variants: {
+          pla: { src: 'illustracions/m029/detall-inscripcio-iberica-pla.png', thumbnail: 'illustracions/m029/miniatures/detall-inscripcio-iberica-pla.jpg' },
+          atles: { src: 'illustracions/m029/detall-inscripcio-iberica-atles.png', thumbnail: 'illustracions/m029/miniatures/detall-inscripcio-iberica-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('pobles', 'Pobles diferents, trets compartits',
         essencial('Els **ibers** eren diversos pobles que compartien trets culturals a l’est i al sud de la península Ibèrica.'),
@@ -2175,9 +2257,19 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'roma', title: 'En temps dels romans' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Coneix la diversitat dels pobles ibers, els contactes amb els grecs i dos jaciments catalans.',
     curriculum: [{ row: 'medi:passat', section: 'grecs', note: 'Coneix la diversitat dels pobles ibers, els contactes amb els grecs i dos jaciments catalans.' }],
     sources: [
+      ['Iberia Graeca · Copa escif MAC-ULL 1896', 'https://bd.iberiagraeca.net/fichas/6730'],
+      ['Visitmuseum · Carta ibèrica sobre plom', 'https://visitmuseum.gencat.cat/ca/museu/museu-d-arqueologia-de-catalunya-ullastret/objecte/carta-iberica-sobre-plom'],
+      ['MAC Ullastret · Làmina de plom', 'https://www.mac.cat/ca/Col-leccio/Tresors-del-MAC/ullastret/ULL-lamina-de-plom'],
+      ['Ajuntament de Palafrugell · Coordenades del jaciment, fitxa A-05', 'https://mapes.palafrugell.cat/documentacio/Planejament/PEPIPH/Vigent/finestra%20documents/05%20Arqueologia.pdf'],
+      ['IGN · Línia de costa', 'https://api-features.idee.es/collections/landwaterboundary'],
+      ['ACA · Cartografia i geoserveis', 'https://aca.gencat.cat/ca/laigua/consulta-de-dades/cartografia-geoserveis/'],
       ['Patrimoni cultural · Ruta dels ibers', 'https://patrimoni.gencat.cat/sites/default/files/hd-images-zip/descarregues/rutes/rutaibers_per_internet.pdf'],
       ['MAC Empúries · La ciutat grega', 'https://www.macempuries.cat/Sobre-el-MAC-Empuries/Itinerari-arqueologic/Ciutat-grega'],
     ],
@@ -2187,6 +2279,39 @@ window.quaderns ??= [];
     id: 'ciutat-romana',
     title: 'Un recorregut per una ciutat romana',
     intro: 'Una persona que arriba a Tàrraco pot anar al mercat, visitar un edifici públic i tornar a casa pel mateix carrer. Què la guia per la ciutat?',
+    coverFigure: 'planol-ciutat-terrasses',
+    figures: [
+      {
+        id: 'planol-ciutat-terrasses', section: 'tracat', name: 'Un plànol de ciutat sobre terrasses', ratio: 2280 / 1470,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Vista en planta amb carrers, fòrum, botigues i teatre. Una línia A–B creua un canvi de nivell amb escalinates, que apareix també al perfil lateral.',
+        caption: 'Ciutat romana de mostra, inspirada en les terrasses de Tàrraco. A i B uneixen el plànol amb el perfil. Busca més d’un camí possible entre el fòrum i el teatre.',
+        variants: {
+          pla: { src: 'illustracions/m030/planol-ciutat-terrasses-pla.png', thumbnail: 'illustracions/m030/miniatures/planol-ciutat-terrasses-pla.jpg' },
+          atles: { src: 'illustracions/m030/planol-ciutat-terrasses-atles.png', thumbnail: 'illustracions/m030/miniatures/planol-ciutat-terrasses-atles.jpg' },
+        },
+      },
+      {
+        id: 'forum-teatre-i-termes', section: 'edificis', name: 'Tres espais on es reunia la gent', ratio: 2280 / 1260,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'En un fòrum hi ha persones que conversen davant d’un temple. Al teatre, hi ha públic a les grades i una figura a l’escena. A les termes, hi ha una persona a l’aigua i una altra vora la piscina.',
+        caption: 'Reconstruccions didàctiques de tres espais públics. Observa què fa la gent a la plaça, a les grades i a la sala de bany.',
+        variants: {
+          pla: { src: 'illustracions/m030/forum-teatre-i-termes-pla.png', thumbnail: 'illustracions/m030/miniatures/forum-teatre-i-termes-pla.jpg' },
+          atles: { src: 'illustracions/m030/forum-teatre-i-termes-atles.png', thumbnail: 'illustracions/m030/miniatures/forum-teatre-i-termes-atles.jpg' },
+        },
+      },
+      {
+        id: 'taberna-del-carrer-al-taller', section: 'comerc', name: 'Una taberna oberta al carrer', ratio: 1200 / 915,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Una façana obre el taulell al carrer. Darrere de l’obertura hi ha espai per treballar o guardar recipients.',
+        caption: 'Tall esquemàtic d’una taberna. On podia atendre la gent qui hi treballava? On podia desar els materials?',
+        variants: {
+          pla: { src: 'illustracions/m030/taberna-del-carrer-al-taller-pla.png', thumbnail: 'illustracions/m030/miniatures/taberna-del-carrer-al-taller-pla.jpg' },
+          atles: { src: 'illustracions/m030/taberna-del-carrer-al-taller-atles.png', thumbnail: 'illustracions/m030/miniatures/taberna-del-carrer-al-taller-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('tracat', 'Carrers, places i cases',
         essencial('En moltes ciutats romanes, els carrers principals orientaven el **traçat urbà**.'),
@@ -2202,9 +2327,14 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'roma', title: 'En temps dels romans' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Interpreta espais públics, habitatges i botigues d’una ciutat romana.',
     curriculum: [{ row: 'medi:passat', section: 'comerc', note: 'Interpreta espais públics, habitatges i botigues d’una ciutat romana.' }],
     sources: [
+      ['MNAT · Teatre de Tàrraco', 'https://www.mnat.cat/teatre-de-tarraco/'],
       ['Patrimoni cultural · Tàrraco', 'https://patrimoni.gencat.cat/ca/tarraco'],
       ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
     ],
@@ -2214,6 +2344,41 @@ window.quaderns ??= [];
     id: 'comerc-tarraconense',
     title: 'D’una vil·la al port de Tàrraco',
     intro: 'Una gerra amb oli pot passar per un magatzem, una calçada i un port abans d’arribar a una altra ciutat. Seguim-ne el recorregut.',
+    coverFigure: 'oli-de-la-villa-al-mercat',
+    figures: [
+      {
+        id: 'oli-de-la-villa-al-mercat', section: 'xarxa', name: 'El recorregut d’una àmfora d’oli', ratio: 2280 / 1260,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Quatre vinyetes segueixen una àmfora amb una marca en forma de rombe. Passa d’una vil·la a un carro, a la càrrega d’un vaixell al port de Tàrraco i al taulell d’un mercat.',
+        caption: 'Vil·la, àmfora marcada i itinerari de mostra. Segueix la mateixa marca i busca a quin lloc l’àmfora passa del carro al vaixell.',
+        variants: {
+          pla: { src: 'illustracions/m031/oli-de-la-villa-al-mercat-pla.png', thumbnail: 'illustracions/m031/miniatures/oli-de-la-villa-al-mercat-pla.jpg' },
+          atles: { src: 'illustracions/m031/oli-de-la-villa-al-mercat-atles.png', thumbnail: 'illustracions/m031/miniatures/oli-de-la-villa-al-mercat-atles.jpg' },
+        },
+      },
+      {
+        id: 'forma-i-marca-d-amfora', section: 'productes', name: 'La forma i les marques d’una àmfora', ratio: 1200 / 1000,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'A l’esquerra, la part alta conservada contrasta amb el perfil aproximat discontinu de l’àmfora. Una guia assenyala el segell ACIRCI a l’ansa. A la dreta hi ha el segell ampliat.',
+        caption: 'Àmfora Dressel 20 fabricada a la Bètica i trobada a Londres. Es conserven el coll, les anses i la part superior. Quines pistes ens permetrien saber si es va tornar a fer servir per a un altre producte?',
+        credit: 'Dibuix segons el London Museum, objecte 26653. Escala orientativa a partir del diàmetre i l’alçada conservada de catàleg.',
+        variants: {
+          pla: { src: 'illustracions/m031/forma-i-marca-d-amfora-pla.png', thumbnail: 'illustracions/m031/miniatures/forma-i-marca-d-amfora-pla.jpg' },
+          atles: { src: 'illustracions/m031/forma-i-marca-d-amfora-atles.png', thumbnail: 'illustracions/m031/miniatures/forma-i-marca-d-amfora-atles.jpg' },
+        },
+      },
+      {
+        id: 'anvers-i-revers-denari', section: 'denari', name: 'Les dues cares d’un denari', ratio: 1200 / 884,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Dues cares de la mateixa moneda a la mateixa mida. L’anvers mostra el cap d’Apol·lo. El revers mostra els Dioscurs amb els cavalls i una inscripció al peu.',
+        caption: 'Denari de plata emès per Postumi Albí a Roma, cap al 96 aC. Compara el retrat de l’anvers amb l’escena i la inscripció del revers.',
+        credit: 'The Metropolitan Museum of Art, Rogers Fund 1908, 08.170.75. Fotografies de domini públic.',
+        variants: {
+          pla: { src: 'illustracions/m031/anvers-i-revers-denari-pla.png', thumbnail: 'illustracions/m031/miniatures/anvers-i-revers-denari-pla.jpg' },
+          atles: { src: 'illustracions/m031/anvers-i-revers-denari-atles.png', thumbnail: 'illustracions/m031/miniatures/anvers-i-revers-denari-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('villes', 'Produir i guardar al camp',
         essencial('Les **vil·les** eren finques rurals. Algunes produïen cereal, oli o vi per vendre o intercanviar.'),
@@ -2232,9 +2397,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'roma', title: 'En temps dels romans' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Segueix productes i rutes de l’Imperi, i interpreta el paper de les vil·les, les àmfores i el denari.',
     curriculum: [{ row: 'medi:passat', section: 'denari', note: 'Segueix productes i rutes de l’Imperi, i interpreta el paper de les vil·les, les àmfores i el denari.' }],
     sources: [
+      ['London Museum · Àmfora Dressel 20, 26653', 'https://www.londonmuseum.org.uk/collections/v/object-20399/amphora-dressel-20-amphora/'],
+      ['The Met · Denari de Postumi Albí, 08.170.75', 'https://www.metmuseum.org/art/collection/search/248032'],
       ['MNAT · El comerç a Tàrraco', 'https://www.mnat.cat/documents/74992mnat-itinerari-7-catal1.pdf'],
       ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
     ],
@@ -2244,6 +2415,40 @@ window.quaderns ??= [];
     id: 'creences-en-temps-romans',
     title: 'Déus, rituals i cristianisme a Roma',
     intro: 'Què ens expliquen un altar, una moneda amb un símbol i un sarcòfag? Les creences canvien al llarg del temps i de vegades conviuen al mateix lloc.',
+    coverFigure: 'comunitats-313-380',
+    figures: [
+      {
+        id: 'comunitats-313-380', section: 'oficial', name: 'Del segle I al 380', ratio: 2280 / 1225,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres fites ordenades: primeres comunitats cristianes a Judea al segle I, llibertat de culte per als cristians el 313 i cristianisme nicè com a religió oficial el 380. Dues bandes mostren la coexistència de pràctiques.',
+        caption: 'Línia del temps esquemàtica. Les bandes indiquen que diferents pràctiques religioses van coexistir. El 313 i el 380 marquen decisions diferents.',
+        variants: {
+          pla: { src: 'illustracions/m032/comunitats-313-380-pla.png', thumbnail: 'illustracions/m032/miniatures/comunitats-313-380-pla.jpg' },
+          atles: { src: 'illustracions/m032/comunitats-313-380-atles.png', thumbnail: 'illustracions/m032/miniatures/comunitats-313-380-atles.jpg' },
+        },
+      },
+      {
+        id: 'culte-domestic-i-public', section: 'rituals', name: 'Una ofrena a casa i un ritual públic', ratio: 2280 / 1290,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'A l’esquerra hi ha una ofrena petita en un altar domèstic amb dues figures en un nínxol. A la dreta hi ha un grup de persones davant de l’altar exterior d’un temple.',
+        caption: 'Reconstruccions didàctiques. Quines pistes permeten distingir una ofrena en un espai de casa d’una cerimònia a la plaça?',
+        variants: {
+          pla: { src: 'illustracions/m032/culte-domestic-i-public-pla.png', thumbnail: 'illustracions/m032/miniatures/culte-domestic-i-public-pla.jpg' },
+          atles: { src: 'illustracions/m032/culte-domestic-i-public-atles.png', thumbnail: 'illustracions/m032/miniatures/culte-domestic-i-public-atles.jpg' },
+        },
+      },
+      {
+        id: 'pistes-de-la-necropolis-tarraco', section: 'hispania', name: 'Una peça de la Necròpolis de Tàrraco', ratio: 2280 / 1430,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dibuix de la cara de marbre documentada, amb una figura humana al mig, solcs ondulats i un lleó amb una gasela a cada extrem. Un requadre amplia un dels relleus.',
+        caption: 'Sarcòfag dels Lleons, segle III dC. El catàleg el situa a la Necròpolis de Tarragona i descriu una difunta al centre i lleons amb gaseles als extrems. Què podem observar al relleu i què ens caldria contrastar amb el context?',
+        credit: 'Recreació gràfica segons el catàleg del Museu Nacional Arqueològic de Tarragona, MNAT P-53.',
+        variants: {
+          pla: { src: 'illustracions/m032/pistes-de-la-necropolis-tarraco-pla.png', thumbnail: 'illustracions/m032/miniatures/pistes-de-la-necropolis-tarraco-pla.jpg' },
+          atles: { src: 'illustracions/m032/pistes-de-la-necropolis-tarraco-atles.png', thumbnail: 'illustracions/m032/miniatures/pistes-de-la-necropolis-tarraco-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('rituals', 'Creences a casa i a la ciutat',
         essencial('En època romana molta gent practicava cultes a **diverses divinitats**.'),
@@ -2262,9 +2467,16 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'roma', title: 'En temps dels romans' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Explica el culte romà, l’expansió del cristianisme i algunes de les seves primeres restes a Hispània.',
     curriculum: [{ row: 'medi:passat', section: 'hispania', note: 'Explica el culte romà, l’expansió del cristianisme i algunes de les seves primeres restes a Hispània.' }],
     sources: [
+      ['MNAT · Sarcòfag dels Lleons, P-53', 'https://www.mnat.cat/obra/21/sarcofag-dels-lleons/'],
+      ['The Met · Estatueta d’un lar domèstic', 'https://www.metmuseum.org/art/collection/search/250737'],
+      ['Universitat de Fordham · Text de Lactanci sobre l’acord del 313', 'https://sourcebooks.web.fordham.edu/source/edict-milan.asp'],
       ['Britannica · La Roma antiga', 'https://www.britannica.com/place/ancient-Rome'],
       ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
     ],

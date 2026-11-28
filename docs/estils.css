@@ -36,7 +36,9 @@
   --ink: #19372f;
   --muted: #52655b;
   --green: #285c4d;
+  --curriculum-draft: #fff;
   --curriculum-illustrated: #85b5ab;
+  --curriculum-definitive: #246960;
   --accent: #b45139;
   --surface: #fffefa;
   --background: #f6f6f1;
@@ -63,7 +65,8 @@
   --ink: #ecf3ed;
   --muted: #b5c8bc;
   --green: #aad9c4;
-  --curriculum-illustrated: #669b90;
+  --curriculum-illustrated: #8fbbb1;
+  --curriculum-definitive: #216d65;
   --accent: #f3a489;
   --surface: #1d2b25;
   --background: #14201b;
@@ -598,9 +601,11 @@ summary { color: var(--green); font-weight: 650; }
   border: 1.5px solid currentColor;
   border-radius: 2px;
   color: var(--green);
-  background: currentColor;
+  background: var(--curriculum-definitive);
 }
-.curriculum-square.is-draft::before, .curriculum-legend .is-draft { background: transparent; }
+.curriculum-square.is-draft::before, .curriculum-legend .is-draft {
+  background: var(--curriculum-draft);
+}
 .curriculum-square.is-illustrated::before, .curriculum-legend .is-illustrated {
   background: var(--curriculum-illustrated);
 }
