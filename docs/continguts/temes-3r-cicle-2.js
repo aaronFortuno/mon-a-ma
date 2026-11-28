@@ -1555,4 +1555,114 @@ window.variantsMaterials ??= {};
       guia: ['Dibuixa «Algues → dàfnies → peix petit».', 'Digues què mengen les dàfnies en aquest model.', 'Afegeix una fletxa de les dàfnies a la larva de libèl·lula i explica què indica.'],
       ampliacio: [repte('Un mateix canvi, diverses conseqüències', 'Després d’una setmana amb poca llum es compten menys algues. Traça dos camins que podrien portar aquest canvi a altres organismes. Tria una mesura que recolliries durant diverses setmanes per comprovar una de les prediccions.')],
     });
+
+  fitxa(disseny, 'M115', 'porta-amb-sensor-i-motor', 'Com fem una porta que s’obri quan detecta algú?',
+    'Una fitxa de cartó fa de vianant i s’acosta a la porta d’una maqueta. Quina informació necessita la porta? Què li permet obrir-se i com decideix quan tornar a tancar?', {
+      descripcio: 'Construeix una maqueta de porta, combina sensor i actuador i comprova una regla d’obertura i tancament.',
+      curriculum: [['disseny', 'provar', 'Integra un sensor i un actuador en una maqueta i avalua la resposta amb casos de prova.']],
+      fonts: [sabersCicleSuperior, ['Micro:bit Educational Foundation · Fer servir un servomotor', 'https://support.microbit.org/support/solutions/articles/19000101864-using-a-servo-with-the-micro-bit']],
+      apartats: [
+        apartat('entrada-sortida', 'Mesurar i fer moure són dues feines',
+          'El **sensor** mesura a quina distància hi ha un objecte. L’**actuador** és la peça que fa moure la porta quan rep una ordre.',
+          'Un servomotor pot girar fins a una posició determinada. Per provar la idea en paper, una persona pot llegir la distància en una targeta i una altra pot moure la porta quan rep l’ordre.'),
+        apartat('maqueta', 'Muntem una porta amb dues posicions',
+          'Dibuixa una entrada, fixa-hi una porta petita de cartó amb cinta que faci de frontissa i marca les posicions **oberta** i **tancada**.',
+          'Prepara targetes amb lectures de distància. Dibuixa fletxes entre «sensor», «regla» i «actuador». Si disposeu de material de robòtica, podeu representar el moviment amb un servomotor escolar muntat amb el docent i una porta lleugera de cartó.'),
+        apartat('regla', 'Obrir aviat i tancar després de dues lectures',
+          'Si la lectura és de **10 cm o menys**, la porta s’obre i el recompte de lectures llunyanes torna a zero. Si és de **més de 10 cm** dues vegades seguides, es tanca.',
+          'Comença amb la porta tancada i el recompte a zero. Una sola lectura llunyana manté la posició que ja tenia la porta. Registra la posició i el recompte després de cada lectura.'),
+        apartat('provar', 'Prova la regla abans de canviar-la',
+          'La prova inclou una lectura al límit de **10 cm**, una lectura llunyana aïllada i dues lectures llunyanes seguides.',
+          taula(['Ordre de prova', 'Lectures en centímetres'], [
+            ['Cas A', '14, 10, 12, 9, 12, 15'],
+            ['Cas B', '8, 11, 11'],
+          ], 38),
+          repte('Assenyala quan es mou la porta', 'Simula els dos casos per separat, començant sempre amb la porta tancada. Escriu després de quina lectura s’obre i després de quina es torna a tancar. Què passaria en el cas A si es tanqués a la primera lectura de més de 10 cm?')),
+      ],
+      guia: ['Mou la porta de cartó per representar l’actuador.', 'Comença amb la porta tancada i passa les targetes 8, 11 i 11.', 'Marca quan s’obre i quan es tanca.'],
+      ampliacio: [repte('I si no hi ha cap lectura?', 'Imagina que la porta és oberta i el sensor retorna una lectura desconeguda. Proposa què hauria de fer el model, quina indicació donaria i com provaries que aplica la regla nova.')],
+    });
+
+  fitxa(disseny, 'M116', 'suport-estable-de-tauleta', 'Com dissenyem un suport de tauleta que no tombi?',
+    'Voleu fer una lectura amb una tauleta dreta sobre la taula. El primer suport es mou quan toques la pantalla. Què podeu dibuixar, mesurar i canviar abans de repetir la prova?', {
+      descripcio: 'Pren mides, dibuixa un suport a escala i compara l’estabilitat de dos prototips.',
+      curriculum: [
+        ['disseny', 'millorar', 'Utilitza un croquis 2D per construir i millorar un prototip a partir de les mides i els criteris d’ús.'],
+        ['indagacio', 'prova', 'Manté les condicions de la prova i registra l’estabilitat de dos dissenys.'],
+      ],
+      fonts: [sabersCicleSuperior],
+      apartats: [
+        apartat('mides', 'Prenem mides i decidim quina prova ha de superar',
+          'Un **requisit** explica què ha de poder fer el suport. Ha de sostenir el model, deixar la superfície de lectura visible i mantenir-se dret quan el toquem.',
+          'Talleu un model de tauleta de cartó rígid de 16 × 10 cm. Mesureu-ne el gruix i prepareu un topall baix que impedeixi que llisqui. Feu servir aquest mateix model en totes les proves.'),
+        apartat('croquis', 'Dibuixa la base, el respatller i el topall',
+          'En una **vista lateral**, pots marcar la fondària de la base i la inclinació del respatller. En el dibuix a escala 1:1, 1 cm del paper correspon a 1 cm del prototip.',
+          'Dibuixa dues bases de 5 cm i 9 cm de fondària. El respatller i el topall han de tenir la mateixa posició respecte de la vora de davant. Indica al dibuix què es manté igual i què canvia.',
+          'Retalla les bases en cartó i fixa cada respatller amb dos reforços triangulars iguals i cinta. Enganxa el topall a davant i comprova que el model s’hi recolza amb el mateix angle als dos suports.'),
+        apartat('prova', 'Compara sense canviar el gest',
+          'Una base més ampla en la direcció de la bolcada pot ajudar el model a mantenir-se dret. Fes cada **prova** amb la mateixa tauleta de cartó i sobre una taula plana.',
+          'Amb un regle vertical darrere de cada suport, inclina lentament la part alta del model cap enrere fins a una marca acordada. Anota si el suport es mou, es recupera o tomba. Repeteix-ho tres vegades en cada suport, amb el mateix gest i la mateixa marca.'),
+        apartat('millorar', 'Revisa el dibuix amb les dades de la prova',
+          'Per **avaluar** el disseny, explica si compleix els requisits i proposa una millora que es pugui tornar a provar.',
+          repte('Presenta les dues proves', 'Dibuixa una vista lateral de cada suport i marca la fondària de la base. Escriu quin ha estat més estable en la prova. Si en un el model rellisca abans de tombar, quina part canviaries?')),
+      ],
+      guia: ['Dibuixa la tauleta de cartó i el seu topall.', 'Escriu 5 cm en una base i 9 cm a l’altra.', 'Digues quina cosa has de mantenir igual per comparar els dos suports.'],
+      ampliacio: [repte('Un suport que càpiga en un espai petit', 'L’espai disponible admet una base de 7 cm. Proposa un canvi al respatller o al topall, actualitza el dibuix a escala i explica com comprovaries que manté un angle de lectura còmode.')],
+    });
+
+  fitxa(cel, 'M117', 'brises-de-mar-i-terra', 'Per què la brisa pot canviar entre el dia i la nit?',
+    'Una tarda, a prop de la platja, el vent arriba des del mar. De matinada, en un dia tranquil, pot arribar des de terra. Què ha canviat?', {
+      descripcio: 'Relaciona la temperatura de la costa i el mar amb la circulació de l’aire.',
+      curriculum: [
+        ['terra', 'dia-i-nit', 'Relaciona l’escalfament de la terra i el mar amb el moviment de l’aire en un model de brises.'],
+        ['reptes', 'observacio', 'Interpreta observacions de temperatura i vent per explicar un fenomen atmosfèric.'],
+      ],
+      fonts: [sabersCicleSuperior, ['National Weather Service · Glossari de brises', 'https://forecast.weather.gov/glossary.php?word=breeze']],
+      apartats: [
+        apartat('escalfar', 'La terra i el mar canvien a ritmes diferents',
+          'En un dia tranquil, la **terra** sol escalfar-se i refredar-se més de pressa que el **mar**. Això pot fer que el lloc més càlid canviï entre la tarda i la nit.',
+          'L’aire de sobre s’escalfa en contacte amb la superfície. L’aire més càlid és menys dens que l’aire més fred que l’envolta i tendeix a pujar.'),
+        apartat('dia-i-nit', 'D’on ve la brisa que notem?',
+          'De dia, si la terra és més càlida, pot aparèixer una **brisa marina** que va del mar cap a terra. De nit, si el mar queda més càlid, pot aparèixer una **brisa terrestre** que va de terra cap al mar.',
+          taula(['Moment', 'Temperatura a terra', 'Temperatura del mar'], [
+            ['Tarda · 15 h', '26 °C', '20 °C'],
+            ['Matinada · 4 h', '14 °C', '19 °C'],
+          ], 35),
+          'Les temperatures de les dues superfícies són d’un model didàctic. Dibuixa una fletxa que pugi sobre la zona més càlida i una fletxa arran de terra o d’aigua que hi porti aire des de la zona més freda.'),
+        apartat('observacio', 'Com comprovem cap on va l’aire?',
+          'Per investigar una **brisa**, anota d’on ve el vent, l’hora i les temperatures en més d’una observació. Un vent general més fort pot dominar el moviment de l’aire.',
+          repte('Dues fletxes i dues hores', 'Dibuixa la direcció de la brisa arran de la superfície per a cada fila de la taula. En una observació real al mateix lloc, quines dades anotaries per comprovar si el model encaixa?')),
+      ],
+      guia: ['A la tarda, compara 26 °C a terra i 20 °C al mar.', 'Marca amb una fletxa el lloc on l’aire més càlid puja.', 'Assenyala d’on arriba l’aire que el substitueix.'],
+      ampliacio: [repte('Quatre dies a la mateixa platja', 'Tres dies tranquils observes una brisa marina a la tarda. Un quart dia hi ha un vent fort que ve de terra. Quina dada del vent et caldria comparar abans de relacionar aquest últim dia amb la brisa del model?')],
+    });
+
+  fitxa(cel, 'M118', 'del-desglac-al-riu', 'Què canvia al riu quan es fon la neu?',
+    'Fa dies que no plou a la conca, però el riu porta més aigua. A la muntanya han pujat les temperatures. Poden estar relacionades totes dues observacions?', {
+      descripcio: 'Segueix l’aigua del desglaç i compara dades de temperatura, neu i cabal.',
+      curriculum: [
+        ['terra', 'recomptes', 'Relaciona temperatura, neu acumulada i canvi de cabal en una conca.'],
+        ['indagacio', 'causes', 'Interpreta sèries de mesures i cerca dades per comparar explicacions.'],
+      ],
+      fonts: [sabersCicleSuperior, ['USGS · El desglaç en el cicle de l’aigua', 'https://www.usgs.gov/water-science-school/science/snowmelt-runoff-and-water-cycle']],
+      apartats: [
+        apartat('recorregut', 'De la neu acumulada fins a la llera',
+          'Quan la **neu es fon**, una part de l’aigua es filtra al sòl i una altra baixa pel vessant. Els rierols i afluents poden conduir-la fins al riu.',
+          'La neu reté durant setmanes o mesos una part de l’aigua que ha precipitat. El moment en què es fon depèn de la temperatura, la llum, l’altitud i altres condicions.'),
+        apartat('recomptes', 'Llegim quatre dies de dades',
+          'El **cabal** indica quanta aigua passa per un punt del riu cada segon. Per interpretar-lo, compara què passa riu avall amb els canvis a la muntanya.',
+          taula(['Dia', 'Temperatura màxima', 'Gruix de neu', 'Cabal'], [
+            ['1', '2 °C', '42 cm', '4 m³/s'],
+            ['2', '5 °C', '37 cm', '5 m³/s'],
+            ['3', '9 °C', '32 cm', '7 m³/s'],
+            ['4', '12 °C', '24 cm', '10 m³/s'],
+          ], 18),
+          'En aquest exemple inventat no plou. Les dades de neu són del mateix punt de muntanya i les de cabal, del mateix punt del riu. El gruix de neu també pot baixar perquè la neu es compacta.'),
+        apartat('causes', 'Quines dades donarien més força a la idea?',
+          'Per relacionar el **desglaç** amb la pujada del riu, comprova si també ha plogut a altres parts de la conca o si ha canviat la sortida d’aigua d’un embassament.',
+          repte('Explica el canvi amb tres mesures', 'Indica com canvien la temperatura, la neu i el cabal entre el dia 1 i el 4. Dibuixa un camí possible de l’aigua fins al riu i apunta una dada que voldries comprovar.')),
+      ],
+      guia: ['El dia 1 hi ha 42 cm de neu i el dia 4, 24 cm. Digues què ha canviat.', 'El cabal passa de 4 a 10 m³/s. Digues si puja o baixa.', 'Dibuixa una fletxa de la neu que es fon cap al rierol.'],
+      ampliacio: [repte('La pujada arriba més tard', 'Una estació a la capçalera registra la pujada al matí i una altra més avall a la tarda. Proposa per què poden passar hores entre les dues mesures i com compararies ambdues sèries.')],
+    });
 }

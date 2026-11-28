@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.76 · 28 de novembre de 2026
+
+- Publica M115–M118, quatre esborranys sobre maquetes de disseny, brises i el desglaç dels rius.
+
 ## 0.1.75 · 28 de novembre de 2026
 
 - Publica M111–M114, quatre esborranys sobre petjada ecològica, impostos, comerç del cacau i xarxes alimentàries.
