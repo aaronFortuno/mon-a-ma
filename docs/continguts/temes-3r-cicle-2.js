@@ -1316,4 +1316,86 @@ window.variantsMaterials ??= {};
       guia: ['Compara 1.220 habitants el 2024 i 1.250 el 2025. Calcula quants més n’hi ha.', 'Per al saldo natural, calcula 10 menys 16.', 'Per al saldo migratori, calcula 48 menys 12 i suma-hi el resultat anterior.'],
       ampliacio: [repte('El mateix canvi en municipis diferents', 'Dos municipis guanyen 30 habitants. Un en tenia 1.000 i l’altre 5.000. Calcula quin percentatge de la població inicial representa un augment de 30 a cada municipi. Explica què ens diu aquesta comparació que el recompte de persones tot sol no mostra.')],
     });
+
+  fitxa(disseny, 'M106', 'pont-de-paper', 'Quin pont de paper aguanta més pes?',
+    'La classe vol fer un pont perquè unes fitxes passin per damunt d’un buit. Cada pont només pot fer servir un full. Com podem canviar la forma del paper perquè aguanti més càrrega?', {
+      descripcio: 'Dissenya un pont de paper amb materials limitats, compara dues formes i revisa el prototip.',
+      curriculum: [
+        ['disseny', 'millora', 'Dissenya, construeix, posa a prova i millora un prototip amb uns criteris i uns materials definits.'],
+        ['indagacio', 'carrega', 'Controla la distància i la càrrega en una prova de resistència i compara els resultats.'],
+      ],
+      fonts: [sabersCicleSuperior],
+      apartats: [
+        apartat('condicions', 'Un repte amb tres condicions',
+          'El **prototip** ha de cobrir un buit de 15 cm, fer servir un full A4 i aguantar tantes fitxes iguals com pugui.',
+          'Poseu dos llibres gruixuts estables, de la mateixa alçada, separats 15 cm. Col·loqueu-hi el full amb el costat llarg en la direcció del pont. L’espai entre llibres ha de ser el mateix a cada prova.'),
+        apartat('formes', 'Un full pla i un full amb vores plegades',
+          'Compareu un **full pla** amb un altre full igual amb les dues vores llargues plegades cap amunt. Tots dos tenen la mateixa quantitat de paper.',
+          'Feu cada plec a 2 cm de la vora. Deixeu la mateixa llargada de paper sobre cada suport. Abans de provar-ho, dibuixeu els dos models de costat i feu una predicció.'),
+        apartat('carrega', 'La càrrega sempre al mateix lloc',
+          'Afegiu **una fitxa cada vegada al centre**. Anoteu quantes n’aguanta abans que el paper toqui la taula o que caigui la càrrega.',
+          taula(['Forma', 'Prova 1', 'Prova 2', 'Prova 3'], [
+            ['Full pla', '4', '5', '4'],
+            ['Vores plegades', '10', '9', '10'],
+          ], 37),
+          'Les dades de la taula són un exemple. Si repetiu una prova, feu servir un full nou del mateix tipus perquè els plecs o les deformacions anteriors no afectin el resultat.'),
+        apartat('millora', 'Canvia una cosa i torna-ho a provar',
+          'Per **millorar** el model, trieu un sol canvi i compareu-lo amb el model de referència amb el mateix procediment.',
+          repte('Tria què modificaràs', 'Proposeu modificar l’alçada dels plecs o la forma del pont. Dibuixeu la idea, indiqueu quina mesura es manté igual i escriviu el resultat que voldríeu superar.')),
+      ],
+      guia: ['Separa els llibres 15 cm.', 'Posa les fitxes d’una en una al centre de cada pont.', 'En una prova, el full pla n’aguanta 4 i el plegat 10. Digues quin n’aguanta més i quantes de diferència.'],
+      ampliacio: [repte('Guanya sempre el mateix?', 'El pont amb les vores plegades ha aguantat més fitxes al centre. Proposa una prova amb la càrrega prop d’una vora. Explica què mantindries igual i per què no pots donar el resultat per sabut.')],
+    });
+
+  fitxa(disseny, 'M107', 'robot-amb-instruccions', 'Com fem arribar un robot al seu destí?',
+    'Un robot de paper ha de portar una capsa de la biblioteca al taller. Només sap avançar una casella i girar. Com li donarem les instruccions perquè esquivi els obstacles?', {
+      descripcio: 'Escriu i comprova instruccions en blocs per a un robot i substitueix repeticions per un bucle.',
+      curriculum: [['disseny', 'depurar', 'Descompon un recorregut, identifica patrons, empra bucles i comprova i depura una seqüència.']],
+      fonts: [sabersCicleSuperior, ['Code.org · Depuració en un laberint', 'https://studio.code.org/courses/coursec-2025/units/1/lessons/4/levels/2']],
+      apartats: [
+        apartat('graella', 'Situem el robot, el destí i els obstacles',
+          'Dibuixa una graella de 5 × 5. Les columnes són **A–E**, d’esquerra a dreta, i les files **1–5**, de dalt a baix. El robot és a **A1** i mira cap a la dreta. El destí és **D3**. Bloqueja **C2** i **B3**.',
+          taula(['Fila', 'A', 'B', 'C', 'D', 'E'], [
+            ['1', 'Inici →', '·', '·', '·', '·'],
+            ['2', '·', '·', 'Bloqueig', '·', '·'],
+            ['3', '·', 'Bloqueig', '·', 'Destí', '·'],
+            ['4', '·', '·', '·', '·', '·'],
+            ['5', '·', '·', '·', '·', '·'],
+          ], 16)),
+        apartat('blocs', 'Una instrucció cada vegada',
+          'El bloc **Avança** mou el robot una casella cap on mira. **Gira a la dreta** i **Gira a l’esquerra** el fan girar un quart de volta sense moure’l de casella.',
+          'Retalleu targetes amb els blocs o dibuixeu-los en fila. Una persona llegeix i una altra mou el robot. Marqueu la casella i l’orientació després de cada bloc.'),
+        apartat('bucle', 'Repetir un pas amb un bloc',
+          'Un **bucle** permet repetir una instrucció diverses vegades. **Repeteix 3 vegades [Avança]** fa tres avanços seguits.',
+          'D’A1 a D1 hi ha tres avanços si el robot mira cap a la dreta. Un gir a la dreta el deixa mirant cap a la fila 2. Continua la seqüència fins a D3.'),
+        apartat('depurar', 'Troba el primer error i corregeix-lo',
+          '**Depurar** és localitzar els errors d’una seqüència i comprovar que el canvi els resol.',
+          repte('Un gir massa aviat', 'Prova «Repeteix 2 vegades [Avança] → Gira a la dreta → Repeteix 2 vegades [Avança]». En quina casella apareix el primer problema? Canvia un sol nombre i prova el programa sencer des d’A1.')),
+      ],
+      guia: ['Dibuixa la graella i situa A1, D3 i els dos obstacles.', 'Avança tres vegades des d’A1 i digues on arribes.', 'Gira cap avall sense canviar de casella i escriu quants avanços et falten.'],
+      ampliacio: [repte('Canvia l’entorn', 'Bloqueja també D2. Troba un altre recorregut d’A1 a D3, escriu-lo amb blocs i comprova’l. Busca quines repeticions pots agrupar sense canviar el recorregut.')],
+    });
+
+  fitxa(cel, 'M108', 'satel-lits-i-residus-espacials', 'Què hi fem, a l’espai, i què hi deixem?',
+    'Pots veure una imatge dels núvols de tot un país feta des de l’espai. El satèl·lit que l’ha captada comparteix l’entorn amb altres naus i amb fragments que ja no tenen cap funció.', {
+      descripcio: 'Relaciona alguns usos dels satèl·lits amb la vida a la Terra i analitza com reduir els residus en òrbita.',
+      curriculum: [['terra', 'decisions', 'Analitza els usos dels satèl·lits i les conseqüències de la contaminació espacial.']],
+      fonts: [sabersCicleSuperior, ['ESA · Residus espacials', 'https://www.esa.int/about-us/directorates/operations/space-safety/space-debris'], ['ESA · Observació de la Terra', 'https://www.esa.int/Applications/Observing_the_Earth']],
+      apartats: [
+        apartat('orbita', 'Què vol dir estar en òrbita?',
+          'Un **satèl·lit artificial** és un objecte construït que hem posat en òrbita. Mentre avança, la gravetat fa que el seu camí es corbi al voltant de la Terra.',
+          'Hi ha òrbites de formes i altituds diferents. Per llegir un esquema, segueix el traç que envolta la Terra i comprova si indica que les distàncies s’han dibuixat a escala.'),
+        apartat('usos', 'Per a què ens serveixen els satèl·lits?',
+          'Alguns satèl·lits **observen la Terra**. D’altres ajuden a transmetre comunicacions o a saber on som.',
+          'Les imatges de la Terra permeten seguir núvols i observar com canvia el territori. Els aparells de navegació poden usar senyals de diversos satèl·lits per calcular una posició.'),
+        apartat('residus', 'Objectes que ja no fan cap servei',
+          'Els **residus espacials** inclouen satèl·lits fora de servei, parts de coets i fragments que continuen en òrbita.',
+          'Els objectes en òrbita es mouen molt de pressa. Un xoc pot danyar una nau en funcionament i produir fragments nous. També hi ha peces que, amb el temps, tornen a l’atmosfera.'),
+        apartat('decisions', 'Planificar abans del llançament',
+          'Abans d’enviar un satèl·lit, es pot planificar com es **retirarà de l’òrbita de treball** al final de la missió. La solució depèn de l’òrbita i del tipus de satèl·lit.',
+          repte('Tria què vols saber de cada objecte', 'En un esquema de l’espai proper a la Terra, dibuixa un satèl·lit actiu, un satèl·lit aturat i un fragment. Quina informació et cal saber per identificar quin encara fa un servei? Explica com ajudaria planificar el final de la missió.')),
+      ],
+      guia: ['Digues quina informació fa servir una previsió meteorològica que pot venir d’un satèl·lit.', 'Identifica un exemple de residu espacial.', 'Explica què es pot decidir abans del llançament.'],
+      ampliacio: [repte('Dues decisions per a un mateix problema', 'Compara planificar la retirada d’un satèl·lit nou i fer el seguiment d’un fragment que ja existeix. Digues en quin moment serveix cada acció i quina informació necessitaria l’equip.')],
+    });
 }

@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.73 · 28 de novembre de 2026
+
+- Publica M106–M108, tres esborranys sobre ponts de paper, programació d’un robot i residus espacials.
+
 ## 0.1.72 · 28 de novembre de 2026
 
 - Publica M102–M105, quatre esborranys sobre contaminació lumínica, flotabilitat, circuits elèctrics i població municipal.
