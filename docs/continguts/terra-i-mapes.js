@@ -1486,4 +1486,276 @@ window.quaderns ??= [];
       ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
     ],
   });
+
+  addTopic('M035', {
+    id: 'visigots-inici-edat-mitjana',
+    title: 'De l’Imperi romà al regne visigot',
+    intro: 'Les ciutats, les llengües i les creences continuen canviant quan es fragmenta un imperi. Què es manté i qui governa la Península després de Roma?',
+    sections: [
+      section('imperi', 'Quan es fragmenta l’Imperi d’Occident',
+        essencial('Al segle V, l’**Imperi romà d’Occident** es va fragmentar. Diversos grups van formar regnes als seus antics territoris.'),
+        p('El 476 es fa servir com a data convencional del final de l’Imperi d’Occident. A l’est, l’Imperi romà va continuar. Les ciutats, el llatí parlat i algunes formes de vida van perdurar als territoris occidentals.')),
+      section('visigots', 'Un regne amb centre a Toledo',
+        essencial('Els **visigots** van governar bona part de la península Ibèrica. **Toledo** va esdevenir la seva capital.'),
+        p('El regne reunia persones amb orígens diversos i va conservar part de les maneres de governar romanes. Amb el temps es van transformar les lleis, els vincles entre grups i les pràctiques religioses.'),
+        box('prova', 'Què continua i què canvia?', 'Escriu un exemple de continuïtat després de Roma i un canvi en qui governa la Península. Quina dada de la lectura sosté cada resposta?')),
+      section('set-cents', 'L’arribada d’exèrcits musulmans',
+        essencial('L’any **711**, un exèrcit musulmà procedent del nord d’Àfrica va entrar a la Península.'),
+        p('Amb conquestes i pactes, el regne visigot va perdre el control de gran part del territori. Es va formar **Al-Àndalus**. La conquesta no va tenir el mateix ritme a tot arreu.')),
+      section('islam', 'Què és l’islam?',
+        essencial('L’**islam** és una religió monoteista que va sorgir a Aràbia al segle VII. El seu llibre sagrat és l’**Alcorà**.'),
+        p('Els musulmans consideren Mahoma un profeta. Una llengua, una religió i un govern són coses diferents. A les societats medievals hi podia haver persones de llengües i religions diverses.')),
+    ],
+  }, {
+    collection: { id: 'medieval', title: 'L’edat mitjana' },
+    theme: 'Història',
+    description: 'Relaciona la fragmentació de l’Imperi romà d’Occident amb el regne visigot, l’arribada musulmana i l’islam.',
+    curriculum: [{ row: 'medi:passat', section: 'visigots', note: 'Relaciona la fragmentació de l’Imperi romà d’Occident amb el regne visigot, l’arribada musulmana i l’islam.' }],
+    sources: [
+      ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
+      ['Britannica · La Roma antiga', 'https://www.britannica.com/place/ancient-Rome'],
+    ],
+  });
+
+  addTopic('M036', {
+    id: 'terres-andalusines',
+    title: 'Lleida i Tortosa en temps d’Al-Àndalus',
+    intro: 'Els límits dels territoris medievals no coincideixen amb els actuals. A les terres de Lleida i Tortosa, podem seguir pistes de com era la vida sota govern andalusí.',
+    sections: [
+      section('alandalus', 'Un territori que va canviar de forma',
+        essencial('**Al-Àndalus** és el nom que reben els territoris peninsulars sota govern musulmà durant l’edat mitjana.'),
+        p('Les fronteres van variar amb els segles. Lleida, Balaguer i Tortosa van formar part d’Al-Àndalus durant molt de temps. Per situar-les, ens cal conèixer la data del mapa.')),
+      section('vida', 'Llengües, creences i vida urbana',
+        essencial('En els territoris andalusins es van estendre l’ús de l’**àrab** i l’**islam**. Hi continuaven convivint comunitats amb creences diferents.'),
+        p('La difusió de l’islam, anomenada islamització, va ser gradual. Tortosa connectava l’Ebre amb la mar. Lleida articulava un territori agrícola i comercial a la vall del Segre.'),
+        box('prova', 'Un riu que connecta', 'Situa Lleida i Tortosa al mapa amb el Segre i l’Ebre. Quin avantatge tenia viure o comerciar a prop d’aquests rius?')),
+      section('alqueries', 'Les alqueries i els conreus',
+        essencial('Una **alqueria** era un petit assentament rural amb terres de conreu.'),
+        p('En alguns llocs es conreava aprofitant séquies i altres sistemes de reg. Les alqueries, els camins i les ciutats formaven una xarxa per moure gent i productes.')),
+    ],
+  }, {
+    collection: { id: 'medieval', title: 'L’edat mitjana' },
+    theme: 'Història',
+    description: 'Situa parts de l’actual Catalunya a Al-Àndalus i explica la vida de ciutats i alqueries.',
+    curriculum: [{ row: 'medi:passat', section: 'vida', note: 'Situa parts de l’actual Catalunya a Al-Àndalus i explica la vida de ciutats i alqueries.' }],
+    sources: [
+      ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
+    ],
+  });
+
+  addTopic('M037', {
+    id: 'comtats-i-feudalisme',
+    title: 'Dels comtats a les terres feudals',
+    intro: 'Una frontera pot donar lloc a castells i comtats. Amb els segles, aquells territoris canvien de govern i amplien les seves relacions.',
+    sections: [
+      section('frontera', 'Comtats a la frontera carolíngia',
+        essencial('Els **comtats catalans** es van formar en territoris vinculats a l’Imperi carolingi, a prop de la frontera amb Al-Àndalus.'),
+        p('Els comtes hi exercien funcions de govern. La **Marca Hispànica** és el nom que s’utilitza per parlar d’aquella zona de frontera formada per diversos comtats i territoris.')),
+      section('autonomia', 'Una autonomia guanyada amb el temps',
+        essencial('Els comtes van actuar amb una autonomia cada vegada més gran respecte dels reis francs.'),
+        p('El comtat de Barcelona va guanyar pes amb el temps. A finals del segle X es va afeblir el vincle amb la monarquia franca. Va ser un procés d’anys i va afectar de manera diferent cada comtat.')),
+      section('poblament', 'Conquesta i reorganització del territori',
+        essencial('Durant els segles XI i XII, els comtes van ampliar els dominis i van reorganitzar espais ja habitats.'),
+        p('Les conquestes i els canvis de poblament van portar repartiments de terres i arribada de nous habitants. Altres persones van romandre, van ser desplaçades o van perdre terres. El mot «repoblament» no implica que totes les zones fossin buides.'),
+        box('prova', 'Canvis d’habitants i de poder', 'Explica amb un exemple per què el govern d’una terra pot canviar mentre una part dels habitants hi continua vivint. Quina font permetria comprovar-ho?')),
+      section('feudalisme', 'Terres, protecció i poder',
+        essencial('En una societat **feudal**, els senyors controlaven terres i podien exigir rendes o serveis a la pagesia.'),
+        p('Alguns nobles es comprometien a donar ajuda i fidelitat a altres a canvi de terres o drets. Monestirs, bisbats i senyors laics també podien controlar dominis. Les condicions variaven segons el lloc.')),
+    ],
+  }, {
+    collection: { id: 'medieval', title: 'L’edat mitjana' },
+    theme: 'Història',
+    description: 'Segueix l’origen dels comtats catalans, l’autonomia creixent i les transformacions feudals i de poblament.',
+    curriculum: [{ row: 'medi:passat', section: 'poblament', note: 'Segueix l’origen dels comtats catalans, l’autonomia creixent i les transformacions feudals i de poblament.' }],
+    sources: [
+      ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
+    ],
+  });
+
+  addTopic('M038', {
+    id: 'regnes-peninsulars-medievals',
+    title: 'Una península amb regnes canviants',
+    intro: 'Si comparem tres mapes separats per segles veurem que canvien fronteres, governants i habitants. Un mapa amb data permet tractar aquests canvis amb més precisió.',
+    sections: [
+      section('segles', 'Tres moments per comparar',
+        essencial('Als segles XI, XII i XIV, la Península estava repartida entre diversos regnes i territoris. Les fronteres van canviar.'),
+        p('Al segle XI hi havia, entre altres, Lleó, Castella, Navarra, Aragó, els comtats catalans i regnes de taifes en terres andalusines. Al segle XII es van formar el regne de Portugal i la unió que coneixem com a Corona d’Aragó. Al XIV destaquen Castella, Portugal, Navarra, la Corona d’Aragó i el regne nassarita de Granada.')),
+      section('exercits', 'Expandir-se amb conquestes i pactes',
+        essencial('Els **exèrcits** van ser importants en els canvis de fronteres. Els pactes, les unions entre cases governants i les treves també hi van influir.'),
+        p('Alguns llocs estaven fortificats perquè controlaven un pas, una vall o un camí. Els conflictes afectaven la pagesia i els nuclis urbans i comportaven nous impostos o canvis d’autoritat.')),
+      section('poblament', 'Qui vivia als territoris conquerits?',
+        essencial('Després de les conquestes es podien repartir terres, arribar nous pobladors o mantenir-hi part de la població anterior.'),
+        p('Alguns governs atorgaven cartes de poblament amb normes i avantatges per atraure veïns. També hi hagué desplaçaments i situacions de desigualtat. Convé comprovar què va passar en cada cas.'),
+        box('prova', 'Comparar dos mapes i una font', 'Localitza Granada en un mapa del segle XIV. Compara’l amb un mapa del segle XI. Quin canvi polític hi veus? Quina font et podria ajudar a saber si els habitants del lloc també van canviar?')),
+    ],
+  }, {
+    collection: { id: 'medieval', title: 'L’edat mitjana' },
+    theme: 'Història',
+    description: 'Compara la Península dels segles XI, XII i XIV i analitza conquestes, aliances i poblament.',
+    curriculum: [{ row: 'medi:passat', section: 'poblament', note: 'Compara la Península dels segles XI, XII i XIV i analitza conquestes, aliances i poblament.' }],
+    sources: [
+      ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
+      ['MHC · L’expansió de la Corona d’Aragó', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/el_naixement_d_una_nacio/l_expansio_de_la_corona_d_arago'],
+    ],
+  });
+
+  addTopic('M039', {
+    id: 'noblesa-i-castells',
+    title: 'El castell, estratègia i vida quotidiana',
+    intro: 'Un castell pot dominar una ruta i allotjar persones alhora. El seu plànol permet descobrir quins espais responien a cada necessitat.',
+    sections: [
+      section('estaments', 'Qui tenia terres i privilegis?',
+        essencial('En molts territoris medievals, la **noblesa** tenia privilegis i controlava terres i drets. Part del clergat també exercia poder.'),
+        p('El terme **estament** agrupa persones amb una posició social i uns drets semblants. Dins de cada grup hi havia diferències de riquesa i d’autoritat.')),
+      section('situacio', 'El castell dins del territori',
+        essencial('El **castell** podia servir per controlar un territori i defensar un pas. També podia ser residència i centre de govern.'),
+        p('Els castells sovint se situaven en llocs elevats. Les vistes, l’accés a l’aigua i la proximitat a camins eren factors importants. El conjunt podia canviar d’ús durant els segles.')),
+      section('parts', 'Muralles, torres i espais interiors',
+        essencial('La muralla tanca un recinte. Les torres permeten observar l’entorn i el pati distribueix l’accés a diversos espais.'),
+        p('Una **cisterna** permet guardar aigua. En força castells també hi havia cuina, sales de residència i magatzems. Les parts varien segons la mida i l’època de l’edifici.'),
+        box('prova', 'Dibuixa un castell que funcioni', 'En una planta senzilla, situa una entrada, una cisterna, una torre i un magatzem. Explica dues decisions amb la funció de cada espai.')),
+    ],
+  }, {
+    collection: { id: 'medieval', title: 'L’edat mitjana' },
+    theme: 'Història',
+    description: 'Relaciona el poder de la noblesa amb la funció i els espais del castell medieval.',
+    curriculum: [{ row: 'medi:passat', section: 'parts', note: 'Relaciona el poder de la noblesa amb la funció i els espais del castell medieval.' }],
+    sources: [
+      ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
+      ['MHC · La mar nostra', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/la_mar_nostra'],
+    ],
+  });
+
+  addTopic('M040', {
+    id: 'pagesia-i-feus',
+    title: 'Treballar i viure en un domini feudal',
+    intro: 'Als marges d’un llogaret hi ha camps, boscos i camins. Qui hi treballava i qui decidia com se n’aprofitaven els recursos?',
+    sections: [
+      section('pagesia', 'La feina de la pagesia',
+        essencial('La major part de la població medieval vivia al camp. La **pagesia** conreava la terra i criava animals.'),
+        p('Homes, dones i infants contribuïen de maneres diverses a les tasques domèstiques i agrícoles. Algunes famílies tenien terres pròpies i altres treballaven terres sota drets d’un senyor.')),
+      section('produccio', 'Collites al ritme de les estacions',
+        essencial('Les collites depenien del clima, de la terra i del treball. Els cereals tenien un paper important en l’alimentació.'),
+        p('També es conreaven llegums, hortalisses o vinya, segons el paisatge. Es podia deixar una part del camp en guaret per recuperar-ne la fertilitat i aprofitar altres parts per pasturar.')),
+      section('dominis', 'Rendes i obligacions',
+        essencial('En un **domini senyorial**, el senyor podia cobrar rendes o exigir serveis a canvi de l’ús de terres o recursos.'),
+        p('La renda es podia pagar amb productes, diners o feina, segons el lloc. En alguns dominis també es pagava per fer servir determinats molins, forns o altres instal·lacions.'),
+        box('prova', 'Posa nom a tres usos del paisatge', 'Dibuixa un llogaret, un camp i un molí. Anota què en podia obtenir una família pagesa i quin pagament o condició podia afectar l’ús d’algun d’aquests espais.')),
+      section('conreus', 'El paisatge que envolta els camps',
+        essencial('Al voltant dels conreus hi podia haver pastures, boscos i recursos compartits.'),
+        p('Boscos i pastures proporcionaven llenya, fruits i aliment per als animals. L’accés a aquests espais depenia de normes i acords i podia provocar conflictes.')),
+      section('llogaret', 'A prop de casa, allò necessari',
+        essencial('En un **llogaret** hi havia un grup petit d’habitatges, camins i espais de feina.'),
+        p('Un pou, un hort, una església o un corral podien formar part del paisatge. Algunes famílies vivien en masos més aïllats i es desplaçaven per anar al mercat o al molí.')),
+    ],
+  }, {
+    collection: { id: 'medieval', title: 'L’edat mitjana' },
+    theme: 'Història',
+    description: 'Interpreta l’organització d’un domini feudal, el treball de la pagesia i els usos de conreus i espais comuns.',
+    curriculum: [{ row: 'medi:passat', section: 'dominis', note: 'Interpreta l’organització d’un domini feudal, el treball de la pagesia i els usos de conreus i espais comuns.' }],
+    sources: [
+      ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
+      ['MHC · La mar nostra', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/la_mar_nostra'],
+    ],
+  });
+
+  addTopic('M041', {
+    id: 'corona-arago-mediterrania',
+    title: 'La Corona d’Aragó a la Mediterrània',
+    intro: 'Des d’un port es veuen vaixells que parteixen cap a altres ports. A terra, comerciants i artesans treballen en ciutats que formen part d’una corona amb territoris diversos.',
+    sections: [
+      section('formacio', 'Una corona, territoris diferents',
+        essencial('La **Corona d’Aragó** es va formar amb la unió dinàstica del regne d’Aragó i el casal de Barcelona.'),
+        p('L’acord del 1137 va vincular Peronella d’Aragó i Ramon Berenguer IV. Els territoris compartien sobirans, però van mantenir lleis i institucions pròpies.')),
+      section('expansio', 'Més territoris a través de la Mediterrània',
+        essencial('A partir del segle XIII, la Corona d’Aragó va incorporar territoris com **Mallorca** i **València**.'),
+        p('Els seus dominis i influències van variar. En moments diferents, la corona va governar llocs com Sicília, Sardenya i Nàpols. Per comparar dominis, cal mirar mapes amb data i distingir possessions de rutes comercials.')),
+      section('comerc', 'Ciutats connectades per rutes de mar',
+        essencial('Mercaders i mariners transportaven mercaderies entre ports. Les ciutats reunien tallers, mercats i llocs per guardar productes.'),
+        p('La indústria tèxtil i el comerç van donar pes a alguns grups urbans. Els comerciants s’havien d’entendre amb pesos, monedes i normes que podien canviar d’un port a l’altre.')),
+      section('drassanes', 'Les Drassanes Reials de Barcelona',
+        essencial('Les **drassanes** eren instal·lacions on es construïen i reparaven vaixells. A les Drassanes Reials es feien galeres.'),
+        p('Uns espais grans i coberts facilitaven la feina amb fusta, cordes i peces de grans dimensions. La proximitat a l’aigua ajudava a posar els vaixells en servei.')),
+      section('taula', 'Una taula per guardar i moure diners',
+        essencial('La **Taula de Canvi** de Barcelona es va crear el **1401** com a institució municipal de dipòsit i pagaments.'),
+        p('Una persona podia dipositar diners i tenir-los anotats en un compte. En podia fer servir una part per a pagaments. Se’n conserven documents que permeten seguir com s’organitzava.'),
+        box('prova', 'Segueix una operació comercial', 'Imagina un vaixell que es repara a Barcelona, surt amb teixits i els ven en un altre port. Marca quan intervenen els artesans, la tripulació i la gent que gestiona els diners.')),
+    ],
+  }, {
+    collection: { id: 'medieval', title: 'L’edat mitjana' },
+    theme: 'Història',
+    description: 'Explica la formació i l’expansió mediterrània de la Corona d’Aragó i el paper de les Drassanes i la Taula de Canvi.',
+    curriculum: [{ row: 'medi:passat', section: 'taula', note: 'Explica la formació i l’expansió mediterrània de la Corona d’Aragó i el paper de les Drassanes i la Taula de Canvi.' }],
+    sources: [
+      ['MHC · L’expansió de la Corona d’Aragó', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/el_naixement_d_una_nacio/l_expansio_de_la_corona_d_arago'],
+      ['Museu Marítim · Les Drassanes Reials', 'https://www.mmb.cat/exposicions/viatge-en-el-temps-per-les-drassanes-reials-de-barcelona/'],
+      ['Arxiu Municipal · Ordinacions de la Taula de Canvi', 'https://patrimoni.gencat.cat/ca/catalunyapaisdarxius/recurs-digital/recurs/document/ordinacions-de-la-taula-de-canvi-de-barcelona/'],
+    ],
+  });
+
+  addTopic('M042', {
+    id: 'viure-ciutat-medieval',
+    title: 'Un dia dins les muralles',
+    intro: 'A la plaça hi ha mercat i en alguns carrers es treballa el cuir o es ven roba. La ciutat reuneix activitats que sovint no hi ha a cada llogaret.',
+    sections: [
+      section('muralla', 'Portes que obren i tanquen',
+        essencial('La **muralla** protegia la ciutat. Les portes eren punts de pas i de control.'),
+        p('Els camins principals arribaven a les portes. Quan una ciutat creixia podien aparèixer ravals fora del recinte o construir-se una muralla més gran.')),
+      section('barris', 'Barris amb oficis i històries diferents',
+        essencial('Els barris es podien formar al voltant d’esglésies, mercats, tallers o camins.'),
+        p('El nom d’un carrer pot conservar el record d’un ofici o d’una comunitat. Per confirmar qui hi vivia en un segle concret cal consultar altres fonts, com censos o contractes.')),
+      section('carrers', 'Carrers per circular i treballar',
+        essencial('Molts carrers medievals eren estrets i irregulars. Al costat dels habitatges algunes botigues i tallers obrien directament al carrer.'),
+        p('L’espai es compartia entre vianants, transport de càrregues i artesans. L’accés a aigua, els desguassos i la recollida de deixalles podien ser problemes de convivència.'),
+        box('prova', 'Un recorregut amb tres parades', 'Dibuixa una porta, una plaça i un taller i traça el recorregut d’una persona que porta gra i busca un encàrrec. Què li facilita cada espai?')),
+      section('placa', 'La plaça reuneix la ciutat',
+        essencial('La **plaça** servia per comprar, vendre i trobar-se amb altres persones.'),
+        p('En algunes s’hi llegien decisions i avisos. Al mercat, els productes procedents del camp entraven en contacte amb els que es fabricaven a tallers urbans.')),
+      section('burgesia', 'Tenir un ofici o fer negocis',
+        essencial('Sovint anomenem **burgesia** els grups urbans vinculats als negocis, a l’artesania i a altres activitats de la ciutat.'),
+        p('Hi havia comerciants rics i treballadors amb recursos molt més limitats. Les oportunitats i la participació en el govern local depenien de la posició social i de les normes de cada ciutat.')),
+      section('malalties', 'Malalties i respostes a la ciutat',
+        essencial('Les ciutats medievals podien patir epidèmies. La **pesta** del segle XIV va tenir conseqüències profundes.'),
+        p('La concentració de persones i el moviment entre pobles i ports facilitaven l’expansió de diverses malalties. Les autoritats i les comunitats intentaven respondre-hi amb els coneixements i els recursos de l’època.')),
+    ],
+  }, {
+    collection: { id: 'medieval', title: 'L’edat mitjana' },
+    theme: 'Història',
+    description: 'Interpreta la muralla, els barris i els mercats d’una ciutat medieval i relaciona la vida urbana amb els riscos de malaltia.',
+    curriculum: [{ row: 'medi:passat', section: 'carrers', note: 'Interpreta la muralla, els barris i els mercats d’una ciutat medieval i relaciona la vida urbana amb els riscos de malaltia.' }],
+    sources: [
+      ['MHC · La mar nostra', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/la_mar_nostra'],
+      ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
+    ],
+  });
+
+  addTopic('M043', {
+    id: 'romanic-i-gotic',
+    title: 'Llegim el romànic i el gòtic als edificis',
+    intro: 'En entrar en dues esglésies medievals podem observar la forma dels arcs, la llum que hi entra i el pes que han de suportar les parets. Què indica cada detall?',
+    sections: [
+      section('romanic', 'Arcs rodons i pintures murals',
+        essencial('En moltes esglésies **romàniques** hi ha arcs de mig punt, murs gruixuts i finestres petites.'),
+        p('Els absis i altres parts de l’interior podien estar decorats amb pintures murals. El cos de l’edifici i el campanar variaven segons els recursos i les necessitats del lloc.')),
+      section('boi', 'Les esglésies de la Vall de Boí',
+        essencial('A la **Vall de Boí**, al Pirineu, s’ha conservat un conjunt d’esglésies romàniques.'),
+        p('A Sant Climent de Taüll destaquen el campanar i les pintures de l’absis. Moltes pintures originals es conserven al Museu Nacional d’Art de Catalunya. L’edifici i les pintures s’han de cuidar cadascun segons les seves necessitats.')),
+      section('gotic', 'Arcs apuntats i espais més alts',
+        essencial('A l’arquitectura **gòtica** són habituals els arcs apuntats i les voltes de creueria.'),
+        p('El pes de les voltes es transmet a punts concrets. Els contraforts ajuden a suportar les empentes i permeten obrir finestrals més grans en molts edificis. Hi ha variants locals i edificis que combinen estils.')),
+      section('santa-maria', 'Santa Maria del Mar, una basílica gòtica',
+        essencial('**Santa Maria del Mar**, a Barcelona, és una basílica gòtica del segle XIV.'),
+        p('L’interior té pilars esvelts i un espai ampli. El barri de la Ribera on es troba estava relacionat amb l’activitat comercial i marítima. La basílica i la catedral de Barcelona són edificis diferents.'),
+        box('prova', 'Compara dos edificis', 'Busca una foto de Sant Climent de Taüll i una de Santa Maria del Mar. Anota dues diferències visibles, i digues si la foto mostra l’edifici per dins o per fora.')),
+    ],
+  }, {
+    collection: { id: 'medieval', title: 'L’edat mitjana' },
+    theme: 'Història',
+    description: 'Distingeix elements del romànic i del gòtic i compara la Vall de Boí i Santa Maria del Mar.',
+    curriculum: [{ row: 'medi:passat', section: 'santa-maria', note: 'Distingeix elements del romànic i del gòtic i compara la Vall de Boí i Santa Maria del Mar.' }],
+    sources: [
+      ['UNESCO · Esglésies romàniques de la Vall de Boí', 'https://whc.unesco.org/en/list/988/'],
+      ['MHC · La mar nostra', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/la_mar_nostra'],
+    ],
+  });
 }

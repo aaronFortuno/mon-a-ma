@@ -821,5 +821,195 @@ window.variantsMaterials ??= {};
         },
       },
     },
+    M035: {
+      'visigots-inici-edat-mitjana': {
+        suport: {
+          intro: 'Les ciutats, les llengües i les creences continuen canviant quan es fragmenta un imperi. Què es manté i qui governa la Península després de Roma?',
+          sections: {
+            'imperi': [],
+            'visigots': [],
+            'set-cents': [passos('Situa 476 i 711 en una línia del temps.', 'Relaciona cada data amb la fragmentació romana o l’arribada musulmana.')],
+            'islam': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'imperi': [
+              p('Un mapa pot representar qui governa un territori sense mostrar quina llengua parla la gent ni quines pràctiques hi ha.'),
+              repte('Fronteres que canvien', 'Què et podria explicar un mapa polític del segle VI? Què hauries de buscar en un text o una inscripció?'),
+            ],
+          },
+        },
+      },
+    },
+    M036: {
+      'terres-andalusines': {
+        suport: {
+          intro: 'Els límits dels territoris medievals no coincideixen amb els actuals. A les terres de Lleida i Tortosa, podem seguir pistes de com era la vida sota govern andalusí.',
+          sections: {
+            'alandalus': [],
+            'vida': [],
+            'alqueries': [passos('Dibuixa una alqueria, uns camps i una séquia.', 'Quina feina fa la séquia en el dibuix?')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'alandalus': [
+              p('Un nom de lloc d’origen àrab pot mantenir-se després que el govern i la llengua de la majoria canviïn.'),
+              repte('Què explica cada rastre?', 'Què pot suggerir un topònim? Quines altres fonts buscaries per saber qui vivia en aquell lloc en un segle concret?'),
+            ],
+          },
+        },
+      },
+    },
+    M037: {
+      'comtats-i-feudalisme': {
+        suport: {
+          intro: 'Una frontera pot donar lloc a castells i comtats. Amb els segles, aquells territoris canvien de govern i amplien les seves relacions.',
+          sections: {
+            'frontera': [passos('Dibuixa una línia que separi dos territoris.', 'Col·loca dos comtats a una banda i assenyala Al-Àndalus a l’altra.')],
+            'autonomia': [],
+            'poblament': [],
+            'feudalisme': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'autonomia': [
+              p('La data del 988 s’utilitza sovint com a referència de l’afebliment del vincle amb els francs. El govern dels comtes va canviar abans i després d’aquell moment.'),
+              repte('Una data dins d’un procés', 'Com representaries en un eix un procés de dècades? Què hi indicaries per distingir-lo d’un esdeveniment puntual?'),
+            ],
+          },
+        },
+      },
+    },
+    M038: {
+      'regnes-peninsulars-medievals': {
+        suport: {
+          intro: 'Si comparem tres mapes separats per segles veurem que canvien fronteres, governants i habitants. Un mapa amb data permet tractar aquests canvis amb més precisió.',
+          sections: {
+            'segles': [passos('Ordena XI, XII i XIV.', 'Busca al text un territori que aparegui a la llista de cada moment.')],
+            'exercits': [],
+            'poblament': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'exercits': [
+              p('Una frontera dibuixada en un mapa és sovint una aproximació, sobretot quan els documents són incomplets o el control era disputat.'),
+              repte('Què permet saber una frontera?', 'Què afegiries a la llegenda per distingir una frontera ben documentada d’una zona de control incert?'),
+            ],
+          },
+        },
+      },
+    },
+    M039: {
+      'noblesa-i-castells': {
+        suport: {
+          intro: 'Un castell pot dominar una ruta i allotjar persones alhora. El seu plànol permet descobrir quins espais responien a cada necessitat.',
+          sections: {
+            'estaments': [],
+            'situacio': [],
+            'parts': [passos('Busca al text què serveix per guardar aigua.', 'Dibuixa on podria ser respecte del pati i la muralla.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'situacio': [
+              p('Una talaia pot tenir bona vista en una direcció i quedar tapada per un turó a l’altre costat.'),
+              repte('Comprovem què es podia veure', 'En un mapa de relleu, quines pistes faries servir per comprovar si des d’un castell es veu un camí o si hi ha una carena al mig?'),
+            ],
+          },
+        },
+      },
+    },
+    M040: {
+      'pagesia-i-feus': {
+        suport: {
+          intro: 'Als marges d’un llogaret hi ha camps, boscos i camins. Qui hi treballava i qui decidia com se n’aprofitaven els recursos?',
+          sections: {
+            'pagesia': [],
+            'produccio': [passos('Tria un aliment consumit a l’època.', 'Anota d’on es podia obtenir i quina feina calia fer.')],
+            'dominis': [],
+            'conreus': [],
+            'llogaret': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'conreus': [
+              p('El bosc pot servir per a moltes feines i els seus recursos tenen límits. El control dels usos pot beneficiar de manera diferent cada grup.'),
+              repte('Decidir sobre un bosc compartit', 'Imagina un desacord sobre la llenya del bosc. Escriu què podria voler cadascun dels dos grups i quina font de l’època buscaria un historiador.'),
+            ],
+          },
+        },
+      },
+    },
+    M041: {
+      'corona-arago-mediterrania': {
+        suport: {
+          intro: 'Des d’un port es veuen vaixells que parteixen cap a altres ports. A terra, comerciants i artesans treballen en ciutats que formen part d’una corona amb territoris diversos.',
+          sections: {
+            'formacio': [],
+            'expansio': [],
+            'comerc': [],
+            'drassanes': [passos('Troba què es feia a les drassanes.', 'Explica per què convé que siguin prop del mar.')],
+            'taula': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'expansio': [
+              p('Una ruta comercial pot arribar a llocs que pertanyen a un altre estat. Un territori governat per la corona pot quedar lluny d’un port concret.'),
+              repte('Què representa cada línia?', 'Dissenya una llegenda que separi clarament territoris que pertanyen a la corona i rutes per on viatgen mercaders.'),
+            ],
+          },
+        },
+      },
+    },
+    M042: {
+      'viure-ciutat-medieval': {
+        suport: {
+          intro: 'A la plaça hi ha mercat i en alguns carrers es treballa el cuir o es ven roba. La ciutat reuneix activitats que sovint no hi ha a cada llogaret.',
+          sections: {
+            'muralla': [],
+            'barris': [],
+            'carrers': [],
+            'placa': [passos('Tria dues coses que es podien fer a la plaça.', 'Digues qui hi podia arribar del camp i què hi portaria.')],
+            'burgesia': [],
+            'malalties': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'malalties': [
+              p('Els registres d’enterraments, els testaments i les ordenances poden donar pistes sobre la gravetat d’una epidèmia. Cadascun deixa fora una part de la població.'),
+              repte('Quina font ens falta?', 'Si en un barri augmenten els testaments, què et suggereix? Quina altra font faries servir per comprovar-ho?'),
+            ],
+          },
+        },
+      },
+    },
+    M043: {
+      'romanic-i-gotic': {
+        suport: {
+          intro: 'En entrar en dues esglésies medievals podem observar la forma dels arcs, la llum que hi entra i el pes que han de suportar les parets. Què indica cada detall?',
+          sections: {
+            'romanic': [passos('Dibuixa un arc rodó i un arc apuntat.', 'Relaciona cada forma amb el romànic o el gòtic.')],
+            'boi': [],
+            'gotic': [],
+            'santa-maria': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'boi': [
+              p('Una pintura mural és més fàcil d’entendre si sabem on era. Al museu es pot conservar i estudiar de prop, mentre a l’església se’n pot mostrar la posició amb una reproducció.'),
+              repte('Com mostrem una obra que s’ha traslladat?', 'Com dissenyaries un cartell que expliqui al visitant què és original, què és una reproducció i on es conserva cada peça?'),
+            ],
+          },
+        },
+      },
+    },
   });
 }

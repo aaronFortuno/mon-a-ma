@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.66 · 28 de novembre de 2026
+
+- Publica els esborranys M035–M043 sobre l’edat mitjana i el patrimoni medieval.
+
 ## 0.1.65 · 28 de novembre de 2026
 
 - Publica els esborranys M027–M034 sobre Roma, Hispània, els pobles ibers i el patrimoni romà.
