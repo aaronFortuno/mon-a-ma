@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.92 · 28 de novembre de 2026
+
+- Renova els plànols de l’M003 amb un Pla i una vista obliqua del mateix barri, i manté un únic plànol exacte per a l’activitat d’escala.
+
 ## 0.1.91 · 28 de novembre de 2026
 
 - Renova els globus de l’M002 amb un tall lateral, una vista polar i globus amb costes i relleu projectats a partir de dades cartogràfiques.

@@ -42,7 +42,7 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | --- | --- | --- |
 | M001 · La Terra per dins i per fora | 6, quatre principals i dos complements | 3 lots de 5 figures (Pla, Volum i Realista) i una fotografia compartida. 16 originals. |
 | M002 · Un lloc, dues coordenades | 4 principals i 1 exemple de joc opcional | 2 estils per globus, 2 versions de la graella de les boies i 2 figures de la flota. 8 PNG. |
-| M003 · Del mapa al plànol | 3, canvi d’enquadrament, llegenda i escala | 3 lots de 3 figures (Pla, Atles escolar i Vista aèria il·lustrada) amb una mateixa geometria de barri. |
+| M003 · Del mapa al plànol | 3, canvi d’enquadrament, llegenda i escala | Dues vistes del municipi i de la llegenda, i un únic plànol per mesurar distàncies. Cinc originals amb una mateixa geometria de barri. |
 | M004 · Un territori, molts mapes | 8, cinc principals i tres complements | 2 lots de 3 figures i 5 peces compartides. 11 originals i 6 miniatures. |
 | M005 · El nostre lloc al sistema solar | 8, cinc principals i tres complements | 2 lots de 5 figures (Pla i Atles espacial), 3 complements compartits i 10 miniatures. |
 
@@ -59,9 +59,9 @@ Les figures complementàries alternen esquerra i dreta i s’ancoren a un paràg
 | M002 | localitzacio · graella | m002/graella-boies.png · m002/graella-boies-planisferi.png |
 | M002 | localitzacio · troba-la-flota | m002/troba-la-flota.png, tauler de joc |
 | M002 | localitzacio · troba-la-flota-exemple | m002/troba-la-flota-exemple.png, exemple opcional |
-| M003 | definicions · reserva-definicions | m003/municipi-i-barri.png · m003/municipi-i-barri-atles.png · m003/municipi-i-barri-aeria.png, 2.160 × 900 px per imatge |
-| M003 | llegenda · barri | m003/planol-barri.png · m003/planol-barri-atles.png · m003/planol-barri-aeria.png, 2.100 × 1.000 px per imatge |
-| M003 | escala · reserva-escala | m003/distancies-barri.png · m003/distancies-barri-atles.png · m003/distancies-barri-aeria.png, 2.250 × 900 px per imatge |
+| M003 | definicions · reserva-definicions | m003/municipi-i-barri.png · m003/municipi-i-barri-aeria.png, 2.160 × 900 px per imatge |
+| M003 | llegenda · barri | m003/planol-barri.png · m003/planol-barri-aeria.png, 2.100 × 1.000 px per imatge |
+| M003 | escala · reserva-escala | m003/distancies-barri.png, plànol compartit de 2.250 × 900 px |
 | M004 | Vegeu la taula del [lot M004](#m004--un-territori-molts-mapes) | `m004/` i `m004/miniatures/` |
 | M005 | Vegeu la taula del [lot M005](#m005--el-nostre-lloc-al-sistema-solar) | `m005/` i `m005/miniatures/` |
 
@@ -155,7 +155,7 @@ L’exemple opcional assenyala el vaixell 1 a 20° S, 40° E i planteja que l’
 
 ## M003 · Del mapa al plànol
 
-Les tres imatges comparteixen un barri imaginari, orientat amb el nord cap amunt. L’escola i la biblioteca són a l’oest del riu i el parc és a l’est. Conserva els carrers, els símbols i la posició d’aquests elements quan passis d’una imatge a l’altra. Traça el barri en metres abans d’exportar i mantén les proporcions quan en facis un retall.
+Les tres imatges comparteixen un barri imaginari, orientat amb el nord cap amunt. L’escola i la biblioteca són a l’oest del riu i el parc és a l’est. Conserva els carrers, els símbols i la posició d’aquests elements quan passis d’una imatge a l’altra. Traça el barri en metres abans d’exportar. Projecta les façanes, les teulades i el relleu sobre aquesta mateixa base per fer la vista obliqua. Mantén el plànol zenital com a figura compartida per mesurar amb la barra d’escala.
 
 ### Del mapa del municipi al plànol del barri
 

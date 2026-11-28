@@ -279,9 +279,16 @@ window.quaderns ??= [];
         alt: 'A l’esquerra, el mapa del municipi mostra la línia d’autobús i el requadre del barri. A la dreta, el plànol ampliat repeteix la parada i la biblioteca i hi dibuixa el tram a peu.',
         caption: 'El mapa situa el barri dins del municipi. El plànol mostra amb detall els carrers de la zona marcada al mapa.',
         variants: {
-          pla: { src: 'illustracions/m003/municipi-i-barri.png', thumbnail: 'illustracions/m003/miniatures/municipi-i-barri.jpg' },
-          atles: { src: 'illustracions/m003/municipi-i-barri-atles.png', thumbnail: 'illustracions/m003/miniatures/municipi-i-barri-atles.jpg' },
-          aeria: { src: 'illustracions/m003/municipi-i-barri-aeria.png', thumbnail: 'illustracions/m003/miniatures/municipi-i-barri-aeria.jpg' },
+          pla: {
+            src: 'illustracions/m003/municipi-i-barri.png?v=0.1.92',
+            thumbnail: 'illustracions/m003/miniatures/municipi-i-barri.jpg?v=0.1.92',
+          },
+          aeria: {
+            src: 'illustracions/m003/municipi-i-barri-aeria.png?v=0.1.92',
+            thumbnail: 'illustracions/m003/miniatures/municipi-i-barri-aeria.jpg?v=0.1.92',
+            alt: 'Mapa del municipi i vista obliqua del mateix barri. Les teulades i les façanes permeten reconèixer els edificis. La parada i la biblioteca són als mateixos punts i un traç discontinu marca el tram a peu.',
+            caption: 'Troba la parada i la biblioteca al mapa i a la vista obliqua. Ressegueix el tram a peu entre tots dos punts.',
+          },
         },
       },
       {
@@ -289,20 +296,23 @@ window.quaderns ??= [];
         alt: 'Plànol zenital amb una fletxa del nord i una llegenda. L’escola i la biblioteca són a l’oest del riu, davant d’un parc a l’altra riba. Un pont enllaça les dues ribes i hi ha una parada prop de la biblioteca.',
         caption: 'Busca la fletxa del nord i compara els símbols del plànol amb els de la llegenda.',
         variants: {
-          pla: { src: 'illustracions/m003/planol-barri.png', thumbnail: 'illustracions/m003/miniatures/planol-barri.jpg' },
-          atles: { src: 'illustracions/m003/planol-barri-atles.png', thumbnail: 'illustracions/m003/miniatures/planol-barri-atles.jpg' },
-          aeria: { src: 'illustracions/m003/planol-barri-aeria.png', thumbnail: 'illustracions/m003/miniatures/planol-barri-aeria.jpg' },
+          pla: {
+            src: 'illustracions/m003/planol-barri.png?v=0.1.92',
+            thumbnail: 'illustracions/m003/miniatures/planol-barri.jpg?v=0.1.92',
+          },
+          aeria: {
+            src: 'illustracions/m003/planol-barri-aeria.png?v=0.1.92',
+            thumbnail: 'illustracions/m003/miniatures/planol-barri-aeria.jpg?v=0.1.92',
+            alt: 'Vista obliqua del barri amb teulades i façanes. L’escola i la biblioteca són a l’oest del riu, i el parc a l’est. El pont de la carretera travessa el riu a tocar de la parada.',
+            caption: 'Relaciona la llegenda amb els edificis i els espais que es veuen en volum. Què connecta les dues ribes?',
+          },
         },
       },
       {
         id: 'reserva-escala', section: 'escala', name: 'De l’escola a la biblioteca', ratio: 2.5, position: 'center',
         alt: 'Un traç discontinu uneix l’escola i la biblioteca en línia recta. El camí a peu fa tres trams, cap al nord, cap a l’est i cap al sud. La barra d’escala té dos trams iguals i indica 0, 50 i 100 m.',
         caption: 'El segment recte uneix l’escola i la biblioteca. L’altre traç segueix els carrers. Compara les dues distàncies amb la barra d’escala.',
-        variants: {
-          pla: { src: 'illustracions/m003/distancies-barri.png', thumbnail: 'illustracions/m003/miniatures/distancies-barri.jpg' },
-          atles: { src: 'illustracions/m003/distancies-barri-atles.png', thumbnail: 'illustracions/m003/miniatures/distancies-barri-atles.jpg' },
-          aeria: { src: 'illustracions/m003/distancies-barri-aeria.png', thumbnail: 'illustracions/m003/miniatures/distancies-barri-aeria.jpg' },
-        },
+        src: 'illustracions/m003/distancies-barri.png?v=0.1.92',
       },
     ],
     sections: [
@@ -326,9 +336,8 @@ window.quaderns ??= [];
     ],
   }, {
     figureStyles: [
-      { id: 'pla', label: 'Pla', description: 'Formes planes i símbols sobre un fons clar.' },
-      { id: 'atles', label: 'Atles escolar', description: 'Colors del sòl, carrers i parcel·les diferenciats.' },
-      { id: 'aeria', label: 'Vista aèria il·lustrada', description: 'Teulades, capçades i ombres amb el barri vist des de dalt.' },
+      { id: 'pla', label: 'Pla', description: 'Vista zenital amb carrers, símbols, itineraris i escala gràfica.' },
+      { id: 'aeria', label: 'Vista obliqua', description: 'El mateix barri en volum, amb les façanes, les teulades i el pont visibles.' },
     ],
     status: 'definitiu',
     description: 'Distingeix un mapa d’un plànol i aprèn a llegir-ne la llegenda i l’escala per orientar-te i calcular distàncies.',
