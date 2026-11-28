@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.95 · 28 de novembre de 2026
+
+- Renova el viatge de l’àmfora d’oli de l’M031 amb una ruta esquemàtica i quatre escenes que mostren la mateixa peça.
+
 ## 0.1.94 · 28 de novembre de 2026
 
 - Renova la casa i les feines del taller de l’M025 amb seccions i peces en Pla i reconstruccions d’activitat en Atles.

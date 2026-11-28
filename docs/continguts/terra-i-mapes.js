@@ -2410,11 +2410,22 @@ window.quaderns ??= [];
       {
         id: 'oli-de-la-villa-al-mercat', section: 'xarxa', name: 'El recorregut d’una àmfora d’oli', ratio: 2280 / 1260,
         width: 100, position: 'center', wrap: false, anchor: 'lead',
-        alt: 'Quatre vinyetes segueixen una àmfora amb una marca en forma de rombe. Passa d’una vil·la a un carro, a la càrrega d’un vaixell al port de Tàrraco i al taulell d’un mercat.',
-        caption: 'Vil·la, àmfora marcada i itinerari de mostra. Segueix la mateixa marca i busca a quin lloc l’àmfora passa del carro al vaixell.',
         variants: {
-          pla: { src: 'illustracions/m031/oli-de-la-villa-al-mercat-pla.png', thumbnail: 'illustracions/m031/miniatures/oli-de-la-villa-al-mercat-pla.jpg' },
-          atles: { src: 'illustracions/m031/oli-de-la-villa-al-mercat-atles.png', thumbnail: 'illustracions/m031/miniatures/oli-de-la-villa-al-mercat-atles.jpg' },
+          pla: {
+            src: 'illustracions/m031/oli-de-la-villa-al-mercat-pla.png?v=0.1.95',
+            thumbnail: 'illustracions/m031/miniatures/oli-de-la-villa-al-mercat-pla.jpg?v=0.1.95',
+            ratio: 2400 / 1356,
+            alt: 'Ruta esquemàtica en quatre passos. La mateixa àmfora amb un rombe és a la vil·la, al carro, al moll de Tàrraco i al mercat. El traç discontinu marca el tram per mar.',
+            caption: 'Segueix el rombe. Distingeix els trams per terra i per mar i assenyala on l’àmfora passa del carro al vaixell. L’itinerari és un exemple didàctic.',
+          },
+          atles: {
+            src: 'illustracions/m031/oli-de-la-villa-al-mercat-atles.webp?v=0.1.95',
+            thumbnail: 'illustracions/m031/miniatures/oli-de-la-villa-al-mercat-atles.jpg?v=0.1.95',
+            ratio: 2400 / 1764,
+            alt: 'Quatre escenes amb una mateixa àmfora de terrissa i un rombe. Un treballador la revisa a la vil·la, la peça viatja en carro, dos portuaris la passen al vaixell a Tàrraco i es veu al mercat d’una altra ciutat.',
+            caption: 'Itinerari imaginat de l’oli. El rombe és una marca didàctica per seguir la mateixa àmfora des de la vil·la fins a un altre mercat. Què et mostra el canvi de transport?',
+            credit: 'Reconstrucció generada i retolada per a Món a mà.',
+          },
         },
       },
       {
