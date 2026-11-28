@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.65 · 28 de novembre de 2026
+
+- Publica els esborranys M027–M034 sobre Roma, Hispània, els pobles ibers i el patrimoni romà.
+
 ## 0.1.64 · 28 de novembre de 2026
 
 - Publica els esborranys M021–M026 sobre la prehistòria, l’arqueologia i el patrimoni.

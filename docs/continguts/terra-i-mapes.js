@@ -1250,4 +1250,240 @@ window.quaderns ??= [];
       ['Patrimoni cultural · Cova d’en Daina', 'https://patrimoni.gencat.cat/ca/coleccio/cova-den-daina'],
     ],
   });
+
+  addTopic('M027', {
+    id: 'de-roma-a-imperi',
+    title: 'Com Roma va passar de ciutat a imperi',
+    intro: 'En alguns mapes, Roma només és un punt. En d’altres, el seu poder s’estén al voltant de tota la Mediterrània. Què va passar entre un mapa i l’altre?',
+    sections: [
+      section('origens', 'Al costat del Tíber',
+        essencial('La ciutat de **Roma** va créixer a la vora del **Tíber**, a la península Itàlica.'),
+        p('Segons la llegenda, Ròmul va fundar Roma. L’arqueologia mostra que la ciutat va créixer a partir d’assentaments. El riu i els camins facilitaven els contactes amb altres pobles.')),
+      section('govern', 'Tres maneres de governar',
+        essencial('La història de Roma s’acostuma a dividir en **monarquia, república i imperi**.'),
+        p('Primer hi hagué reis. Durant la república intervenien institucions com el Senat i els magistrats. Amb August, a partir del 27 aC, el poder es va concentrar en l’emperador, encara que es van conservar algunes institucions republicanes.')),
+      section('expansio', 'La Mediterrània connectava territoris',
+        essencial('Roma va estendre el seu poder per conquestes i aliances. Amb el temps va controlar territoris a Europa, al nord d’Àfrica i a l’Àsia occidental.'),
+        p('Els romans organitzaven territoris en províncies i hi construïen calçades. Els ports i les rutes marítimes movien mercaderies, persones i notícies. L’expansió incloïa conflictes i formes diverses d’incorporar cada territori.'),
+        box('prova', 'Llegeix dos mapes', 'Situa Roma i la Mediterrània. Imagina un mapa d’una Roma encara petita i un del moment de màxima expansió. Què representaries de manera diferent a cada mapa?')),
+      section('societat', 'Una societat amb drets desiguals',
+        essencial('A l’Imperi romà convivien ciutadans, persones lliures amb drets diferents i persones esclavitzades.'),
+        p('Les formes de vida depenien de la ciutat, la feina i els recursos de cada família. Entre les persones esclavitzades hi havia qui treballava a cases, tallers, camps o mines sense poder decidir sobre la seva llibertat.')),
+    ],
+  }, {
+    collection: { id: 'roma', title: 'En temps dels romans' },
+    theme: 'Història',
+    description: 'Ordena la monarquia, la república i l’imperi i explica com Roma es va expandir.',
+    curriculum: [{ row: 'medi:passat', section: 'expansio', note: 'Ordena la monarquia, la república i l’imperi i explica com Roma es va expandir.' }],
+    sources: [
+      ['Britannica · La Roma antiga', 'https://www.britannica.com/place/ancient-Rome'],
+    ],
+  });
+
+  addTopic('M028', {
+    id: 'hispania-romana',
+    title: 'De l’arribada a Empúries a la Hispània romana',
+    intro: 'L’any 218 aC, una flota romana va fer servir el port d’Empúries. Era un episodi d’una guerra i també el començament d’un procés llarg de conquestes a la Península.',
+    sections: [
+      section('arribada', 'Les tropes romanes arriben per mar',
+        essencial('Les tropes romanes van arribar a **Empúries** el **218 aC**, durant la guerra amb Cartago.'),
+        p('Per Roma, arribar a la Península era una manera de disputar a Cartago el control de territoris i recursos. Roma va estendre el seu domini amb campanyes, pactes i conflictes que van durar generacions.')),
+      section('pobles', 'Molts pobles en una mateixa península',
+        essencial('A la Península hi havia grups diversos, entre els quals pobles **ibers** i grups de cultura **cèltica**.'),
+        p('Els ibers vivien sobretot a l’est i al sud peninsular. En algunes zones de l’interior hi havia pobles celtibers. Els noms generals ajuden a llegir un mapa, però cada grup tenia formes d’organització, contactes i trajectòries pròpies.')),
+      section('canvis', 'Canvis locals en temps de Roma',
+        essencial('Anomenem **romanització** la difusió i adopció de costums, usos, llengües i institucions romanes als territoris conquerits.'),
+        p('El llatí, la moneda i el dret es van estendre, mentre molts costums locals van continuar o es van barrejar amb altres. La transformació va variar segons el lloc i també hi va haver resistències.')),
+      section('xarxa', 'Províncies, ciutats i calçades',
+        essencial('Roma va dividir **Hispània** en províncies. **Tàrraco** va ser la capital d’una gran província, la Tarraconense.'),
+        p('Els límits de les províncies van canviar amb el temps. La **Via Augusta** connectava llocs de l’est peninsular i passava per Tàrraco. Una calçada podia servir a persones que comerciaven, a missatgers i a tropes.'),
+        box('prova', 'Què hi posa un mapa romà?', 'Dibuixa un esquema amb Empúries, Tàrraco i una ruta litoral. Dona un exemple d’ús civil de la calçada i un altre relacionat amb el govern de la província.')),
+    ],
+  }, {
+    collection: { id: 'roma', title: 'En temps dels romans' },
+    theme: 'Història',
+    description: 'Situa l’arribada romana a Empúries i estudia què va canviar a Hispània amb les ciutats i les calçades.',
+    curriculum: [{ row: 'medi:passat', section: 'xarxa', note: 'Situa l’arribada romana a Empúries i estudia què va canviar a Hispània amb les ciutats i les calçades.' }],
+    sources: [
+      ['MAC Empúries · La ciutat grega', 'https://www.macempuries.cat/Sobre-el-MAC-Empuries/Itinerari-arqueologic/Ciutat-grega'],
+      ['Patrimoni cultural · Tàrraco', 'https://patrimoni.gencat.cat/ca/tarraco'],
+    ],
+  });
+
+  addTopic('M029', {
+    id: 'vida-dels-ibers',
+    title: 'Els ibers, poblats i intercanvis',
+    intro: 'Al costat d’una muralla apareixen ceràmiques fetes a la zona i d’altres que han arribat per mar. Com podem saber a qui pertanyien i què ens expliquen dels contactes?',
+    sections: [
+      section('pobles', 'Pobles diferents, trets compartits',
+        essencial('Els **ibers** eren diversos pobles que compartien trets culturals a l’est i al sud de la península Ibèrica.'),
+        p('Al territori de l’actual Catalunya hi havia, entre d’altres, **indigets**, **laietans** i **ilergets**. L’agricultura, la ramaderia, l’artesania i els intercanvis tenien un pes diferent segons el lloc.')),
+      section('grecs', 'El contacte amb els grecs',
+        essencial('La ciutat grega d’**Empòrion**, l’actual Empúries, era un lloc de contacte i comerç.'),
+        p('Algunes ceràmiques importades apareixen en poblats ibers. També hi circulaven tècniques, models i idees. Les comunitats iberes decidien quins objectes adquirien i com els utilitzaven.'),
+        box('prova', 'Un objecte que ha viatjat', 'Un vas grec és trobat dins d’una casa ibera. Proposa dues maneres diferents com hi podria haver arribat. Quina altra resta donaria força a una explicació?')),
+      section('cultura', 'Ceràmica, escriptura i imatges',
+        essencial('Entre les restes ibèriques hi ha ceràmiques decorades, objectes de metall, escultures i inscripcions.'),
+        p('L’escriptura ibèrica es pot llegir en gran part pel que fa als signes, però la llengua encara no s’entén completament. Una inscripció pot informar sobre una pràctica sense que en coneguem tot el missatge.')),
+      section('jaciments', 'Dos poblats amb vistes diferents',
+        essencial('Al **Puig Castellar**, a Santa Coloma de Gramenet, i a **Sant Sebastià de la Guarda**, a Palafrugell, hi ha restes de poblats ibers.'),
+        p('El Puig Castellar domina l’entorn del Besòs i Sant Sebastià de la Guarda queda a tocar de la costa. Comparar-los ajuda a veure quins recursos i camins podia controlar cada comunitat.')),
+    ],
+  }, {
+    collection: { id: 'roma', title: 'En temps dels romans' },
+    theme: 'Història',
+    description: 'Coneix la diversitat dels pobles ibers, els contactes amb els grecs i dos jaciments catalans.',
+    curriculum: [{ row: 'medi:passat', section: 'grecs', note: 'Coneix la diversitat dels pobles ibers, els contactes amb els grecs i dos jaciments catalans.' }],
+    sources: [
+      ['Patrimoni cultural · Ruta dels ibers', 'https://patrimoni.gencat.cat/sites/default/files/hd-images-zip/descarregues/rutes/rutaibers_per_internet.pdf'],
+      ['MAC Empúries · La ciutat grega', 'https://www.macempuries.cat/Sobre-el-MAC-Empuries/Itinerari-arqueologic/Ciutat-grega'],
+    ],
+  });
+
+  addTopic('M030', {
+    id: 'ciutat-romana',
+    title: 'Un recorregut per una ciutat romana',
+    intro: 'Una persona que arriba a Tàrraco pot anar al mercat, visitar un edifici públic i tornar a casa pel mateix carrer. Què la guia per la ciutat?',
+    sections: [
+      section('tracat', 'Carrers, places i cases',
+        essencial('En moltes ciutats romanes, els carrers principals orientaven el **traçat urbà**.'),
+        p('Algunes ciutats tenien una planta regular amb carrers que es creuaven. Tàrraco també s’adaptava a un turó i tenia terrasses. Les persones amb més recursos podien viure en cases espaioses, i d’altres en habitatges més petits o edificis compartits.')),
+      section('edificis', 'On es reunia la gent?',
+        essencial('El **fòrum** era una plaça pública important. A prop hi podia haver un temple i edificis relacionats amb el govern o els negocis.'),
+        p('El teatre, les termes i altres edificis reunien gent per motius diferents. La seva forma ajuda a reconèixer la funció que podien tenir.')),
+      section('comerc', 'Es ven i es treballa a peu de carrer',
+        essencial('En una **taberna** es podien vendre productes o fer feines d’artesania.'),
+        p('Moltes botigues o tallers obrien directament al carrer. Una mateixa façana podia connectar espais de venda al públic amb dependències de treball o de magatzem.'),
+        box('prova', 'Prepara un plànol de visita', 'Dibuixa tres carrers, un fòrum i dues tabernae. Explica quin recorregut faries per comprar, passar pel fòrum i arribar al teatre.')),
+    ],
+  }, {
+    collection: { id: 'roma', title: 'En temps dels romans' },
+    theme: 'Història',
+    description: 'Interpreta espais públics, habitatges i botigues d’una ciutat romana.',
+    curriculum: [{ row: 'medi:passat', section: 'comerc', note: 'Interpreta espais públics, habitatges i botigues d’una ciutat romana.' }],
+    sources: [
+      ['Patrimoni cultural · Tàrraco', 'https://patrimoni.gencat.cat/ca/tarraco'],
+      ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
+    ],
+  });
+
+  addTopic('M031', {
+    id: 'comerc-tarraconense',
+    title: 'D’una vil·la al port de Tàrraco',
+    intro: 'Una gerra amb oli pot passar per un magatzem, una calçada i un port abans d’arribar a una altra ciutat. Seguim-ne el recorregut.',
+    sections: [
+      section('villes', 'Produir i guardar al camp',
+        essencial('Les **vil·les** eren finques rurals. Algunes produïen cereal, oli o vi per vendre o intercanviar.'),
+        p('Hi podia haver habitatges, espais de feina i magatzems. Algunes vil·les, com la dels Munts, també tenien una zona residencial luxosa. Les feines agrícoles sostenien bona part de l’economia.')),
+      section('xarxa', 'Del taller al mercat',
+        essencial('Durant l’època romana es feien intercanvis entre ciutats i regions de l’Imperi.'),
+        p('A Tàrraco es podien rebre productes de moltes procedències i exportar-ne d’altres. Les persones que treballaven al camp, als tallers, al transport i als mercats formaven part de la mateixa xarxa.')),
+      section('productes', 'Calçades, vaixells i àmfores',
+        essencial('El **vi**, l’**oli** i algunes **conserves de peix** es transportaven en àmfores. Les rutes seguien per terra i per mar.'),
+        p('La forma i les marques d’una àmfora poden donar pistes sobre el producte o el lloc on es va fabricar. Per als trajectes llargs i les càrregues pesants, el transport marítim podia portar moltes més peces que un carro.')),
+      section('denari', 'Una moneda que viatja',
+        essencial('El **denari** era una moneda romana, sovint de plata, que es va utilitzar durant segles.'),
+        p('S’emprava juntament amb altres monedes. Mirar-ne les cares permet identificar inscripcions, retrats o símbols. Una moneda també podia difondre el nom o la imatge de qui governava.'),
+        box('prova', 'Dues pistes de comerç', 'Trobem una àmfora feta lluny i un denari. Quina peça informa millor del transport de productes? Què pot explicar la moneda? Justifica per què totes dues ens interessen.')),
+    ],
+  }, {
+    collection: { id: 'roma', title: 'En temps dels romans' },
+    theme: 'Història',
+    description: 'Segueix productes i rutes de l’Imperi, i interpreta el paper de les vil·les, les àmfores i el denari.',
+    curriculum: [{ row: 'medi:passat', section: 'denari', note: 'Segueix productes i rutes de l’Imperi, i interpreta el paper de les vil·les, les àmfores i el denari.' }],
+    sources: [
+      ['MNAT · El comerç a Tàrraco', 'https://www.mnat.cat/documents/74992mnat-itinerari-7-catal1.pdf'],
+      ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
+    ],
+  });
+
+  addTopic('M032', {
+    id: 'creences-en-temps-romans',
+    title: 'Déus, rituals i cristianisme a Roma',
+    intro: 'Què ens expliquen un altar, una moneda amb un símbol i un sarcòfag? Les creences canvien al llarg del temps i de vegades conviuen al mateix lloc.',
+    sections: [
+      section('rituals', 'Creences a casa i a la ciutat',
+        essencial('En època romana molta gent practicava cultes a **diverses divinitats**.'),
+        p('Al fòrum hi podia haver temples dedicats a déus com Júpiter. També es feien ofrenes a la llar i es podia venerar l’emperador en cerimònies públiques. Les pràctiques variaven segons el lloc i el moment.')),
+      section('cristianisme', 'Neixen les primeres comunitats cristianes',
+        essencial('El **cristianisme** va néixer al segle I a la regió de Judea i es va estendre per ciutats de l’Imperi.'),
+        p('Les comunitats es formaven al voltant dels ensenyaments de Jesús. En alguns moments i llocs les autoritats romanes van perseguir persones cristianes. En d’altres, les comunitats podien créixer amb més marge.')),
+      section('oficial', 'De religió autoritzada a religió oficial',
+        essencial('L’any **313** es va reconèixer als cristians la llibertat de practicar la seva religió. L’any **380**, el cristianisme nicè va esdevenir la religió oficial de l’Imperi.'),
+        p('Són dos canvis diferents. Una pràctica pot ser permesa sense ser oficial. La decisió imperial no va fer desaparèixer de cop totes les altres formes de culte.')),
+      section('hispania', 'Com es veu el canvi a Hispània?',
+        essencial('Les comunitats cristianes d’Hispània van deixar restes com inscripcions, tombes i edificis.'),
+        p('La **Necròpolis Paleocristiana de Tarragona** conserva enterraments i objectes que ajuden a conèixer aquelles comunitats. Els símbols i les paraules de les inscripcions són pistes que podem comparar amb altres fonts.'),
+        box('prova', 'Què explica una tomba?', 'Imagina que veus una inscripció amb un nom, una data i un símbol. Quines pistes són directes? Quina informació necessites per saber si es relaciona amb el cristianisme?')),
+    ],
+  }, {
+    collection: { id: 'roma', title: 'En temps dels romans' },
+    theme: 'Història',
+    description: 'Explica el culte romà, l’expansió del cristianisme i algunes de les seves primeres restes a Hispània.',
+    curriculum: [{ row: 'medi:passat', section: 'hispania', note: 'Explica el culte romà, l’expansió del cristianisme i algunes de les seves primeres restes a Hispània.' }],
+    sources: [
+      ['Britannica · La Roma antiga', 'https://www.britannica.com/place/ancient-Rome'],
+      ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
+    ],
+  });
+
+  addTopic('M033', {
+    id: 'llegat-de-roma',
+    title: 'De Roma al present, què n’ha quedat?',
+    intro: 'Un mot, el traçat d’un carrer i el nom d’un mes poden tenir històries llargues. Algunes comencen molt abans que la nostra ciutat actual.',
+    sections: [
+      section('llengues', 'El llatí canvia al llarg del temps',
+        essencial('Del **llatí** que es parlava a l’Imperi es van desenvolupar llengües romàniques com el català, el castellà, el francès, l’italià i el portuguès.'),
+        p('Les maneres de parlar van canviar amb el pas dels segles i les relacions entre comunitats. Paraules com «aigua» i «agua» s’assemblen perquè comparteixen un origen llatí.')),
+      section('ciutats', 'Carrers i serveis que deixen una empremta',
+        essencial('Algunes ciutats actuals conserven parts del traçat o restes de **muralles**, **aqüeductes** i altres obres romanes.'),
+        p('Una ciutat es transforma moltes vegades. A Tàrraco es poden reconèixer parts de la ciutat antiga sota o al costat de construccions molt posteriors. Els aqüeductes portaven aigua d’un lloc a un altre aprofitant sovint un pendent suau.')),
+      section('vies', 'Camins nous damunt de rutes antigues',
+        essencial('Algunes rutes actuals passen per corredors que ja comunicaven llocs en **època romana**.'),
+        p('Els passos de muntanya, les valls i les costes orienten els desplaçaments. Una carretera d’avui pot seguir el mateix corredor general sense passar exactament damunt l’antiga calçada.'),
+        box('prova', 'Un rastre al municipi', 'Tria una paraula, un carrer, una obra antiga o un nom del calendari. Explica quina font et permet comprovar si realment té algun vincle amb el món romà.')),
+      section('calendari', 'Mesos que conserven noms antics',
+        essencial('Una part dels noms dels mesos i de l’organització del nostre calendari prové de l’època romana.'),
+        p('Juliol recorda Juli Cèsar i agost recorda August. El calendari gregorià d’avui va modificar l’antic calendari julià per ajustar millor el còmput dels anys.')),
+      section('religio', 'La continuïtat d’una religió',
+        essencial('El **cristianisme** es va estendre durant l’Imperi romà i ha continuat canviant al llarg dels segles.'),
+        p('Alguns edificis, festes i expressions de l’entorn tenen una història relacionada amb el cristianisme. També formen part de la societat tradicions de molts altres orígens.')),
+    ],
+  }, {
+    collection: { id: 'roma', title: 'En temps dels romans' },
+    theme: 'Història',
+    description: 'Ressegueix rastres romans en les llengües, els carrers, les vies, el calendari i el cristianisme.',
+    curriculum: [{ row: 'medi:passat', section: 'vies', note: 'Ressegueix rastres romans en les llengües, els carrers, les vies, el calendari i el cristianisme.' }],
+    sources: [
+      ['Patrimoni cultural · Tàrraco', 'https://patrimoni.gencat.cat/ca/tarraco'],
+      ['Britannica · La Roma antiga', 'https://www.britannica.com/place/ancient-Rome'],
+    ],
+  });
+
+  addTopic('M034', {
+    id: 'patrimoni-de-tarraco',
+    title: 'Llegim les formes dels edificis romans',
+    intro: 'Una graderia semicircular, una arena oval i unes sales amb aigua ens donen pistes sobre tres usos diferents. Com podem reconèixer cada edifici?',
+    sections: [
+      section('temples', 'Espais de culte',
+        essencial('Un **temple** era un edifici destinat al culte. En molts casos s’alçava sobre una base alta i tenia una entrada amb columnes.'),
+        p('El ritual podia celebrar-se també a l’exterior. Per identificar un temple es poden combinar fragments arquitectònics, inscripcions i la seva situació en relació amb el fòrum.')),
+      section('spectacles', 'Dues graderies, formes diferents',
+        essencial('El **teatre** romà tenia una graderia aproximadament semicircular davant de l’escena. L’**amfiteatre** envoltava una arena, generalment ovalada.'),
+        p('Al teatre hi havia representacions escèniques. A l’amfiteatre s’hi feien espectacles públics, entre ells els combats de gladiadors. A Tarragona es conserven restes dels dos tipus d’edifici.')),
+      section('termes', 'Termes, banys i espais de trobada',
+        essencial('Les **termes** eren llocs de bany i de relació social. Podien tenir sales amb aigua a diverses temperatures.'),
+        p('En algunes termes, l’aire calent circulava sota el paviment. Les estances, els desguassos i els forns ajuden a entendre com s’organitzava l’edifici.'),
+        box('prova', 'Quin edifici hem trobat?', 'En unes restes hi ha tres sales amb conduccions d’aigua. En unes altres hi ha una graderia que envolta una arena. Identifica els edificis probables i assenyala quina pista t’ha ajudat.')),
+    ],
+  }, {
+    collection: { id: 'roma', title: 'En temps dels romans' },
+    theme: 'Història',
+    description: 'Distingeix temples, teatres, amfiteatres i termes a partir de la forma i la funció.',
+    curriculum: [{ row: 'medi:passat', section: 'termes', note: 'Distingeix temples, teatres, amfiteatres i termes a partir de la forma i la funció.' }],
+    sources: [
+      ['Patrimoni cultural · Amfiteatre de Tàrraco', 'https://patrimoni.gencat.cat/ca/tarraco/amfiteatre'],
+      ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
+    ],
+  });
 }

@@ -654,5 +654,172 @@ window.variantsMaterials ??= {};
         },
       },
     },
+    M027: {
+      'de-roma-a-imperi': {
+        suport: {
+          intro: 'En alguns mapes, Roma només és un punt. En d’altres, el seu poder s’estén al voltant de tota la Mediterrània. Què va passar entre un mapa i l’altre?',
+          sections: {
+            'origens': [],
+            'govern': [passos('Ordena «emperadors», «reis» i «república».', 'Relaciona cadascun amb el seu moment a l’eix del temps.')],
+            'expansio': [],
+            'societat': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'origens': [
+              p('Una llegenda transmet una manera d’explicar els orígens. Una excavació aporta restes que es poden datar i comparar.'),
+              repte('Llegendes i restes', 'Quin tipus de font utilitzaries per saber si una zona concreta de Roma ja era habitada fa més de 2.500 anys?'),
+            ],
+          },
+        },
+      },
+    },
+    M028: {
+      'hispania-romana': {
+        suport: {
+          intro: 'L’any 218 aC, una flota romana va fer servir el port d’Empúries. Era un episodi d’una guerra i també el començament d’un procés llarg de conquestes a la Península.',
+          sections: {
+            'arribada': [passos('Busca Empúries a la costa catalana.', 'Explica per què un port podia servir per arribar amb tropes i material.')],
+            'pobles': [],
+            'canvis': [],
+            'xarxa': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'canvis': [
+              p('L’arribada de noves maneres de viure i governar no va fer desaparèixer de cop els costums locals.'),
+              repte('Canviar i conservar', 'Quins objectes o inscripcions ajudaran a comprovar si, en una mateixa ciutat, es feien servir costums locals i romans alhora?'),
+            ],
+          },
+        },
+      },
+    },
+    M029: {
+      'vida-dels-ibers': {
+        suport: {
+          intro: 'Al costat d’una muralla apareixen ceràmiques fetes a la zona i d’altres que han arribat per mar. Com podem saber a qui pertanyien i què ens expliquen dels contactes?',
+          sections: {
+            'pobles': [],
+            'grecs': [],
+            'cultura': [],
+            'jaciments': [passos('Situa els dos jaciments en un mapa.', 'Assenyala quin és més a prop del mar.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'cultura': [
+              p('Reconèixer els signes permet reproduir els sons d’una part de les inscripcions. Entendre què volen dir requereix altres proves.'),
+              repte('Llegir signes i entendre llengües', 'Imagina un text amb lletres que saps llegir però amb paraules desconegudes. Com podries deduir si un mot és el nom d’una persona?'),
+            ],
+          },
+        },
+      },
+    },
+    M030: {
+      'ciutat-romana': {
+        suport: {
+          intro: 'Una persona que arriba a Tàrraco pot anar al mercat, visitar un edifici públic i tornar a casa pel mateix carrer. Què la guia per la ciutat?',
+          sections: {
+            'tracat': [],
+            'edificis': [passos('Troba el nom de la plaça pública romana.', 'Digues un motiu per anar a la plaça i un altre per anar al teatre.')],
+            'comerc': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'tracat': [
+              p('El traçat dels carrers pot adaptar-se al terreny i a construccions anteriors.'),
+              repte('I si la ciutat és en un pendent?', 'Com canviaries el teu plànol si el fòrum hagués de quedar en una terrassa més alta que les botigues?'),
+            ],
+          },
+        },
+      },
+    },
+    M031: {
+      'comerc-tarraconense': {
+        suport: {
+          intro: 'Una gerra amb oli pot passar per un magatzem, una calçada i un port abans d’arribar a una altra ciutat. Seguim-ne el recorregut.',
+          sections: {
+            'villes': [],
+            'xarxa': [],
+            'productes': [passos('Ordena: productor, carro, port i mercat d’una altra ciutat.', 'Digues de què anava plena l’àmfora que has seguit.')],
+            'denari': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'productes': [
+              p('Una marca pot identificar un taller o algun pas de la distribució. Una àmfora també es podia reutilitzar.'),
+              repte('Com llegim una marca?', 'Quines proves miraríem per saber què portava en el seu darrer viatge?'),
+            ],
+          },
+        },
+      },
+    },
+    M032: {
+      'creences-en-temps-romans': {
+        suport: {
+          intro: 'Què ens expliquen un altar, una moneda amb un símbol i un sarcòfag? Les creences canvien al llarg del temps i de vegades conviuen al mateix lloc.',
+          sections: {
+            'rituals': [],
+            'cristianisme': [],
+            'oficial': [passos('Ordena 313 i 380.', 'Digues en quin moment es podia practicar el cristianisme legalment i en quin es va fer oficial.')],
+            'hispania': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'oficial': [
+              p('Un decret ens diu què volia establir el govern. Les restes locals poden mostrar amb quina rapidesa van canviar algunes pràctiques.'),
+              repte('Què vol dir oficial?', 'Quines dues fonts consultaries per comparar la decisió imperial amb la vida d’una ciutat concreta?'),
+            ],
+          },
+        },
+      },
+    },
+    M033: {
+      'llegat-de-roma': {
+        suport: {
+          intro: 'Un mot, el traçat d’un carrer i el nom d’un mes poden tenir històries llargues. Algunes comencen molt abans que la nostra ciutat actual.',
+          sections: {
+            'llengues': [passos('Observa «aigua» i «agua».', 'Assenyala què s’assembla i digues què en podem deduir amb ajuda del text.')],
+            'ciutats': [],
+            'vies': [],
+            'calendari': [],
+            'religio': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'ciutats': [
+              p('Les ciutats acumulen capes. Una estructura es pot conservar, quedar enterrada o reutilitzar-se per a una altra finalitat.'),
+              repte('Mateix lloc, altres usos', 'Com podries distingir, amb un plànol antic i un d’actual, què s’ha mantingut i què ha canviat?'),
+            ],
+          },
+        },
+      },
+    },
+    M034: {
+      'patrimoni-de-tarraco': {
+        suport: {
+          intro: 'Una graderia semicircular, una arena oval i unes sales amb aigua ens donen pistes sobre tres usos diferents. Com podem reconèixer cada edifici?',
+          sections: {
+            'temples': [],
+            'spectacles': [passos('Dibuixa una mitja rodona i un oval.', 'Assenyala quina forma ajuda a identificar un teatre i quina un amfiteatre.')],
+            'termes': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'temples': [
+              p('Els temples, els pòrtics i altres edificis podien tenir columnes. La forma d’un fragment pot ser compartida per edificis amb funcions diferents.'),
+              repte('Una columna és prou prova?', 'Quines dues pistes del voltant t’ajudarien a comprovar si una columna era part d’un temple?'),
+            ],
+          },
+        },
+      },
+    },
   });
 }
