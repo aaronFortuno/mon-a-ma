@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.82 · 28 de novembre de 2026
+
+- Publica M127–M129, tres esborranys sobre mediació, rutines de descans i fonts del treball industrial.
+
 ## 0.1.81 · 28 de novembre de 2026
 
 - Publica M124–M126, tres esborranys sobre el radar meteorològic, l’ombra al camí de l’escola i el despoblament.

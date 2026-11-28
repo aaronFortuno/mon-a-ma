@@ -1884,4 +1884,77 @@ window.variantsMaterials ??= {};
       guia: ['Compara 780 i 610 habitants de Vall Alta.', 'Compara 1.100 i 1.400 habitants de Pla Nou.', 'Digues quina altra font trobaries per estudiar un servei.'],
       ampliacio: [repte('Una biblioteca itinerant', 'Compareu una biblioteca itinerant amb la proposta de mantenir un espai fix amb menys dies d’obertura. Quines tres dades sobre freqüència, distància i ús permetrien decidir?')],
     });
+
+  fitxa(drets, 'M127', 'acords-per-compartir-la-pista', 'Com compartim la pista quan tothom la vol alhora?',
+    'Tres grups volen fer servir la pista. Un necessita espai per jugar un partit, un altre per assajar i un tercer per jugar sense pilota. Tots han arribat al mateix temps. Com podem acordar què fer?', {
+      descripcio: 'Practica l’escolta i la mediació per acordar un ús compartit de la pista i revisar-lo després.',
+      curriculum: [['civica', 'acord', 'Aplica la cultura de pau i la mediació a un conflicte col·lectiu i comprova el resultat d’un acord.']],
+      fonts: [sabersCicleSuperior, ['XTEC · Resolució de conflictes al projecte de convivència', 'https://xtec.gencat.cat/ca/centres/projeducatiu/convivencia/normativa/conflictes/']],
+      apartats: [
+        apartat('escolta', 'Tothom explica què necessita',
+          'Per entendre un **conflicte**, escolta què necessita cada grup. Repeteix amb les teves paraules la idea abans de proposar una solució.',
+          '«Volem tota la pista» és una petició. «Necessitem deu minuts sense interrupcions per assajar» concreta una necessitat. Pregunta quins temps i espais són imprescindibles i quins es poden ajustar.'),
+        apartat('mediacio', 'Una persona ajuda a ordenar la conversa',
+          'En la **mediació**, una persona imparcial ajuda els grups a escoltar-se i a generar opcions. El grup participa en la tria i en la revisió de l’acord.',
+          'Una persona facilita els torns i una altra apunta les necessitats. Després formuleu almenys dues opcions, com ara torns, zones compatibles o dies alterns. Comproveu si algun grup queda sense espai o temps.'),
+        apartat('acord', 'Un acord diu què es farà i quan es revisarà',
+          'Un **acord revisable** indica qui fa què, quan començarà i com comprovarem si funciona.',
+          repte('Prova l’acord durant una setmana', 'Amb un pati de 30 minuts, inventeu un acord que doni un lloc i una franja concreta a cada grup. Escriu una frase de l’acord i dues preguntes per revisar-lo al final de la setmana.')),
+      ],
+      guia: ['Escriu una necessitat de cadascun dels tres grups.', 'Tria si us repartireu l’espai, el temps o tots dos.', 'Digues com sabràs si els grups han pogut jugar.'],
+      ampliacio: [repte('La pista es pot compartir igualment?', 'Un grup diu que els deu minuts acordats se li queden en cinc perquè arriba més tard. Proposa què comprovaries i com ajustaries l’acord sense perdre les altres necessitats.')],
+    });
+
+  fitxa(benestar, 'M128', 'rutines-per-dormir-millor', 'Com ens preparem per dormir millor?',
+    'Algunes nits ens adormim de seguida i d’altres ens costa més. Mirarem què passa abans d’anar a dormir i quines rutines poden preparar el cos per descansar.', {
+      descripcio: 'Identifica hàbits de descans i compara rutines de vespre amb atenció al lleure i a les pantalles.',
+      curriculum: [['vida', 'rutina', 'Relaciona la higiene del son amb els horaris, la gestió del lleure i l’ús de dispositius digitals.']],
+      fonts: [
+        sabersCicleSuperior,
+        ['Canal Salut · El son', 'https://canalsalut.gencat.cat/ca/detalls/article/El_son/'],
+        ['Canal Salut · Benestar digital en la infància i l’adolescència', 'https://canalsalut.gencat.cat/ca/vida-saludable/salut-benestar-digital/infancia-adolescencia/index.html'],
+      ],
+      apartats: [
+        apartat('descans', 'Dormir forma part de la cura del cos',
+          'El **son** ajuda el cos i el cervell a recuperar-se. Els horaris regulars i una activitat tranquil·la al vespre poden ajudar a preparar el descans.',
+          'El soroll, la llum, les preocupacions o els canvis d’horari poden afectar el descans. Per entendre un patró convé observar diverses nits.'),
+        apartat('pantalles', 'Què passa abans d’anar al llit?',
+          'Un joc o vídeo pot allargar el **temps de lleure** i deixar menys temps per a altres activitats. Si és engrescador o hi ha notificacions, pot costar acabar-lo.',
+          'Podem acordar una hora per desar el dispositiu i reservar un tram de tranquil·litat, per exemple per llegir, preparar la motxilla o conversar. Tria una rutina que es pugui mantenir a casa.'),
+        apartat('rutina', 'Compara dos plans de vespre',
+          'Per valorar una **rutina**, observa quan acaba l’activitat, quan comença el descans i quins factors poden haver canviat.',
+          repte('Tria una variació concreta', 'En un exemple, l’Àlex acaba una partida just abans d’anar a dormir. L’endemà l’acaba abans i llegeix una estona. Proposa què observaries durant diversos dies per saber si la nova rutina li resulta més fàcil.')),
+      ],
+      guia: ['Tria una activitat tranquil·la per al vespre.', 'Situa-la abans d’anar al llit en una línia del temps.', 'Digues una cosa que observaries més d’un dia.'],
+      ampliacio: [repte('Quan canvien diverses coses alhora', 'En una mateixa setmana canvia l’horari, augmenta el soroll i es fan servir pantalles més tard. Ordena els factors i explica com provaries si una sola variació pot ajudar.')],
+    });
+
+  fitxa(historia, 'M129', 'qui-treballava-a-la-fabrica', 'Qui queda fora quan expliquem la història d’una fàbrica?',
+    'En una fotografia industrial hi ha una màquina nova i dues persones que hi posen al costat. Altres persones engegaven les màquines, reparaven fils i feien feines que poden quedar fora de la imatge.', {
+      descripcio: 'Compara fonts sobre el treball a les fàbriques i busca pistes sobre la participació de dones i infants.',
+      curriculum: [['passat', 'contrast', 'Analitza fonts del treball industrial per fer visible la participació de dones i infants i detectar absències del relat.']],
+      fonts: [
+        sabersCicleSuperior,
+        ['Museu del Ter · Les treballadores del tèxtil al Ter', 'https://www.museudelter.cat/wp-content/uploads/2020/04/Dossier-Expo-Treballadores-textil.pdf'],
+        ['Arxiu Nacional de Catalunya · Fons comercials i d’empresa', 'https://anc.gencat.cat/ca/larxiu/fons-i-colleccions/fons-patrimonials-i-dempresa'],
+      ],
+      apartats: [
+        apartat('enquadrament', 'Què ensenya una fotografia i qui la va fer?',
+          'Una **fotografia** ens mostra allò que algú va decidir enquadrar. Pots descriure les feines que s’hi veuen i preguntar qui més hi participava.',
+          'En algunes fàbriques tèxtils hi treballaven moltes dones. També hi va haver infants que treballaven en fàbriques i en altres espais. Les condicions variaven segons el lloc i l’època.'),
+        apartat('registre', 'Què hi ha escrit en un registre de feines?',
+          'Un **registre laboral** pot conservar noms, feines, jornades o pagaments. Cada registre recull una part de l’activitat.',
+          taula(['Font d’exemple', 'Què hi podem buscar?'], [
+            ['Fotografia de taller', 'Persones, objectes i feina que es veu en aquell moment.'],
+            ['Llibre de jornals', 'Feines i pagaments anotats.'],
+            ['Testimoni oral', 'Records sobre els torns i la vida al taller.'],
+          ], 39),
+          'Un llibre de jornals pot recollir només les persones pagades. Una feina sense pagament o feta fora del taller pot aparèixer en altres fonts.'),
+        apartat('contrast', 'A qui podem donar un lloc al relat?',
+          'Per escriure un relat històric, **contrasta** almenys dues fonts. Distingeix què podem afirmar i què encara cal investigar.',
+          repte('Una nova cartel·la per a la fotografia', 'En un cas inventat, la foto només mostra les màquines i el llibre de jornals anota diverses persones a la sala de filatura. Escriu una cartel·la que incorpori el que diu el llibre. Afegeix una pregunta que faries a una persona que hi hagués treballat.')),
+      ],
+      guia: ['Tria una cosa que es podria veure en una fotografia.', 'Digues què es podria llegir en un llibre de jornals.', 'Escriu una pregunta per a un testimoni.'],
+      ampliacio: [repte('Quan falten noms al registre', 'Un testimoni recorda persones que feien encàrrecs fora de la fàbrica i el llibre només recull jornals del taller. Proposa una tercera font i digues quina afirmació podria reforçar.')],
+    });
 }
