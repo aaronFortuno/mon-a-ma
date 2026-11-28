@@ -186,7 +186,7 @@
       const firstFigure = figures.find(figure => figure.id === chapter.coverFigure) ??
         figures.find(figure => figure.section === chapter.sections[0]?.id);
       const variant = firstFigure && figureVariants(topic, firstFigure).findLast(item => item.src);
-      const coverSrc = variant?.thumbnail ?? variant?.src ?? firstFigure?.src;
+      const coverSrc = variant?.thumbnail ?? variant?.src ?? firstFigure?.thumbnail ?? firstFigure?.src;
       const picture = node('div', coverSrc ? 'topic-cover' : 'topic-cover image-placeholder');
       picture.setAttribute('aria-hidden', 'true');
       if (coverSrc) {

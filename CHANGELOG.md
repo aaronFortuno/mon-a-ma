@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.93 · 28 de novembre de 2026
+
+- Revisa les il·lustracions de l’M040 amb un mateix llogaret en planta i en vista elevada, quatre feines del cereal i tres formes de renda.
+- Revisa les il·lustracions de l’M041 amb un mapa compartit, una vista de treball a les Drassanes i una seqüència de la Taula de Canvi.
+
 ## 0.1.92 · 28 de novembre de 2026
 
 - Renova els plànols de l’M003 amb un Pla i una vista obliqua del mateix barri, i manté un únic plànol exacte per a l’activitat d’escala.
