@@ -1022,4 +1022,82 @@ window.variantsMaterials ??= {};
       guia: ['Digues què permet copiar molts textos.', 'Indica quin aparell envia senyals.', 'Tria què serveix per portar una caixa de llibres.'],
       ampliacio: [repte('Dues ciutats, dues velocitats', 'Una ciutat rep el telègraf i una altra només disposa de correu. Explica com podries comparar el temps de transmissió d’un missatge i quina dada caldria sobre l’accés al servei.')],
     });
+
+  const disseny = itinerari('disseny-i-prototips', 'Disseny i prototips', 'Tecnologia i digitalització');
+  const sabersCicleSuperior = ['XTEC · Sabers de coneixement del medi de cinquè i sisè', 'https://xtec.gencat.cat/web/.content/curriculum/primaria/curriculum-175-2022/Coneixement-del-Medi-Natural-Social-i-Cultural.pdf#page=22'];
+
+  fitxa(disseny, 'M097', 'reg-amb-sensor', 'Reguem només quan la terra és seca?',
+    'Un planter s’asseca els caps de setmana, però algun test queda xop quan el reguem per rutina. Com podria un prototip decidir quan cal regar i quan ha de parar?', {
+      descripcio: 'Construeix i avalua un model de reg que interpreta la humitat amb un sensor i una regla.',
+      curriculum: [
+        ['disseny', 'prototip', 'Dissenya, construeix i avalua un prototip que respon a la lectura d’un sensor.'],
+        ['indagacio', 'proves', 'Comprova prediccions amb casos de control i ajusta una regla a partir dels resultats.'],
+      ],
+      fonts: [sabersCicleSuperior, ['Microsoft MakeCode · Sensor d’humitat del sòl amb micro:bit', 'https://makecode.microbit.org/projects/soil-moisture']],
+      apartats: [
+        apartat('necessitat', 'Què necessita el planter?',
+          'Comença per definir la **necessitat** i dos criteris d’èxit. El model ha d’avisar per regar amb terra seca i ha d’aturar el reg quan la humitat és suficient.',
+          'Pregunta a la persona que cuida el planter què passa quan la terra queda xopa o quan s’asseca massa. Un **sensor** recull una dada de l’entorn. Amb un sensor d’humitat, podem comparar lectures del mateix tipus de terra en condicions diferents.'),
+        apartat('regla', 'Convertim una lectura en una decisió',
+          'En aquest model, les lectures més altes indiquen terra més humida. Si el valor és **inferior a 40**, s’encén el senyal de reg. Amb **40 o més**, s’apaga.',
+          'Els valors de la fitxa són inventats i l’escala no indica un percentatge real d’aigua. Amb un sensor de debò, compara primer què marca en terra seca i en terra humida. El **llindar** és el valor de referència que separa dues respostes.'),
+        apartat('prototip', 'Muntem una maqueta que es pugui provar',
+          'Muntem tres peces amb les etiquetes **sensor → regla → senyal**. Les targetes fan de lectures del sensor i el senyal indica si el reg està encès o apagat.',
+          'Retalla cinc targetes amb els números de la taula. En un full, dibuixa dues posicions per al senyal: «rega» i «atura». Una persona passa la targeta, una altra aplica la regla i una tercera mou el senyal. Intercanvieu els papers i comproveu si el resultat es manté.',
+          'Si teniu un sensor digital preparat a l’aula, feu una segona prova amb les seves lectures i un senyal a la pantalla o un llum. Compareu els resultats amb la maqueta de paper. El prototip representa l’ordre de reg sense haver d’accionar una bomba.'),
+        apartat('proves', 'Provem casos fàcils i casos de frontera',
+          'Abans d’activar el **prototip**, escriu què esperes observar. Compara el senyal obtingut amb la predicció i anota qualsevol diferència.',
+          taula(['Lectura', 'Cas de prova'], [
+            ['20', 'Terra més seca que el llindar.'],
+            ['39', 'Immediatament per sota del llindar.'],
+            ['40', 'Just al llindar.'],
+            ['41', 'Immediatament per damunt del llindar.'],
+            ['58', 'Terra més humida que el llindar.'],
+          ], 26),
+          repte('Una millora i una segona prova', 'Passeu les targetes 20, 39, 40, 41 i 58 en aquest ordre. Indiqueu quan canvia el senyal. Si algú interpreta que cal regar també amb 40, en quin cas es veu l’error? Reescriviu la regla perquè dues persones la interpretin de la mateixa manera.')),
+      ],
+      guia: ['Fes tres targetes amb 20, 40 i 58 i passa-les pel model.', 'Mou el senyal a «rega» o «atura» segons la regla de la fitxa.', 'Compara què passa amb 20 i amb 40 i explica quan s’atura el reg.'],
+      ampliacio: [
+        p('Amb un únic llindar, les lectures 39, 41, 38 i 42 poden fer canviar el senyal a cada pas. Podem fer servir dos llindars: encenem per sota de 35 i apaguem a partir de 50. Entre 35 i 49, conservem l’estat anterior.'),
+        repte('Evita els canvis constants', 'Comença amb el reg apagat. Aplica aquesta regla a 32, 39, 41, 50 i 44. Indica després de quines lectures canvia el senyal. Explica què s’ha de recordar entre una lectura i la següent.'),
+      ],
+    });
+
+  fitxa(disseny, 'M098', 'instruccions-dun-semafor', 'Com donem instruccions a un semàfor?',
+    'En un carrer de joguina hi ha un semàfor per als vehicles i un altre per a qui va a peu. Com donem instruccions a la maqueta perquè no apareguin dos verds alhora?', {
+      descripcio: 'Divideix un repte en passos, programa una seqüència amb una condició i comprova què fa el model.',
+      curriculum: [['disseny', 'condicio', 'Descompon un problema i dissenya, simula i revisa una seqüència amb una condició.']],
+      fonts: [
+        sabersCicleSuperior,
+        ['Micro:bit Educational Foundation · Primeres lliçons amb MakeCode', 'https://www.microbit.org/teach/lessons/first-lessons-with-makecode-and-the-microbit/'],
+        ['Micro:bit Educational Foundation · Projecte de semàfor intel·ligent', 'https://www.microbit.org/about/impact/do-your-bit/projects/2024/smart-traffic-light/'],
+      ],
+      apartats: [
+        apartat('descomposar', 'Dividim el repte en tres feines',
+          'Per **descompondre** el repte, separem tres feines: rebre una petició, canviar els senyals en ordre i tornar al començament.',
+          'Hi ha una **entrada**, que és prémer un botó, i dues **sortides**, que són els senyals de la maqueta. Dibuixeu el pas i prepareu una targeta de senyal per als vehicles i una per als vianants.'),
+        apartat('sequencia', 'Canviem les llums en ordre',
+          'La **seqüència** comença amb verd per als vehicles i vermell per als vianants. Abans de donar pas als vianants, els vehicles passen per groc i després tots dos tenen vermell.',
+          taula(['Pas', 'Vehicles', 'Vianants'], [
+            ['1 · Espera', 'Verd', 'Vermell'],
+            ['2 · Avís', 'Groc', 'Vermell'],
+            ['3 · Pausa', 'Vermell', 'Vermell'],
+            ['4 · Pas', 'Vermell', 'Verd'],
+            ['5 · Pausa', 'Vermell', 'Vermell'],
+          ], 34),
+          'Després del pas 5, el model torna al pas 1. Les pauses del model es poden marcar amb un batec de mans. La durada d’una fase del carrer real requereix altres dades i decisions.'),
+        apartat('condicio', 'Decidim quan ha de començar el cicle',
+          'En el **pas 1**, si es prem el botó, el model passa al pas 2. Si ningú el prem, el model continua al pas 1.',
+          'Quan el model ja ha començat el cicle, conserva l’ordre dels passos encara que algú torni a prémer el botó. La mateixa seqüència es pot repetir cada vegada que arriba una petició nova durant el pas 1.'),
+        apartat('comprovacio', 'Simulem i detectem un error',
+          'Simulem tres **casos de prova**: sense prémer el botó, prement-lo al pas 1 i prement-lo una altra vegada durant el pas 4.',
+          'En grup, feu que una persona llegeixi les instruccions, una canviï les targetes i una faci de vianant. En cada prova, anoteu si es passa al pas 2 i si en algun moment coincideixen dos verds.',
+          repte('Quin ordre cal reparar?', 'Una seqüència equivocada dona llum verda als vianants abans de posar vermell als vehicles. Assenyala quina situació es pot produir. Canvia l’ordre i prova quan es prem el botó dues vegades.')),
+      ],
+      guia: ['Dibuixa els dos senyals tal com són al pas 1.', 'Fes servir un tros de paper com a botó i simula què passa si ningú el prem.', 'Prem el botó i assenyala quin senyal s’ha de posar vermell abans del verd dels vianants.'],
+      ampliacio: [
+        p('Podem afegir una regla que recordi una petició feta al pas 4. En tornar al pas 1, el model espera dos batecs abans de començar el proper cicle i esborra la petició guardada.'),
+        repte('Recordar un botó premut', 'Dibuixa els passos si una persona prem el botó durant el pas 4. Compara aquest recorregut amb el de la primera maqueta. Quin cas hauries de provar per assegurar que la petició només es fa servir una vegada?'),
+      ],
+    });
 }

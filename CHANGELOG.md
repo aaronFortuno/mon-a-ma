@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.70 · 28 de novembre de 2026
+
+- Publica M097 i M098, dos esborranys sobre el disseny i la prova d’un prototip de reg i d’un semàfor.
+
 ## 0.1.69 · 28 de novembre de 2026
 
 - Eixampla el mapa curricular, compacta els indicadors i mostra la miniatura només en fitxes concretes. El llistat s’obre quan se selecciona una cel·la.
