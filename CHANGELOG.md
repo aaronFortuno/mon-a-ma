@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.88 · 28 de novembre de 2026
+
+- Incorpora a l’M039 la prova en esborrany del castell amb planta Pla i tall Atles, pendent de validació.
+
 ## 0.1.87 · 28 de novembre de 2026
 
 - Incorpora les tandes d’il·lustracions M033–M037 i M038–M042 amb els estils Pla i Atles i l’Atles per defecte.

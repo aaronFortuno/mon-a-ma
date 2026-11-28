@@ -2923,14 +2923,23 @@ window.quaderns ??= [];
     coverFigure: 'planta-castell-espais-i-usos',
     figures: [
       {
-        id: 'planta-castell-espais-i-usos', section: 'parts', name: 'Un castell vist en planta', ratio: 2280 / 1420,
-        width: 100, position: 'center', wrap: false, anchor: 'lead',
-        alt: 'El plànol mostra muralla amb torres, entrada, recorregut cap al pati i accés al magatzem. Un símbol d’aigua indica la cisterna sota el pati.',
-        caption: 'Planta de mostra d’un castell. Ressegueix com s’arriba de l’entrada al pati i localitza on es guardava l’aigua.',
-        credit: 'Dibuix didàctic de producció pròpia.',
+        id: 'planta-castell-espais-i-usos', section: 'parts', name: 'Planta i tall d’un castell', ratio: 2400 / 1509,
+        width: 100, position: 'center', wrap: false, anchor: 'paragraph-1',
         variants: {
-          pla: { src: 'illustracions/m039/planta-castell-espais-i-usos-pla.png', thumbnail: 'illustracions/m039/miniatures/planta-castell-espais-i-usos-pla.jpg' },
-          atles: { src: 'illustracions/m039/planta-castell-espais-i-usos-atles.png', thumbnail: 'illustracions/m039/miniatures/planta-castell-espais-i-usos-atles.jpg' },
+          pla: {
+            src: 'illustracions/m039/planta-castell-espais-i-usos-pla.png?v=0.1.88',
+            thumbnail: 'illustracions/m039/miniatures/planta-castell-espais-i-usos-pla.jpg?v=0.1.88',
+            alt: 'Planta d’un castell. L’entrada dona al pati amb la torre i el magatzem al fons. Un traç discontinu delimita la cisterna sota el pati.',
+            caption: 'Planta d’un castell imaginari. La trama marca la cisterna que hi ha sota el pati.',
+            credit: 'Dibuix didàctic de producció pròpia.',
+          },
+          atles: {
+            src: 'illustracions/m039/planta-castell-espais-i-usos-atles.png?v=0.1.88',
+            thumbnail: 'illustracions/m039/miniatures/planta-castell-espais-i-usos-atles.jpg?v=0.1.88',
+            alt: 'Tall oblic del mateix castell. Al davant i a l’esquerra es veuen la boca i el nivell de l’aigua al dipòsit sota el pati.',
+            caption: 'Reconstrucció didàctica del mateix castell. El tall permet veure la boca i el dipòsit d’aigua sota el pati.',
+            credit: 'Il·lustració generada i retolada per a Món a mà.',
+          },
         },
       },
       {
