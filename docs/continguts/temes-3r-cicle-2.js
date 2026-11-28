@@ -1398,4 +1398,57 @@ window.variantsMaterials ??= {};
       guia: ['Digues quina informació fa servir una previsió meteorològica que pot venir d’un satèl·lit.', 'Identifica un exemple de residu espacial.', 'Explica què es pot decidir abans del llançament.'],
       ampliacio: [repte('Dues decisions per a un mateix problema', 'Compara planificar la retirada d’un satèl·lit nou i fer el seguiment d’un fragment que ja existeix. Digues en quin moment serveix cada acció i quina informació necessitaria l’equip.')],
     });
+
+  fitxa(digital, 'M109', 'afinar-una-cerca-i-citar', 'Com afinem una cerca i citem el que trobem?',
+    'Necessites explicar quins ocells es poden observar al Delta de l’Ebre. La primera cerca et dona anuncis, fotografies i notícies. Com pots trobar una font útil i indicar d’on surt?', {
+      descripcio: 'Planifica una cerca, ajusta la consulta, compara fonts i atribueix el material que reutilitzes.',
+      curriculum: [['digital', 'atribucio', 'Afina la cerca amb paraules clau i operadors i anota l’origen i la llicència dels materials.']],
+      fonts: [
+        sabersCicleSuperior,
+        ['Google · Opcions per afinar una cerca', 'https://support.google.com/websearch/answer/2466433'],
+        ['Creative Commons · Pautes d’atribució', 'https://wiki.creativecommons.org/Best_practices_for_attribution'],
+      ],
+      apartats: [
+        apartat('pregunta', 'De la pregunta a les paraules clau',
+          'Escriu la pregunta sencera i tria **paraules clau** de lloc, tema i finalitat. Per al Delta de l’Ebre, pots començar amb «delta de l’Ebre ocells observació».',
+          'Si apareixen molts anuncis, afegeix-hi «guia». Si apareixen pocs resultats, prova un sinònim com «aus» o elimina una paraula. Anota què has canviat i quina mena de resultats apareix ara.'),
+        apartat('operadors', 'Limita la cerca amb una pista concreta',
+          'En cercadors com Google, les **cometes dobles** busquen una expressió exacta i **site:** limita la cerca a un web o domini.',
+          'La consulta «ocells "delta de l’Ebre" site:parcsnaturals.gencat.cat» demana resultats d’aquest domini que continguin l’expressió entre cometes. Escriu el domini enganxat a site:. Si una consulta és massa restrictiva, prova de treure un filtre i compara el resultat.'),
+        apartat('fonts', 'Compara què aporta cada resultat',
+          'Per triar una **font**, comprova qui l’ha publicada, de quan és i si respon a la pregunta. La posició a la llista depèn de la consulta i dels criteris del cercador.',
+          'Una guia del parc pot explicar on observar ocells. Una notícia sobre una sola observació pot donar una data i un lloc més precisos. Obre les pàgines i decideix quina informació et serveix de cadascuna.'),
+        apartat('atribucio', 'Deixa escrit d’on has tret la informació',
+          'Per **citar** una font, anota l’autoria, el títol, el lloc on es pot trobar i la data si consta. Si reutilitzes una imatge, mira quina llicència té i quines condicions demana.',
+          'En una imatge amb llicència CC BY, indica l’autoria, la font i la llicència, i anota si has fet canvis. Afegeix el títol si consta. Una imatge feta a classe o una amb una llicència que permeti l’ús són opcions que pots valorar.',
+          repte('Una cerca i una fitxa de font', 'Escriu dues consultes per respondre la pregunta inicial. Compara un resultat de cada consulta i deixa constància de quin t’ajuda més i per què. Prepara una línia d’atribució si la font inclou una imatge que pots reutilitzar.')),
+      ],
+      guia: ['Subratlla el lloc i el tema de la pregunta.', 'Escriu tres paraules per cercar.', 'A la pàgina triada, troba l’autoria i el títol.'],
+      ampliacio: [repte('Una cerca que deixa coses fora', 'Limitant la cerca al web del parc trobes documents útils. Quina mena de fonts quedaran fora? Escriu una segona consulta que pugui trobar-les i explica per què mantindries un registre de totes dues.')],
+    });
+
+  fitxa(digital, 'M110', 'protegir-un-compte-digital', 'Com protegim un compte digital?',
+    'A l’escola, un missatge diu que cal confirmar el compte de seguida i demana un codi. Què pot fer una persona per comprovar-ho sense donar cap dada?', {
+      descripcio: 'Aplica pràctiques de protecció al compte i respon amb criteri davant d’un avís inesperat.',
+      curriculum: [['digital', 'avis', 'Aplica normes de seguretat a l’entorn digital, incloent-hi contrasenyes, verificació i resposta a avisos sospitosos.']],
+      fonts: [
+        sabersCicleSuperior,
+        ['INCIBE · Consells per evitar riscos en línia', 'https://www.incibe.es/sites/default/files/2024-12/tips-para-evitar-riesgos-en-linea.pdf'],
+        ['INCIBE · Autenticació en dos passos', 'https://www.incibe.es/sites/default/files/docs/osi_autenticacion_2_pasos.pdf'],
+      ],
+      apartats: [
+        apartat('contrasenya', 'Una clau diferent per a cada compte',
+          'Una **contrasenya llarga i única** ajuda a protegir un compte. Evita noms, dates i altres dades fàcils d’endevinar. Mantén la contrasenya en privat.',
+          'Una frase de pas pot combinar paraules que no tinguin una relació evident. Fes servir només exemples inventats en aquesta activitat. Si s’ha de recuperar un compte escolar, segueix els passos del centre amb una persona adulta.'),
+        apartat('passos', 'Una segona comprovació',
+          'La **verificació en dos passos** demana una comprovació addicional després de la contrasenya. Si reps un codi que no has demanat, guarda’l en privat i avisa.',
+          'Un servei pot confirmar l’accés amb una aplicació, un dispositiu o un codi. La comprovació complementa la contrasenya. Quan el centre permet triar el mètode, demana ajuda per activar-lo i per saber com tornar a entrar si perds l’accés.'),
+        apartat('avis', 'Atura’t i comprova l’avís',
+          'Si un missatge inesperat et demana una dada secreta, **atura’t**. Obre el servei pel camí que fas servir habitualment i demana ajuda a una persona adulta de confiança.',
+          'La pressa, una petició estranya o una notificació que no esperaves són motius per comprovar l’avís. Si ja has compartit una clau o un codi, avisa de seguida perquè t’ajudin amb els passos de recuperació del servei.',
+          repte('Tria què faries primer', 'En el cas del principi, escriu una frase per explicar la situació a una persona adulta. Indica per quin camí consultaries el compte i què faries amb el codi que has rebut.')),
+      ],
+      guia: ['Marca què demana el missatge inesperat.', 'Digues què has de mantenir en privat.', 'Tria a qui ho explicaries abans de continuar.'],
+      ampliacio: [repte('Dues capes, dos problemes', 'En un cas fictici, algú reutilitza la mateixa contrasenya en dos comptes. Un té verificació en dos passos i l’altre no. Explica per què és útil que les claus siguin diferents, fins i tot quan un compte té una segona comprovació.')],
+    });
 }

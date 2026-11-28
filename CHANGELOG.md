@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.74 · 28 de novembre de 2026
+
+- Publica M109 i M110, dos esborranys sobre la cerca i l’atribució de fonts i la protecció dels comptes digitals.
+
 ## 0.1.73 · 28 de novembre de 2026
 
 - Publica M106–M108, tres esborranys sobre ponts de paper, programació d’un robot i residus espacials.
