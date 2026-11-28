@@ -4,6 +4,7 @@
   const topics = window.quaderns.filter(topic => topic.lang === locale);
   const { node, paragraphAnchor, loadPaperFont, paginate, previewPage, figureSizing, normalizeFigureWidth, canWrapFigure, noteTypes, noteIcons, noteColors, noteIcon } = window.imprimible;
   const preferences = window.preferencies;
+  const { flagButton } = window.incidencies;
   const { defaults } = preferences;
   const materialLevels = [
     { id: 'suport', label: 'Suport' },
@@ -81,6 +82,9 @@
   let imageDb;
   let logoUploadVersion = 0;
   let pendingSection = '';
+  let pendingIssue;
+  let pendingIssueFigure = '';
+  let issueFigureVariant;
   let sectionEdit;
   let figureEdit = '';
   let paperAnimations = [];
@@ -342,7 +346,10 @@
         variants.findLast(variant => variant.src);
       if (personal) variants.push({ id: 'custom', label: 'Imatge pròpia', src: personal.src, alt: personal.alt });
       const savedVariant = saved?.variant === 'original' && previousOriginal ? previousOriginal.id : saved?.variant;
-      const selected = variants.find(variant => variant.id === savedVariant && variant.src) ?? defaultVariant;
+      const issueVariant = issueFigureVariant?.figureId === item.id && issueFigureVariant.chapterId === chapter.id
+        ? issueFigureVariant.figureVariant : '';
+      const selected = (issueVariant && variants.find(variant => variant.id === issueVariant && variant.src)) ||
+        variants.find(variant => variant.id === savedVariant && variant.src) || defaultVariant;
       const config = {
         wrap: false, border: true, visible: true, ...item, ...selected, id: item.id, ...saved,
         variants, selectedVariant: selected?.id ?? '', chapterId: chapter.id,
@@ -489,14 +496,19 @@
   }
 
   function renderFigureStyleTools() {
-    for (const figure of stack.querySelectorAll('figure[data-figure]:not([data-legacy-upload])')) {
-      const button = node('button', 'figure-style-trigger', 'Imatge');
-      button.type = 'button';
-      button.dataset.styleFigure = figure.dataset.figure;
-      button.setAttribute('aria-label', 'Opcions d’imatge: ' + figure.dataset.figureName);
-      button.setAttribute('aria-controls', 'figure-helper');
-      button.setAttribute('aria-expanded', String(helperFigure === figure.dataset.figure));
-      figure.append(button);
+    for (const figure of stack.querySelectorAll('figure[data-figure]')) {
+      if (!figure.hasAttribute('data-legacy-upload')) {
+        const button = node('button', 'figure-style-trigger', 'Imatge');
+        button.type = 'button';
+        button.dataset.styleFigure = figure.dataset.figure;
+        button.setAttribute('aria-label', 'Opcions d’imatge: ' + figure.dataset.figureName);
+        button.setAttribute('aria-controls', 'figure-helper');
+        button.setAttribute('aria-expanded', String(helperFigure === figure.dataset.figure));
+        figure.append(button);
+      }
+      const flag = flagButton('figure-issue-trigger', 'Anota una incidència d’imatge: ' + figure.dataset.figureName);
+      flag.dataset.issueFigure = figure.dataset.figure;
+      figure.append(flag);
     }
   }
 
@@ -534,6 +546,7 @@
     }
     const item = findFigure(choiceFigure);
     if (!item?.variants.some(choice => choice.id === variant && choice.src) || item.selectedVariant === variant) return;
+    if (issueFigureVariant?.figureId === item.id) issueFigureVariant = undefined;
     settings.figures[item.id] = { ...settings.figures[item.id], variant };
     figureEdit = item.id;
     storeOptions();
@@ -778,15 +791,65 @@
     target.focus();
   }
 
+  function issueContext(flag) {
+    if (!route) return { type: 'catalog', pageTitle: 'Catàleg', category: 'maquetacio', href: '#' };
+    const { topic } = route;
+    const figure = flag?.dataset.issueFigure ? findFigure(flag.dataset.issueFigure) : undefined;
+    const unit = flag?.closest('[data-paper-section]');
+    const chapterId = figure?.chapterId ?? unit?.dataset.paperChapter ?? route.chapter.id;
+    const chapter = topic.chapters.find(item => item.id === chapterId) ?? route.chapter;
+    const sectionId = figure?.section ?? unit?.dataset.paperSection ?? route.section;
+    const contents = documentType === 'solution' ? chapter.solution : chapter;
+    const section = contents?.sections.find(item => item.id === sectionId);
+    const style = figure?.variants.find(item => item.id === figure.selectedVariant);
+    return {
+      type: 'material', category: figure ? 'imatge' : 'text',
+      href: address(topic, chapter, documentType === 'sheet' ? section?.id : ''),
+      materialCode: topic.code, materialTitle: topic.title, chapterId: chapter.id,
+      sectionId: section?.id, sectionTitle: section?.title, readingLevel: selectedLevel().id,
+      documentType, collectionId: activeCollection?.id,
+      figureId: figure?.id, figureTitle: figure?.name, figureVariant: style?.id, figureStyleTitle: style?.label,
+      layout: {
+        font: settings.font, fontSize: settings.fontSize, leading: settings.leading,
+        margin: settings.margin, scope: settings.scope, showFigures: settings.showFigures,
+      },
+    };
+  }
+
+  function reopenIssueContext(context) {
+    let destination = '#';
+    if (context.type === 'map') {
+      curriculum.restoreIssueContext(context);
+      destination = '#mapa-curricular';
+    } else if (context.type === 'material') {
+      const topic = topicByCode.get(context.materialCode);
+      if (!topic) return;
+      const chapter = topic.chapters.find(item => item.id === context.chapterId) ?? topic.chapters[0];
+      const collection = library.collections.find(item => item.id === context.collectionId && item.topicIds.includes(topic.id));
+      const section = context.documentType !== 'solution' && chapter.sections.some(item => item.id === context.sectionId)
+        ? context.sectionId : '';
+      pendingIssue = context;
+      destination = address(topic, chapter, section, collection ?? null);
+    }
+    if (location.hash === destination) renderRoute();
+    else location.hash = destination;
+  }
+
   function renderRoute(event) {
     cancelResetConfirmation();
     const previous = route;
     route = extractRoute();
+    const issue = pendingIssue;
+    pendingIssue = undefined;
     if (route) {
       const canonical = address(route.topic, route.chapter, route.section);
       if (location.hash !== canonical) history.replaceState(history.state, '', canonical);
     }
     const changedMaterial = previous?.topic.id !== route?.topic.id || previous?.collectionId !== route?.collectionId;
+    if (changedMaterial || previous?.chapter.id !== route?.chapter.id || issue) {
+      issueFigureVariant = undefined;
+      pendingIssueFigure = '';
+    }
     if (changedMaterial && byId('material-intro').open) byId('material-intro').close();
     if (changedMaterial && comparisonDialog.open) comparisonDialog.close();
     if (changedMaterial && printMenu.matches(':popover-open')) printMenu.hidePopover();
@@ -848,12 +911,21 @@
       pendingSection = route.section ?? '';
       if (pendingSection) documentType = 'sheet';
     }
+    if (issue?.materialCode === route.topic.code) {
+      if (availableLevels(route.topic).some(level => level.id === issue.readingLevel)) {
+        settings.materialLevel = issue.readingLevel;
+      }
+      documentType = issue.documentType === 'solution' && route.chapter.solution ? 'solution' : 'sheet';
+      pendingSection = issue.sectionId ?? '';
+      pendingIssueFigure = issue.figureId ?? '';
+      if (issue.figureId && issue.figureVariant) issueFigureVariant = issue;
+    }
     document.title = route.chapter.title + ' · Món a mà';
     if (event && changedMaterial && !route.section) title.focus({ preventScroll: true });
     renderNavigation();
     renderControls();
     refreshPaper();
-    if (previous?.topic.id !== route.topic.id) showMaterialIntro(route.topic);
+    if (!issue && previous?.topic.id !== route.topic.id) showMaterialIntro(route.topic);
   }
 
   function control(label, input, className) {
@@ -1152,11 +1224,12 @@
         actions.id = unit.id + '-controls';
         actions.setAttribute('role', 'group');
         actions.setAttribute('aria-label', 'Edita «' + section.title + '»');
-        for (const [action, symbol, label, disabled] of [
+        const edits = documentType === 'sheet' ? [
           ['up', '↑', 'Puja', index === 0],
           ['down', '↓', 'Baixa', index === chapter.sections.length - 1],
           ['remove', '×', 'Treu de la fitxa', false],
-        ]) {
+        ] : [];
+        for (const [action, symbol, label, disabled] of edits) {
           const button = node('button', '', symbol);
           button.type = 'button';
           button.dataset.action = action;
@@ -1165,6 +1238,9 @@
           button.disabled = disabled;
           actions.append(button);
         }
+        const flag = flagButton('', 'Anota una incidència de «' + section.title + '»');
+        flag.dataset.issueSection = section.id;
+        actions.append(flag);
         tools.append(toggle, actions);
         unit.append(tools);
       }
@@ -1221,7 +1297,7 @@
   function removedPaperUnit({ unit, rect }, layer, zoom) {
     const ghost = unit.closest('.sheet').cloneNode(false);
     const clone = unit.cloneNode(true);
-    for (const control of clone.querySelectorAll('.section-preview-tools, .figure-style-trigger')) control.remove();
+    for (const control of clone.querySelectorAll('.section-preview-tools, .figure-style-trigger, .figure-issue-trigger')) control.remove();
     clone.removeAttribute('id');
     clone.removeAttribute('tabindex');
     clone.removeAttribute('data-paper-unit');
@@ -1583,7 +1659,7 @@
     stopPaperMotion();
     const focusedStyleFigure = document.activeElement?.dataset.styleFigure;
     paper = layoutMaterial(material, stack);
-    if (documentType === 'sheet') renderSectionTools(material.chapters);
+    renderSectionTools(material.chapters);
     renderFigureStyleTools();
     fitPaper();
     if (focusedStyleFigure) {
@@ -1595,6 +1671,15 @@
     if (visibleUnit) {
       const equivalent = stack.querySelector('[data-paper-unit="' + CSS.escape(visibleUnit.dataset.paperUnit) + '"]');
       if (equivalent) stack.scrollTop += equivalent.getBoundingClientRect().top - viewTop - visibleOffset;
+    }
+    if (pendingIssueFigure) {
+      const flag = stack.querySelector('[data-issue-figure="' + CSS.escape(pendingIssueFigure) + '"]');
+      if (flag) {
+        flag.focus({ preventScroll: true });
+        stack.scrollTop += flag.getBoundingClientRect().top - stack.getBoundingClientRect().top - 18;
+        pendingSection = '';
+      }
+      pendingIssueFigure = '';
     }
     if (pendingSection) {
       if (!focusPaperSection(chapter.id, pendingSection)) focusRemovedSection(chapter.id, pendingSection);
@@ -1835,6 +1920,7 @@
       pendingSection = route.section ?? '';
       sectionEdit = null;
       figureEdit = '';
+      issueFigureVariant = undefined;
       logoUploadVersion++;
       closeFigureHelper();
       if (comparisonDialog.open) comparisonDialog.close();
@@ -1868,6 +1954,7 @@
       layout.figures = {};
       layout.showFigures = preferences.getBase(layout.templateId, collection, library).showFigures;
       if (current) {
+        issueFigureVariant = undefined;
         closeFigureHelper();
         storeOptions();
         renderControls();
@@ -2112,13 +2199,14 @@
   }
 
   function editPreviewSection(event) {
-    const button = event.target.closest('.section-preview-tools button');
-    if (!button || !route || documentType !== 'sheet') return;
+    const button = event.target.closest('.section-preview-tools button[data-action]');
+    if (!button || !route) return;
     const { action } = button.dataset;
     if (action === 'toggle') {
       button.setAttribute('aria-expanded', String(button.getAttribute('aria-expanded') !== 'true'));
       return;
     }
+    if (documentType !== 'sheet') return;
     const unit = button.closest('[data-paper-section]');
     const { paperChapter, paperSection: id } = unit.dataset;
     const chapter = route.topic.chapters.find(entry => entry.id === paperChapter);
@@ -2237,6 +2325,12 @@
     showCollection();
   });
   stack.addEventListener('click', editPreviewSection);
+  stack.addEventListener('click', event => {
+    const flag = event.target.closest('[data-issue-section], [data-issue-figure]');
+    if (!route || !flag) return;
+    closeFigureHelper();
+    openIssueEditor(issueContext(flag));
+  });
   stack.addEventListener('pointerover', event => {
     const figure = previewFigure(event.target);
     if (event.pointerType === 'mouse' && route && figure && !figure.contains(event.relatedTarget)) showFigureHelper(figure);
@@ -2602,10 +2696,12 @@
 
   setupNoteOptions();
   const refreshCatalog = setupCatalog();
-  window.setupCurriculum(topics, (topic, section) => {
+  const curriculum = window.setupCurriculum(topics, (topic, section) => {
     const chapter = topic.chapters.find(entry => entry.sections.some(item => item.id === section)) ?? topic.chapters[0];
     return address(topic, chapter, section, null);
   }, isDefinitive);
+  const openIssueEditor = window.incidencies.setup({ openContext: reopenIssueContext, currentContext: issueContext });
+  byId('curriculum-report').addEventListener('click', () => openIssueEditor(curriculum.issueContext()));
   renderRoute();
   const uploadsReady = imageOperation('readonly', store => store.getAll()).then(items => {
     knownUploads.push(...items.map(item => ({ ...addUrl(item), persisted: true })));

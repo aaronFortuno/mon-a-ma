@@ -7,16 +7,17 @@
   <title>Món a mà · Apunts i materials per explorar el medi</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png?v=0.1.4">
   <link rel="apple-touch-icon" href="assets/mon-a-ma.png?v=0.1.4">
-  <link rel="stylesheet" href="estils.css?v=0.1.82">
-  <script src="interficie.js?v=0.1.82" defer></script>
-  <script src="continguts/terra-i-mapes.js?v=0.1.82" defer></script>
-  <script src="continguts/variants-terra-i-mapes.js?v=0.1.82" defer></script>
-  <script src="continguts/temes-3r-cicle-2.js?v=0.1.82" defer></script>
-  <script src="imprimible.js?v=0.1.82" defer></script>
-  <script src="preferencies.js?v=0.1.82" defer></script>
-  <script src="continguts/curriculum.js?v=0.1.82" defer></script>
-  <script src="mapa-curricular.js?v=0.1.82" defer></script>
-  <script src="app.js?v=0.1.82" defer></script>
+  <link rel="stylesheet" href="estils.css?v=0.1.83">
+  <script src="interficie.js?v=0.1.83" defer></script>
+  <script src="continguts/terra-i-mapes.js?v=0.1.83" defer></script>
+  <script src="continguts/variants-terra-i-mapes.js?v=0.1.83" defer></script>
+  <script src="continguts/temes-3r-cicle-2.js?v=0.1.83" defer></script>
+  <script src="imprimible.js?v=0.1.83" defer></script>
+  <script src="preferencies.js?v=0.1.83" defer></script>
+  <script src="continguts/curriculum.js?v=0.1.83" defer></script>
+  <script src="mapa-curricular.js?v=0.1.83" defer></script>
+  <script src="incidencies.js?v=0.1.83" defer></script>
+  <script src="app.js?v=0.1.83" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Ves al contingut</a>
@@ -27,6 +28,9 @@
       <div class="header-actions">
         <button type="button" class="icon-button" id="curriculum-button" data-dialog="curriculum-dialog" aria-haspopup="dialog" aria-label="Mapa curricular" title="Mapa curricular">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18M9 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+        </button>
+        <button type="button" class="icon-button" id="issues-button" data-dialog="issues-dialog" aria-haspopup="dialog" aria-label="Recull d’incidències" title="Recull d’incidències">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4m0 0c5-4 9 4 14 0v10c-5 4-9-4-14 0"/></svg>
         </button>
         <button type="button" class="icon-button" id="language-button" aria-label="Idioma" title="Idioma" aria-haspopup="menu" aria-expanded="false" aria-controls="language-menu" popovertarget="language-menu">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1m6 20 4-9 4 9m-7-3h6"/></svg>
@@ -324,7 +328,7 @@
         <button type="button" id="reset-user" title="Restableix els ajustos de totes les fitxes, les plantilles, les col·leccions i les imatges pròpies.">Restableix preferències</button>
         <span id="reset-user-status" role="status"></span>
         <a href="https://github.com/aaronFortuno/mon-a-ma/blob/main/license.md">MIT</a>
-        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.82 · Historial de versions">v0.1.82</button>
+        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.83 · Historial de versions">v0.1.83</button>
         <button type="button" data-dialog="about" aria-haspopup="dialog" aria-label="V4V · Sobre el projecte">V4V</button>
       </nav>
     </div>
@@ -335,6 +339,10 @@
       <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
     </div>
     <div class="dialog-content">
+      <h3>v0.1.83</h3>
+      <ul>
+        <li>Afegeix banderetes al visor i al mapa curricular i un recull local amb exportació JSON.</li>
+      </ul>
       <h3>v0.1.82</h3>
       <ul>
         <li>Publica M127–M129, tres esborranys sobre mediació, rutines de descans i fonts del treball industrial.</li>
@@ -873,7 +881,12 @@
     <div class="curriculum-shell">
       <div class="dialog-header">
         <h2 id="curriculum-title">Mapa curricular</h2>
-        <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca el mapa curricular"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
+        <div class="issue-actions">
+          <button type="button" id="curriculum-report" class="icon-button" aria-label="Anota una incidència del mapa curricular" title="Anota una incidència del mapa curricular">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4m0 0c5-4 9 4 14 0v10c-5 4-9-4-14 0"/></svg>
+          </button>
+          <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca el mapa curricular"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
+        </div>
       </div>
       <div class="curriculum-bar">
         <div class="views curriculum-tabs" role="tablist" aria-label="Etapa educativa">
@@ -905,6 +918,57 @@
     </div>
     <div class="curriculum-help" id="curriculum-help" role="tooltip" hidden></div>
   </dialog>
+  <dialog id="issues-dialog" class="project-dialog issues-dialog" aria-labelledby="issues-title">
+    <div class="dialog-header">
+      <h2 id="issues-title">Recull d’incidències</h2>
+      <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca el recull d’incidències"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
+    </div>
+    <div class="issues-body">
+      <div class="issue-actions issue-toolbar">
+        <label for="issues-filter">Mostra</label>
+        <select id="issues-filter">
+          <option value="pending">Pendents</option>
+          <option value="resolved">Resoltes</option>
+          <option value="all">Totes</option>
+        </select>
+        <button type="button" id="issues-new" class="secondary">Nova incidència</button>
+      </div>
+      <p id="issues-storage" class="hint" hidden>El navegador conserva les notes només en aquesta sessió. Exporta-les abans de tancar.</p>
+      <p id="issues-empty" class="hint">No hi ha incidències en aquesta vista.</p>
+      <ul id="issues-list" class="issues-list"></ul>
+      <div class="issue-export">
+        <p id="issues-export-count" class="hint"></p>
+        <div class="issue-actions">
+          <button type="button" id="issues-copy" class="secondary" disabled>Copia el JSON</button>
+          <button type="button" id="issues-download" class="secondary" disabled>Descarrega el JSON</button>
+        </div>
+        <p id="issues-status" class="hint" role="status"></p>
+        <textarea id="issues-json" rows="5" aria-label="JSON d’incidències per copiar" readonly hidden></textarea>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="issue-editor" class="project-dialog issue-editor" aria-labelledby="issue-editor-title">
+    <div class="dialog-header">
+      <h2 id="issue-editor-title">Anota una incidència</h2>
+      <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca l’anotació"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
+    </div>
+    <form id="issue-form" class="issues-body issue-form">
+      <p id="issue-context" class="hint"></p>
+      <label>Categoria
+        <select name="category">
+          <option value="text">Text</option>
+          <option value="imatge">Imatge</option>
+          <option value="maquetacio">Maquetació</option>
+          <option value="curricular">Mapa curricular</option>
+        </select>
+      </label>
+      <label>Què cal revisar?
+        <textarea name="note" rows="5" maxlength="2000" required autofocus></textarea>
+      </label>
+      <div class="issue-actions"><button type="submit" class="primary">Desa la incidència</button></div>
+    </form>
+  </dialog>
+  <p id="issue-announcement" class="sr-only" role="status"></p>
   <template id="figure-alignment-template">
     <div class="alignment-options">
       <label title="Esquerra">

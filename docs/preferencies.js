@@ -4,6 +4,7 @@
   const libraryKey = 'mon-a-ma:organitzacio:v1';
   const visitsKey = 'mon-a-ma:fitxes-vistes:v1';
   const catalogDraftsKey = 'mon-a-ma:cataleg-en-desenvolupament';
+  const issuesKey = 'mon-a-ma:incidencies:v1';
   const { noteTypes, noteIconChoice } = window.imprimible;
   const noteDefaults = Object.fromEntries(Object.values(noteTypes).flatMap(type => [
     [type.iconField, type.icons[0]], [type.sideField, 'left'], [type.colorField, type.color],
@@ -42,6 +43,15 @@
 
   function saveCatalogDrafts(value) {
     write(catalogDraftsKey, value);
+  }
+
+  function loadIncidencies() {
+    const data = read(issuesKey, []);
+    return Array.isArray(data) ? data : [];
+  }
+
+  function saveIncidencies(items) {
+    return write(issuesKey, items);
   }
 
   function firstVisit() {
@@ -150,5 +160,5 @@
     return [...sorted, ...sections.values()];
   }
 
-  window.preferencies = { defaults, loadCatalogDrafts, saveCatalogDrafts, firstVisit, library, saveLibrary, format, getBase, loadLayout, saveLayout, resetAll, clearLayout, clearCollectionLayouts, orderedSections };
+  window.preferencies = { defaults, loadCatalogDrafts, saveCatalogDrafts, loadIncidencies, saveIncidencies, firstVisit, library, saveLibrary, format, getBase, loadLayout, saveLayout, resetAll, clearLayout, clearCollectionLayouts, orderedSections };
 })();

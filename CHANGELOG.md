@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.83 · 28 de novembre de 2026
+
+- Afegeix banderetes al visor i al mapa curricular i un recull local amb exportació JSON.
+
 ## 0.1.82 · 28 de novembre de 2026
 
 - Publica M127–M129, tres esborranys sobre mediació, rutines de descans i fonts del treball industrial.

@@ -316,6 +316,27 @@
       render();
     });
     selectStage(tabs[0]);
+    return {
+      issueContext() {
+        const current = filters[stage];
+        const selection = table.querySelector('button[data-cell][aria-pressed="true"]');
+        const pageTitle = 'Mapa curricular';
+        return {
+          type: 'map', pageTitle, category: 'curricular', href: '#mapa-curricular', stage,
+          area: current.area, cycle: current.cycle, withMaterials: current.withMaterials,
+          cell: selection?.dataset.cell,
+          sectionTitle: selection?.getAttribute('aria-label'),
+        };
+      },
+      restoreIssueContext(context) {
+        const tab = tabs.find(item => item.dataset.stage === context.stage) ?? tabs[0];
+        Object.assign(filters[tab.dataset.stage], {
+          area: context.area ?? '', cycle: context.cycle ?? '',
+          withMaterials: Boolean(context.withMaterials), selection: context.cell ?? '',
+        });
+        selectStage(tab);
+      },
+    };
   }
 
   window.setupCurriculum = setupCurriculum;
