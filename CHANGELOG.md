@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.94 · 28 de novembre de 2026
+
+- Renova la casa i les feines del taller de l’M025 amb seccions i peces en Pla i reconstruccions d’activitat en Atles.
+
 ## 0.1.93 · 28 de novembre de 2026
 
 - Revisa les il·lustracions de l’M040 amb un mateix llogaret en planta i en vista elevada, quatre feines del cereal i tres formes de renda.
