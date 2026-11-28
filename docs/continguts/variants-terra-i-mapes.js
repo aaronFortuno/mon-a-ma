@@ -251,5 +251,74 @@ window.variantsMaterials ??= {};
         },
       },
     },
+    M008: {
+      'muntanyes-i-rius-europa': {
+        suport: {
+          intro: 'En un mapa d’Europa, els colors del relleu i les línies dels rius expliquen coses diferents. Podem llegir-los junts i seguir l’aigua fins on arriba.',
+          sections: {
+            'alps': [],
+            'caucas': [],
+            'plana': [],
+            'danubi': [passos('Busca el Danubi en un mapa físic. Troba l’inici del seu recorregut.', 'Segueix la línia fins al mar Negre.')],
+            'volga': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'caucas': [
+              p('Els límits continentals s’acorden. Un PDF o un atles pot traçar la frontera convencional entre Europa i Àsia de manera diferent.'),
+              repte('On s’acaba Europa?', 'Compara dos atles i explica com han tractat el Caucas. Quins elements físics es mantenen als dos mapes?'),
+            ],
+          },
+        },
+      },
+    },
+    M009: {
+      'relleu-espanya': {
+        suport: {
+          intro: 'Si féssim un viatge des del centre de la península fins a la costa i les illes, passaríem per altiplans, serralades i depressions. On trobaríem cada paisatge?',
+          sections: {
+            'meseta': [passos('Busca la Meseta al centre del mapa.', 'Assenyala el Sistema Central. Digues quina submeseta queda al nord i quina al sud.')],
+            'vores': [],
+            'periferia': [],
+            'ebre': [],
+            'guadalquivir': [],
+            'balears': [],
+            'canaries': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'canaries': [
+              p('Les formes volcàniques canvien amb l’erosió i es poden transformar amb noves erupcions.'),
+              repte('Per què dues illes són tan diferents?', 'Compara les corbes de nivell d’una illa baixa i una de muntanyosa. Quines pistes utilitzes per saber quina té més desnivell?'),
+            ],
+          },
+        },
+      },
+    },
+    M010: {
+      'costes-i-rius-espanya': {
+        suport: {
+          intro: 'Una gota d’aigua que cau a la Península pot acabar al Cantàbric, a l’Atlàntic o a la Mediterrània. El relleu ens dona pistes per explicar quin camí farà.',
+          sections: {
+            'rius': [],
+            'costa': [],
+            'cantabric': [passos('Busca el mar Cantàbric i el Nalón.', 'Compara amb el recorregut del Tajo. Quin triga més recorregut a arribar al mar?')],
+            'mediterrani': [],
+            'atlantic': [],
+            'illes': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'illes': [
+              p('Una conca petita amb pendent fort pot respondre ràpidament a una pluja intensa, encara que la llera sigui seca més dies de l’any.'),
+              repte('Quan una llera seca porta aigua', 'Dibuixa dues conques amb pendents diferents i assenyala per on aniria l’aigua. Quina altra dada necessitaries per saber quina crescuda seria més gran?'),
+            ],
+          },
+        },
+      },
+    },
   });
 }

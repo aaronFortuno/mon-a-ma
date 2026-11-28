@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.61 · 28 de novembre de 2026
+
+- Publica els esborranys M008–M010 sobre relleu, rius i costes d’Europa i d’Espanya.
+
 ## 0.1.60 · 27 de novembre de 2026
 
 - Valida El nostre lloc al sistema solar (M005). Redueix el cos de les taules i ajusta la primera columna de les fitxes definitives perquè les paraules es mantinguin senceres.
