@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.68 · 28 de novembre de 2026
+
+- Afegeix les fitxes en desenvolupament M052–M096 del segon índex de cicle superior, amb variants de Suport, Base i Ampliació.
+
 ## 0.1.67 · 28 de novembre de 2026
 
 - Publica M044–M051, vuit esborranys sobre cèl·lules, biodiversitat i classificació dels éssers vius.
