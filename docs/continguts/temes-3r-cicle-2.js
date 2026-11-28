@@ -1720,4 +1720,89 @@ window.variantsMaterials ??= {};
       guia: ['Compara els 42 °C al sol i els 31 °C a l’ombra de l’asfalt.', 'Tria on posaries un punt d’ombra i explica el motiu.', 'Digues qui podria ajudar a fer la mesura o preparar la proposta.'],
       ampliacio: [repte('Què falta per saber si l’espai és més confortable?', 'La segona campanya confirma que el paviment és més fresc. Tria una mesura de l’aire i una observació sobre com es fa servir la plaça que completin l’avaluació.')],
     });
+
+  const cos = itinerari('cos-huma-en-funcionament', 'El cos humà en funcionament', 'Éssers vius');
+
+  fitxa(economia, 'M121', 'repartir-aigua-en-sequera', 'Com repartim l’aigua quan n’hi ha menys?',
+    'En una conca imaginària, després de molts mesos amb poca pluja es disposa de menys aigua. Cal comparar què necessiten les persones, els conreus, les activitats econòmiques i el mateix riu.', {
+      descripcio: 'Interpreta un balanç d’aigua i argumenta un repartiment quan es redueix la disponibilitat.',
+      curriculum: [['ecosocial', 'repartiment', 'Analitza l’aigua com a recurs limitat i justifica prioritats d’ús i de protecció del medi.']],
+      fonts: [sabersCicleSuperior, ['Agència Catalana de l’Aigua · Pla de sequera', 'https://aca.gencat.cat/ca/plans-i-programes/pla-de-sequera/']],
+      apartats: [
+        apartat('recurs', 'Qui necessita l’aigua de la conca?',
+          'L’**aigua disponible** és limitada. En una conca, se’n fa servir per beure, rentar, regar o treballar, i també en cal perquè el riu funcioni com a ecosistema.',
+          'Les plantes i els animals del riu depenen de les seves condicions. Quan el cabal baixa, poden canviar el corrent, la temperatura i l’espai amb aigua.'),
+        apartat('balanc', 'Llegim un balanç amb les mateixes unitats',
+          'En aquest **cas inventat**, la conca passa de tenir **100 a 80 unitats d’aigua** durant un mateix període. Cada unitat representa el mateix volum.',
+          taula(['Destinació', 'Repartiment inicial'], [
+            ['Llars i serveis essencials', '35 unitats'],
+            ['Conreus', '25 unitats'],
+            ['Altres activitats econòmiques', '20 unitats'],
+            ['Aigua que queda al riu', '20 unitats'],
+          ], 55),
+          'En el model, l’equip ha acordat conservar les 35 unitats per a llars i serveis essencials i les 20 que queden al riu. Feu servir aquests valors per resoldre el repte.'),
+        apartat('repartiment', 'Fes una proposta i explica què implica',
+          'Per fer un **repartiment**, suma primer les quantitats acordades. Amb les unitats restants, proposa un repartiment per a les altres activitats i justifica’l.',
+          repte('Reparteix les 80 unitats', 'Calcula quantes unitats queden per a conreus i altres activitats econòmiques. Proposa com repartir-les, comprova que el total sigui 80 i explica un efecte possible de la decisió per a cada grup.')),
+      ],
+      guia: ['Suma les 35 unitats de les llars i les 20 del riu.', 'Resta aquesta quantitat de 80.', 'Proposa com repartir el que queda entre conreus i altres activitats.'],
+      ampliacio: [repte('Una segona proposta sota la mateixa regla', 'Compara un repartiment que reparteix les reduccions per igual en unitats amb un altre que prioritza un conreu concret. Quines dades sobre cada activitat et caldrien per justificar una tria?')],
+    });
+
+  fitxa(proves, 'M122', 'fonts-electricitat-i-xarxa', 'D’on ve l’electricitat que arriba a l’escola?',
+    'A l’escola podem encendre un llum tant quan fa sol com quan és fosc. L’electricitat que hi arriba es pot haver generat de maneres diferents. Com es transforma l’energia en cada cas?', {
+      descripcio: 'Compara maneres de generar electricitat, segueix el camí per la xarxa i interpreta una combinació de fonts.',
+      curriculum: [
+        ['materia', 'transformacions', 'Descriu la transformació i la transferència d’energia en diversos sistemes de generació elèctrica.'],
+        ['ecosocial', 'comparar', 'Compara fonts d’electricitat segons els recursos que necessiten i els seus impactes ambientals.'],
+      ],
+      fonts: [sabersCicleSuperior, ['Red Eléctrica · Com funciona el sistema elèctric?', 'https://www.ree.es/es/sala-de-prensa/infografias-y-mapas/como-funciona-el-sistema-electrico']],
+      apartats: [
+        apartat('transformacions', 'Tres maneres de generar electricitat',
+          'Generar **electricitat** és convertir energia d’altres formes. Podem aprofitar la llum del Sol, l’aigua en moviment o l’energia química d’un combustible.',
+          taula(['Font', 'Transformació a la central'], [
+            ['Sol', 'Les plaques fotovoltaiques converteixen part de l’energia de la llum en electricitat.'],
+            ['Aigua en moviment', 'L’aigua mou una turbina connectada a un generador elèctric.'],
+            ['Gas', 'La combustió fa possible el moviment d’una turbina que acciona un generador.'],
+          ], 36)),
+        apartat('xarxa', 'De la generació al llum de l’aula',
+          'La **xarxa elèctrica** connecta molts llocs de generació i de consum. L’aportació de cada font pot variar segons l’hora i les condicions.',
+          'Quan encenem un llum, l’energia elèctrica es transforma en llum i calor. Per saber quines fonts generaven electricitat en un moment concret podem consultar dades del sistema elèctric.'),
+        apartat('comparar', 'Compara més d’un criteri',
+          'Una font és **renovable** si es refà de manera natural a una escala de temps humana. Per comparar fonts també podem mirar les emissions, l’espai que ocupen i la disponibilitat del recurs.',
+          'Les plaques necessiten llum i espai. Una central hidroelèctrica pot afectar el cabal d’un riu. La combustió del gas produeix diòxid de carboni.',
+          repte('Quina font ha canviat?', 'En un model amb tres fonts, al migdia es generen 50 unitats amb el Sol, 30 amb l’aigua i 20 amb el gas. Al vespre se’n generen 5, 40 i 55, respectivament. Comprova el total a cada hora. Quina font disminueix més? Quina dada et faltaria per comparar l’impacte dels dos moments?')),
+      ],
+      guia: ['Relaciona Sol amb plaques i aigua amb turbina.', 'En el model, compara les 50 unitats solars del migdia amb les 5 del vespre.', 'Explica en què es transforma l’energia quan s’encén el llum.'],
+      ampliacio: [repte('Una dada local i una dada del sistema', 'Si l’escola té plaques solars, quina mesura caldria per saber quanta electricitat proporcionen aquell dia? Quina dada del conjunt de la xarxa consultaries per saber quines altres fonts generaven electricitat a la mateixa hora?')],
+    });
+
+  fitxa(cos, 'M123', 'de-l-entrepa-als-musculs', 'Què passa entre l’entrepà i els músculs?',
+    'Has menjat un entrepà i després has corregut al pati. Els aliments, l’aire que respires i la sang intervenen en el que necessiten els músculs. Seguim quin paper fa cadascun.', {
+      descripcio: 'Relaciona digestió, respiració i circulació amb l’arribada de nutrients i oxigen als músculs.',
+      curriculum: [['vida', 'celles', 'Integra el paper de la digestió, la respiració i la circulació per explicar com obtenen energia les cèl·lules.']],
+      fonts: [
+        sabersCicleSuperior,
+        ['NIDDK · L’aparell digestiu i el seu funcionament', 'https://www.niddk.nih.gov/health-information/informacion-de-la-salud/enfermedades-digestivas/aparato-digestivo-funcionamiento'],
+        ['NHLBI · El sistema respiratori', 'https://www.nhlbi.nih.gov/es/salud/pulmones/sistema-respiratorio'],
+        ['NHLBI · Com circula la sang pel cor', 'https://www.nhlbi.nih.gov/health/heart/blood-flow'],
+      ],
+      apartats: [
+        apartat('digestio', 'Dels aliments als nutrients',
+          'La **digestió** transforma els aliments en substàncies més petites. A l’**intestí prim**, molts nutrients, com la glucosa, passen a la sang.',
+          'El pa conté midó. Durant la digestió, una part d’aquest midó es trenca i forma glucosa. L’intestí pot absorbir-la i la sang la pot transportar.'),
+        apartat('respiracio', 'De l’aire a la sang',
+          'Quan respirem, l’aire arriba als **pulmons**. L’oxigen passa d’uns petits sacs anomenats **alvèols** a la sang dels vasos del voltant.',
+          'Al mateix lloc hi ha un altre intercanvi. La sang deixa passar diòxid de carboni cap a l’aire dels alvèols i el traiem quan espirem.'),
+        apartat('circulacio', 'El cor fa circular la sang',
+          'El **cor** impulsa la sang pels vasos sanguinis. Així els nutrients i l’oxigen poden arribar a les cèl·lules dels músculs.',
+          'A prop de les cèl·lules, els vasos més petits, els capil·lars, faciliten el pas de substàncies entre la sang i l’entorn de les cèl·lules. La sang també pot recollir el diòxid de carboni i portar-lo als pulmons.'),
+        apartat('celles', 'Què fan les cèl·lules amb el que els arriba?',
+          'Amb nutrients com la glucosa i amb oxigen, les **cèl·lules** poden obtenir energia per funcionar. Aquest procés s’anomena **respiració cel·lular**.',
+          'Quan fem exercici, els músculs també poden aprofitar reserves que el cos ja tenia abans de l’àpat. El cos coordina diversos aparells per mantenir l’activitat.',
+          repte('Dues rutes que es troben', 'Dibuixa una fletxa de l’intestí prim a la sang i una altra dels pulmons a la sang. Posa a cada fletxa què es transporta. Fes que totes dues rutes arribin a una cèl·lula del múscul i indica com torna el diòxid de carboni als pulmons.')),
+      ],
+      guia: ['Escriu «nutrients» al camí de l’intestí cap a la sang.', 'Escriu «oxigen» al camí dels pulmons cap a la sang.', 'Porta les dues fletxes fins al múscul.'],
+      ampliacio: [repte('Quan el múscul treballa més', 'Durant una cursa respires més de pressa i el cor batega més sovint. Relaciona aquests dos canvis amb l’arribada d’oxigen als músculs i el retorn del diòxid de carboni.')],
+    });
 }

@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.78 · 28 de novembre de 2026
+
+- Publica M121–M123, tres esborranys sobre el repartiment de l’aigua, les fonts d’electricitat i la nutrició dels músculs.
+
 ## 0.1.77 · 28 de novembre de 2026
 
 - Publica M119 i M120, dos esborranys sobre l’edició compartida de documents i la investigació de la calor urbana.
