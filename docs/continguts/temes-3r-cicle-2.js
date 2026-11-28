@@ -1805,4 +1805,83 @@ window.variantsMaterials ??= {};
       guia: ['Escriu «nutrients» al camí de l’intestí cap a la sang.', 'Escriu «oxigen» al camí dels pulmons cap a la sang.', 'Porta les dues fletxes fins al múscul.'],
       ampliacio: [repte('Quan el múscul treballa més', 'Durant una cursa respires més de pressa i el cor batega més sovint. Relaciona aquests dos canvis amb l’arribada d’oxigen als músculs i el retorn del diòxid de carboni.')],
     });
+
+  fitxa(cel, 'M124', 'seguir-un-temporal-amb-el-radar', 'Què ens explica el radar quan s’acosta un temporal?',
+    'A la pantalla del radar apareix una taca de color. Deu minuts després és uns quilòmetres més a l’est. Què sabem a partir d’aquestes imatges i què hauríem de comprovar després?', {
+      descripcio: 'Llegeix una seqüència de radar meteorològic i distingeix observacions i prediccions.',
+      curriculum: [
+        ['terra', 'sequencia', 'Interpreta una seqüència de radar per seguir el desplaçament aproximat de la precipitació.'],
+        ['reptes', 'prediccio', 'Distingeix què s’observa al radar i què s’estima amb una predicció.'],
+      ],
+      fonts: [sabersCicleSuperior, ['Meteocat · Radar de precipitació', 'https://es.meteocat.gencat.cat/radar']],
+      apartats: [
+        apartat('llegenda', 'Què mostra una imatge del radar?',
+          'El **radar meteorològic** detecta senyals que retornen de gotes, flocs o calamarsa. Amb aquests senyals podem estimar on hi ha precipitació i quina intensitat té.',
+          'Mira l’hora de la imatge i la llegenda. En un mapa, els colors poden distingir diversos valors d’intensitat de la precipitació. Llegeix la llegenda del mapa concret que consultis.'),
+        apartat('sequencia', 'Tres imatges del mateix lloc',
+          'Compara imatges del **mateix enquadrament** amb l’hora de cada observació. En l’exemple, les caselles A, B, C i D van d’oest a est.',
+          taula(['Hora', 'On es veu el centre de la taca?', 'Quina intensitat indica el model?'], [
+            ['16.00 h', 'Casella A', 'Moderada'],
+            ['16.10 h', 'Casella B', 'Forta'],
+            ['16.20 h', 'Casella C', 'Moderada'],
+          ], 25),
+          'Les dades són inventades. Una taca de precipitació pot canviar de forma i intensitat mentre es desplaça.'),
+        apartat('prediccio', 'Què podríem preveure i què cal comprovar?',
+          'Amb diverses imatges podem **estimar** cap on va la taca. La imatge següent permet comprovar si el moviment continua igual.',
+          repte('Segueix la taca', 'Ordena les tres imatges segons l’hora, indica la direcció del canvi i assenyala quan es veu més intensitat al model. Si el moviment continua igual, a quina casella podria arribar després? Marca aquesta última dada com a predicció.')),
+      ],
+      guia: ['Posa de costat les caselles A, B, C i D.', 'Dibuixa una fletxa de l’A a la C passant per la B.', 'Assenyala on podria aparèixer la taca a la següent imatge.'],
+      ampliacio: [repte('La taca es divideix', 'A les 16.30 h, una part de la taca és a C i una altra és a D. Explica què revisaries de la predicció inicial i quines altres dades et donarien més pistes sobre l’evolució del temporal.')],
+    });
+
+  fitxa(digital, 'M125', 'mapa-d-ombres-del-cami', 'On hi ha ombra al camí de l’escola?',
+    'Dos camins arriben a l’escola. Un és més curt i l’altre pot tenir més ombra a l’hora de sortida. Com ho podem representar perquè una altra classe pugui entendre la comparació?', {
+      descripcio: 'Combina observacions de carrer amb capes d’un mapa digital i argumenta una tria segons el criteri.',
+      curriculum: [
+        ['digital', 'capes', 'Selecciona capes en un visor i hi representa observacions amb una llegenda i dades contextuals.'],
+        ['cartografia', 'comparar', 'Compara recorreguts a partir de la distància, l’hora i les observacions situades al mapa.'],
+      ],
+      fonts: [sabersCicleSuperior, ['ICGC · Visor VISSIR', 'https://www.icgc.cat/es/Herramientas-y-visores/Visores/VISSIR']],
+      apartats: [
+        apartat('registre', 'Anota on i quan has vist l’ombra',
+          'L’**ombra** canvia amb l’hora. Per comparar dues rutes, observeu-les en una franja semblant i feu servir el mateix criteri per marcar els trams.',
+          'En grup i amb acompanyament, anoteu quins trams de la vorera són al sol o a l’ombra a l’hora de sortida. Si un tram queda a mitges, marqueu-lo com a parcial. Feu servir cruïlles i noms de carrer per localitzar-lo.'),
+        apartat('capes', 'Combina el mapa amb les observacions',
+          'Una **capa** agrupa una mena d’informació. Pots fer servir un plànol de carrers per situar-te i afegir a sobre els trams observats amb una llegenda.',
+          'En un visor, localitza l’escola i compara el plànol amb la fotografia aèria. Si el visor no permet dibuixar, fes les marques en una còpia de treball. Indica l’hora i el dia a la llegenda. La fotografia aèria correspon al moment en què es va prendre.'),
+        apartat('comparar', 'Dues rutes que resolen necessitats diferents',
+          'La **distància total** i la **distància a l’ombra** són dues dades diferents. Decideix quin criteri és més important per al trajecte.',
+          taula(['Ruta', 'Distància total', 'Trams a l’ombra'], [
+            ['Camí A', '300 m', '90 m'],
+            ['Camí B', '380 m', '220 m'],
+          ], 33),
+          repte('Tria una ruta i explica la llegenda', 'Amb les dades d’aquest exemple, digues quina ruta és més curta i quina té més metres a l’ombra. Explica quina triaries una tarda calorosa si totes dues tenen cruïlles igualment accessibles.')),
+      ],
+      guia: ['Marca en un plànol el punt de sortida i el d’arribada.', 'Tria un traç per al sol i un altre per a l’ombra.', 'Compara 90 i 220 metres d’ombra.'],
+      ampliacio: [repte('Un mapa per a dues hores', 'Com repetiríeu l’observació al matí i a la tarda? Explica quines capes o marques conservaries i què canviaries a la llegenda per poder comparar-les.')],
+    });
+
+  fitxa(poblacio, 'M126', 'poble-que-perd-habitants', 'Què canvia en un poble quan perd habitants?',
+    'En dos municipis propers, un té cada vegada menys habitants i l’altre en guanya. Quines dades ens ajuden a descriure el canvi? Com podem investigar què passa amb els serveis?', {
+      descripcio: 'Compara dues sèries de població i estudia com es relacionen els canvis amb serveis i desplaçaments.',
+      curriculum: [['reptes', 'serveis', 'Compara dades de població i interpreta canvis en l’accés a serveis a les zones rurals i urbanes.']],
+      fonts: [sabersCicleSuperior, ['Idescat · Xifres de població', 'https://idescat.cat/tema/xifpo']],
+      apartats: [
+        apartat('llegir', 'Compareu els mateixos anys',
+          'El **despoblament** és una pèrdua d’habitants mantinguda al llarg del temps. Per estudiar-lo, compara diversos anys amb la mateixa data de referència.',
+          taula(['Municipi imaginari', '2010', '2015', '2020', '2025'], [
+            ['Vall Alta', '780', '720', '660', '610'],
+            ['Pla Nou', '1.100', '1.180', '1.290', '1.400'],
+          ], 35),
+          'Representa les dades amb dos traços sobre els mateixos eixos. En aquest model, totes les xifres es refereixen a l’1 de gener dels anys indicats.'),
+        apartat('serveis', 'Quins serveis queden a prop?',
+          'Els **serveis** poden canviar amb el nombre d’habitants i amb decisions sobre transport, equipaments i pressupost. Cal observar què passa en cada lloc.',
+          'Imagina que la biblioteca de Vall Alta obre ara dos dies en comptes de quatre i que a Pla Nou s’hi ha afegit una línia d’autobús. En cada cas, ens caldrien dades per saber el motiu del canvi i qui hi té més o menys accés.'),
+        apartat('investigar', 'Com comprovem què ha canviat?',
+          'Un **gràfic** mostra com ha canviat la població. Per explicar els motius o els efectes, consulta també altres fonts, com horaris, mapes o testimonis.',
+          repte('Població i accés en una mateixa explicació', 'Calcula quant ha canviat cada municipi entre 2010 i 2025. Tria un servei i escriu una pregunta sobre el temps de desplaçament o l’horari que voldries investigar.')),
+      ],
+      guia: ['Compara 780 i 610 habitants de Vall Alta.', 'Compara 1.100 i 1.400 habitants de Pla Nou.', 'Digues quina altra font trobaries per estudiar un servei.'],
+      ampliacio: [repte('Una biblioteca itinerant', 'Compareu una biblioteca itinerant amb la proposta de mantenir un espai fix amb menys dies d’obertura. Quines tres dades sobre freqüència, distància i ús permetrien decidir?')],
+    });
 }

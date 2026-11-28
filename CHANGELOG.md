@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.81 · 28 de novembre de 2026
+
+- Publica M124–M126, tres esborranys sobre el radar meteorològic, l’ombra al camí de l’escola i el despoblament.
+
 ## 0.1.80 · 28 de novembre de 2026
 
 - Incorpora les il·lustracions de relleu, rius i costes de l’M008 a l’M012, amb els lots Pla i Atles.
