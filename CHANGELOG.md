@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.72 · 28 de novembre de 2026
+
+- Publica M102–M105, quatre esborranys sobre contaminació lumínica, flotabilitat, circuits elèctrics i població municipal.
+
 ## 0.1.71 · 28 de novembre de 2026
 
 - Publica M099–M101, tres esborranys sobre indagació amb planadors, representació de dades i privadesa digital.

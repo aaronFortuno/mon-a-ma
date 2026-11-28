@@ -1197,4 +1197,123 @@ window.variantsMaterials ??= {};
       guia: ['Busca una pista que permeti identificar algú.', 'Digues quina part del projecte voleu mostrar.', 'Tria una manera de mostrar-la que deixi fora aquella dada.'],
       ampliacio: [repte('La fotografia ja s’ha compartit', 'Una companya descobreix que una foto seva s’ha reenviat sense que ella ho volgués. Escriu què pot fer el grup per aturar nous reenviaments i què podria fer una persona adulta del centre per ajudar.')],
     });
+
+  const cel = itinerari('terra-i-mapes', 'La Terra i les seves representacions', 'Geografia');
+  const poblacio = itinerari('poblacio-i-territori', 'Població i territori', 'Geografia');
+
+  fitxa(cel, 'M102', 'estrelles-i-llum-nocturna', 'Per què veiem menys estrelles a la ciutat?',
+    'La mateixa nit, dues persones miren la mateixa regió del cel. Una hi compta sis estrelles i l’altra, setze. Què pot explicar aquesta diferència?', {
+      descripcio: 'Investiga la contaminació lumínica, compara observacions i justifica una millora de l’enllumenat.',
+      curriculum: [
+        ['terra', 'entorn', 'Explica com l’enllumenat nocturn altera el cel i pot afectar els éssers vius.'],
+        ['indagacio', 'recompte', 'Compara observacions del cel amb un protocol i identifica explicacions alternatives.'],
+      ],
+      fonts: [
+        sabersCicleSuperior,
+        ['Generalitat · Què és la contaminació lumínica?', 'https://mediambient.gencat.cat/ca/05_ambits_dactuacio/atmosfera/contaminacio_luminica/que-es-la-contaminacio-luminica/'],
+      ],
+      apartats: [
+        apartat('resplendor', 'Quan el cel del fons es fa més clar',
+          'La **contaminació lumínica** és l’alteració de la foscor natural de la nit per llum artificial. Quan part de la llum s’escampa per l’atmosfera, el cel pot semblar més clar.',
+          'Les estrelles més febles destaquen menys sobre un fons clar. També pot costar veure-les si una llum ens enlluerna directament. Els núvols, la Lluna i els obstacles canvien les condicions d’observació.'),
+        apartat('recompte', 'Comptem a la mateixa regió del cel',
+          'Per comparar dos llocs, observa la **mateixa zona del cel**, a la mateixa hora, i anota els núvols i si hi ha lluna. Deixa que la vista s’acostumi a la foscor abans de comptar.',
+          'Si ho proveu, trieu llocs segurs amb una persona adulta. Delimiteu la mateixa zona amb un grup d’estrelles fàcils de trobar i feu el recompte amb el mateix criteri. També podeu treballar amb aquestes dades d’exemple.',
+          taula(['Lloc', 'Estrelles visibles', 'Condicions anotades'], [
+            ['Plaça il·luminada', '6', 'Cel serè, mateixa hora i lluna sota l’horitzó.'],
+            ['Camí fosc', '16', 'Cel serè, mateixa hora i lluna sota l’horitzó.'],
+          ], 33)),
+        apartat('entorn', 'Portar la llum allà on cal',
+          'Podem **dirigir la llum cap a terra**, limitar-ne la intensitat i apagar-la quan no es necessita. Així es pot il·luminar un pas i reduir la llum que surt cap al cel.',
+          'La llum nocturna també pot alterar l’activitat d’alguns animals, com els insectes nocturns. Cal decidir quines zones s’han d’il·luminar, en quin horari i amb quina intensitat.',
+          repte('Dibuixa una millora per a la plaça', 'Assenyala de quins llocs són els recomptes de 6 i de 16 estrelles. Dibuixa una llum que il·lumini el camí i indica on reduiries la llum que s’escapa. Què observaries abans i després del canvi?')),
+      ],
+      guia: ['A la plaça es veuen 6 estrelles i al camí se’n veuen 16. Digues on se’n veuen més.', 'Assenyala una condició que ha de ser igual per comparar.', 'Dibuixa una fletxa que mostri cap on dirigiríem la llum d’un fanal.'],
+      ampliacio: [repte('I si només tenim dades d’una nit?', 'Organitza observacions en tres vespres a la mateixa hora. Decideix com anotaries la nuvolositat i què faries amb les dades d’un recompte en què no es podia veure tota la regió del cel.')],
+    });
+
+  fitxa(proves, 'M103', 'flotabilitat-i-densitat', 'Per què sura un vaixell d’acer?',
+    'Una làmina de metall es pot doblegar fins a fer un bol. El metall continua sent el mateix, però la forma nova canvia com es comporta a l’aigua.', {
+      descripcio: 'Mesura massa i volum, compara densitats i investiga com la forma afecta la flotabilitat.',
+      curriculum: [
+        ['materia', 'empenta', 'Relaciona massa i volum amb la densitat i explica la flotabilitat i l’empenta de l’aigua.'],
+        ['indagacio', 'assaig', 'Compara dues formes amb la mateixa massa i registra què passa a l’aigua.'],
+      ],
+      fonts: [
+        sabersCicleSuperior,
+        ['OpenStax · Principi d’Arquimedes i flotabilitat', 'https://openstax.org/books/university-physics-volume-1/pages/14-4-archimedes-principle-and-buoyancy'],
+      ],
+      apartats: [
+        apartat('densitat', 'Quanta massa hi ha en un mateix volum?',
+          'La **densitat** relaciona la massa i el volum. Per calcular-la, divideix la massa pel volum. A igual volum, l’objecte amb més massa té una densitat més gran.',
+          '100 mL d’aigua tenen una massa aproximada de 100 g. Un bloc de 100 mL que té una massa de 80 g és menys dens que l’aigua. Un bloc del mateix volum amb una massa de 125 g és més dens.'),
+        apartat('empenta', 'L’aigua empeny el vaixell cap amunt',
+          'Quan un objecte entra a l’aigua, n’aparta una part. L’aigua li fa una **empenta cap amunt**. Quan l’objecte sura, l’empenta equilibra el seu pes.',
+          'L’acer del casc és més dens que l’aigua. El vaixell sencer té molt d’espai ple d’aire. Gràcies a la seva forma, pot desplaçar prou aigua per surar abans que n’hi entri per les vores. Amb més càrrega, queda més enfonsat i desplaça més aigua.'),
+        apartat('assaig', 'La mateixa massa, dues formes',
+          'Fes servir **dues peces de paper d’alumini de la mateixa massa**. Fes-ne una bola ben compacta i un bol de vores altes. Posa-les per separat sobre aigua i anota què observes.',
+          'Comproveu la massa de les peces amb una balança i feu les proves amb la mateixa aigua. Anoteu quina part de cada peça queda sota l’aigua i si l’aire queda atrapat o hi entra aigua. Una bola d’alumini pot retenir aire i continuar surant.',
+          repte('Carrega el bol a poc a poc', 'Posa fitxes iguals d’una en una al centre del bol. Després de cada fitxa, mira fins on puja l’aigua a la paret del bol. Anota quantes en suporta abans que hi entri aigua. Explica quin canvi has observat mentre hi afegies massa.')),
+      ],
+      guia: ['Compara dos blocs del mateix volum: un fa 80 g i l’altre 125 g. Quin és més dens?', 'Digues quina força de l’aigua ajuda el bol a surar.', 'Observa si el bol s’enfonsa més quan hi afegeixes una fitxa.'],
+      ampliacio: [repte('El lloc de la càrrega importa?', 'Prova la mateixa quantitat de fitxes al centre i després molt a prop d’una vora. Mantén la forma del bol. Compara quan s’inclina, quan entra aigua i què mostra aquesta prova sobre el repartiment de la càrrega.')],
+    });
+
+  fitxa(proves, 'M104', 'una-bombeta-en-un-circuit', 'Què cal perquè s’encengui la bombeta?',
+    'Tens un portapiles, una bombeta petita, un interruptor i uns cables. Quines connexions necessites? Com ho pots comprovar abans de moure l’interruptor?', {
+      descripcio: 'Munta i dibuixa un circuit senzill i segueix les transformacions de l’energia.',
+      curriculum: [['materia', 'circuit', 'Construeix un circuit elèctric senzill i relaciona el funcionament de la bombeta amb les transformacions d’energia.']],
+      fonts: [
+        sabersCicleSuperior,
+        ['Science Buddies · Proves amb un circuit senzill de baixa tensió', 'https://www.sciencebuddies.org/stem-activities/which-materials-conduct-electricity'],
+      ],
+      apartats: [
+        apartat('circuit', 'Dos contactes i un camí complet',
+          'En un **circuit tancat**, el corrent pot circular per un camí complet que connecta els dos pols de la pila a través del dispositiu. Obrir el camí interromp el corrent.',
+          'Amb l’acompanyament del docent, feu servir un portapiles de baixa tensió, una bombeta escolar adequada a la pila, un interruptor i tres cables aïllats. Connecteu un pol al primer contacte de la bombeta. Connecteu el segon contacte a l’interruptor i torneu de l’interruptor a l’altre pol.',
+          'Mantingueu l’interruptor obert mentre munteu el circuit. Connecteu els pols entre si només a través de la bombeta i els altres elements del circuit.'),
+        apartat('energia', 'D’on surt la llum?',
+          'La **pila** transforma energia química en energia elèctrica. A la bombeta, l’energia elèctrica es transforma en **llum** i **calor**.',
+          'Altres sistemes poden proporcionar energia elèctrica. Una placa fotovoltaica aprofita l’energia de la llum i un generador amb maneta transforma energia del moviment. En cada cas podem dibuixar què arriba al dispositiu i en què es transforma.'),
+        apartat('interruptor', 'Prediu què passarà i comprova-ho',
+          'Un **interruptor** obre o tanca un tram del circuit. Si hi ha una interrupció en un altre punt, la bombeta continua apagada encara que tanquem l’interruptor.',
+          repte('Fes tres proves', 'Dibuixa el circuit i prediu si la bombeta s’encendrà amb l’interruptor obert, amb l’interruptor tancat i amb l’interruptor tancat però un cable desconnectat. Obre l’interruptor abans de desconnectar el cable. Registra els resultats i assenyala on queda tallat el camí en cada cas.')),
+      ],
+      guia: ['Dibuixa la pila i la bombeta i uneix-les amb dos camins entre contactes diferents.', 'Afegeix l’interruptor a un dels camins i marca si queda obert o tancat.', 'Assenyala quan pot circular el corrent i què produeix la bombeta.'],
+      ampliacio: [repte('Canvia l’interruptor de lloc', 'Dibuixa un segon circuit amb l’interruptor a l’altre costat de la bombeta, dins del mateix camí. Prediu què passarà quan l’obris en cada muntatge i explica quina propietat del circuit permet fer la predicció.')],
+    });
+
+  fitxa(poblacio, 'M105', 'com-canvia-la-poblacio', 'Com ha canviat la població del nostre municipi?',
+    'Les xifres d’un municipi pugen un any i baixen el següent. Amb un gràfic veurem quan canvien i amb altres dades investigarem per què.', {
+      descripcio: 'Representa l’evolució de la població i interpreta els saldos natural i migratori.',
+      curriculum: [
+        ['reptes', 'components', 'Interpreta canvis demogràfics i diferencia naixements, defuncions, arribades i sortides.'],
+        ['digital', 'evolucio', 'Organitza una sèrie temporal i representa l’evolució de la població amb un gràfic.'],
+      ],
+      fonts: [
+        sabersCicleSuperior,
+        ['Idescat · Xifres de població', 'https://www.idescat.cat/tema/xifpo'],
+        ['Idescat · Creixement de la població per components a escala municipal', 'https://www.idescat.cat/pub/?geo=mun%3A081043&id=censph&n=16847'],
+      ],
+      apartats: [
+        apartat('evolucio', 'Posa les dades per ordre i dibuixa’n l’evolució',
+          'Per comparar la **població** al llarg del temps, fes servir xifres del mateix territori i amb la mateixa data de referència. En un gràfic de línies, posa els anys a baix i el nombre d’habitants a l’eix vertical.',
+          taula(['Data de referència', 'Habitants del municipi'], [
+            ['1 de gener de 2022', '1.200'],
+            ['1 de gener de 2023', '1.230'],
+            ['1 de gener de 2024', '1.220'],
+            ['1 de gener de 2025', '1.250'],
+          ], 48),
+          'Les dades són d’un municipi fictici. Fes una línia amb les quatre dades. Mantén intervals iguals a cada eix i indica quin tram has triat representar. Marca entre quines dues dates hi ha una baixada.'),
+        apartat('components', 'Què explica el canvi?',
+          'El **saldo natural** és el nombre de naixements menys el de defuncions. El **saldo migratori** és el nombre de persones que hi arriben a viure menys el de les que se’n van.',
+          'Durant el 2024, al municipi de l’exemple hi va haver 10 naixements i 16 defuncions. Hi van arribar 48 persones i se’n van anar 12. Podem calcular cada saldo per explicar el canvi entre l’1 de gener de 2024 i l’1 de gener de 2025.'),
+        apartat('lectura', 'Del nostre exemple al municipi real',
+          'Per investigar com canvia el teu **municipi**, tria una sèrie de població de l’Idescat i apunta la font, el territori i la data de cada xifra.',
+          'Un lloc pot créixer per motius diferents d’un altre. Si només coneixem el total d’habitants, sabem quant ha canviat la població. Ens calen dades de naixements, defuncions i moviments de població per investigar per què.',
+          repte('Reconstrueix un any de canvi', 'Calcula la diferència entre els habitants de 2024 i 2025 a la taula. Calcula els dos saldos amb les dades de l’apartat anterior i comprova si, en aquest cas, la seva suma coincideix amb el canvi total.')),
+      ],
+      guia: ['Compara 1.220 habitants el 2024 i 1.250 el 2025. Calcula quants més n’hi ha.', 'Per al saldo natural, calcula 10 menys 16.', 'Per al saldo migratori, calcula 48 menys 12 i suma-hi el resultat anterior.'],
+      ampliacio: [repte('El mateix canvi en municipis diferents', 'Dos municipis guanyen 30 habitants. Un en tenia 1.000 i l’altre 5.000. Calcula quin percentatge de la població inicial representa un augment de 30 a cada municipi. Explica què ens diu aquesta comparació que el recompte de persones tot sol no mostra.')],
+    });
 }
