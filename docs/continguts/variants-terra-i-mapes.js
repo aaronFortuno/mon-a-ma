@@ -1011,5 +1011,161 @@ window.variantsMaterials ??= {};
         },
       },
     },
+    M044: {
+      'materia-viva-i-cellules': {
+        suport: {
+          sections: {
+            'materia': [],
+            'cellula': [],
+            'organitzacio': [],
+            'virus': [passos('Assenyala les dues paraules que indiquen quantes cèl·lules té un organisme.', 'Relaciona llevat, alzina i virus amb tres descripcions diferents.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'virus': [
+              p('Veure una forma petita en una fotografia no demostra que sigui una cèl·lula sencera.'),
+              repte('Què mostra una imatge?', 'Quines dues pistes necessitaries per distingir un microorganisme d’una part d’un organisme més gran?'),
+            ],
+          },
+        },
+      },
+    },
+    M045: {
+      'biodiversitat-i-funcions': {
+        suport: {
+          sections: {
+            'nutricio': [],
+            'relacio': [],
+            'reproduccio': [],
+            'diversitat': [passos('Tria una planta i un animal.', 'Assenyala una manera en què responen a un canvi de l’entorn.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'diversitat': [
+              p('Comptar només els individus no indica quantes espècies diferents hem observat.'),
+              repte('Mesurar la diversitat', 'Compara un lloc amb 20 individus d’una sola espècie i un amb 20 individus repartits entre cinc espècies. Quina dada has de comunicar perquè la comparació sigui clara?'),
+            ],
+          },
+        },
+      },
+    },
+    M046: {
+      'classificar-vida': {
+        suport: {
+          sections: {
+            'categories': [],
+            'especies': [],
+            'regnes': [],
+            'dominis': [passos('Posa «regne» i «espècie» als extrems d’una escala.', 'Assenyala els dos dominis que tenen cèl·lules sense nucli.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'dominis': [
+              p('El parentiu evolutiu es contrasta comparant diverses pistes, incloent-hi el material genètic.'),
+              repte('Canviar la classificació', 'Com explicaries a una altra classe que el grup antic de les moneres reunia dues grans branques de la vida?'),
+            ],
+          },
+        },
+      },
+    },
+    M047: {
+      'vertebrats-i-entorn': {
+        suport: {
+          sections: {
+            'columna': [],
+            'peixos-amfibis': [],
+            'reptils-ocells': [],
+            'mamifers': [passos('Tria un animal amb plomes i un que alimenti les cries amb llet.', 'Relaciona els trets amb els grups corresponents.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'mamifers': [
+              p('Les aletes de molts peixos i la forma de natació dels cetacis s’assemblen en part per les condicions de l’aigua.'),
+              repte('Mateixa solució, orígens diferents', 'Per què la forma general d’un dofí no és la millor prova per dir a quin grup pertany?'),
+            ],
+          },
+        },
+      },
+    },
+    M048: {
+      'invertebrats-i-formes': {
+        suport: {
+          sections: {
+            'cucs': [],
+            'marins': [],
+            'articulats': [passos('Cerca l’exemple d’un animal amb porus, un amb closca i un amb potes articulades.', 'Digues quin tret has mirat en cada cas.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'articulats': [
+              p('El davant i el darrere d’un animal allargat no identifiquen per si sols un grup.'),
+              repte('Un tret compartit és prou?', 'Quines dues pistes faries servir per distingir un cuc de terra d’una larva d’insecte?'),
+            ],
+          },
+        },
+      },
+    },
+    M049: {
+      'plantes-i-grans-grups': {
+        suport: {
+          sections: {
+            'llum': [],
+            'espores': [],
+            'llavors': [passos('Troba el mot «espora» i el mot «llavor».', 'Escriu al costat el nom d’una planta que en produeixi.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'llavors': [
+              p('Algunes plantes pol·linitzades pel vent tenen flors discretes i sovint no tenen pètals acolorits.'),
+              repte('Detectius de les flors', 'Quina estructura buscaries abans de concloure que una planta petita no fa flors?'),
+            ],
+          },
+        },
+      },
+    },
+    M050: {
+      'vida-dels-fongs': {
+        suport: {
+          sections: {
+            'nutricio': [],
+            'bolets': [],
+            'llevats-floridures': [passos('Dibuixa un bolet per damunt de terra i el miceli per sota.', 'Marca la part que normalment no veiem.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'llevats-floridures': [
+              p('Els fongs descomponedors contribueixen a retornar al medi part de la matèria de les restes orgàniques.'),
+              repte('Quan les restes canvien', 'Com seria diferent el terra d’un bosc si les fulles mortes no es descomponguessin?'),
+            ],
+          },
+        },
+      },
+    },
+    M051: {
+      'microorganismes-i-microbiota': {
+        suport: {
+          sections: {
+            'protists': [],
+            'algues': [],
+            'bacteris': [passos('Torna a les definicions de procariota i eucariota.', 'Digues a quina va cada exemple, una alga i un bacteri.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'bacteris': [
+              p('Una mostra d’aigua pot contenir organismes que obtenen energia de la llum i d’altres que s’alimenten de matèria orgànica.'),
+              repte('Un grup depèn del criteri', 'Fes dos agrupaments, un per nutrició i l’altre per estructura cel·lular. Explica per què no donen necessàriament els mateixos grups.'),
+            ],
+          },
+        },
+      },
+    },
   });
 }

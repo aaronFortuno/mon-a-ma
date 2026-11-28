@@ -1758,4 +1758,226 @@ window.quaderns ??= [];
       ['MHC · La mar nostra', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/la_mar_nostra'],
     ],
   });
+
+  addTopic('M044', {
+    id: 'materia-viva-i-cellules',
+    title: 'La vida vista de prop',
+    intro: 'Una fulla i un animal poden semblar molt diferents. Si els observem amb prou ampliació, hi reconeixem unitats petites que fan possible la vida.',
+    sections: [
+      section('materia', 'Què tenen en comú els éssers vius?',
+        essencial('Els éssers vius estan formats per una o més **cèl·lules** i duen a terme funcions vitals.'),
+        p('La matèria viva conté aigua i moltes substàncies, com sucres, proteïnes i greixos. Una roca també té matèria, però no està organitzada en cèl·lules.')),
+      section('cellula', 'Una unitat amb parts que cooperen',
+        essencial('La **cèl·lula** és la unitat bàsica dels éssers vius. Una membrana la separa de l’entorn.'),
+        p('A l’interior hi ha citoplasma i informació genètica. Algunes cèl·lules tenen un nucli que conté la major part d’aquesta informació. L’estructura de la cèl·lula ajuda a explicar què pot fer.')),
+      section('organitzacio', 'Una o moltes cèl·lules',
+        essencial('Un ésser **unicel·lular** té una sola cèl·lula. En un organisme **pluricel·lular** n’hi ha moltes que treballen juntes.'),
+        p('Un llevat viu com a cèl·lula individual. En una planta, cèl·lules diferents poden protegir la superfície o transportar aigua. Cada grup de cèl·lules especialitzades contribueix a la vida de l’organisme.')),
+      section('virus', 'Els virus i les cèl·lules',
+        essencial('Els **virus** no són cèl·lules. Necessiten una cèl·lula hoste per fer-ne noves còpies.'),
+        p('Per això no els classifiquem als grups d’éssers vius cel·lulars. Un bacteri, en canvi, sí que és una cèl·lula. Distingir-los ajuda a interpretar els noms que apareixen en textos de ciència.'),
+        box('prova', 'Una col·lecció de quatre exemples', 'Classifica una roca, un llevat, una alzina i un virus. Indica quins tenen cèl·lules i quins en tenen una o més d’una. Argumenta per què el virus queda en una categoria pròpia.')),
+    ],
+  }, {
+    collection: { id: 'vida', title: 'La diversitat de la vida' },
+    theme: 'Éssers vius',
+    description: 'Distingeix matèria viva, cèl·lules, organismes unicel·lulars i pluricel·lulars, i situa els virus al marge de la classificació cel·lular.',
+    curriculum: [{ row: 'medi:vida', section: 'virus', note: 'Distingeix matèria viva, cèl·lules, organismes unicel·lulars i pluricel·lulars, i situa els virus al marge de la classificació cel·lular.' }],
+    sources: [
+      ['OpenStax · Biologia', 'https://openstax.org/books/biology-2e/pages/1-introduction'],
+      ['NHGRI · Virus', 'https://www.genome.gov/genetics-glossary/Virus'],
+    ],
+  });
+
+  addTopic('M045', {
+    id: 'biodiversitat-i-funcions',
+    title: 'La vida fa moltes coses de maneres diferents',
+    intro: 'Un faig no es mou com una formiga i totes dues espècies responen a l’entorn. Compararem com obtenen matèria i energia, com detecten canvis i com deixen descendència.',
+    sections: [
+      section('nutricio', 'Obtenir matèria i energia',
+        essencial('Amb la **nutrició**, els éssers vius obtenen matèria i energia per mantenir-se i créixer.'),
+        p('Moltes plantes aprofiten la llum per elaborar sucres. Els animals obtenen matèria i energia alimentant-se. Els fongs absorbeixen nutrients del medi.')),
+      section('relacio', 'Detectar canvis i respondre',
+        essencial('La funció de **relació** permet captar canvis i respondre-hi.'),
+        p('Els animals poden detectar sons o olors. Algunes plantes orienten el creixement cap a la llum. Respondre a l’entorn no sempre implica desplaçar-se.')),
+      section('reproduccio', 'Deixar descendència',
+        essencial('Amb la **reproducció** es formen individus nous i es mantenen les poblacions al llarg del temps.'),
+        p('Els individus d’una població poden ser diversos. Per créixer i viure, una persona o un animal no necessita tenir descendència.')),
+      section('diversitat', 'Moltes espècies i maneres de viure',
+        essencial('La **biodiversitat** inclou la varietat d’éssers vius, les diferències entre individus i la diversitat d’ecosistemes.'),
+        p('Un bassal temporal i un bosc acullen conjunts diferents d’organismes. Observar-los en més d’un moment ajuda a detectar la vida que no és sempre visible.'),
+        box('prova', 'Un pati viu', 'Tria tres organismes que podries observar al pati. Escriu una acció o estructura que relacionis amb una funció vital de cadascun i com la podries observar.')),
+    ],
+  }, {
+    collection: { id: 'vida', title: 'La diversitat de la vida' },
+    theme: 'Éssers vius',
+    description: 'Relaciona biodiversitat, formes de vida i les funcions vitals de nutrició, relació i reproducció.',
+    curriculum: [{ row: 'medi:vida', section: 'diversitat', note: 'Relaciona biodiversitat, formes de vida i les funcions vitals de nutrició, relació i reproducció.' }],
+    sources: [
+      ['OpenStax · Biologia', 'https://openstax.org/books/biology-2e/pages/1-introduction'],
+    ],
+  });
+
+  addTopic('M046', {
+    id: 'classificar-vida',
+    title: 'De l’espècie als grans grups',
+    intro: 'Classificar és com ordenar molts llibres amb etiquetes. En biologia, canviem les etiquetes quan tenim proves noves sobre el parentiu.',
+    sections: [
+      section('categories', 'Grups dins de grups',
+        essencial('Una classificació pot anar de grups amplis a grups més concrets. Els rangs habituals són **regne, fílum o divisió, classe, ordre, família, gènere i espècie**.'),
+        p('Cada nivell conté grups més petits. En el nom científic d’una espècie se solen escriure dos mots, el del gènere i un segon nom que l’identifica dins del gènere.')),
+      section('especies', 'Què és una espècie?',
+        essencial('Una **espècie** agrupa organismes que comparteixen trets i una història evolutiva pròxima.'),
+        p('En molts animals, una pista és que poden tenir descendència fèrtil entre ells. En organismes que es reprodueixen asexualment calen altres criteris.')),
+      section('regnes', 'El model escolar dels cinc regnes',
+        essencial('La classificació clàssica en cinc regnes agrupava **animals, plantes, fongs, protists i moneres**.'),
+        p('Era una manera útil d’ordenar la diversitat. Amb noves dades, especialment de parentiu, els científics han revisat aquests grups. «Moneres» i «protists» són noms de models escolars o agrupacions convencionals.')),
+      section('dominis', 'Amb nucli o sense nucli',
+        essencial('Les cèl·lules **eucariotes** tenen nucli. Les **procariotes** tenen el material genètic sense un nucli envoltat de membrana.'),
+        p('En el model de tres dominis distingim **Bacteria, Archaea i Eukarya**. Bacteris i arqueus són procariotes. Els animals, plantes, fongs i els organismes que solem anomenar protists són eucariotes.'),
+        box('prova', 'Classifica sense saltar nivells', 'Ordena «espècie, família, gènere, regne» de més ampli a més concret. Després dibuixa tres cercles per als dominis i situa-hi un bacteri, un arqueu i una alzina.')),
+    ],
+  }, {
+    collection: { id: 'vida', title: 'La diversitat de la vida' },
+    theme: 'Éssers vius',
+    description: 'Practica les categories taxonòmiques i compara la classificació històrica en cinc regnes amb el model dels tres dominis.',
+    curriculum: [{ row: 'medi:vida', section: 'dominis', note: 'Practica les categories taxonòmiques i compara la classificació històrica en cinc regnes amb el model dels tres dominis.' }],
+    sources: [
+      ['OpenStax · Classificació i tres dominis', 'https://openstax.org/books/biology-2e/pages/1-2-themes-and-concepts-of-biology'],
+    ],
+  });
+
+  addTopic('M047', {
+    id: 'vertebrats-i-entorn',
+    title: 'Vertebrats que viuen en medis diferents',
+    intro: 'Com pots saber que un ratpenat és mamífer i una balena també? Per classificar un animal necessitem més d’una pista sobre el seu cos.',
+    sections: [
+      section('columna', 'Una columna a l’interior',
+        essencial('Els **vertebrats** tenen columna vertebral. Amb l’esquelet intern poden sostenir el cos i protegir parts delicades.'),
+        p('L’esquelet no té la mateixa forma en tots els vertebrats. La forma de les extremitats, les aletes o les ales es relaciona amb maneres diferents de moure’s.')),
+      section('peixos-amfibis', 'Peixos i amfibis',
+        essencial('Molts **peixos** viuen a l’aigua i respiren amb brànquies. Molts **amfibis** passen d’una larva aquàtica a una forma adulta diferent.'),
+        p('La majoria dels peixos tenen aletes. Una granota pot respirar amb pulmons i a través de la pell. Alguns amfibis no tenen el mateix cicle de vida que la granota.')),
+      section('reptils-ocells', 'Escates i plomes',
+        essencial('Molts **rèptils** tenen la pell coberta d’escates. Els **ocells** tenen plomes.'),
+        p('Un llangardaix i una tortuga són rèptils. Un pingüí és un ocell encara que no voli. En la classificació evolutiva, els ocells formen part de la branca dels rèptils.')),
+      section('mamifers', 'Pèl i llet',
+        essencial('Els **mamífers** tenen pèl en alguna etapa i les femelles produeixen llet per alimentar les cries.'),
+        p('Les balenes respiren amb pulmons i alimenten les cries amb llet. La forma del seu cos s’assembla en alguns aspectes a la dels peixos perquè es mouen pel mateix medi.'),
+        box('prova', 'Agrupa per dues pistes', 'Classifica una granota, un lluç, una serp, un pingüí i un ratpenat. Escriu una pista de cada classificació i explica per què «té ales» sola no resol els dos últims casos.')),
+    ],
+  }, {
+    collection: { id: 'vida', title: 'La diversitat de la vida' },
+    theme: 'Éssers vius',
+    description: 'Compara peixos, amfibis, rèptils, ocells i mamífers amb trets observables i contraexemples.',
+    curriculum: [{ row: 'medi:vida', section: 'mamifers', note: 'Compara peixos, amfibis, rèptils, ocells i mamífers amb trets observables i contraexemples.' }],
+    sources: [
+      ['OpenStax · Biologia', 'https://openstax.org/books/biology-2e/pages/1-introduction'],
+    ],
+  });
+
+  addTopic('M048', {
+    id: 'invertebrats-i-formes',
+    title: 'Sis pistes per reconèixer invertebrats',
+    intro: 'La majoria de les espècies animals no tenen columna vertebral. Una medusa i una formiga ens mostren fins a quin punt es poden assemblar poc.',
+    sections: [
+      section('cucs', 'Anèl·lids i altres animals amb cos allargat',
+        essencial('Els **anèl·lids**, com el cuc de terra, tenen el cos dividit en segments.'),
+        p('«Cuc» és una paraula corrent per a animals allargats de grups diferents. Fixa’t en la segmentació i altres trets abans de triar un grup.')),
+      section('marins', 'Meduses, esponges i estrelles de mar',
+        essencial('Les meduses són **cnidaris**, les esponges són **porífers** i les estrelles de mar són **equinoderms**.'),
+        p('Les esponges fan circular aigua pels porus. Els cnidaris poden tenir tentacles amb cèl·lules urticants. Molts equinoderms adults tenen parts disposades al voltant d’un centre.')),
+      section('articulats', 'Cossos tous i potes articulades',
+        essencial('Molts **mol·luscs** tenen cos tou. Els **artròpodes** tenen un esquelet extern i apèndixs articulats.'),
+        p('Els cargols, els musclos i els pops són mol·luscs, amb petxina externa o sense. Els insectes, les aranyes i els crustacis són artròpodes, però no tenen tots el mateix nombre de potes.'),
+        box('prova', 'Munta una clau de tres preguntes', 'Tria sis animals d’aquests grups. Inventa tres preguntes sobre trets visibles que ajudin a separar-los. Quan una pregunta sigui insuficient, mostra quin cas provoca el dubte.')),
+    ],
+  }, {
+    collection: { id: 'vida', title: 'La diversitat de la vida' },
+    theme: 'Éssers vius',
+    description: 'Reconeix anèl·lids, cnidaris, equinoderms, porífers, mol·luscs i artròpodes per trets del seu cos.',
+    curriculum: [{ row: 'medi:vida', section: 'articulats', note: 'Reconeix anèl·lids, cnidaris, equinoderms, porífers, mol·luscs i artròpodes per trets del seu cos.' }],
+    sources: [
+      ['OpenStax · Biologia', 'https://openstax.org/books/biology-2e/pages/1-introduction'],
+    ],
+  });
+
+  addTopic('M049', {
+    id: 'plantes-i-grans-grups',
+    title: 'Plantes amb espores, llavors i flors',
+    intro: 'Una molsa al peu d’un mur, una falguera i un pi poden viure sense tenir flors vistoses. Mirem quina informació ens dona cada estructura.',
+    sections: [
+      section('llum', 'Matèria i energia a partir de la llum',
+        essencial('En la **fotosíntesi**, moltes plantes utilitzen llum, aigua i diòxid de carboni per elaborar sucres i alliberen oxigen.'),
+        p('La **clorofil·la** ajuda a captar llum. Les plantes que elaboren la seva matèria orgànica a partir de substàncies senzilles són autòtrofes. També respiren.')),
+      section('espores', 'Molses i falgueres',
+        essencial('Les **molses** i les **falgueres** es reprodueixen amb espores i no fan llavors.'),
+        p('Les molses són petites i solen viure on troben humitat en alguna època. Les falgueres poden portar grups d’estructures amb espores a la cara inferior de les fulles.')),
+      section('llavors', 'Llavors al fruit o fora del fruit',
+        essencial('Les **gimnospermes**, com el pi, no tenen les llavors tancades dins d’un fruit. Les **angiospermes** fan flors i fruits.'),
+        p('En una pinya madura algunes escates deixen sortir les llavors. En un tomàquet, el fruit envolta les llavors. Hi ha flors petites que es passen per alt quan mirem una planta.'),
+        box('prova', 'Tres observacions', 'Relaciona una pinya, una fulla de falguera amb punts a sota i una flor de mongetera amb tres estratègies. Digues quines estructures t’han servit de pista.')),
+    ],
+  }, {
+    collection: { id: 'vida', title: 'La diversitat de la vida' },
+    theme: 'Éssers vius',
+    description: 'Explica la fotosíntesi i diferencia molses, falgueres, gimnospermes i angiospermes.',
+    curriculum: [{ row: 'medi:vida', section: 'llavors', note: 'Explica la fotosíntesi i diferencia molses, falgueres, gimnospermes i angiospermes.' }],
+    sources: [
+      ['OpenStax · Biologia', 'https://openstax.org/books/biology-2e/pages/1-introduction'],
+    ],
+  });
+
+  addTopic('M050', {
+    id: 'vida-dels-fongs',
+    title: 'Fongs que veiem i fongs que passen desapercebuts',
+    intro: 'Un bolet apunta fora de terra. Una floridura cobreix una superfície i un llevat fa créixer una massa de pa. Què comparteixen?',
+    sections: [
+      section('nutricio', 'Els fongs absorbeixen nutrients',
+        essencial('Els **fongs** són heteròtrofs. Obtenen nutrients de matèria orgànica de l’entorn.'),
+        p('Molts descomponen restes d’éssers vius. Altres poden viure associats a plantes o obtenir nutrients de cossos vius. Aquestes relacions no tenen totes els mateixos efectes.')),
+      section('bolets', 'Un bolet és una part del fong',
+        essencial('El **bolet** és una estructura reproductora d’alguns fongs. La part que s’estén pel medi s’anomena **miceli**.'),
+        p('El miceli es compon de filaments molt fins. Els bolets poden formar espores que es dispersen. Hi ha fongs que no fan cap bolet visible.')),
+      section('llevats-floridures', 'Llevats i floridures a la vida quotidiana',
+        essencial('Molts **llevats** són unicel·lulars. Les **floridures** solen créixer formant filaments.'),
+        p('Alguns llevats produeixen gas quan intervenen en la preparació del pa. Alguns fongs es fan servir en aliments i altres en malmeten. La funció depèn de l’espècie i de l’entorn.'),
+        box('prova', 'Per què no és una planta?', 'Compara un bolet i una molsa. Explica la diferència en com obtenen nutrients, i recorda per què veure un bolet no ens mostra tot el fong.')),
+    ],
+  }, {
+    collection: { id: 'vida', title: 'La diversitat de la vida' },
+    theme: 'Éssers vius',
+    description: 'Distingeix bolets, llevats i floridures, i descriu el paper dels fongs en el reciclatge de la matèria i en la vida quotidiana.',
+    curriculum: [{ row: 'medi:vida', section: 'llevats-floridures', note: 'Distingeix bolets, llevats i floridures, i descriu el paper dels fongs en el reciclatge de la matèria i en la vida quotidiana.' }],
+    sources: [
+      ['OpenStax · Biologia', 'https://openstax.org/books/biology-2e/pages/1-introduction'],
+    ],
+  });
+
+  addTopic('M051', {
+    id: 'microorganismes-i-microbiota',
+    title: 'Món microscòpic, algues, protists i bacteris',
+    intro: 'En una gota d’aigua i també dins del cos es poden trobar éssers vius molt petits. Les paraules que els agrupen no volen dir totes el mateix.',
+    sections: [
+      section('protists', 'Protists, un nom que agrupa molta diversitat',
+        essencial('Sovint diem **protists** a molts organismes eucariotes que no es classifiquen com a animals, plantes terrestres o fongs.'),
+        p('Molts són unicel·lulars. «Protozou» s’empra per a alguns que obtenen nutrients d’altres organismes o restes. El grup escolar no representa una sola branca evolutiva.')),
+      section('algues', 'Algues senzilles i algues grans',
+        essencial('Moltes **algues** fan fotosíntesi. N’hi ha d’unicel·lulars i també de pluricel·lulars.'),
+        p('Diverses algues microscòpiques formen part del fitoplàncton. Les algues marines grans agrupen organismes de llinatges diferents. No confonguis el nom corrent amb una categoria única de parentiu.')),
+      section('bacteris', 'Bacteris i vida en comunitat',
+        essencial('Els **bacteris** són unicel·lulars i procariotes. La **microbiota** és el conjunt de microorganismes d’un lloc, com l’intestí.'),
+        p('El nom tradicional «flora intestinal» es refereix a la microbiota intestinal. Inclou molts bacteris i altres microorganismes. Els bacteris són molt diversos i no tots tenen els mateixos efectes.'),
+        box('prova', 'Tria una etiqueta i justifica-la', 'Compara una alga unicel·lular, una de gran i un bacteri. Indica quins tenen nucli i quins podrien fer fotosíntesi. Per què «petit» no serveix com a classificació?')),
+    ],
+  }, {
+    collection: { id: 'vida', title: 'La diversitat de la vida' },
+    theme: 'Éssers vius',
+    description: 'Compara algues, protozous i bacteris i explica què és la microbiota.',
+    curriculum: [{ row: 'medi:vida', section: 'bacteris', note: 'Compara algues, protozous i bacteris i explica què és la microbiota.' }],
+    sources: [
+      ['OpenStax · Classificació i tres dominis', 'https://openstax.org/books/biology-2e/pages/1-2-themes-and-concepts-of-biology'],
+      ['OpenStax · Biologia', 'https://openstax.org/books/biology-2e/pages/1-introduction'],
+    ],
+  });
 }

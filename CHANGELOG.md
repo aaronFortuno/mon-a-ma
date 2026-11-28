@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.67 · 28 de novembre de 2026
+
+- Publica M044–M051, vuit esborranys sobre cèl·lules, biodiversitat i classificació dels éssers vius.
+
 ## 0.1.66 · 28 de novembre de 2026
 
 - Publica els esborranys M035–M043 sobre l’edat mitjana i el patrimoni medieval.
