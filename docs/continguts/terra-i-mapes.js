@@ -675,6 +675,40 @@ window.quaderns ??= [];
     id: 'muntanyes-i-rius-europa',
     title: 'De les muntanyes als grans rius d’Europa',
     intro: 'En un mapa d’Europa, els colors del relleu i les línies dels rius expliquen coses diferents. Podem llegir-los junts i seguir l’aigua fins on arriba.',
+    figures: [
+      {
+        id: 'relleu-europa', section: 'alps', name: 'Mapa del relleu d’Europa', ratio: 2280 / 1815,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa físic d’Europa amb els Alps, el Caucas i la Gran Plana Europea, i amb el mar Negre i el mar Caspi retolats.',
+        caption: 'Els Alps i el Caucas destaquen per l’altitud. La Gran Plana Europea ocupa una extensió àmplia de terres més baixes.',
+        credit: 'NOAA/NCEI ETOPO 2022 i Natural Earth.',
+        variants: {
+          pla: { src: 'illustracions/m008/relleu-europa-pla.png', thumbnail: 'illustracions/m008/miniatures/relleu-europa-pla.jpg' },
+          atles: { src: 'illustracions/m008/relleu-europa-atles.png', thumbnail: 'illustracions/m008/miniatures/relleu-europa-atles.jpg' },
+        },
+      },
+      {
+        id: 'danubi-i-volga', section: 'danubi', name: 'Dos rius, dues desembocadures', ratio: 2280 / 1815,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Mapa amb el Danubi en línia contínua fins al mar Negre i el Volga en línia discontínua fins al mar Caspi. Un requadre mostra Viena, Bratislava, Budapest i Belgrad.',
+        caption: 'Ressegueix el Danubi fins al mar Negre i el Volga fins al Caspi. El requadre amplia el tram del Danubi on hi ha quatre capitals.',
+        credit: 'Natural Earth i NOAA/NCEI ETOPO 2022.',
+        variants: {
+          pla: { src: 'illustracions/m008/danubi-i-volga-pla.png', thumbnail: 'illustracions/m008/miniatures/danubi-i-volga-pla.jpg' },
+          atles: { src: 'illustracions/m008/danubi-i-volga-atles.png', thumbnail: 'illustracions/m008/miniatures/danubi-i-volga-atles.jpg' },
+        },
+      },
+      {
+        id: 'valls-i-planes', section: 'alps', name: 'Una vall alpina i una plana extensa', ratio: 1200 / 755,
+        width: 50, position: 'right', wrap: true, anchor: 'paragraph-1',
+        alt: 'Un riu corre entre vessants alts en una vall alpina. A la plana europea, un riu fa corbes entre terres de poc pendent.',
+        caption: 'Esquemes de dos paisatges. Compara el pendent dels vessants i el recorregut dels rius.',
+        variants: {
+          pla: { src: 'illustracions/m008/valls-i-planes-pla.png', thumbnail: 'illustracions/m008/miniatures/valls-i-planes-pla.jpg' },
+          atles: { src: 'illustracions/m008/valls-i-planes-atles.png', thumbnail: 'illustracions/m008/miniatures/valls-i-planes-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('alps', 'Els Alps al cor d’Europa',
         essencial('Els **Alps** són una gran serralada de l’Europa central i meridional.'),
@@ -696,9 +730,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'relleu', title: 'El relleu i els rius' },
     theme: 'Geografia',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Franges de color i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Relleu modelat i detalls de paisatge.' },
+    ],
     description: 'Situa els Alps, el Caucas i la Gran Plana Europea i compara el recorregut del Danubi amb el del Volga.',
     curriculum: [{ row: 'medi:cartografia', section: 'volga', note: 'Situa els Alps, el Caucas i la Gran Plana Europea i compara el recorregut del Danubi amb el del Volga.' }],
     sources: [
+      ['NOAA/NCEI · Model de relleu ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['Natural Earth · Rius i eixos dels llacs', 'https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-rivers-lake-centerlines/'],
       ['ICGC · El món en català', 'https://www.icgc.cat/ca/Eines-i-visors/Visors/Didactics-i-ludics/El-Mon-en-catala'],
     ],
   });
@@ -707,6 +747,41 @@ window.quaderns ??= [];
     id: 'relleu-espanya',
     title: 'De la Meseta al relleu de les illes',
     intro: 'Si féssim un viatge des del centre de la península fins a la costa i les illes, passaríem per altiplans, serralades i depressions. On trobaríem cada paisatge?',
+    figures: [
+      {
+        id: 'unitats-relleu-peninsular', section: 'meseta', name: 'Les unitats del relleu peninsular', ratio: 2280 / 1515,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa físic de la península Ibèrica amb les dues submesetes, les serralades principals i les depressions de l’Ebre i del Guadalquivir marcades amb trama.',
+        caption: 'El Sistema Central divideix la Meseta. Cerca les dues depressions i les serralades que les envolten.',
+        credit: 'ETOPO 2022, Natural Earth i atles didàctic de l’IGN.',
+        variants: {
+          pla: { src: 'illustracions/m009/unitats-relleu-peninsular-pla.png', thumbnail: 'illustracions/m009/miniatures/unitats-relleu-peninsular-pla.jpg' },
+          atles: { src: 'illustracions/m009/unitats-relleu-peninsular-atles.png', thumbnail: 'illustracions/m009/miniatures/unitats-relleu-peninsular-atles.jpg' },
+        },
+      },
+      {
+        id: 'depressions-ebre-guadalquivir', section: 'ebre', name: 'Dues depressions entre muntanyes', ratio: 2280 / 1280,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Dos mapes mostren el curs de l’Ebre i del Guadalquivir, els seus relleus veïns i la sortida de cadascun cap al mar.',
+        caption: 'Les dues depressions són més baixes que les serralades veïnes. Segueix l’Ebre fins a la Mediterrània i el Guadalquivir fins a l’Atlàntic.',
+        credit: 'ETOPO 2022, Natural Earth, ACA i IGR Hidrografia de l’IGN.',
+        variants: {
+          pla: { src: 'illustracions/m009/depressions-ebre-guadalquivir-pla.png', thumbnail: 'illustracions/m009/miniatures/depressions-ebre-guadalquivir-pla.jpg' },
+          atles: { src: 'illustracions/m009/depressions-ebre-guadalquivir-atles.png', thumbnail: 'illustracions/m009/miniatures/depressions-ebre-guadalquivir-atles.jpg' },
+        },
+      },
+      {
+        id: 'relleu-mallorca-tenerife', section: 'balears', name: 'Tramuntana i Teide', ratio: 2280 / 1280,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Dos mapes amb nord i escala mostren la Tramuntana i una plana de Mallorca i el Teide a Tenerife. Uns mapes petits situen les illes dins de cada arxipèlag.',
+        caption: 'Compara la serra de Tramuntana i la plana interior de Mallorca amb els pendents del Teide, a Tenerife.',
+        credit: 'NOAA/NCEI ETOPO 2022 i Natural Earth.',
+        variants: {
+          pla: { src: 'illustracions/m009/relleu-mallorca-tenerife-pla.png', thumbnail: 'illustracions/m009/miniatures/relleu-mallorca-tenerife-pla.jpg' },
+          atles: { src: 'illustracions/m009/relleu-mallorca-tenerife-atles.png', thumbnail: 'illustracions/m009/miniatures/relleu-mallorca-tenerife-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('meseta', 'La Meseta, una plana elevada',
         essencial('La **Meseta** ocupa bona part de l’interior peninsular. El **Sistema Central** la divideix en submeseta nord i submeseta sud.'),
@@ -734,9 +809,16 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'relleu', title: 'El relleu i els rius' },
     theme: 'Geografia',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Franges de color i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Relleu modelat i detalls de paisatge.' },
+    ],
     description: 'S’organitza el relleu d’Espanya a partir de la Meseta, les serralades, les depressions i el relleu dels arxipèlags.',
     curriculum: [{ row: 'medi:cartografia', section: 'guadalquivir', note: 'S’organitza el relleu d’Espanya a partir de la Meseta, les serralades, les depressions i el relleu dels arxipèlags.' }],
     sources: [
+      ['NOAA/NCEI · Model de relleu ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['IGN · IGR Hidrografia', 'https://www.ign.es/web/ign/portal/seccion-hidrografia'],
+      ['ACA · Cartografia i geoserveis', 'https://aca.gencat.cat/ca/laigua/consulta-de-dades/cartografia-geoserveis/'],
       ['IGN · Les unitats del relleu peninsular', 'https://educativo.ign.es/atlas-didactico/relieve-bach/las_grandes_unidades_del_relieve_peninsular.html'],
       ['IGN · Atlas Didàctic', 'https://educativo.ign.es/atlas-didactico/'],
     ],
@@ -746,6 +828,40 @@ window.quaderns ??= [];
     id: 'costes-i-rius-espanya',
     title: 'Tres vessants i moltes costes',
     intro: 'Una gota d’aigua que cau a la Península pot acabar al Cantàbric, a l’Atlàntic o a la Mediterrània. El relleu ens dona pistes per explicar quin camí farà.',
+    coverFigure: 'vessants-peninsulars',
+    figures: [
+      {
+        id: 'vessants-peninsulars', section: 'cantabric', name: 'Els tres vessants peninsulars', ratio: 2280 / 1515,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa amb trames per als vessants cantàbric, atlàntic i mediterrani. Les línies blaves mostren deu rius i els triangles, les desembocadures.',
+        caption: 'Segueix el Nalón, el Xúquer i el Tajo. El mar o oceà on acaba cadascun indica a quin vessant pertany.',
+        credit: 'HydroBASINS v1c, IGN, ACA, Natural Earth i ETOPO 2022.',
+        variants: {
+          pla: { src: 'illustracions/m010/vessants-peninsulars-pla.png', thumbnail: 'illustracions/m010/miniatures/vessants-peninsulars-pla.jpg' },
+          atles: { src: 'illustracions/m010/vessants-peninsulars-atles.png', thumbnail: 'illustracions/m010/miniatures/vessants-peninsulars-atles.jpg' },
+        },
+      },
+      {
+        id: 'conca-i-vessant', section: 'rius', name: 'On va l’aigua que cau a cada vessant?', ratio: 2280 / 1190,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Tres conques formen un paisatge fictici. Unes carenes discontínues separen les conques i unes fletxes indiquen cap a quin mar va l’aigua.',
+        caption: 'Dues conques desguassen al mar A i formen un mateix vessant. Una altra conca desguassa al mar B.',
+        variants: {
+          pla: { src: 'illustracions/m010/conca-i-vessant-pla.png', thumbnail: 'illustracions/m010/miniatures/conca-i-vessant-pla.jpg' },
+          atles: { src: 'illustracions/m010/conca-i-vessant-atles.png', thumbnail: 'illustracions/m010/miniatures/conca-i-vessant-atles.jpg' },
+        },
+      },
+      {
+        id: 'formes-de-costa', section: 'costa', name: 'Quatre formes de costa', ratio: 2280 / 819,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Quatre esquemes oblics mostren un penya-segat alt, una platja de sorra, una ria que entra terra endins i un delta amb sediments i braços de riu.',
+        caption: 'El penya-segat, la platja, la ria i el delta tenen formes diferents a la vora del mar.',
+        variants: {
+          pla: { src: 'illustracions/m010/formes-de-costa-pla.png', thumbnail: 'illustracions/m010/miniatures/formes-de-costa-pla.jpg' },
+          atles: { src: 'illustracions/m010/formes-de-costa-atles.png', thumbnail: 'illustracions/m010/miniatures/formes-de-costa-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('rius', 'Què explica el recorregut d’un riu?',
         essencial('La **conca** és el territori que aporta aigua a un riu. Un **vessant hidrogràfic** agrupa conques que desguassen a la mateixa mar o oceà.'),
@@ -770,9 +886,16 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'relleu', title: 'El relleu i els rius' },
     theme: 'Geografia',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Franges de color i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Relleu modelat i detalls de paisatge.' },
+    ],
     description: 'Agrupa els rius peninsulars per vessants i relaciona el relleu de les costes i les illes amb els recorreguts de l’aigua.',
     curriculum: [{ row: 'medi:cartografia', section: 'atlantic', note: 'Agrupa els rius peninsulars per vessants i relaciona el relleu de les costes i les illes amb els recorreguts de l’aigua.' }],
     sources: [
+      ['HydroBASINS · Límits de les conques', 'https://www.hydrosheds.org/products/hydrobasins'],
+      ['IGN · IGR Hidrografia', 'https://www.ign.es/web/ign/portal/seccion-hidrografia'],
+      ['NOAA/NCEI · Model de relleu ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
       ['IGN · Rius d’Espanya i vessants', 'https://educativo.ign.es/atlas-didactico/agua-bach/actividad_identificar_los_principales_ros_de_espaa.html'],
       ['IGN · Atlas Didàctic', 'https://educativo.ign.es/atlas-didactico/'],
     ],
@@ -782,6 +905,40 @@ window.quaderns ??= [];
     id: 'relleu-catalunya',
     title: 'Dels Pirineus a la costa catalana',
     intro: 'De nord a sud, Catalunya combina cims alts, depressions, altiplans i serres paral·leles al mar. Un recorregut dibuixat al mapa ens permet relacionar-los.',
+    figures: [
+      {
+        id: 'relleu-catalunya', section: 'pirineus', name: 'Mapa físic de Catalunya', ratio: 2280 / 1470,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa físic de Catalunya amb el Pirineu axial, el Prepirineu, la Depressió Central, les dues serralades costaneres, el Vallès i el Penedès.',
+        caption: 'De la muntanya al mar es poden seguir el Pirineu, el Prepirineu, l’interior i les serres costaneres. El Vallès i el Penedès ocupen franges més baixes.',
+        credit: 'NOAA/NCEI ETOPO 2022, Natural Earth i © EuroGeographics pels límits.',
+        variants: {
+          pla: { src: 'illustracions/m011/relleu-catalunya-pla.png', thumbnail: 'illustracions/m011/miniatures/relleu-catalunya-pla.jpg' },
+          atles: { src: 'illustracions/m011/relleu-catalunya-atles.png', thumbnail: 'illustracions/m011/miniatures/relleu-catalunya-atles.jpg' },
+        },
+      },
+      {
+        id: 'recorregut-prepirineu-mar', section: 'costaneres', name: 'Un recorregut del Prepirineu al mar', ratio: 2280 / 1500,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Una línia numerada creua Catalunya des del Prepirineu fins a la Mediterrània i passa pel Vallès. Un dibuix lateral mostra l’ordre del mateix recorregut.',
+        caption: 'Esquema del recorregut. Els nombres del mapa indiquen l’ordre del Prepirineu fins al mar passant pel Vallès.',
+        credit: 'NOAA/NCEI ETOPO 2022, Natural Earth i © EuroGeographics pels límits.',
+        variants: {
+          pla: { src: 'illustracions/m011/recorregut-prepirineu-mar-pla.png', thumbnail: 'illustracions/m011/miniatures/recorregut-prepirineu-mar-pla.jpg' },
+          atles: { src: 'illustracions/m011/recorregut-prepirineu-mar-atles.png', thumbnail: 'illustracions/m011/miniatures/recorregut-prepirineu-mar-atles.jpg' },
+        },
+      },
+      {
+        id: 'plana-altipla-plana-litoral', section: 'interior', name: 'Tres formes de terreny més pla', ratio: 1200 / 727,
+        width: 50, position: 'right', wrap: true, anchor: 'paragraph-1',
+        alt: 'Tres vinyetes mostren una plana interior, una superfície plana elevada sobre l’entorn i una plana adjacent al mar.',
+        caption: 'Esquemes de terres planes en entorns diferents. L’altiplà queda elevat i la plana litoral és a tocar del mar.',
+        variants: {
+          pla: { src: 'illustracions/m011/plana-altipla-plana-litoral-pla.png', thumbnail: 'illustracions/m011/miniatures/plana-altipla-plana-litoral-pla.jpg' },
+          atles: { src: 'illustracions/m011/plana-altipla-plana-litoral-atles.png', thumbnail: 'illustracions/m011/miniatures/plana-altipla-plana-litoral-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('pirineus', 'El Pirineu axial i el Prepirineu',
         essencial('Al nord hi ha el **Pirineu axial**, amb cims com la **Pica d’Estats**. Més al sud hi ha les serres del **Prepirineu**.'),
@@ -797,9 +954,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'relleu', title: 'El relleu i els rius' },
     theme: 'Geografia',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Franges de color i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Relleu modelat i detalls de paisatge.' },
+    ],
     description: 'Localitza els Pirineus, les terres baixes de l’interior i les serralades i planes costaneres de Catalunya.',
     curriculum: [{ row: 'medi:cartografia', section: 'costaneres', note: 'Localitza els Pirineus, les terres baixes de l’interior i les serralades i planes costaneres de Catalunya.' }],
     sources: [
+      ['NOAA/NCEI · Model de relleu ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['Eurostat/GISCO · Límits de context NUTS 2024', 'https://gisco-services.ec.europa.eu/distribution/v2/nuts/nuts-2024-files.html'],
       ['ICGC · VISSIR, visor de cartografia', 'https://www.icgc.cat/ca/Eines-i-visors/Visors/VISSIR'],
     ],
   });
@@ -808,6 +971,40 @@ window.quaderns ??= [];
     id: 'rius-costes-catalunya',
     title: 'Seguint l’aigua fins a la costa catalana',
     intro: 'El Segre, l’Ebre, el Ter i el Llobregat passen per paisatges molt diferents. Segueix-los al mapa i descobreix quins arriben al mar i quin desemboca en un altre riu.',
+    figures: [
+      {
+        id: 'xarxa-fluvial-catalunya', section: 'conques', name: 'El Segre, l’Ebre, el Ter i el Llobregat', ratio: 2280 / 1480,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa de quatre rius de Catalunya. Un rombe marca la unió del Segre amb l’Ebre i tres triangles indiquen les desembocadures al mar. Una fletxa indica que la Garona va cap a l’Atlàntic.',
+        caption: 'El Segre s’uneix a l’Ebre a Mequinensa. L’Ebre, el Ter i el Llobregat arriben a la Mediterrània.',
+        credit: 'ACA, ETOPO 2022, Natural Earth i © EuroGeographics pels límits.',
+        variants: {
+          pla: { src: 'illustracions/m012/xarxa-fluvial-catalunya-pla.png', thumbnail: 'illustracions/m012/miniatures/xarxa-fluvial-catalunya-pla.jpg' },
+          atles: { src: 'illustracions/m012/xarxa-fluvial-catalunya-atles.png', thumbnail: 'illustracions/m012/miniatures/xarxa-fluvial-catalunya-atles.jpg' },
+        },
+      },
+      {
+        id: 'deltes-ebre-llobregat', section: 'costes', name: 'Els deltes de l’Ebre i el Llobregat', ratio: 2280 / 1210,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Comparació orientada al nord dels deltes de l’Ebre i el Llobregat. Cada retall té un traç de riu, un símbol de desembocadura i una barra d’escala.',
+        caption: 'Dos deltes i dues escales. Compara la forma de la costa i localitza la sortida de cada riu.',
+        credit: 'Traç i contorns aproximats a partir de l’ortofoto territorial © ICGC, vol 2025 (CC BY 4.0).',
+        variants: {
+          pla: { src: 'illustracions/m012/deltes-ebre-llobregat-pla.png', thumbnail: 'illustracions/m012/miniatures/deltes-ebre-llobregat-pla.jpg' },
+          atles: { src: 'illustracions/m012/deltes-ebre-llobregat-atles.png', thumbnail: 'illustracions/m012/miniatures/deltes-ebre-llobregat-atles.jpg', credit: 'Ortofoto territorial © ICGC, vol 2025 (CC BY 4.0). Retall i ajust de color.' },
+        },
+      },
+      {
+        id: 'recorreguts-ter-llobregat', section: 'ter', name: 'Dos cursos, de la capçalera al mar', ratio: 2280 / 1215,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Dues tires mostren els llocs que travessen el Ter i el Llobregat. Símbols diferents distingeixen les capçaleres, els embassaments, les confluències i les desembocadures.',
+        caption: 'Recorreguts esquemàtics. Segueix els llocs en ordre des de la capçalera fins al mar.',
+        variants: {
+          pla: { src: 'illustracions/m012/recorreguts-ter-llobregat-pla.png', thumbnail: 'illustracions/m012/miniatures/recorreguts-ter-llobregat-pla.jpg' },
+          atles: { src: 'illustracions/m012/recorreguts-ter-llobregat-atles.png', thumbnail: 'illustracions/m012/miniatures/recorreguts-ter-llobregat-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('conques', 'Cap al mateix mar per camins diferents',
         essencial('Bona part de l’aigua dels rius de Catalunya acaba a la **Mediterrània**. El Ter i el Llobregat són de **conques internes**.'),
@@ -832,9 +1029,17 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'relleu', title: 'El relleu i els rius' },
     theme: 'Geografia',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Franges de color i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Relleu modelat i detalls de paisatge.' },
+    ],
     description: 'Compara quatre rius i els paisatges de la costa, i distingeix les conques internes de la conca de l’Ebre.',
     curriculum: [{ row: 'medi:cartografia', section: 'llobregat', note: 'Compara quatre rius i els paisatges de la costa, i distingeix les conques internes de la conca de l’Ebre.' }],
     sources: [
+      ['ACA · Cartografia i geoserveis', 'https://aca.gencat.cat/ca/laigua/consulta-de-dades/cartografia-geoserveis/'],
+      ['ICGC · Ortofoto territorial', 'https://www.icgc.cat/ca/Geoinformacio-i-mapes/Dades-i-productes/Imatge/Ortofoto-Territorial'],
+      ['Llicència de l’ortofoto · CC BY 4.0', 'https://creativecommons.org/licenses/by/4.0/deed.ca'],
+      ['Eurostat/GISCO · Límits de context NUTS 2024', 'https://gisco-services.ec.europa.eu/distribution/v2/nuts/nuts-2024-files.html'],
       ['ACA · El medi hídric i les conques de Catalunya', 'https://aca.gencat.cat/ca/laigua/el-medi-hidric-a-catalunya/'],
       ['ICGC · VISSIR, visor de cartografia', 'https://www.icgc.cat/ca/Eines-i-visors/Visors/VISSIR'],
     ],

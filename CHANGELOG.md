@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.80 · 28 de novembre de 2026
+
+- Incorpora les il·lustracions de relleu, rius i costes de l’M008 a l’M012, amb els lots Pla i Atles.
+
 ## 0.1.79 · 28 de novembre de 2026
 
 - Distingeix al mapa curricular les fitxes amb un lot principal d’il·lustracions incorporat.
