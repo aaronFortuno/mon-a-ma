@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.79 · 28 de novembre de 2026
+
+- Distingeix al mapa curricular les fitxes amb un lot principal d’il·lustracions incorporat.
+
 ## 0.1.78 · 28 de novembre de 2026
 
 - Publica M121–M123, tres esborranys sobre el repartiment de l’aigua, les fonts d’electricitat i la nutrició dels músculs.

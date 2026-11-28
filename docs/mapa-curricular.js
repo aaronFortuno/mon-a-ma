@@ -5,6 +5,15 @@
   const countLabel = count => count === 1 ? '1 material' : count + ' materials';
   const cycleLabel = cycle => cycle.label + (cycle.stage === 'ESO' ? ' · ESO' : '');
 
+  function hasIllustrationSet(topic) {
+    const mainFigures = topic.chapters.flatMap(chapter => chapter.sections.map(section =>
+      chapter.figures?.find(figure => figure.section === section.id)).filter(Boolean));
+    if (!mainFigures.length) return false;
+    if (mainFigures.every(figure => figure.src)) return true;
+    return (topic.figureStyles ?? []).some(style =>
+      mainFigures.every(figure => figure.src || figure.variants?.[style.id]?.src));
+  }
+
   function setupCurriculum(topics, materialAddress, isDefinitive) {
     const dialog = byId('curriculum-dialog');
     const form = byId('curriculum-filters');
@@ -24,7 +33,11 @@
     let helpTimer;
     const helpContents = new WeakMap();
     const matches = new Map();
-    const statusLabel = topic => isDefinitive(topic) ? 'Definitiu' : 'En desenvolupament';
+    const illustratedTopics = new Set(topics.filter(hasIllustrationSet));
+    const statusLabel = topic => {
+      const status = isDefinitive(topic) ? 'Definitiu' : 'En desenvolupament';
+      return illustratedTopics.has(topic) ? status + ' · Lot d’il·lustracions incorporat' : status;
+    };
 
     for (const topic of topics) {
       for (const entry of topic.curriculum ?? []) {
@@ -90,7 +103,10 @@
       anchor.href = materialAddress(entry.topic, entry.section);
       anchor.dataset.material = '';
       anchor.setAttribute('aria-label', label + ' · ' + statusLabel(entry.topic));
-      if (square && !isDefinitive(entry.topic)) anchor.classList.add('is-draft');
+      if (square) {
+        anchor.classList.toggle('is-draft', !isDefinitive(entry.topic));
+        anchor.classList.toggle('is-illustrated', illustratedTopics.has(entry.topic));
+      }
       helpContents.set(anchor, () => materialHelp(entry, cycle));
       return anchor;
     }

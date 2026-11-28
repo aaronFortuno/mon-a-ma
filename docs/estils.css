@@ -36,6 +36,7 @@
   --ink: #19372f;
   --muted: #52655b;
   --green: #285c4d;
+  --curriculum-illustrated: #2e52a2;
   --accent: #b45139;
   --surface: #fffefa;
   --background: #f6f6f1;
@@ -62,6 +63,7 @@
   --ink: #ecf3ed;
   --muted: #b5c8bc;
   --green: #aad9c4;
+  --curriculum-illustrated: #a0baff;
   --accent: #f3a489;
   --surface: #1d2b25;
   --background: #14201b;
@@ -590,7 +592,13 @@ summary { color: var(--green); font-weight: 650; }
   background: currentColor;
 }
 .curriculum-square.is-draft::before, .curriculum-legend .is-draft { background: transparent; }
-.curriculum-square:is(:hover, :focus-visible)::before { color: var(--accent); box-shadow: 0 0 0 3px var(--pale); }
+.curriculum-square.is-illustrated::before, .curriculum-legend .is-illustrated {
+  color: var(--curriculum-illustrated);
+  outline: 1px solid currentColor;
+  outline-offset: 1px;
+}
+.curriculum-legend .is-illustrated { background: transparent; }
+.curriculum-square:is(:hover, :focus-visible)::before { box-shadow: 0 0 0 3px var(--pale); }
 .curriculum-legend { display: flex; flex-wrap: wrap; gap: .25rem .9rem; margin: 0; padding: 0 1rem .6rem; list-style: none; color: var(--muted); font-size: .78rem; }
 .curriculum-legend li { display: flex; align-items: center; gap: .35rem; }
 .curriculum-material-status { color: var(--muted); }
