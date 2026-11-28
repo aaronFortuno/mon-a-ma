@@ -2486,6 +2486,42 @@ window.quaderns ??= [];
     id: 'llegat-de-roma',
     title: 'De Roma al present, què n’ha quedat?',
     intro: 'Un mot, el traçat d’un carrer i el nom d’un mes poden tenir històries llargues. Algunes comencen molt abans que la nostra ciutat actual.',
+    coverFigure: 'tarraco-ciutat-en-capes',
+    figures: [
+      {
+        id: 'tarraco-ciutat-en-capes', section: 'ciutats', name: 'Una ciutat que ha anat canviant', ratio: 2280 / 1260,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dues vistes d’una muralla en el mateix enquadrament. El segon dibuix conserva la base, marcada amb un contorn discontinu, i hi afegeix construccions.',
+        caption: 'Esquema inspirat en les muralles de Tàrraco. El contorn discontinu assenyala el mateix tram en totes dues escenes. Què veus a sobre i al costat del tram conservat?',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m033/tarraco-ciutat-en-capes-pla.png', thumbnail: 'illustracions/m033/miniatures/tarraco-ciutat-en-capes-pla.jpg' },
+          atles: { src: 'illustracions/m033/tarraco-ciutat-en-capes-atles.png', thumbnail: 'illustracions/m033/miniatures/tarraco-ciutat-en-capes-atles.jpg' },
+        },
+      },
+      {
+        id: 'aqua-i-llengues-romaniques', section: 'llengues', name: 'Paraules amb un origen compartit', ratio: 2280 / 1240,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Cinc branques surten de la paraula llatina aqua i arriben a aigua en català, agua en castellà, eau en francès, acqua en italià i água en portuguès.',
+        caption: 'Cinc paraules emparentades amb el llatí aqua. Totes tenen un origen compartit i cada llengua ha seguit la seva trajectòria.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m033/aqua-i-llengues-romaniques-pla.png', thumbnail: 'illustracions/m033/miniatures/aqua-i-llengues-romaniques-pla.jpg' },
+          atles: { src: 'illustracions/m033/aqua-i-llengues-romaniques-atles.png', thumbnail: 'illustracions/m033/miniatures/aqua-i-llengues-romaniques-atles.jpg' },
+        },
+      },
+      {
+        id: 'mateix-corredor-dos-camins', section: 'vies', name: 'Una vall, dos traçats', ratio: 2280 / 1390,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Una calçada discontínua i una carretera de traç continu passen per una vall amb dos nuclis i un riu. Les dues vies s’acosten al pas estret.',
+        caption: 'Model d’una vall imaginària. Una calçada i una carretera passen pel mateix corredor, amb traçats diferents. Quines fonts ajudaran a comprovar-ho en un lloc real?',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m033/mateix-corredor-dos-camins-pla.png', thumbnail: 'illustracions/m033/miniatures/mateix-corredor-dos-camins-pla.jpg' },
+          atles: { src: 'illustracions/m033/mateix-corredor-dos-camins-atles.png', thumbnail: 'illustracions/m033/miniatures/mateix-corredor-dos-camins-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('llengues', 'El llatí canvia al llarg del temps',
         essencial('Del **llatí** que es parlava a l’Imperi es van desenvolupar llengües romàniques com el català, el castellà, el francès, l’italià i el portuguès.'),
@@ -2507,9 +2543,14 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'roma', title: 'En temps dels romans' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Ressegueix rastres romans en les llengües, els carrers, les vies, el calendari i el cristianisme.',
     curriculum: [{ row: 'medi:passat', section: 'vies', note: 'Ressegueix rastres romans en les llengües, els carrers, les vies, el calendari i el cristianisme.' }],
     sources: [
+      ['Diccionari català-valencià-balear · Aigua', 'https://dcvb.iec.cat/results.asp?word=aigua'],
       ['Patrimoni cultural · Tàrraco', 'https://patrimoni.gencat.cat/ca/tarraco'],
       ['Britannica · La Roma antiga', 'https://www.britannica.com/place/ancient-Rome'],
     ],
@@ -2519,6 +2560,42 @@ window.quaderns ??= [];
     id: 'patrimoni-de-tarraco',
     title: 'Llegim les formes dels edificis romans',
     intro: 'Una graderia semicircular, una arena oval i unes sales amb aigua ens donen pistes sobre tres usos diferents. Com podem reconèixer cada edifici?',
+    coverFigure: 'teatre-i-amfiteatre-en-planta',
+    figures: [
+      {
+        id: 'teatre-i-amfiteatre-en-planta', section: 'spectacles', name: 'Teatre i amfiteatre en planta', ratio: 2280 / 1190,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'La graderia del teatre forma un semicercle davant de l’escena. La de l’amfiteatre envolta l’arena ovalada. La mateixa trama marca les graderies.',
+        caption: 'Plantes esquemàtiques sense escala comuna. Tapa els títols i fixa’t en la forma de la graderia i en la seva posició respecte de l’espai central.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m034/teatre-i-amfiteatre-en-planta-pla.png', thumbnail: 'illustracions/m034/miniatures/teatre-i-amfiteatre-en-planta-pla.jpg' },
+          atles: { src: 'illustracions/m034/teatre-i-amfiteatre-en-planta-atles.png', thumbnail: 'illustracions/m034/miniatures/teatre-i-amfiteatre-en-planta-atles.jpg' },
+        },
+      },
+      {
+        id: 'pistes-d-un-temple', section: 'temples', name: 'Pistes per identificar un temple', ratio: 1200 / 1020,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Un dibuix de façana indica la base, l’escala i les columnes. Un requadre mostra un fragment de columna i una nota recorda la relació amb el fòrum.',
+        caption: 'Una façana reconstruïda i un fragment esquemàtic de columna. La situació respecte del fòrum pot ser una pista. Quines altres restes o documents buscaries?',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m034/pistes-d-un-temple-pla.png', thumbnail: 'illustracions/m034/miniatures/pistes-d-un-temple-pla.jpg' },
+          atles: { src: 'illustracions/m034/pistes-d-un-temple-atles.png', thumbnail: 'illustracions/m034/miniatures/pistes-d-un-temple-atles.jpg' },
+        },
+      },
+      {
+        id: 'termes-i-paviment-escalfat', section: 'termes', name: 'Com s’escalfava una sala de les termes?', ratio: 2280 / 1400,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Un forn lateral envia aire calent sota el paviment elevat de la sala. Un traç doble, separat del tall, representa una conducció d’aigua.',
+        caption: 'Tall d’un sistema de calefacció que s’emprava en algunes termes romanes. Les fletxes segueixen l’aire entre els pilarets. Un requadre mostra una conducció d’aigua.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m034/termes-i-paviment-escalfat-pla.png', thumbnail: 'illustracions/m034/miniatures/termes-i-paviment-escalfat-pla.jpg' },
+          atles: { src: 'illustracions/m034/termes-i-paviment-escalfat-atles.png', thumbnail: 'illustracions/m034/miniatures/termes-i-paviment-escalfat-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('temples', 'Espais de culte',
         essencial('Un **temple** era un edifici destinat al culte. En molts casos s’alçava sobre una base alta i tenia una entrada amb columnes.'),
@@ -2534,9 +2611,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'roma', title: 'En temps dels romans' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Distingeix temples, teatres, amfiteatres i termes a partir de la forma i la funció.',
     curriculum: [{ row: 'medi:passat', section: 'termes', note: 'Distingeix temples, teatres, amfiteatres i termes a partir de la forma i la funció.' }],
     sources: [
+      ['MNAT · Teatre de Tàrraco', 'https://www.mnat.cat/teatre-de-tarraco/'],
+      ['Generalitat de Catalunya · Termes de Sant Boi de Llobregat', 'https://govern.cat/govern/docs/2016/07/19/16/12/51838643-0591-4bf4-bb75-251ff42b1c4b.pdf'],
       ['Patrimoni cultural · Amfiteatre de Tàrraco', 'https://patrimoni.gencat.cat/ca/tarraco/amfiteatre'],
       ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
     ],
@@ -2546,6 +2629,42 @@ window.quaderns ??= [];
     id: 'visigots-inici-edat-mitjana',
     title: 'De l’Imperi romà al regne visigot',
     intro: 'Les ciutats, les llengües i les creences continuen canviant quan es fragmenta un imperi. Què es manté i qui governa la Península després de Roma?',
+    coverFigure: 'del-476-al-711',
+    figures: [
+      {
+        id: 'del-476-al-711', section: 'imperi', name: 'Del 476 al 711, canvis i continuïtats', ratio: 2280 / 1120,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Un eix marca el 476, el regne visigot amb centre a Toledo i el 711. A sota, una línia discontínua llarga identifica les ciutats i el llatí parlat.',
+        caption: 'El 476 és una data convencional. La franja indica el període visigot a la Península. Les ciutats i el llatí parlat continuen canviant mentre se succeeixen els governs.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m035/del-476-al-711-pla.png', thumbnail: 'illustracions/m035/miniatures/del-476-al-711-pla.jpg' },
+          atles: { src: 'illustracions/m035/del-476-al-711-atles.png', thumbnail: 'illustracions/m035/miniatures/del-476-al-711-atles.jpg' },
+        },
+      },
+      {
+        id: 'toledo-i-estret-de-gibraltar', section: 'set-cents', name: 'Toledo i el pas entre dues ribes', ratio: 2280 / 1450,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa de la península Ibèrica i el nord d’Àfrica. Un punt indica Toledo i una fletxa curta creua l’estret de Gibraltar cap al nord.',
+        caption: 'Toledo era el centre del regne visigot. La fletxa marca de manera esquemàtica el pas del nord d’Àfrica cap a la Península el 711.',
+        credit: 'Cartografia física Natural Earth i NOAA/NCEI ETOPO 2022.',
+        variants: {
+          pla: { src: 'illustracions/m035/toledo-i-estret-de-gibraltar-pla.png', thumbnail: 'illustracions/m035/miniatures/toledo-i-estret-de-gibraltar-pla.jpg' },
+          atles: { src: 'illustracions/m035/toledo-i-estret-de-gibraltar-atles.png', thumbnail: 'illustracions/m035/miniatures/toledo-i-estret-de-gibraltar-atles.jpg' },
+        },
+      },
+      {
+        id: 'llengua-religio-i-govern', section: 'islam', name: 'Una llengua, una creença i un govern', ratio: 2280 / 1330,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres fotografies documentades mostren un fragment de teixit amb lletres àrabs, un foli en pergamí de l’Alcorà i un dinar del califa Abd-al-Màlik.',
+        caption: 'Les tres peces provenen de diferents llocs i èpoques del món islàmic. Quina pregunta faries a cada peça per aprendre sobre la llengua, la religió o el govern?',
+        credit: 'The Met, Rogers Fund, 1927 (27.170.79) i Gift of Rudolf M. Riefstahl, 1930 (30.45). Münzkabinett, Staatliche Museen zu Berlin (18205131), fotografia de Lutz-Jürgen Lübke. Imatges de domini públic.',
+        variants: {
+          pla: { src: 'illustracions/m035/llengua-religio-i-govern-pla.png', thumbnail: 'illustracions/m035/miniatures/llengua-religio-i-govern-pla.jpg' },
+          atles: { src: 'illustracions/m035/llengua-religio-i-govern-atles.png', thumbnail: 'illustracions/m035/miniatures/llengua-religio-i-govern-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('imperi', 'Quan es fragmenta l’Imperi d’Occident',
         essencial('Al segle V, l’**Imperi romà d’Occident** es va fragmentar. Diversos grups van formar regnes als seus antics territoris.'),
@@ -2564,9 +2683,19 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Relaciona la fragmentació de l’Imperi romà d’Occident amb el regne visigot, l’arribada musulmana i l’islam.',
     curriculum: [{ row: 'medi:passat', section: 'visigots', note: 'Relaciona la fragmentació de l’Imperi romà d’Occident amb el regne visigot, l’arribada musulmana i l’islam.' }],
     sources: [
+      ['IGN · Atlas Nacional de España, capítol 6', 'https://www.ign.es/web/resources/docs/IGNCnig/ANE/Capitulos/06_Referenciashistoricas.pdf'],
+      ['Natural Earth · Vectors físics', 'https://www.naturalearthdata.com/downloads/10m-physical-vectors/'],
+      ['NOAA/NCEI · ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['The Met · Teixit amb inscripció, 27.170.79', 'https://www.metmuseum.org/art/collection/search/448123'],
+      ['The Met · Foli de l’Alcorà, 30.45', 'https://www.metmuseum.org/art/collection/search/448369'],
+      ['Münzkabinett Berlin · Dinar omeia, 18205131', 'https://ikmk.smb.museum/object?id=18205131'],
       ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
       ['Britannica · La Roma antiga', 'https://www.britannica.com/place/ancient-Rome'],
     ],
@@ -2576,6 +2705,42 @@ window.quaderns ??= [];
     id: 'terres-andalusines',
     title: 'Lleida i Tortosa en temps d’Al-Àndalus',
     intro: 'Els límits dels territoris medievals no coincideixen amb els actuals. A les terres de Lleida i Tortosa, podem seguir pistes de com era la vida sota govern andalusí.',
+    coverFigure: 'lleida-balaguer-tortosa-i-rius',
+    figures: [
+      {
+        id: 'lleida-balaguer-tortosa-i-rius', section: 'alandalus', name: 'De la vall del Segre al baix Ebre', ratio: 2280 / 1500,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Balaguer i Lleida són a la vora del Segre. El Segre s’uneix a l’Ebre, que passa per Tortosa abans d’arribar a la Mediterrània.',
+        caption: 'Balaguer, Lleida i Tortosa són tres ciutats de referència del segle XI. El mapa simplifica la xarxa fluvial i fa servir la costa actual.',
+        credit: 'Cartografia física Natural Earth i NOAA/NCEI ETOPO 2022. Eixos fluvials de l’Agència Catalana de l’Aigua.',
+        variants: {
+          pla: { src: 'illustracions/m036/lleida-balaguer-tortosa-i-rius-pla.png', thumbnail: 'illustracions/m036/miniatures/lleida-balaguer-tortosa-i-rius-pla.jpg' },
+          atles: { src: 'illustracions/m036/lleida-balaguer-tortosa-i-rius-atles.png', thumbnail: 'illustracions/m036/miniatures/lleida-balaguer-tortosa-i-rius-atles.jpg' },
+        },
+      },
+      {
+        id: 'tortosa-i-el-port-fluvial', section: 'vida', name: 'Una ciutat al costat del riu', ratio: 2280 / 1310,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Una embarcació de càrrega és al costat d’un embarcador de l’Ebre. Un camí puja cap a un carrer de la ciutat on s’intercanvien productes.',
+        caption: 'Reconstrucció didàctica inspirada en la Tortosa andalusina. Segueix el camí entre l’embarcació i el carrer i identifica les feines que s’hi fan.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m036/tortosa-i-el-port-fluvial-pla.png', thumbnail: 'illustracions/m036/miniatures/tortosa-i-el-port-fluvial-pla.jpg' },
+          atles: { src: 'illustracions/m036/tortosa-i-el-port-fluvial-atles.png', thumbnail: 'illustracions/m036/miniatures/tortosa-i-el-port-fluvial-atles.jpg' },
+        },
+      },
+      {
+        id: 'alqueria-sequia-i-camps', section: 'alqueries', name: 'Una séquia porta aigua als camps', ratio: 2280 / 1300,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Una séquia contínua amb una fletxa alimenta diferents camps. Un camí discontinu surt del petit grup de cases i connecta amb la ciutat.',
+        caption: 'Exemple esquemàtic de reg prop d’una alqueria. Segueix el sentit de l’aigua i comprova com arriba als camps. Quin traç indica el camí cap a la ciutat?',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m036/alqueria-sequia-i-camps-pla.png', thumbnail: 'illustracions/m036/miniatures/alqueria-sequia-i-camps-pla.jpg' },
+          atles: { src: 'illustracions/m036/alqueria-sequia-i-camps-atles.png', thumbnail: 'illustracions/m036/miniatures/alqueria-sequia-i-camps-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('alandalus', 'Un territori que va canviar de forma',
         essencial('**Al-Àndalus** és el nom que reben els territoris peninsulars sota govern musulmà durant l’edat mitjana.'),
@@ -2591,9 +2756,18 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Situa parts de l’actual Catalunya a Al-Àndalus i explica la vida de ciutats i alqueries.',
     curriculum: [{ row: 'medi:passat', section: 'vida', note: 'Situa parts de l’actual Catalunya a Al-Àndalus i explica la vida de ciutats i alqueries.' }],
     sources: [
+      ['Natural Earth · Vectors físics', 'https://www.naturalearthdata.com/downloads/10m-physical-vectors/'],
+      ['NOAA/NCEI · ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['Agència Catalana de l’Aigua · Cartografia i geoserveis', 'https://aca.gencat.cat/ca/laigua/consulta-de-dades/cartografia-geoserveis/'],
+      ['Museu de Lleida · Al-Àndalus', 'https://museudelleida.cat/collection/al-andalus/'],
+      ['Museu de Tortosa · Turtuxa', 'https://www.museudetortosa.cat/museu/exposicio-permanent/turtuxa'],
       ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
     ],
   });
@@ -2602,6 +2776,42 @@ window.quaderns ??= [];
     id: 'comtats-i-feudalisme',
     title: 'Dels comtats a les terres feudals',
     intro: 'Una frontera pot donar lloc a castells i comtats. Amb els segles, aquells territoris canvien de govern i amplien les seves relacions.',
+    coverFigure: 'comtats-i-frontera-carolingia',
+    figures: [
+      {
+        id: 'comtats-i-frontera-carolingia', section: 'frontera', name: 'Dos comtats en una zona de frontera', ratio: 2280 / 1500,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'El mapa assenyala els comtats de Girona i Barcelona. Una fletxa apunta cap al món franc i una franja tramada indica la zona de frontera amb Al-Àndalus.',
+        caption: 'Esquema del segle IX. La Marca Hispànica incloïa diversos comtats i territoris fronterers. La trama representa una franja aproximada.',
+        credit: 'Cartografia física Natural Earth i NOAA/NCEI ETOPO 2022. Franja orientativa segons el Museu d’Història de Catalunya.',
+        variants: {
+          pla: { src: 'illustracions/m037/comtats-i-frontera-carolingia-pla.png', thumbnail: 'illustracions/m037/miniatures/comtats-i-frontera-carolingia-pla.jpg' },
+          atles: { src: 'illustracions/m037/comtats-i-frontera-carolingia-atles.png', thumbnail: 'illustracions/m037/miniatures/comtats-i-frontera-carolingia-atles.jpg' },
+        },
+      },
+      {
+        id: 'autonomia-creixent-i-988', section: 'autonomia', name: 'Una data dins d’un procés', ratio: 2280 / 1000,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Una banda tramada representa l’autonomia creixent dels comtes. Una marca indica el 988 al tram final del segle X i la banda continua cap al segle XI.',
+        caption: 'El 988 serveix de referència per interpretar l’afebliment del vincle amb la monarquia franca. El procés venia d’abans i va seguir ritmes diferents segons el comtat.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m037/autonomia-creixent-i-988-pla.png', thumbnail: 'illustracions/m037/miniatures/autonomia-creixent-i-988-pla.jpg' },
+          atles: { src: 'illustracions/m037/autonomia-creixent-i-988-atles.png', thumbnail: 'illustracions/m037/miniatures/autonomia-creixent-i-988-atles.jpg' },
+        },
+      },
+      {
+        id: 'mateix-lloc-noves-obligacions', section: 'poblament', name: 'Un mateix lloc amb noves obligacions', ratio: 2280 / 1280,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dos plànols conserven una casa, un camí i un camp. Al segon, s’afegeixen noves terres i una fletxa mostra una renda de gra cap al domini senyorial.',
+        caption: 'Cas imaginari. Alguns habitants continuen al lloc mentre es reparteixen noves terres i canvia qui rep una part de la collita. Quina font ho podria documentar?',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m037/mateix-lloc-noves-obligacions-pla.png', thumbnail: 'illustracions/m037/miniatures/mateix-lloc-noves-obligacions-pla.jpg' },
+          atles: { src: 'illustracions/m037/mateix-lloc-noves-obligacions-atles.png', thumbnail: 'illustracions/m037/miniatures/mateix-lloc-noves-obligacions-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('frontera', 'Comtats a la frontera carolíngia',
         essencial('Els **comtats catalans** es van formar en territoris vinculats a l’Imperi carolingi, a prop de la frontera amb Al-Àndalus.'),
@@ -2620,9 +2830,17 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Segueix l’origen dels comtats catalans, l’autonomia creixent i les transformacions feudals i de poblament.',
     curriculum: [{ row: 'medi:passat', section: 'poblament', note: 'Segueix l’origen dels comtats catalans, l’autonomia creixent i les transformacions feudals i de poblament.' }],
     sources: [
+      ['Museu d’Història de Catalunya · La frontera d’Europa', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/el_naixement_d_una_nacio/la_frontera_d_europa'],
+      ['Museu d’Història de Catalunya · Guia del museu', 'https://www.mhcat.cat/enmhc/visiting_the_museum/plano_libreria/guide_to_visit_the_museum/audio_guide/guia_de_visita_al_museo/segona_planta'],
+      ['Natural Earth · Vectors físics', 'https://www.naturalearthdata.com/downloads/10m-physical-vectors/'],
+      ['NOAA/NCEI · ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
       ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
     ],
   });
@@ -2631,6 +2849,42 @@ window.quaderns ??= [];
     id: 'regnes-peninsulars-medievals',
     title: 'Una península amb regnes canviants',
     intro: 'Si comparem tres mapes separats per segles veurem que canvien fronteres, governants i habitants. Un mapa amb data permet tractar aquests canvis amb més precisió.',
+    coverFigure: 'peninsula-per-segles',
+    figures: [
+      {
+        id: 'peninsula-per-segles', section: 'segles', name: 'Tres mapes de la península', ratio: 2280 / 1440,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres mapes de la mateixa península cap al 1070, 1190 i 1350. Les llegendes amb lletres identifiquen els governs de cada moment. El punt de Granada es manté.',
+        caption: 'Els tres mapes tenen la mateixa escala. Les lletres assenyalen llocs de referència de cada govern i les trames són orientatives. El punt fosc situa la ciutat de Granada.',
+        credit: 'Cartografia física Natural Earth i NOAA/NCEI ETOPO 2022. Selecció històrica a partir de l’Atlas Nacional de España i l’Atlas de la Historia del Territorio de Andalucía.',
+        variants: {
+          pla: { src: 'illustracions/m038/peninsula-per-segles-pla.png', thumbnail: 'illustracions/m038/miniatures/peninsula-per-segles-pla.jpg' },
+          atles: { src: 'illustracions/m038/peninsula-per-segles-atles.png', thumbnail: 'illustracions/m038/miniatures/peninsula-per-segles-atles.jpg' },
+        },
+      },
+      {
+        id: 'fronteres-pactes-i-treves', section: 'exercits', name: 'Una frontera que canvia de maneres diferents', ratio: 2280 / 1210,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres parelles de dibuixos conserven un riu i dos nuclis. Canvis en la trama o en els símbols representen un canvi de control, una unió i una treva.',
+        caption: 'Tres models imaginaris. Compara el control del territori, els acords entre governants i la interrupció dels enfrontaments. Què es manté al paisatge?',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m038/fronteres-pactes-i-treves-pla.png', thumbnail: 'illustracions/m038/miniatures/fronteres-pactes-i-treves-pla.jpg' },
+          atles: { src: 'illustracions/m038/fronteres-pactes-i-treves-atles.png', thumbnail: 'illustracions/m038/miniatures/fronteres-pactes-i-treves-atles.jpg' },
+        },
+      },
+      {
+        id: 'dos-moments-un-lloc-habitat', section: 'poblament', name: 'Qui es queda i qui hi arriba?', ratio: 2280 / 1260,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Els dos plànols mantenen la casa, el camp i el camí. Al segon s’hi distingeixen una parcel·la nova en un altre costat i una indicació de canvi de govern.',
+        caption: 'Model d’un nucli habitat en dos moments. Una part del nucli es manté i s’hi afegeix una parcel·la. Què podria explicar una carta de poblament?',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m038/dos-moments-un-lloc-habitat-pla.png', thumbnail: 'illustracions/m038/miniatures/dos-moments-un-lloc-habitat-pla.jpg' },
+          atles: { src: 'illustracions/m038/dos-moments-un-lloc-habitat-atles.png', thumbnail: 'illustracions/m038/miniatures/dos-moments-un-lloc-habitat-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('segles', 'Tres moments per comparar',
         essencial('Als segles XI, XII i XIV, la Península estava repartida entre diversos regnes i territoris. Les fronteres van canviar.'),
@@ -2646,9 +2900,17 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Compara la Península dels segles XI, XII i XIV i analitza conquestes, aliances i poblament.',
     curriculum: [{ row: 'medi:passat', section: 'poblament', note: 'Compara la Península dels segles XI, XII i XIV i analitza conquestes, aliances i poblament.' }],
     sources: [
+      ['IGN · Atlas Nacional de España, capítol 6', 'https://www.ign.es/web/resources/docs/IGNCnig/ANE/Capitulos/06_Referenciashistoricas.pdf'],
+      ['Natural Earth · Vectors físics', 'https://www.naturalearthdata.com/downloads/10m-physical-vectors/'],
+      ['NOAA/NCEI · ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['Junta de Andalucía · Organització territorial d’Al-Àndalus', 'https://www.juntadeandalucia.es/institutodeestadisticaycartografia/atlasterritorio/at/pdf/13_organizacionterritorialdealandalus.pdf'],
       ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
       ['MHC · L’expansió de la Corona d’Aragó', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/el_naixement_d_una_nacio/l_expansio_de_la_corona_d_arago'],
     ],
@@ -2658,6 +2920,42 @@ window.quaderns ??= [];
     id: 'noblesa-i-castells',
     title: 'El castell, estratègia i vida quotidiana',
     intro: 'Un castell pot dominar una ruta i allotjar persones alhora. El seu plànol permet descobrir quins espais responien a cada necessitat.',
+    coverFigure: 'planta-castell-espais-i-usos',
+    figures: [
+      {
+        id: 'planta-castell-espais-i-usos', section: 'parts', name: 'Un castell vist en planta', ratio: 2280 / 1420,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'El plànol mostra muralla amb torres, entrada, recorregut cap al pati i accés al magatzem. Un símbol d’aigua indica la cisterna sota el pati.',
+        caption: 'Planta de mostra d’un castell. Ressegueix com s’arriba de l’entrada al pati i localitza on es guardava l’aigua.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m039/planta-castell-espais-i-usos-pla.png', thumbnail: 'illustracions/m039/miniatures/planta-castell-espais-i-usos-pla.jpg' },
+          atles: { src: 'illustracions/m039/planta-castell-espais-i-usos-atles.png', thumbnail: 'illustracions/m039/miniatures/planta-castell-espais-i-usos-atles.jpg' },
+        },
+      },
+      {
+        id: 'castell-carena-i-cami', section: 'situacio', name: 'Què es veu des del castell?', ratio: 2280 / 1380,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dues línies discontínues surten del castell. Una arriba al tram visible del camí i l’altra topa amb una carena que amaga el tram llunyà.',
+        caption: 'Tall esquemàtic d’un paisatge. Una línia arriba al camí de la vall. L’altra acaba on la carena interromp la visió.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m039/castell-carena-i-cami-pla.png', thumbnail: 'illustracions/m039/miniatures/castell-carena-i-cami-pla.jpg' },
+          atles: { src: 'illustracions/m039/castell-carena-i-cami-atles.png', thumbnail: 'illustracions/m039/miniatures/castell-carena-i-cami-atles.jpg' },
+        },
+      },
+      {
+        id: 'feines-d-un-castell', section: 'estaments', name: 'Un espai de residència i govern', ratio: 1200 / 1280,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Tres vinyetes mostren una persona amb un llibre de comptes, una altra al costat d’atuells de magatzem i una altra preparant menjar vora el foc.',
+        caption: 'Tres feines possibles en alguns castells. Fixa’t en els objectes i explica què està fent cada persona.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m039/feines-d-un-castell-pla.png', thumbnail: 'illustracions/m039/miniatures/feines-d-un-castell-pla.jpg' },
+          atles: { src: 'illustracions/m039/feines-d-un-castell-atles.png', thumbnail: 'illustracions/m039/miniatures/feines-d-un-castell-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('estaments', 'Qui tenia terres i privilegis?',
         essencial('En molts territoris medievals, la **noblesa** tenia privilegis i controlava terres i drets. Part del clergat també exercia poder.'),
@@ -2673,6 +2971,10 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Relaciona el poder de la noblesa amb la funció i els espais del castell medieval.',
     curriculum: [{ row: 'medi:passat', section: 'parts', note: 'Relaciona el poder de la noblesa amb la funció i els espais del castell medieval.' }],
     sources: [
@@ -2685,6 +2987,42 @@ window.quaderns ??= [];
     id: 'pagesia-i-feus',
     title: 'Treballar i viure en un domini feudal',
     intro: 'Als marges d’un llogaret hi ha camps, boscos i camins. Qui hi treballava i qui decidia com se n’aprofitaven els recursos?',
+    coverFigure: 'paisatge-de-llogaret-i-moli',
+    figures: [
+      {
+        id: 'paisatge-de-llogaret-i-moli', section: 'conreus', name: 'Un llogaret i el seu entorn', ratio: 2280 / 1340,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Camins connecten les cases del llogaret amb els camps, les pastures i el molí d’aigua. Al fons hi ha una zona de bosc.',
+        caption: 'Cas esquemàtic d’un domini rural. Ressegueix com s’arriba del llogaret al camp o al molí. Què hi podria obtenir una família?',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m040/paisatge-de-llogaret-i-moli-pla.png', thumbnail: 'illustracions/m040/miniatures/paisatge-de-llogaret-i-moli-pla.jpg' },
+          atles: { src: 'illustracions/m040/paisatge-de-llogaret-i-moli-atles.png', thumbnail: 'illustracions/m040/miniatures/paisatge-de-llogaret-i-moli-atles.jpg' },
+        },
+      },
+      {
+        id: 'quatre-moments-del-cereal', section: 'produccio', name: 'Del conreu al graner', ratio: 2280 / 1420,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Quatre vinyetes mostren treballar la terra, escampar llavors, collir i desar sacs de gra. Un requadre separat mostra una parcel·la en guaret.',
+        caption: 'Quatre moments de la feina amb el cereal. Els ritmes i les eines podien variar segons el conreu i el lloc. Una vinyeta mostra una parcel·la en guaret.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m040/quatre-moments-del-cereal-pla.png', thumbnail: 'illustracions/m040/miniatures/quatre-moments-del-cereal-pla.jpg' },
+          atles: { src: 'illustracions/m040/quatre-moments-del-cereal-atles.png', thumbnail: 'illustracions/m040/miniatures/quatre-moments-del-cereal-atles.jpg' },
+        },
+      },
+      {
+        id: 'renda-en-productes-diners-i-feina', section: 'dominis', name: 'Tres formes de complir una obligació', ratio: 1200 / 1120,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'La primera targeta mostra sacs de gra, la segona monedes i la tercera una persona que treballa el camp.',
+        caption: 'Tres exemples esquemàtics de renda. Les obligacions variaven segons el lloc i els acords.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m040/renda-en-productes-diners-i-feina-pla.png', thumbnail: 'illustracions/m040/miniatures/renda-en-productes-diners-i-feina-pla.jpg' },
+          atles: { src: 'illustracions/m040/renda-en-productes-diners-i-feina-atles.png', thumbnail: 'illustracions/m040/miniatures/renda-en-productes-diners-i-feina-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('pagesia', 'La feina de la pagesia',
         essencial('La major part de la població medieval vivia al camp. La **pagesia** conreava la terra i criava animals.'),
@@ -2706,6 +3044,10 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Interpreta l’organització d’un domini feudal, el treball de la pagesia i els usos de conreus i espais comuns.',
     curriculum: [{ row: 'medi:passat', section: 'dominis', note: 'Interpreta l’organització d’un domini feudal, el treball de la pagesia i els usos de conreus i espais comuns.' }],
     sources: [
@@ -2718,6 +3060,42 @@ window.quaderns ??= [];
     id: 'corona-arago-mediterrania',
     title: 'La Corona d’Aragó a la Mediterrània',
     intro: 'Des d’un port es veuen vaixells que parteixen cap a altres ports. A terra, comerciants i artesans treballen en ciutats que formen part d’una corona amb territoris diversos.',
+    coverFigure: 'ports-i-fites-mediterranies',
+    figures: [
+      {
+        id: 'ports-i-fites-mediterranies', section: 'comerc', name: 'Ports, territoris i rutes', ratio: 2280 / 1590,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa de la Mediterrània amb punts de port, línies marítimes discontínues i cinc quadrats numerats que es relacionen amb una taula de dates.',
+        caption: 'Els traços discontinus mostren exemples de connexions marítimes. Els quadrats numerats remeten a fites polítiques de dates diferents.',
+        credit: 'Cartografia física Natural Earth i NOAA/NCEI ETOPO 2022. Fites segons el Museu d’Història de Catalunya i l’Atlas Nacional de España.',
+        variants: {
+          pla: { src: 'illustracions/m041/ports-i-fites-mediterranies-pla.png', thumbnail: 'illustracions/m041/miniatures/ports-i-fites-mediterranies-pla.jpg' },
+          atles: { src: 'illustracions/m041/ports-i-fites-mediterranies-atles.png', thumbnail: 'illustracions/m041/miniatures/ports-i-fites-mediterranies-atles.jpg' },
+        },
+      },
+      {
+        id: 'treball-a-les-drassanes', section: 'drassanes', name: 'Una galera a les Drassanes', ratio: 2280 / 1470,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'En una nau coberta amb arcs hi ha una galera de costat sobre suports, fusta i persones amb feines diferents. Un requadre situa la nau respecte de l’aigua.',
+        caption: 'Reconstrucció inspirada en les Drassanes Reials de Barcelona. Les persones, les peces i la situació respecte de l’aigua formen part de l’esquema didàctic.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m041/treball-a-les-drassanes-pla.png', thumbnail: 'illustracions/m041/miniatures/treball-a-les-drassanes-pla.jpg' },
+          atles: { src: 'illustracions/m041/treball-a-les-drassanes-atles.png', thumbnail: 'illustracions/m041/miniatures/treball-a-les-drassanes-atles.jpg' },
+        },
+      },
+      {
+        id: 'diposit-i-pagament-a-la-taula', section: 'taula', name: 'Deixar diners anotats i fer un pagament', ratio: 2280 / 1220,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres escenes mostren monedes dipositades, l’anotació en un llibre amb columnes i el pagament. Cada escena incorpora la mateixa marca de compte.',
+        caption: 'Seqüència didàctica de la Taula de Canvi. Una mateixa marca acompanya el dipòsit, l’anotació al llibre i el pagament posterior.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m041/diposit-i-pagament-a-la-taula-pla.png', thumbnail: 'illustracions/m041/miniatures/diposit-i-pagament-a-la-taula-pla.jpg' },
+          atles: { src: 'illustracions/m041/diposit-i-pagament-a-la-taula-atles.png', thumbnail: 'illustracions/m041/miniatures/diposit-i-pagament-a-la-taula-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('formacio', 'Una corona, territoris diferents',
         essencial('La **Corona d’Aragó** es va formar amb la unió dinàstica del regne d’Aragó i el casal de Barcelona.'),
@@ -2739,9 +3117,18 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Explica la formació i l’expansió mediterrània de la Corona d’Aragó i el paper de les Drassanes i la Taula de Canvi.',
     curriculum: [{ row: 'medi:passat', section: 'taula', note: 'Explica la formació i l’expansió mediterrània de la Corona d’Aragó i el paper de les Drassanes i la Taula de Canvi.' }],
     sources: [
+      ['Museu d’Història de Catalunya · L’hegemonia catalana a la Mediterrània', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/la_mar_nostra/l_hegemonia_catalana_a_la_mediterrania'],
+      ['IGN · Atlas Nacional de España, capítol 6', 'https://www.ign.es/web/resources/docs/IGNCnig/ANE/Capitulos/06_Referenciashistoricas.pdf'],
+      ['Natural Earth · Vectors físics', 'https://www.naturalearthdata.com/downloads/10m-physical-vectors/'],
+      ['NOAA/NCEI · ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['Museu Marítim de Barcelona · Drassanes i galeres', 'https://www.mmb.cat/exposicions/drassanes-i-galeres/'],
       ['MHC · L’expansió de la Corona d’Aragó', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/el_naixement_d_una_nacio/l_expansio_de_la_corona_d_arago'],
       ['Museu Marítim · Les Drassanes Reials', 'https://www.mmb.cat/exposicions/viatge-en-el-temps-per-les-drassanes-reials-de-barcelona/'],
       ['Arxiu Municipal · Ordinacions de la Taula de Canvi', 'https://patrimoni.gencat.cat/ca/catalunyapaisdarxius/recurs-digital/recurs/document/ordinacions-de-la-taula-de-canvi-de-barcelona/'],
@@ -2752,6 +3139,42 @@ window.quaderns ??= [];
     id: 'viure-ciutat-medieval',
     title: 'Un dia dins les muralles',
     intro: 'A la plaça hi ha mercat i en alguns carrers es treballa el cuir o es ven roba. La ciutat reuneix activitats que sovint no hi ha a cada llogaret.',
+    coverFigure: 'planta-ciutat-medieval',
+    figures: [
+      {
+        id: 'planta-ciutat-medieval', section: 'muralla', name: 'D’una porta al mercat i al taller', ratio: 2280 / 1440,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Una muralla amb una porta separa la ciutat del raval. Hi ha més d’un carrer que comunica la plaça del mercat amb la porta o el taller.',
+        caption: 'Planta d’una ciutat medieval imaginària. Tria un recorregut de tres parades i explica quina funció té cada espai.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m042/planta-ciutat-medieval-pla.png', thumbnail: 'illustracions/m042/miniatures/planta-ciutat-medieval-pla.jpg' },
+          atles: { src: 'illustracions/m042/planta-ciutat-medieval-atles.png', thumbnail: 'illustracions/m042/miniatures/planta-ciutat-medieval-atles.jpg' },
+        },
+      },
+      {
+        id: 'mercat-oficis-i-productes', section: 'placa', name: 'Una plaça amb feines diferents', ratio: 2280 / 1340,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Una persona arriba amb productes del camp, una parada els posa a la venda i una persona treballa en un taller obert a la plaça.',
+        caption: 'Reconstrucció didàctica d’una plaça de mercat. Segueix un producte del camp fins a la parada i identifica què es fa al taller.',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m042/mercat-oficis-i-productes-pla.png', thumbnail: 'illustracions/m042/miniatures/mercat-oficis-i-productes-pla.jpg' },
+          atles: { src: 'illustracions/m042/mercat-oficis-i-productes-atles.png', thumbnail: 'illustracions/m042/miniatures/mercat-oficis-i-productes-atles.jpg' },
+        },
+      },
+      {
+        id: 'tres-fonts-sobre-una-epidemia', section: 'malalties', name: 'Tres documents sobre una epidèmia a la ciutat', ratio: 2280 / 1320,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres targetes presenten un registre d’enterraments amb dates, un testament amb una disposició i una ordenança amb una regla municipal.',
+        caption: 'Tres exemples inventats. Quin document serviria per comptar enterraments? Quin ajudaria a entendre una decisió del govern local?',
+        credit: 'Dibuix didàctic de producció pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m042/tres-fonts-sobre-una-epidemia-pla.png', thumbnail: 'illustracions/m042/miniatures/tres-fonts-sobre-una-epidemia-pla.jpg' },
+          atles: { src: 'illustracions/m042/tres-fonts-sobre-una-epidemia-atles.png', thumbnail: 'illustracions/m042/miniatures/tres-fonts-sobre-una-epidemia-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('muralla', 'Portes que obren i tanquen',
         essencial('La **muralla** protegia la ciutat. Les portes eren punts de pas i de control.'),
@@ -2776,9 +3199,14 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Interpreta la muralla, els barris i els mercats d’una ciutat medieval i relaciona la vida urbana amb els riscos de malaltia.',
     curriculum: [{ row: 'medi:passat', section: 'carrers', note: 'Interpreta la muralla, els barris i els mercats d’una ciutat medieval i relaciona la vida urbana amb els riscos de malaltia.' }],
     sources: [
+      ['Museu d’Història de Catalunya · Guia del museu', 'https://www.mhcat.cat/enmhc/visiting_the_museum/plano_libreria/guide_to_visit_the_museum/audio_guide/guia_de_visita_al_museo/segona_planta'],
       ['MHC · La mar nostra', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/la_mar_nostra'],
       ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
     ],

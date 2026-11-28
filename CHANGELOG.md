@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.87 · 28 de novembre de 2026
+
+- Incorpora les tandes d’il·lustracions M033–M037 i M038–M042 amb els estils Pla i Atles i l’Atles per defecte.
+- Mostra les deu fitxes noves amb il·lustracions en validació al mapa curricular.
+
 ## 0.1.86 · 28 de novembre de 2026
 
 - Incorpora els lots Pla i Atles de l’M028 a l’M032, amb l’Atles per defecte.
