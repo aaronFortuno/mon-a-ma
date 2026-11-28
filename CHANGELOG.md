@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.63 · 28 de novembre de 2026
+
+- Publica els esborranys M015–M020 sobre el clima, la vegetació i el canvi climàtic.
+
 ## 0.1.62 · 28 de novembre de 2026
 
 - Publica els esborranys M011–M014 sobre el relleu i l’aigua de Catalunya, els perfils i la conservació del medi.

@@ -899,4 +899,181 @@ window.quaderns ??= [];
       ['ICGC · VISSIR, visor de cartografia', 'https://www.icgc.cat/ca/Eines-i-visors/Visors/VISSIR'],
     ],
   });
+
+  addTopic('M015', {
+    id: 'temps-i-clima',
+    title: 'El temps d’avui i el clima d’un lloc',
+    intro: 'Ens abriguem abans de sortir, però els pagesos també necessiten saber com solen ser les estacions de l’any. Són preguntes diferents i es responen amb dades diferents.',
+    sections: [
+      section('temps', 'Una fotografia del temps',
+        essencial('El **temps atmosfèric** és l’estat de l’atmosfera en un lloc i un moment concrets.'),
+        p('Per descriure’l podem observar els núvols i el vent i mesurar-hi la temperatura o la precipitació. Al mateix lloc pot fer sol al matí i ploure a la tarda.')),
+      section('clima', 'El patró que apareix amb els anys',
+        essencial('El **clima** descriu les condicions habituals d’un lloc i les seves variacions al llarg de molts anys.'),
+        p('Per comparar climes, se solen fer servir períodes de referència de trenta anys. La temperatura mitjana ajuda, però també interessa saber quan plou, com canvien les estacions i quins extrems són més habituals.')),
+      section('extrems', 'Quan les condicions són extremes',
+        essencial('L’Antàrtida és molt freda i seca. El Sàhara té grans zones molt seques que poden arribar a temperatures molt altes.'),
+        p('Un desert és molt sec i també pot ser fred. Una onada de calor és un episodi de temps atmosfèric excepcionalment calorós per al lloc i l’època de l’any, fins i tot en una regió de clima temperat.'),
+        box('prova', 'Quines dades ens calen?', 'Per decidir què endur-te demà consulta la previsió. Per investigar si en aquest indret és habitual tenir neu al febrer, de quins anys i mesos miraries dades? Justifica la tria.')),
+    ],
+  }, {
+    collection: { id: 'clima', title: 'El clima i la vegetació' },
+    theme: 'Clima i paisatge',
+    description: 'Distingeix el temps del clima i interpreta exemples de condicions extremes.',
+    curriculum: [{ row: 'medi:reptes', section: 'extrems', note: 'Distingeix el temps del clima i interpreta exemples de condicions extremes.' }],
+    sources: [
+      ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
+      ['AEMET · Atles climàtics', 'https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/atlas_climatico'],
+    ],
+  });
+
+  addTopic('M016', {
+    id: 'factors-del-clima',
+    title: 'Per què dos llocs tenen climes diferents?',
+    intro: 'Dues poblacions poden estar a la mateixa latitud i tenir hiverns diferents. La latitud, el mar i les muntanyes hi influeixen alhora.',
+    sections: [
+      section('factors', 'Llegir el clima amb un mapa',
+        essencial('La **latitud**, la proximitat al mar i el **relleu** són alguns dels factors que influeixen en el clima.'),
+        p('Per comprovar un factor, és útil comparar llocs tan semblants com sigui possible en la resta de característiques. Un mapa físic ens ajuda a situar cada lloc.')),
+      section('latitud', 'La llum arriba amb angles diferents',
+        essencial('La **latitud** indica com de lluny som de l’equador cap al nord o cap al sud. A latituds altes els rajos solars solen arribar formant un angle més petit amb l’horitzó.'),
+        p('Quan la llum arriba més obliquament, la mateixa energia es reparteix en una superfície més gran. La inclinació de l’eix terrestre també fa variar l’angle de la llum i les hores de dia amb les estacions.')),
+      section('mar', 'A prop del mar, canvis més suaus',
+        essencial('El **mar** s’escalfa i es refreda més lentament que la terra. Per això molts llocs costaners tenen temperatures menys extremes que llocs semblants de l’interior.'),
+        p('Una serralada prop de la costa pot frenar l’entrada d’aire humit cap a l’interior. També hi influeixen la direcció dels vents dominants i els corrents marins.')),
+      section('relleu', 'Pujar d’altitud i canviar de vessant',
+        essencial('En general, la temperatura baixa quan augmenta l’**altitud**. Un vessant pot rebre més pluja que l’altre.'),
+        p('Quan aire humit és empès muntanya amunt, es refreda i es poden formar núvols i precipitació. A l’altre vessant, que queda a sotavent, l’aire pot arribar més sec.'),
+        box('prova', 'Canvia un sol factor', 'Dissenya dues comparacions. A la primera, fes variar només la distància al mar. A la segona, només l’altitud. Quines altres característiques procuraries mantenir iguals?')),
+    ],
+  }, {
+    collection: { id: 'clima', title: 'El clima i la vegetació' },
+    theme: 'Clima i paisatge',
+    description: 'Relaciona la latitud, la distància al mar, el relleu i l’altitud amb diferències de temperatura i precipitació.',
+    curriculum: [{ row: 'medi:reptes', section: 'relleu', note: 'Relaciona la latitud, la distància al mar, el relleu i l’altitud amb diferències de temperatura i precipitació.' }],
+    sources: [
+      ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
+      ['AEMET · Atles climàtics', 'https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/atlas_climatico'],
+    ],
+  });
+
+  addTopic('M017', {
+    id: 'zones-climatiques',
+    title: 'De les zones climàtiques als climogrames',
+    intro: 'D’una regió polar a una costa mediterrània canvien les temperatures i les pluges. Els mapes de clima i els climogrames ens permeten llegir aquests patrons de dues maneres.',
+    sections: [
+      section('terra', 'Zones fredes, temperades i càlides',
+        essencial('En general, a la Terra distingim zones **càlides** prop de l’equador, **temperades** a latituds mitjanes i **fredes** cap als pols.'),
+        p('Aquesta distribució és una primera aproximació. Dins d’una mateixa zona climàtica, el relleu, els vents i la humitat poden fer que paisatges pròxims siguin ben diferents.')),
+      section('europa', 'Els contrastos climàtics d’Europa',
+        essencial('A Europa hi ha climes **polars** a l’extrem nord, **oceànics** a l’oest, **continentals** cap a l’interior i **mediterranis** en parts del sud. També hi ha climes d’**alta muntanya**.'),
+        p('Al litoral atlàntic solen ser més suaus les temperatures i més repartides les pluges. Cap a l’interior sovint hi ha més contrast entre estiu i hivern. A moltes costes mediterrànies l’estiu és sec. Les muntanyes introdueixen canvis d’altitud que un mapa per latituds no mostra.')),
+      section('dades', 'D’una estació a un gràfic de dotze mesos',
+        essencial('Una estació meteorològica mesura el temps. Un **climograma** mostra la temperatura mitjana i la precipitació per mesos d’un període.'),
+        p('En un climograma, la línia sol representar la temperatura en graus Celsius i les barres, els mil·límetres de precipitació. El mapa climàtic mostra on es distribueixen els climes. Llegeix la llegenda abans de comparar llocs.'),
+        box('prova', 'Un estiu sec?', 'En un exemple inventat, al gener hi ha 7 °C i 58 mm i al juliol, 24 °C i 9 mm. Dibuixa les dues barres i marca les temperatures en un altre eix. Què podem dir d’aquests dos mesos? Què ens falta per descriure tot el clima?')),
+    ],
+  }, {
+    collection: { id: 'clima', title: 'El clima i la vegetació' },
+    theme: 'Clima i paisatge',
+    description: 'Compara les grans zones climàtiques, els climes europeus i les dades que recull un climograma.',
+    curriculum: [{ row: 'medi:reptes', section: 'dades', note: 'Compara les grans zones climàtiques, els climes europeus i les dades que recull un climograma.' }],
+    sources: [
+      ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
+      ['AEMET · Atles climàtics', 'https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/atlas_climatico'],
+    ],
+  });
+
+  addTopic('M018', {
+    id: 'climes-espanya-catalunya',
+    title: 'Del litoral atlàntic al Mediterrani i les Canàries',
+    intro: 'En un mateix viatge per la Península i les illes podem trobar pluges regulars, estius secs o neu hivernal. Mirem com es reparteixen aquests patrons.',
+    sections: [
+      section('atlantic', 'Pluges repartides a l’àrea atlàntica',
+        essencial('Al nord i nord-oest peninsular hi ha zones de **clima atlàntic**, amb pluges freqüents i temperatures generalment moderades prop de la costa.'),
+        p('A Catalunya, la **Val d’Aran** rep influència oceànica. Queda principalment al vessant nord dels Pirineus i s’obre cap a la conca de la Garona.')),
+      section('subtropical', 'El clima subtropical de les Canàries',
+        essencial('Les **Canàries** tenen un clima subtropical amb temperatures suaus durant bona part de l’any a moltes zones baixes.'),
+        p('L’altitud i els vents alisis fan que hi hagi diferències marcades. En algunes illes, el vessant nord acumula més núvols i humitat que parts del sud.')),
+      section('muntanya', 'Fred i neu als sectors més alts',
+        essencial('El **clima de muntanya** es relaciona amb l’altitud. A les zones altes solen fer temperatures més baixes i hi pot nevar a l’hivern.'),
+        p('Als Pirineus hi ha diferències entre fons de vall, vessants i cims. La neu és una forma de precipitació i pot restar al sòl durant mesos en alguns llocs.')),
+      section('interior', 'L’interior mediterrani marca més contrast',
+        essencial('En moltes zones **mediterrànies d’interior**, els hiverns són més freds i els estius més calorosos que a la costa.'),
+        p('A l’interior peninsular i en sectors com la plana de Lleida, l’allunyament de la mar facilita contrastos tèrmics. Les temperatures i les pluges també canvien segons l’altitud i el relleu local.')),
+      section('litoral', 'La Mediterrània a prop del mar',
+        essencial('A bona part del litoral mediterrani els estius són secs i calorosos i els hiverns, relativament suaus.'),
+        p('Les pluges poden concentrar-se en alguns episodis de tardor o primavera. Comparar el Barcelonès i una estació de l’interior amb dades del mateix període ajuda a veure quins contrastos es repeteixen.'),
+        box('prova', 'Quin patró et sembla més probable?', 'En un lloc litoral, el gener és suau i el juliol sec. En un altre, hi ha pluges freqüents en totes les estacions i hiverns suaus. Quin et recorda més un clima mediterrani litoral i quin un d’atlàntic? Què comprovaries en un climograma?')),
+    ],
+  }, {
+    collection: { id: 'clima', title: 'El clima i la vegetació' },
+    theme: 'Clima i paisatge',
+    description: 'Identifica patrons atlàntics, subtropicals, de muntanya i mediterranis a Espanya i Catalunya.',
+    curriculum: [{ row: 'medi:reptes', section: 'litoral', note: 'Identifica patrons atlàntics, subtropicals, de muntanya i mediterranis a Espanya i Catalunya.' }],
+    sources: [
+      ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
+      ['AEMET · Atles climàtics', 'https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/atlas_climatico'],
+    ],
+  });
+
+  addTopic('M019', {
+    id: 'vegetacio-espanya-catalunya',
+    title: 'Els paisatges que formen les plantes',
+    intro: 'Un bosc humit, una pineda de muntanya i una màquia litoral poden assemblar-se de lluny i ser molt diferents de prop. L’aigua, les temperatures, el sòl i els usos humans hi tenen a veure.',
+    sections: [
+      section('subtropical', 'Canàries, del cardonal a la laurisilva',
+        essencial('A les **Canàries**, la vegetació varia amb l’altitud i la humitat. En sectors humits hi pot créixer la **laurisilva**.'),
+        p('Hi ha zones baixes força seques amb plantes com els cardons, boscos humits amb vegetació adaptada a l’aigua dels núvols i pinedes canàries a sectors més elevats. La distribució varia entre illes.')),
+      section('atlantic', 'Boscos i prats de les zones humides',
+        essencial('A les zones de clima **atlàntic** hi ha prats verds i boscos de fulla caduca, amb espècies com roures i faigs, segons el lloc.'),
+        p('Els prats també poden ser resultat de la sega i el pasturatge. Els arbres que perden la fulla ho fan de manera estacional. L’alçada, el sòl i l’activitat humana ajuden a explicar per què no hi ha el mateix bosc a tot arreu.')),
+      section('muntanya', 'La vegetació canvia quan pugem',
+        essencial('A les muntanyes trobem diferents **estatges de vegetació**. Als Pirineus, per damunt de molts boscos hi ha prats d’alta muntanya.'),
+        p('El pi negre arriba a altituds elevades en moltes zones pirinenques. L’orientació del vessant i la durada de la neu poden fer canviar la vegetació a la mateixa cota.'),
+        box('prova', 'Tres fotos en un mapa', 'Imagina una foto de laurisilva, una de prat alpí i una de màquia. Assigna-les a un lloc probable i escriu una pista del clima o del relleu que sostingui cada decisió.')),
+      section('mediterrania', 'Créixer quan l’estiu és sec',
+        essencial('En moltes zones mediterrànies podem trobar **alzines**, **pins** i matollars. Algunes plantes tenen fulles dures o petites que ajuden a limitar la pèrdua d’aigua.'),
+        p('A Catalunya hi ha alzinars, suredes, pinedes i màquies. El paisatge actual també és fruit de conreus, incendis, tala i abandonament de camps. El clima és una pista important, però hi ha altres factors.')),
+    ],
+  }, {
+    collection: { id: 'clima', title: 'El clima i la vegetació' },
+    theme: 'Clima i paisatge',
+    description: 'Relaciona vegetació mediterrània, atlàntica, subtropical i de muntanya amb condicions del medi.',
+    curriculum: [{ row: 'medi:reptes', section: 'muntanya', note: 'Relaciona vegetació mediterrània, atlàntica, subtropical i de muntanya amb condicions del medi.' }],
+    sources: [
+      ['IGN · Atlas Didàctic', 'https://educativo.ign.es/atlas-didactico/'],
+      ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
+    ],
+  });
+
+  addTopic('M020', {
+    id: 'canvi-climatic-causes',
+    title: 'El clima canvia, busquem-ne les causes',
+    intro: 'El nostre planeta reté una part de l’energia que rep del Sol. Quan canvia la quantitat de gasos que hi ha a l’atmosfera, també canvia aquest equilibri.',
+    sections: [
+      section('hivernacle', 'L’efecte hivernacle, un procés natural',
+        essencial('Alguns gasos de l’atmosfera absorbeixen i tornen a emetre part de l’energia que la Terra envia cap a l’espai. Aquest procés és l’**efecte hivernacle**.'),
+        p('La superfície rep energia solar i emet energia en forma de radiació infraroja. Gasos com el vapor d’aigua, el diòxid de carboni i el metà hi intervenen. L’efecte hivernacle natural contribueix a mantenir la Terra més càlida.')),
+      section('canvi', 'El clima es mesura en períodes llargs',
+        essencial('El **canvi climàtic** és un canvi durador en patrons com la temperatura, la pluja o la freqüència d’alguns extrems.'),
+        p('Una tarda de fred no ens diu si el planeta s’escalfa. Per detectar el canvi cal comparar mesures de períodes llargs i de molts llocs. Les dades actuals mostren un escalfament global.')),
+      section('causes', 'D’on venen els gasos afegits?',
+        essencial('La causa principal de l’escalfament global actual són les **emissions humanes de gasos d’efecte hivernacle**.'),
+        p('Cremar carbó, petroli i gas allibera diòxid de carboni. Algunes pràctiques ramaderes i altres activitats emeten metà. Els canvis d’ús del sòl també poden alliberar carboni i reduir-ne l’absorció per la vegetació.')),
+      section('efectes', 'Canvis que ja poden afectar el paisatge',
+        essencial('Un planeta més càlid afavoreix onades de calor més intenses en moltes regions i fa pujar el nivell del mar.'),
+        p('El nivell del mar puja perquè l’aigua s’expandeix en escalfar-se i perquè hi arriba aigua del gel continental. Els efectes varien segons el lloc. Reduir emissions actua sobre la causa. Augmentar l’ombra als carrers ajuda a adaptar-nos a la calor.'),
+        box('prova', 'Actuar de dues maneres', 'Compara substituir un trajecte en cotxe per un en tren quan sigui viable i crear zones d’ombra al pati. Quina mesura pot reduir emissions i quina ajuda a suportar millor la calor?')),
+    ],
+  }, {
+    collection: { id: 'clima', title: 'El clima i la vegetació' },
+    theme: 'Clima i paisatge',
+    description: 'Explica l’efecte hivernacle i relaciona les emissions humanes amb l’escalfament i els impactes climàtics.',
+    curriculum: [{ row: 'medi:ecosocial', section: 'efectes', note: 'Explica l’efecte hivernacle i relaciona les emissions humanes amb l’escalfament i els impactes climàtics.' }],
+    sources: [
+      ['IPCC · Informe de síntesi sobre el canvi climàtic', 'https://www.ipcc.ch/report/ar6/syr/resources/spm-headline-statements/'],
+      ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
+    ],
+  });
 }

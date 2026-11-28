@@ -405,5 +405,130 @@ window.variantsMaterials ??= {};
         },
       },
     },
+    M015: {
+      'temps-i-clima': {
+        suport: {
+          intro: 'Ens abriguem abans de sortir, però els pagesos també necessiten saber com solen ser les estacions de l’any. Són preguntes diferents i es responen amb dades diferents.',
+          sections: {
+            'temps': [],
+            'clima': [passos('Classifica «aquest matí plou» i «els estius acostumen a ser secs».', 'Digues quina frase necessitaria dades de molts anys.')],
+            'extrems': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'clima': [
+              p('Dues localitats poden tenir la mateixa temperatura mitjana anual, amb estius i hiverns molt diferents.'),
+              repte('Dues mitjanes iguals', 'Imagina dos llocs amb mitjana anual de 15 °C. Un té poca variació entre estacions i l’altre en té molta. Quines dades afegiries a la mitjana per distingir-los?'),
+            ],
+          },
+        },
+      },
+    },
+    M016: {
+      'factors-del-clima': {
+        suport: {
+          intro: 'Dues poblacions poden estar a la mateixa latitud i tenir hiverns diferents. La latitud, el mar i les muntanyes hi influeixen alhora.',
+          sections: {
+            'factors': [],
+            'latitud': [],
+            'mar': [passos('Imagina dos pobles igual d’alts. Un és a la costa i l’altre lluny del mar.', 'A quin esperes menys diferència entre l’estiu i l’hivern?')],
+            'relleu': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'relleu': [
+              p('Una ombra pluviomètrica apareix sovint a sotavent d’una serralada. La direcció del vent és necessària per identificar-la.'),
+              repte('La pluja a banda i banda', 'Tenim dues estacions a la mateixa altitud, a banda i banda d’una serra. Com comprovaries si la diferència de pluja es relaciona amb la direcció del vent?'),
+            ],
+          },
+        },
+      },
+    },
+    M017: {
+      'zones-climatiques': {
+        suport: {
+          intro: 'D’una regió polar a una costa mediterrània canvien les temperatures i les pluges. Els mapes de clima i els climogrames ens permeten llegir aquests patrons de dues maneres.',
+          sections: {
+            'terra': [],
+            'europa': [],
+            'dades': [passos('Busca la línia de temperatura i les barres de precipitació en un climograma.', 'Assenyala el mes més càlid i el més plujós i explica quin traç has seguit.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'europa': [
+              p('Un mapa de grans climes agrupa regions. Un climograma correspon a unes dades d’un lloc i un període concrets.'),
+              repte('Llegim el mapa i el gràfic junts', 'Per comparar una estació costanera amb una del Pirineu, quines dades podrien ser diferents encara que totes dues siguin de latitud semblant?'),
+            ],
+          },
+        },
+      },
+    },
+    M018: {
+      'climes-espanya-catalunya': {
+        suport: {
+          intro: 'En un mateix viatge per la Península i les illes podem trobar pluges regulars, estius secs o neu hivernal. Mirem com es reparteixen aquests patrons.',
+          sections: {
+            'atlantic': [],
+            'subtropical': [],
+            'muntanya': [passos('Busca la costa de Catalunya i els Pirineus.', 'On esperes més dies amb neu? Quina dada del relleu et fa pensar això?')],
+            'interior': [],
+            'litoral': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'interior': [
+              p('«Mediterrani continentalitzat» descriu sectors mediterranis d’interior amb més contrast tèrmic. Una classificació agrupa i simplifica.'),
+              repte('Una etiqueta té límits', 'Quines tres dades de dues estacions compararies per saber quina té més influència del mar?'),
+            ],
+          },
+        },
+      },
+    },
+    M019: {
+      'vegetacio-espanya-catalunya': {
+        suport: {
+          intro: 'Un bosc humit, una pineda de muntanya i una màquia litoral poden assemblar-se de lluny i ser molt diferents de prop. L’aigua, les temperatures, el sòl i els usos humans hi tenen a veure.',
+          sections: {
+            'subtropical': [],
+            'atlantic': [],
+            'muntanya': [],
+            'mediterrania': [passos('Imagina un estiu amb poca aigua.', 'Troba al text un tret de les fulles de les plantes mediterrànies que hi pot ajudar.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'atlantic': [
+              p('Un prat pot semblar natural i haver estat mantingut durant anys per la sega o el pasturatge. També hi ha prats on no poden créixer arbres per les condicions del lloc.'),
+              repte('Qui ha modelat aquest prat?', 'Proposa dues maneres de recollir pistes per distingir un prat de pastura d’un prat que queda per damunt del límit del bosc.'),
+            ],
+          },
+        },
+      },
+    },
+    M020: {
+      'canvi-climatic-causes': {
+        suport: {
+          intro: 'El nostre planeta reté una part de l’energia que rep del Sol. Quan canvia la quantitat de gasos que hi ha a l’atmosfera, també canvia aquest equilibri.',
+          sections: {
+            'hivernacle': [],
+            'canvi': [],
+            'causes': [passos('Busca què s’allibera quan es crema carbó, petroli o gas.', 'Segueix la cadena amb fletxes: emissions, més gasos a l’atmosfera, augment de la temperatura.')],
+            'efectes': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'canvi': [
+              p('Un rècord de calor és una dada. Per detectar un canvi sostingut, els investigadors comparen sèries i estudien com canvia la freqüència de valors extrems.'),
+              repte('Un rècord o una tendència', 'En dos períodes semblants, una estació registra 4 i 15 dies per damunt del mateix llindar. Què et suggereix? Quines comprovacions faries abans de generalitzar-ho a tota una regió?'),
+            ],
+          },
+        },
+      },
+    },
   });
 }
