@@ -777,4 +777,126 @@ window.quaderns ??= [];
       ['IGN · Atlas Didàctic', 'https://educativo.ign.es/atlas-didactico/'],
     ],
   });
+
+  addTopic('M011', {
+    id: 'relleu-catalunya',
+    title: 'Dels Pirineus a la costa catalana',
+    intro: 'De nord a sud, Catalunya combina cims alts, depressions, altiplans i serres paral·leles al mar. Un recorregut dibuixat al mapa ens permet relacionar-los.',
+    sections: [
+      section('pirineus', 'El Pirineu axial i el Prepirineu',
+        essencial('Al nord hi ha el **Pirineu axial**, amb cims com la **Pica d’Estats**. Més al sud hi ha les serres del **Prepirineu**.'),
+        p('Al Prepirineu trobem el **Cadí**, el **Port del Comte** i el **Montsec**. Al mapa, fixa’t en les valls que s’obren entre les carenes. L’orientació oest-est de moltes serres ajuda a reconèixer-les.')),
+      section('interior', 'Planes, conques i altiplans interiors',
+        essencial('La **Depressió Central** és entre el Prepirineu i el sistema de serres que segueix la costa.'),
+        p('Inclou zones planes com la de Lleida, conques més tancades, valls i altiplans com el del Moianès. Les planes litorals, en canvi, són prop del mar, com els sectors plans de l’Empordà o del delta del Llobregat.')),
+      section('costaneres', 'Dues serralades prop del mar',
+        essencial('La **Serralada Prelitoral** queda més endins que la **Serralada Litoral**. Entre totes dues hi ha sectors més baixos.'),
+        p('Montserrat i el Montseny formen part de la Prelitoral. Collserola i el Montnegre pertanyen a la Litoral. El Vallès i el Penedès ocupen sectors de la depressió que separa bona part de les dues serralades.'),
+        box('prova', 'Un tall imaginari', 'En un mapa físic, traça un recorregut del Prepirineu a la Mediterrània que passi per l’interior i la zona del Vallès. Anota quines zones més planes o més muntanyoses travesses.')),
+    ],
+  }, {
+    collection: { id: 'relleu', title: 'El relleu i els rius' },
+    theme: 'Geografia',
+    description: 'Localitza els Pirineus, les terres baixes de l’interior i les serralades i planes costaneres de Catalunya.',
+    curriculum: [{ row: 'medi:cartografia', section: 'costaneres', note: 'Localitza els Pirineus, les terres baixes de l’interior i les serralades i planes costaneres de Catalunya.' }],
+    sources: [
+      ['ICGC · VISSIR, visor de cartografia', 'https://www.icgc.cat/ca/Eines-i-visors/Visors/VISSIR'],
+    ],
+  });
+
+  addTopic('M012', {
+    id: 'rius-costes-catalunya',
+    title: 'Seguint l’aigua fins a la costa catalana',
+    intro: 'El Segre, l’Ebre, el Ter i el Llobregat passen per paisatges molt diferents. Segueix-los al mapa i descobreix quins arriben al mar i quin desemboca en un altre riu.',
+    sections: [
+      section('conques', 'Cap al mateix mar per camins diferents',
+        essencial('Bona part de l’aigua dels rius de Catalunya acaba a la **Mediterrània**. El Ter i el Llobregat són de **conques internes**.'),
+        p('Les conques internes desemboquen directament a la Mediterrània dins l’àmbit català. L’Ebre i el Segre formen part d’una conca compartida amb altres territoris. La Garona, a l’Aran, és una excepció, perquè desguassa cap a l’Atlàntic.')),
+      section('costes', 'Cales, platges i deltes',
+        essencial('La costa catalana alterna trams rocosos, platges i terres baixes com les dels **deltes**.'),
+        p('A la Costa Brava són freqüents les cales i els trams abruptes. Les costes baixes dels deltes de l’Ebre i el Llobregat es relacionen amb els sediments que han aportat els rius.')),
+      section('segre', 'El Segre és afluent de l’Ebre',
+        essencial('El **Segre** baixa dels Pirineus, passa per Lleida i s’uneix a l’**Ebre** a Mequinensa.'),
+        p('En el seu recorregut rep aigües d’altres rius, com la Noguera Pallaresa i la Noguera Ribagorçana. Un **afluent** aporta la seva aigua a un altre riu.')),
+      section('ebre', 'L’Ebre s’obre en un delta',
+        essencial('L’**Ebre** travessa les Terres de l’Ebre i desemboca a la Mediterrània.'),
+        p('Els sediments aportats pel riu han contribuït a formar el delta. Les ones, els corrents i els canvis en l’aportació de sediments continuen modificant-ne el contorn.')),
+      section('ter', 'El Ter, del Pirineu a la Gola',
+        essencial('El **Ter** neix al Pirineu oriental i desemboca a la **Gola del Ter**, al Baix Empordà.'),
+        p('Passa per Ripoll, la plana de Vic i Girona. Els embassaments de Sau i Susqueda regulen part de l’aigua que baixa cap al curs inferior.')),
+      section('llobregat', 'El Llobregat i el seu delta',
+        essencial('El **Llobregat** neix a Castellar de n’Hug i arriba al mar al **Prat de Llobregat**.'),
+        p('Rep afluents com el Cardener i l’Anoia. A la plana del delta hi ha aiguamolls, camps de conreu, vies de comunicació i àrees urbanes.'),
+        box('prova', 'Dibuixa la xarxa', 'Amb fletxes, uneix Segre, Ebre, Ter i Llobregat amb el riu o la mar on aboquen l’aigua directament. El Segre i l’Ebre han de quedar connectats abans d’arribar al mar.')),
+    ],
+  }, {
+    collection: { id: 'relleu', title: 'El relleu i els rius' },
+    theme: 'Geografia',
+    description: 'Compara quatre rius i els paisatges de la costa, i distingeix les conques internes de la conca de l’Ebre.',
+    curriculum: [{ row: 'medi:cartografia', section: 'llobregat', note: 'Compara quatre rius i els paisatges de la costa, i distingeix les conques internes de la conca de l’Ebre.' }],
+    sources: [
+      ['ACA · El medi hídric i les conques de Catalunya', 'https://aca.gencat.cat/ca/laigua/el-medi-hidric-a-catalunya/'],
+      ['ICGC · VISSIR, visor de cartografia', 'https://www.icgc.cat/ca/Eines-i-visors/Visors/VISSIR'],
+    ],
+  });
+
+  addTopic('M013', {
+    id: 'altitud-i-perfils',
+    title: 'Del mapa de corbes al perfil d’una excursió',
+    intro: 'Dos camins poden començar i acabar a la mateixa altitud, però un pot fer una pujada molt més forta que l’altre. Les corbes de nivell i els perfils ens ajuden a triar.',
+    sections: [
+      section('corbes', 'Les corbes uneixen punts a la mateixa altitud',
+        essencial('Una **corba de nivell** uneix punts situats a la mateixa altitud. En un mateix mapa, quan les corbes són més juntes, el pendent és més fort.'),
+        p('L’**equidistància** és la diferència d’altitud entre dues corbes seguides. Si la llegenda indica 20 metres, entre les corbes de 540 i 560 metres hi ha un canvi de 20 metres. Els colors solen indicar franges més àmplies.')),
+      section('perfil', 'Un perfil mostra la pujada de costat',
+        essencial('Un **perfil altimètric** representa l’altitud al llarg d’un recorregut. La distància va a l’eix horitzontal i l’altitud, al vertical.'),
+        p('Dibuixa quatre punts amb les distàncies 0, 1, 2 i 3 quilòmetres i les altituds corresponents de 540, 660, 620 i 700 metres. En unir-los veuràs un tram de pujada, un de baixada i un altre de pujada.')),
+      section('excursio', 'Mirem el camí abans de sortir',
+        essencial('Per comparar dues excursions, mira la **llargada**, el **desnivell** i on es concentren els pendents.'),
+        p('Els camins que arriben a la mateixa altitud poden passar per llocs diferents. Comprova també el tipus de terreny i si el camí és adequat per a les persones que el faran.'),
+        box('prova', 'Escull un recorregut', 'L’itinerari A té el perfil de l’apartat anterior. El B fa 0, 1, 2 i 3 km a 540, 580, 620 i 700 m. Dibuixa’ls als mateixos eixos. Tots dos acaben 160 m més amunt. En quin has pujat més metres en total?')),
+    ],
+  }, {
+    collection: { id: 'relleu', title: 'El relleu i els rius' },
+    theme: 'Geografia',
+    description: 'Aprèn a llegir corbes de nivell, dibuixa un perfil altimètric i compara dos recorreguts per preparar una excursió.',
+    curriculum: [{ row: 'medi:cartografia', section: 'excursio', note: 'Aprèn a llegir corbes de nivell, dibuixa un perfil altimètric i compara dos recorreguts per preparar una excursió.' }],
+    sources: [
+      ['ICGC · VISSIR, visor de cartografia', 'https://www.icgc.cat/ca/Eines-i-visors/Visors/VISSIR'],
+      ['ICGC · Corba de nivell', 'https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Corba-de-nivell'],
+    ],
+  });
+
+  addTopic('M014', {
+    id: 'conservar-paisatges',
+    title: 'Com podem tenir cura dels paisatges?',
+    intro: 'Quan un barri creix o un bosc rep moltes visites, el paisatge canvia. Podem observar què s’hi transforma i pensar com conservar els espais que compartim.',
+    sections: [
+      section('canvis', 'El paisatge canvia amb l’activitat humana',
+        essencial('Les persones **transformem el medi** quan construïm, conreem o aprofitem recursos.'),
+        p('Una carretera pot facilitar desplaçaments i alhora separar hàbitats. Un camp de conreu pot conservar marges de pedra i vegetació o perdre’ls quan s’eixampla. Observar què s’ha mantingut ajuda a interpretar el canvi.')),
+      section('urbanitzacio', 'Quan la ciutat ocupa més terreny',
+        essencial('La **urbanització** modifica l’ús del sòl i pot reduir o separar espais naturals i agrícoles.'),
+        p('Quan augmenten l’asfalt i els edificis, part de l’aigua de pluja deixa d’infiltrar-se i corre més de pressa cap als embornals o les rieres. En barris catalans, conservar arbres, espais oberts i sòls permeables pot ajudar a esmorteir alguns efectes.')),
+      section('proteccio', 'Espais amb mesures de protecció',
+        essencial('En un **espai natural protegit** hi pot haver normes i actuacions per conservar paisatges, hàbitats o espècies.'),
+        p('Al Delta de l’Ebre hi ha zones humides i llocs per observar ocells. En alguns sectors es limiten usos o accessos per evitar molèsties. La protecció es combina amb activitats compatibles i amb el treball de les persones que hi viuen.')),
+      section('accions', 'Canvis que podem impulsar',
+        essencial('Podem reduir els residus, respectar els camins senyalitzats i observar la fauna sense molestar-la.'),
+        p('A l’escola podem comparar fotografies del barri, comptar quants arbres donen ombra en un carrer o fer un mapa d’un itinerari amb punts on acostuma a acumular-se brossa.')),
+      section('boscos', 'Què ajuda a conservar un bosc?',
+        essencial('Conservar un bosc vol dir cuidar el sòl i els hàbitats i facilitar una gestió adaptada a l’entorn.'),
+        p('En alguns llocs es protegeix la vegetació de ribera o es recuperen espais oberts del mosaic. Una mateixa acció pot anar bé en un lloc i no en un altre. Per això convé mirar primer com és el bosc i què necessita.'),
+        box('prova', 'Actuem i comprovem el resultat', 'Un sender del bosc té dreceres que han deixat el sòl sense vegetació. Proposa una acció per evitar que el problema creixi i un indicador que puguis observar al cap d’un mes.')),
+    ],
+  }, {
+    collection: { id: 'relleu', title: 'El relleu i els rius' },
+    theme: 'Geografia',
+    description: 'Analitza els efectes de la urbanització i proposa maneres de conservar els boscos i els espais naturals.',
+    curriculum: [{ row: 'medi:ecosocial', section: 'boscos', note: 'Analitza els efectes de la urbanització i proposa maneres de conservar els boscos i els espais naturals.' }],
+    sources: [
+      ['Generalitat · Els espais naturals protegits', 'https://mediambient.gencat.cat/ca/05_ambits_dactuacio/patrimoni_natural/senp_catalunya/'],
+      ['ICGC · VISSIR, visor de cartografia', 'https://www.icgc.cat/ca/Eines-i-visors/Visors/VISSIR'],
+    ],
+  });
 }

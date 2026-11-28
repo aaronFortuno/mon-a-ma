@@ -320,5 +320,90 @@ window.variantsMaterials ??= {};
         },
       },
     },
+    M011: {
+      'relleu-catalunya': {
+        suport: {
+          intro: 'De nord a sud, Catalunya combina cims alts, depressions, altiplans i serres paral·leles al mar. Un recorregut dibuixat al mapa ens permet relacionar-los.',
+          sections: {
+            'pirineus': [passos('Troba la Pica d’Estats al nord.', 'Busca el Cadí i comprova a quin costat queda.')],
+            'interior': [],
+            'costaneres': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'interior': [
+              p('Una plana es defineix pel poc desnivell. Un altiplà és una extensió relativament plana elevada respecte de l’entorn.'),
+              repte('Una plana també pot ser alta', 'Compara en un mapa d’altituds el Moianès i una plana litoral. Quin significat tenen en cada cas els colors i les línies de nivell?'),
+            ],
+          },
+        },
+      },
+    },
+    M012: {
+      'rius-costes-catalunya': {
+        suport: {
+          intro: 'El Segre, l’Ebre, el Ter i el Llobregat passen per paisatges molt diferents. Segueix-los al mapa i descobreix quins arriben al mar i quin desemboca en un altre riu.',
+          sections: {
+            'conques': [],
+            'costes': [],
+            'segre': [passos('Segueix el Segre fins que es trobi amb l’Ebre.', 'Ara segueix l’Ebre fins a la Mediterrània.')],
+            'ebre': [],
+            'ter': [],
+            'llobregat': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'ebre': [
+              p('Els sediments acumulen terra al delta. El mar també n’arrossega materials, i els embassaments poden retenir sediments riu amunt.'),
+              repte('Un delta que canvia', 'Què pot passar en un tram de costa si li arriba menys sediment i les ones continuen actuant? Quines dues dades podries comparar per investigar-ho?'),
+            ],
+          },
+        },
+      },
+    },
+    M013: {
+      'altitud-i-perfils': {
+        suport: {
+          intro: 'Dos camins poden començar i acabar a la mateixa altitud, però un pot fer una pujada molt més forta que l’altre. Les corbes de nivell i els perfils ens ajuden a triar.',
+          sections: {
+            'corbes': [],
+            'perfil': [passos('Escriu els quatre quilòmetres en fila.', 'Anota a sobre 540, 660, 620 i 700 metres. Digues on l’altitud baixa.')],
+            'excursio': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'perfil': [
+              p('Si fas servir una escala vertical molt més gran que l’horitzontal, les mateixes costes semblaran més dretes al paper.'),
+              repte('El gràfic pot exagerar el pendent', 'Dibuixa el primer quilòmetre del camí A i un segon perfil duplicant l’escala vertical. Què canvia al dibuix i què es manté al terreny?'),
+            ],
+          },
+        },
+      },
+    },
+    M014: {
+      'conservar-paisatges': {
+        suport: {
+          intro: 'Quan un barri creix o un bosc rep moltes visites, el paisatge canvia. Podem observar què s’hi transforma i pensar com conservar els espais que compartim.',
+          sections: {
+            'canvis': [],
+            'urbanitzacio': [],
+            'proteccio': [],
+            'accions': [passos('Tria un lloc prop de l’escola que vulguis cuidar.', 'Descriu un problema observable i una acció que hi puguem fer.')],
+            'boscos': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'urbanitzacio': [
+              p('Es pot avaluar una proposta de barri amb criteris com la superfície permeable, la connexió dels espais verds o l’ombra dels arbres.'),
+              repte('Com comparem dos futurs?', 'Compara una plaça tota pavimentada amb una plaça amb arbres i espais de terra. Defineix un indicador mesurable per a un dia de pluja i un dia calorós.'),
+            ],
+          },
+        },
+      },
+    },
   });
 }
