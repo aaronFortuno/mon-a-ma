@@ -1665,4 +1665,59 @@ window.variantsMaterials ??= {};
       guia: ['El dia 1 hi ha 42 cm de neu i el dia 4, 24 cm. Digues què ha canviat.', 'El cabal passa de 4 a 10 m³/s. Digues si puja o baixa.', 'Dibuixa una fletxa de la neu que es fon cap al rierol.'],
       ampliacio: [repte('La pujada arriba més tard', 'Una estació a la capçalera registra la pujada al matí i una altra més avall a la tarda. Proposa per què poden passar hores entre les dues mesures i com compararies ambdues sèries.')],
     });
+
+  fitxa(digital, 'M119', 'escriure-un-document-de-grup', 'Com fem un document de grup sense perdre els canvis?',
+    'Quatre alumnes preparen una pàgina sobre el pati. Dues persones han canviat la mateixa frase i una tercera havia deixat una pregunta al marge. Com poden reprendre la feina i decidir què queda al text?', {
+      descripcio: 'Reparteix permisos, coordina l’edició i recupera informació del document a partir de l’historial.',
+      curriculum: [['digital', 'versions', 'Fa servir permisos, comentaris i l’historial de versions per col·laborar amb respecte i conservar els canvis.']],
+      fonts: [
+        sabersCicleSuperior,
+        ['Google Workspace · Compartir fitxers i col·laborar', 'https://support.google.com/a/users/answer/9296687'],
+        ['Google · Consultar els canvis d’un fitxer', 'https://support.google.com/docs/answer/190843'],
+      ],
+      apartats: [
+        apartat('permisos', 'Qui necessita fer què?',
+          'Els **permisos** indiquen si una persona pot llegir, comentar o editar un document. Trieu el permís segons la feina que li toca i compartiu el fitxer amb el grup acordat.',
+          'Les persones que redacten poden necessitar permís d’edició. Una persona que fa una revisió pot afegir comentaris si el programa li dona aquesta opció. Qui només ha de consultar el resultat pot tenir accés de lectura.'),
+        apartat('comentaris', 'Deixa una proposta allà on es pugui entendre',
+          'Un **comentari** queda lligat a un fragment i permet proposar canvis sense substituir de seguida el text. Escriu quina part vols revisar i explica el motiu.',
+          'Podeu repartir-vos els apartats i revisar-ne un d’un altre grup. Quan hi ha una proposta, qui ha escrit el text pot respondre i l’equip pot decidir com tancar el comentari.'),
+        apartat('versions', 'Torna a trobar una frase d’abans',
+          'L’**historial de versions** permet veure estats anteriors del document si tens accés a aquesta funció. Abans de restaurar una versió sencera, comprova quins canvis més recents hi ha.',
+          'En el cas de la classe, es pot copiar la frase útil d’una versió anterior al document actual. Així es poden conservar els paràgrafs nous i comparar les dues frases abans de decidir.',
+          repte('Recupera només el que et cal', 'La versió de dilluns té una definició que el grup vol recuperar. La de dimarts incorpora una conclusió nova. Explica quina versió consultaries, què en copiaries i com confirmaries que es manté la conclusió.')),
+      ],
+      guia: ['Relaciona llegir, comentar i editar amb tres feines diferents.', 'Digues què pots fer servir per opinar al marge.', 'Assenyala quina versió miraries per recuperar la definició.'],
+      ampliacio: [repte('Prepareu una revisió de grup', 'Dissenya tres passos per revisar el document en què hi hagi un comentarista, dues persones que editen i algú que llegeix el resultat final. Decideix en quin moment identificaríeu una versió per poder-hi tornar.')],
+    });
+
+  fitxa(proves, 'M120', 'com-investiguem-la-calor-urbana', 'Qui investiga per què una plaça s’escalfa tant?',
+    'A la sortida de l’escola, una part de la plaça és al sol i una altra és a l’ombra. L’ajuntament vol saber on es concentra més calor. Què podem mesurar i qui pot ajudar a interpretar-ho?', {
+      descripcio: 'Compara mesures de temperatura de superfícies i relaciona la recerca amb feines i decisions sobre l’espai públic.',
+      curriculum: [
+        ['indagacio', 'equip', 'Relaciona la recollida i l’anàlisi de dades amb professions científiques i tècniques des d’una perspectiva de gènere.'],
+        ['ecosocial', 'decisio', 'Fa servir evidències de temperatura per justificar una actuació d’adaptació a la calor.'],
+      ],
+      fonts: [sabersCicleSuperior, ['Agència de Protecció Ambiental dels EUA · Mesurar illes de calor', 'https://www.epa.gov/heatislands/measuring-heat-islands']],
+      apartats: [
+        apartat('pregunta', 'Què s’escalfa més i on ho mesurem?',
+          'La **temperatura de la superfície** mesura com és de calent el paviment, un banc o la terra. La temperatura de l’aire és una altra mesura.',
+          'Per comparar l’efecte de l’ombra, busca dos punts del mateix material, un al sol i un a l’ombra. Mesura’ls quasi alhora, amb el mateix aparell i mètode. Anota si és un dia serè i repeteix la prova en més d’un punt.'),
+        apartat('mesures', 'Llegim diferències amb dades',
+          'En aquesta taula d’exemple hi ha **temperatures de superfície** mesurades a la mateixa hora.',
+          taula(['Material', 'Al sol', 'A l’ombra'], [
+            ['Asfalt', '42 °C', '31 °C'],
+            ['Fusta d’un banc', '35 °C', '28 °C'],
+          ], 42),
+          'Per mirar l’efecte de l’ombra en l’asfalt, compara les dues dades de la primera fila. Per comprovar si el resultat es repeteix, caldrien altres punts i dies.'),
+        apartat('equip', 'Quines feines entren a la recerca?',
+          'Les persones que investiguen el **clima urbà** poden mesurar i interpretar la calor. Altres perfils, com l’urbanisme o la jardineria, poden estudiar on i com crear ombra.',
+          'Una observació de la classe o dels veïns ajuda a triar llocs que s’utilitzen sovint. Repartiu i intercanvieu els papers de mesurar, registrar, dibuixar el mapa i explicar les dades. Les professions i les feines de recerca estan obertes a tothom.'),
+        apartat('decisio', 'De la mesura a una proposta',
+          'Una **proposta** pot indicar un lloc concret per fer ombra i com es comprovarà el seu efecte. Cal escoltar les persones que fan servir la plaça.',
+          repte('Quina dada donaries a l’ajuntament?', 'Calcula les diferències al sol i a l’ombra per a l’asfalt i la fusta. Digues quina proposta faria el vostre equip i què tornaria a mesurar després.')),
+      ],
+      guia: ['Compara els 42 °C al sol i els 31 °C a l’ombra de l’asfalt.', 'Tria on posaries un punt d’ombra i explica el motiu.', 'Digues qui podria ajudar a fer la mesura o preparar la proposta.'],
+      ampliacio: [repte('Què falta per saber si l’espai és més confortable?', 'La segona campanya confirma que el paviment és més fresc. Tria una mesura de l’aire i una observació sobre com es fa servir la plaça que completin l’avaluació.')],
+    });
 }

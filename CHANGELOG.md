@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.77 · 28 de novembre de 2026
+
+- Publica M119 i M120, dos esborranys sobre l’edició compartida de documents i la investigació de la calor urbana.
+
 ## 0.1.76 · 28 de novembre de 2026
 
 - Publica M115–M118, quatre esborranys sobre maquetes de disseny, brises i el desglaç dels rius.
