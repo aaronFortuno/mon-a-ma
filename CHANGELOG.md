@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.85 · 28 de novembre de 2026
+
+- Completa les il·lustracions de l’M006 i l’M007 i incorpora la tanda M023–M027, amb l’Atles per defecte.
+- Identifica les il·lustracions en validació al mapa curricular amb un farciment blau verdós.
+
 ## 0.1.84 · 28 de novembre de 2026
 
 - Incorpora els lots Pla i Atles de l’M013 a l’M022 amb l’Atles per defecte.

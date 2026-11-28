@@ -568,14 +568,39 @@ window.quaderns ??= [];
     id: 'planisferi-fisic',
     title: 'Llegim el relleu del món',
     intro: 'Des del cel, una plana i una muntanya poden semblar del mateix color. En un planisferi físic podem fer servir els colors per representar l’altitud. Aprendrem a llegir aquest codi i a comparar llocs llunyans.',
+    coverFigure: 'altituds-del-mon',
     figures: [
-      { id: 'altituds-del-mon', section: 'punts-altitud', anchor: 'lead', name: 'Planisferi d’altituds', ratio: 2, position: 'center',
-        src: 'illustracions/m006/altituds-del-mon.png',
-        alt: 'Mapa mundial amb quatre franges d’altitud a la llegenda i cinc punts marcats de la A a la E.',
+      {
+        id: 'altituds-del-mon', section: 'punts-altitud', name: 'Planisferi d’altituds', ratio: 2280 / 1300,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa mundial amb quatre franges d’altitud a la llegenda i cinc punts de la A a la E.',
         caption: 'Compara el color de sota cada punt amb la llegenda. Els intervals s’expressen en metres enters.',
-        credit: 'Relleu de NOAA ETOPO1 i costes de Natural Earth. Elaboració pròpia.' },
-      { id: 'reserva-relleu', section: 'relleu', name: 'Plana, altiplà i serralada', ratio: 2.6, visible: false },
-      { id: 'reserva-colors-altitud', section: 'colors-altitud', name: 'Del perfil als colors d’altitud', ratio: 2.6, visible: false },
+        credit: 'NOAA/NCEI ETOPO 2022, versió de superfície. Natural Earth, domini públic.',
+        variants: {
+          pla: { src: 'illustracions/m006/altituds-del-mon-pla.png', thumbnail: 'illustracions/m006/miniatures/altituds-del-mon-pla.jpg' },
+          atles: { src: 'illustracions/m006/altituds-del-mon-atles.png', thumbnail: 'illustracions/m006/miniatures/altituds-del-mon-atles.jpg' },
+        },
+      },
+      {
+        id: 'reserva-relleu', section: 'relleu', name: 'Plana, altiplà i serralada', ratio: 2280 / 1030,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres talls mostren una plana baixa gairebé horitzontal, un altiplà amb superfície plana elevada i una serralada amb cims i valls.',
+        caption: 'Esquemes de tres formes de relleu. La línia discontínua representa el mateix nivell de referència en tots tres dibuixos.',
+        variants: {
+          pla: { src: 'illustracions/m006/formes-del-relleu-pla.png', thumbnail: 'illustracions/m006/miniatures/formes-del-relleu-pla.jpg' },
+          atles: { src: 'illustracions/m006/formes-del-relleu-atles.png', thumbnail: 'illustracions/m006/miniatures/formes-del-relleu-atles.jpg' },
+        },
+      },
+      {
+        id: 'reserva-colors-altitud', section: 'colors-altitud', name: 'Del perfil als colors d’altitud', ratio: 2280 / 1240,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tall lateral amb una escala de 0 a 5.000 metres. Línies i colors separen els intervals als 500, 2.000 i 4.000 metres.',
+        caption: 'Perfil inventat amb els mateixos intervals de la llegenda del planisferi. Els canvis de color coincideixen amb els llindars d’altitud.',
+        variants: {
+          pla: { src: 'illustracions/m006/perfil-i-colors-d-altitud-pla.png', thumbnail: 'illustracions/m006/miniatures/perfil-i-colors-d-altitud-pla.jpg' },
+          atles: { src: 'illustracions/m006/perfil-i-colors-d-altitud-atles.png', thumbnail: 'illustracions/m006/miniatures/perfil-i-colors-d-altitud-atles.jpg' },
+        },
+      },
     ],
     sections: [
       section('relleu', 'Les formes del paisatge al mapa',
@@ -605,12 +630,16 @@ window.quaderns ??= [];
       ],
     },
   }, {
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Practica amb un planisferi acolorit per intervals d’altitud. Interpreta la llegenda i compara cinc punts del planeta.',
     curriculum: [{ row: 'medi:cartografia', section: 'punts-altitud', note: 'Interpreta els colors d’un planisferi físic i compara intervals d’altitud.' }],
     resources: worldMaps,
     sources: [
+      ['NOAA/NCEI · ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
       ['ICGC · Planisferi', 'https://www.icgc.cat/ca/Ambits-tematics/Divulgacio/Publicacions/Diccionaris/Planisferi'],
-      ['NOAA · Malla d’elevació ETOPO1', 'https://cwcgom.aoml.noaa.gov/erddap/griddap/etopo180.html'],
       ['Natural Earth · Costes de referència', 'https://www.naturalearthdata.com/downloads/110m-physical-vectors/'],
     ],
   });
@@ -619,22 +648,40 @@ window.quaderns ??= [];
     id: 'planisferi-politic',
     title: 'Fronteres i colors al mapa',
     intro: 'Com podem distingir d’un cop d’ull dos països veïns? El planisferi polític fa visibles les fronteres, i els colors ens ajuden a seguir-les. Ho provarem amb un retall de mapa real i dos mapes per acolorir.',
+    coverFigure: 'planisferi-fronteres',
     figures: [
-      { id: 'planisferi-fronteres', section: 'fronteres', anchor: 'lead', name: 'Planisferi polític', ratio: 2, position: 'center',
-        src: 'illustracions/m007/planisferi-fronteres.png',
-        alt: 'Mapamundi amb països acolorits i fronteres. Un requadre al sud-oest d’Europa assenyala el detall de la península Ibèrica.',
+      {
+        id: 'planisferi-fronteres', section: 'fronteres', name: 'Planisferi polític', ratio: 2280 / 1230,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapamundi amb països acolorits. Un requadre assenyala la zona de la península Ibèrica i un traç discontinu identifica els límits disputats.',
         caption: 'Observa el requadre que situa la península Ibèrica i l’entorn. El detall ampliat apareix a l’apartat següent.',
-        credit: 'Natural Earth 1:110.000.000. Elaboració pròpia.' },
-      { id: 'fronteres-peninsula', section: 'veinat', anchor: 'lead', name: 'Fronteres a la península Ibèrica', ratio: 2.05, position: 'center',
-        src: 'illustracions/m007/fronteres-peninsula.png',
-        alt: 'Mapa retallat amb Portugal, Espanya i França, i les fronteres terrestres entre aquests països.',
-        caption: 'Detall regional d’un mapa polític. El traç fosc a terra indica una frontera.',
-        credit: 'Natural Earth 1:50.000.000, via World Atlas. Elaboració pròpia.' },
-      { id: 'mapes-muts-quatre-colors', section: 'acoloreix', anchor: 'lead', name: 'Dos mapes muts per acolorir', ratio: 2.35, position: 'center',
-        src: 'illustracions/m007/mapes-muts-quatre-colors.png',
-        alt: 'Dos mapes imaginaris amb regions etiquetades. El primer té tres regions veïnes entre si. Al segon s’hi afegeix una regió central que toca les altres tres.',
-        caption: 'Acoloreix només les regions amb lletres. També pots fer servir ratllats o escriure números dins de les regions.',
-        credit: 'Elaboració pròpia.' },
+        credit: 'Natural Earth a 1:110 milions. Natural Earth, domini públic.',
+        variants: {
+          pla: { src: 'illustracions/m007/planisferi-fronteres-pla.png', thumbnail: 'illustracions/m007/miniatures/planisferi-fronteres-pla.jpg' },
+          atles: { src: 'illustracions/m007/planisferi-fronteres-atles.png', thumbnail: 'illustracions/m007/miniatures/planisferi-fronteres-atles.jpg' },
+        },
+      },
+      {
+        id: 'fronteres-peninsula', section: 'veinat', name: 'Fronteres a la península Ibèrica', ratio: 2280 / 1210,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa regional amb Portugal, Espanya i França retolats. Les línies contínues a terra n’assenyalen les fronteres.',
+        caption: 'Detall regional d’un mapa polític. Segueix les fronteres a terra i compara quins països comparteixen algun tram.',
+        credit: 'Natural Earth a 1:50 milions. Natural Earth, domini públic.',
+        variants: {
+          pla: { src: 'illustracions/m007/fronteres-peninsula-pla.png', thumbnail: 'illustracions/m007/miniatures/fronteres-peninsula-pla.jpg' },
+          atles: { src: 'illustracions/m007/fronteres-peninsula-atles.png', thumbnail: 'illustracions/m007/miniatures/fronteres-peninsula-atles.jpg' },
+        },
+      },
+      {
+        id: 'mapes-muts-quatre-colors', section: 'acoloreix', name: 'Dos mapes muts per acolorir', ratio: 2280 / 980,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dos mapes imaginaris per pintar. El primer té tres regions veïnes entre si. El segon hi afegeix la regió central D, que toca les tres regions exteriors.',
+        caption: 'Acoloreix les regions amb lletres. També pots fer servir ratllats o escriure números dins de les regions.',
+        variants: {
+          pla: { src: 'illustracions/m007/mapes-muts-quatre-colors-pla.png', thumbnail: 'illustracions/m007/miniatures/mapes-muts-quatre-colors-pla.jpg' },
+          atles: { src: 'illustracions/m007/mapes-muts-quatre-colors-atles.png', thumbnail: 'illustracions/m007/miniatures/mapes-muts-quatre-colors-atles.jpg' },
+        },
+      },
     ],
     sections: [
       section('fronteres', 'Què ens diu una frontera?',
@@ -662,6 +709,10 @@ window.quaderns ??= [];
       ],
     },
   }, {
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Segueix fronteres en un mapa real i descobreix per què alguns mapes es poden acolorir amb tres colors i d’altres en necessiten quatre.',
     curriculum: [{ row: 'medi:cartografia', section: 'fronteres', note: 'Identifica la funció de les fronteres i compara països veïns en una representació política del territori.' }],
     resources: worldMaps,
@@ -1736,6 +1787,39 @@ window.quaderns ??= [];
     id: 'poblat-neolitic',
     title: 'Un poblat neolític, feina a feina',
     intro: 'A tocar d’un estany hi ha camps, cabanes i espais on es treballa la fusta. Cadascun deixa pistes diferents sobre com vivia la gent.',
+    coverFigure: 'poblat-i-estany-de-banyoles',
+    figures: [
+      {
+        id: 'poblat-i-estany-de-banyoles', section: 'poblats', name: 'Un poblat vora l’estany de Banyoles', ratio: 2280 / 1440,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Vista elevada d’un poblat vora l’estany amb cabanes, conreu i persones en un espai de feina. Un tall esquemàtic mostra fusta en un sòl saturat d’aigua.',
+        caption: 'Reconstrucció didàctica inspirada en la Draga. Al sòl saturat d’aigua hi ha poc oxigen, un fet que pot alentir la descomposició de materials orgànics com la fusta.',
+        variants: {
+          pla: { src: 'illustracions/m023/poblat-i-estany-de-banyoles-pla.png', thumbnail: 'illustracions/m023/miniatures/poblat-i-estany-de-banyoles-pla.jpg' },
+          atles: { src: 'illustracions/m023/poblat-i-estany-de-banyoles-atles.png', thumbnail: 'illustracions/m023/miniatures/poblat-i-estany-de-banyoles-atles.jpg' },
+        },
+      },
+      {
+        id: 'fibres-fils-i-teixit', section: 'teixit', name: 'De la fibra al teixit', ratio: 1200 / 680,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Tres vinyetes connectades mostren fibres soltes, un fil torçat i un teixit amb fils que passen alternativament per damunt i per sota.',
+        caption: 'De les fibres soltes al fil torçat. Els fils longitudinals i transversals s’entrecreuen a l’esquema del teixit.',
+        variants: {
+          pla: { src: 'illustracions/m023/fibres-fils-i-teixit-pla.png', thumbnail: 'illustracions/m023/miniatures/fibres-fils-i-teixit-pla.jpg' },
+          atles: { src: 'illustracions/m023/fibres-fils-i-teixit-atles.png', thumbnail: 'illustracions/m023/miniatures/fibres-fils-i-teixit-atles.jpg' },
+        },
+      },
+      {
+        id: 'estris-i-recipients-neolitics', section: 'estris', name: 'Quatre estris, feines diferents', ratio: 2280 / 1115,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Una falç corba amb peces de sílex, un molí de mà amb dues pedres, un recipient de ceràmica amb boca ampla i una aixa amb la fulla travessada respecte al mànec.',
+        caption: 'Quatre models d’estris neolítics. Observa com es combinen materials i formes abans d’escollir quin estri faries servir per a cada feina.',
+        variants: {
+          pla: { src: 'illustracions/m023/estris-i-recipients-neolitics-pla.png', thumbnail: 'illustracions/m023/miniatures/estris-i-recipients-neolitics-pla.jpg' },
+          atles: { src: 'illustracions/m023/estris-i-recipients-neolitics-atles.png', thumbnail: 'illustracions/m023/miniatures/estris-i-recipients-neolitics-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('poblats', 'Fer vida a prop dels conreus',
         essencial('Al **neolític**, molts poblats eren prop d’aigua i de terres que es podien conrear.'),
@@ -1754,9 +1838,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'prehistoria', title: 'La prehistòria' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Relaciona els poblats neolítics amb l’agricultura, el teixit, la ceràmica i les eines.',
     curriculum: [{ row: 'medi:passat', section: 'ceramica', note: 'Relaciona els poblats neolítics amb l’agricultura, el teixit, la ceràmica i les eines.' }],
     sources: [
+      ['Visitmuseum · Jaciment neolític de la Draga', 'https://visitmuseum.gencat.cat/ca/museu/poblat-neolitic-de-la-draga/recorregut/jaciment-neolitic-de-la-draga'],
+      ['Museu d’Arqueologia de Catalunya · Estris neolítics de La Draga', 'https://artprimer.mac.cat/3-lart-llevanti-lart-de-les-persones/'],
       ['Patrimoni cultural · La Draga', 'https://patrimoni.gencat.cat/ca/coleccio/la-draga'],
       ['Museu d’Arqueologia de Catalunya', 'https://www.mac.cat/'],
     ],
@@ -1766,6 +1856,40 @@ window.quaderns ??= [];
     id: 'arqueologia-pistes',
     title: 'Arqueologia, de la troballa a l’explicació',
     intro: 'Una peça sola dona pistes. Si sabem on era, a quina capa i què hi havia al costat, en podem aprendre molt més.',
+    coverFigure: 'capes-i-alteracio',
+    figures: [
+      {
+        id: 'capes-i-alteracio', section: 'jaciment', name: 'Tres capes i una alteració del terreny', ratio: 2280 / 1200,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'A l’esquerra, les capes A, B i C són contínues i hi ha restes a B i C. A la dreta, un clot baixa des de la superfície fins a C. La trama del rebliment distingeix la resta que queda a l’altura de B.',
+        caption: 'Model de dos talls del mateix terreny. Compara una resta de la capa B amb la resta que es troba a la mateixa alçada dins del rebliment.',
+        variants: {
+          pla: { src: 'illustracions/m024/capes-i-alteracio-pla.png', thumbnail: 'illustracions/m024/miniatures/capes-i-alteracio-pla.jpg' },
+          atles: { src: 'illustracions/m024/capes-i-alteracio-atles.png', thumbnail: 'illustracions/m024/miniatures/capes-i-alteracio-atles.jpg' },
+        },
+      },
+      {
+        id: 'graella-i-fitxa-de-registre', section: 'metode', name: 'Registrar una resta abans de retirar-la', ratio: 2280 / 1280,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Graella de tres per tres caselles d’un metre, amb nord i escala. La resta F07 és a B2. La fitxa indica capa C i fragment de ceràmica.',
+        caption: 'Exemple de registre. El codi de la resta, el quadrat i la capa permeten relacionar la fitxa amb la seva posició a l’excavació.',
+        variants: {
+          pla: { src: 'illustracions/m024/graella-i-fitxa-de-registre-pla.png', thumbnail: 'illustracions/m024/miniatures/graella-i-fitxa-de-registre-pla.jpg' },
+          atles: { src: 'illustracions/m024/graella-i-fitxa-de-registre-atles.png', thumbnail: 'illustracions/m024/miniatures/graella-i-fitxa-de-registre-atles.jpg' },
+        },
+      },
+      {
+        id: 'abric-romani-i-la-draga', section: 'comparacio', name: 'Dos jaciments, dues pistes', ratio: 2280 / 1550,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Un localitzador situa Capellades i Banyoles. Dos detalls mostren un fogar amb cendra i carbó i un mànec d’aixa de fusta amb l’extrem colzat.',
+        caption: 'Recreacions a escala orientativa. Un fogar de l’Abric Romaní conserva cendra i carbó. A la Draga es va conservar un mànec d’aixa colzat de fusta de pi.',
+        credit: 'Fogar recreat a partir del registre de l’IPHES. Mànec redibuixat segons MACB-907-002-123, Museu Arqueològic Comarcal de Banyoles.',
+        variants: {
+          pla: { src: 'illustracions/m024/abric-romani-i-la-draga-pla.png', thumbnail: 'illustracions/m024/miniatures/abric-romani-i-la-draga-pla.jpg' },
+          atles: { src: 'illustracions/m024/abric-romani-i-la-draga-atles.png', thumbnail: 'illustracions/m024/miniatures/abric-romani-i-la-draga-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('metode', 'Què estudia l’arqueologia?',
         essencial('L’**arqueologia** estudia les societats del passat a partir de les seves restes materials.'),
@@ -1781,9 +1905,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'prehistoria', title: 'La prehistòria' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Aprèn què és el context arqueològic i compara les troballes de l’Abric Romaní i la Draga.',
     curriculum: [{ row: 'medi:passat', section: 'comparacio', note: 'Aprèn què és el context arqueològic i compara les troballes de l’Abric Romaní i la Draga.' }],
     sources: [
+      ['IPHES · Abric Romaní', 'https://www.iphes.cat/ca/abric-roman%C3%AD'],
+      ['Museu d’Arqueologia de Catalunya · Estris neolítics de La Draga', 'https://artprimer.mac.cat/3-lart-llevanti-lart-de-les-persones/'],
       ['IPHES · Memòria d’excavació de l’Abric Romaní', 'https://calaix.gencat.cat/bitstream/handle/10687/457382/qmem16402.pdf?sequence=1'],
       ['Patrimoni cultural · La Draga', 'https://patrimoni.gencat.cat/ca/coleccio/la-draga'],
     ],
@@ -1793,6 +1923,39 @@ window.quaderns ??= [];
     id: 'poblat-edat-ferro',
     title: 'Cases, tallers i ferro al poblat',
     intro: 'El ferro va obrir possibilitats noves, però fabricar una eina requeriria coneixements, temps i persones especialitzades. Què es veuria en un poblat?',
+    coverFigure: 'poblat-en-un-turo',
+    figures: [
+      {
+        id: 'poblat-en-un-turo', section: 'poblat', name: 'Un poblat en un turó', ratio: 2280 / 1450,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Poblat oblic en un turó amb muralla, habitatges i espai de treball. L’entrada comunica amb un camí cap als camps i una fletxa cap a l’aigua.',
+        caption: 'Reconstrucció didàctica inspirada en Ullastret. Els habitatges, el taller, els camps i l’accés a l’aigua formen un exemple imaginat.',
+        variants: {
+          pla: { src: 'illustracions/m025/poblat-en-un-turo-pla.png', thumbnail: 'illustracions/m025/miniatures/poblat-en-un-turo-pla.jpg' },
+          atles: { src: 'illustracions/m025/poblat-en-un-turo-atles.png', thumbnail: 'illustracions/m025/miniatures/poblat-en-un-turo-atles.jpg' },
+        },
+      },
+      {
+        id: 'interior-d-una-casa-iberica', section: 'cases', name: 'Què hi havia dins d’una casa?', ratio: 2280 / 1290,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tall de casa amb base de pedra, paret de terra i elements de fusta. A terra es distingeixen un fogar i una gerra. La part alta es marca amb traç discontinu.',
+        caption: 'Tall esquemàtic d’una casa ibèrica. El traç ple marca elements que es poden documentar i el discontinu, l’alçat reconstruït.',
+        variants: {
+          pla: { src: 'illustracions/m025/interior-d-una-casa-iberica-pla.png', thumbnail: 'illustracions/m025/miniatures/interior-d-una-casa-iberica-pla.jpg' },
+          atles: { src: 'illustracions/m025/interior-d-una-casa-iberica-atles.png', thumbnail: 'illustracions/m025/miniatures/interior-d-una-casa-iberica-atles.jpg' },
+        },
+      },
+      {
+        id: 'pistes-de-fosa-i-forja', section: 'metall', name: 'Quines pistes deixa un taller?', ratio: 2280 / 1170,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'La fosa es representa amb un motlle i una peça de bronze compatible. La forja mostra ferro a mig acabar amb marques, un martell i residus d’escòria.',
+        caption: 'Models de restes de taller. Compara la cavitat d’un motlle i les marques d’una peça de ferro. L’escòria s’interpreta amb les altres pistes del jaciment.',
+        variants: {
+          pla: { src: 'illustracions/m025/pistes-de-fosa-i-forja-pla.png', thumbnail: 'illustracions/m025/miniatures/pistes-de-fosa-i-forja-pla.jpg' },
+          atles: { src: 'illustracions/m025/pistes-de-fosa-i-forja-atles.png', thumbnail: 'illustracions/m025/miniatures/pistes-de-fosa-i-forja-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('metall', 'Del mineral a l’estri',
         essencial('Per obtenir **ferro** es tracta el mineral amb molta calor. Després, el metall es pot treballar a cops mentre és calent.'),
@@ -1811,9 +1974,14 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'prehistoria', title: 'La prehistòria' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Interpreta l’organització d’un poblat de l’edat del ferro, els habitatges i la feina del metall.',
     curriculum: [{ row: 'medi:passat', section: 'estris', note: 'Interpreta l’organització d’un poblat de l’edat del ferro, els habitatges i la feina del metall.' }],
     sources: [
+      ['Museu d’Arqueologia de Catalunya · Ullastret', 'https://www.mac.cat/ca/Visita-ns-Portada/Ullastret-Portada-Seu/jaciment-ullastret'],
       ['Museu d’Arqueologia de Catalunya', 'https://www.mac.cat/'],
       ['Museu d’Arqueologia · Ullastret', 'https://www.macullastret.cat/'],
     ],
@@ -1823,6 +1991,40 @@ window.quaderns ??= [];
     id: 'patrimoni-figures-i-pedres',
     title: 'Pedres i figures que ens parlen del passat',
     intro: 'Alguns paisatges conserven pintures i grans pedres alçades. Són testimonis fràgils, i estudiar-los ens obliga a separar allò que veiem d’allò que imaginem.',
+    coverFigure: 'menhir-dolmen-i-cromlec',
+    figures: [
+      {
+        id: 'menhir-dolmen-i-cromlec', section: 'megalits', name: 'Tres maneres de disposar grans pedres', ratio: 2280 / 1110,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres vinyetes mostren un menhir de pedra única dreta, un dolmen amb cambra i llosa de coberta i un cromlec amb pedres verticals disposades en cercle.',
+        caption: 'Tres exemples esquemàtics de monuments amb formes simplificades. Compara el nombre de pedres i la seva disposició.',
+        variants: {
+          pla: { src: 'illustracions/m026/menhir-dolmen-i-cromlec-pla.png', thumbnail: 'illustracions/m026/miniatures/menhir-dolmen-i-cromlec-pla.jpg' },
+          atles: { src: 'illustracions/m026/menhir-dolmen-i-cromlec-atles.png', thumbnail: 'illustracions/m026/miniatures/menhir-dolmen-i-cromlec-atles.jpg' },
+        },
+      },
+      {
+        id: 'planta-cova-d-en-daina', section: 'megalits', name: 'La cambra i el corredor de la Cova d’en Daina', ratio: 2280 / 1160,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Planta amb una cambra al centre i un corredor que surt cap al sud-est. Un cercle de lloses envolta la trama del túmul.',
+        caption: 'Cova d’en Daina · Romanyà de la Selva. La planta simplifica les lloses documentades. La trama indica l’espai aproximat del túmul.',
+        credit: 'Redibuix a partir de la fig. 186 de la Crònica de la Secció Arqueològica de l’IEC i del registre de prospecció.',
+        variants: {
+          pla: { src: 'illustracions/m026/planta-cova-d-en-daina-pla.png', thumbnail: 'illustracions/m026/miniatures/planta-cova-d-en-daina-pla.jpg' },
+          atles: { src: 'illustracions/m026/planta-cova-d-en-daina-atles.png', thumbnail: 'illustracions/m026/miniatures/planta-cova-d-en-daina-atles.jpg' },
+        },
+      },
+      {
+        id: 'pigment-solc-i-volum', section: 'gravats', name: 'Pintat, gravat o esculpit?', ratio: 2280 / 1130,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Un rombe pintat queda damunt la roca. Un solc dibuixa el mateix rombe i se’n veu la secció. Un tercer rombe té dues cares visibles i volum.',
+        caption: 'Tres models amb el mateix motiu. El patrimoni rupestre s’observa sense tocar-lo.',
+        variants: {
+          pla: { src: 'illustracions/m026/pigment-solc-i-volum-pla.png', thumbnail: 'illustracions/m026/miniatures/pigment-solc-i-volum-pla.jpg' },
+          atles: { src: 'illustracions/m026/pigment-solc-i-volum-atles.png', thumbnail: 'illustracions/m026/miniatures/pigment-solc-i-volum-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('rupestre', 'Pintar sobre la roca',
         essencial('L’**art rupestre** es va fer sobre superfícies de roca, com parets de coves i de balmes.'),
@@ -1838,9 +2040,14 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'prehistoria', title: 'La prehistòria' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Interpreta exemples de pintures, megàlits, gravats i escultures i explica com protegir-los.',
     curriculum: [{ row: 'medi:passat', section: 'gravats', note: 'Interpreta exemples de pintures, megàlits, gravats i escultures i explica com protegir-los.' }],
     sources: [
+      ['IEC · Planta rectificada del sepulcre de la Cova d’en Daina, fig. 186', 'https://publicacions.iec.cat/repository/pdf/00000103/00000026.pdf'],
       ['UNESCO · Art rupestre mediterrani', 'https://whc.unesco.org/en/list/874/'],
       ['Patrimoni cultural · Cova d’en Daina', 'https://patrimoni.gencat.cat/ca/coleccio/cova-den-daina'],
     ],
@@ -1850,6 +2057,40 @@ window.quaderns ??= [];
     id: 'de-roma-a-imperi',
     title: 'Com Roma va passar de ciutat a imperi',
     intro: 'En alguns mapes, Roma només és un punt. En d’altres, el seu poder s’estén al voltant de tota la Mediterrània. Què va passar entre un mapa i l’altre?',
+    coverFigure: 'roma-i-mediterrania-dos-moments',
+    figures: [
+      {
+        id: 'roma-i-mediterrania-dos-moments', section: 'origens', name: 'Roma i la Mediterrània en dos moments', ratio: 2280 / 2110,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dos mapes comparables situen Roma, la península Itàlica i la Mediterrània. El primer mostra el Tíber en un requadre. Al segon, una trama s’estén per Europa, el nord d’Àfrica i l’Àsia occidental.',
+        caption: 'Dos mapes amb la mateixa escala. El punt situa Roma i la trama indica l’extensió territorial aproximada de l’Imperi cap al 117 dC.',
+        credit: 'Contorn de l’Ancient World Mapping Center (UNC), via Roman Empire Map i OpenStreetMap, ODbL 1.0. Costes Natural Earth i relleu NOAA/NCEI ETOPO 2022.',
+        variants: {
+          pla: { src: 'illustracions/m027/roma-i-mediterrania-dos-moments-pla.png', thumbnail: 'illustracions/m027/miniatures/roma-i-mediterrania-dos-moments-pla.jpg' },
+          atles: { src: 'illustracions/m027/roma-i-mediterrania-dos-moments-atles.png', thumbnail: 'illustracions/m027/miniatures/roma-i-mediterrania-dos-moments-atles.jpg' },
+        },
+      },
+      {
+        id: 'tres-etapes-govern-roma', section: 'govern', name: 'De la monarquia a l’imperi', ratio: 2280 / 940,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'La monarquia s’associa als reis, la república al Senat i als magistrats, i l’Imperi a l’emperador. August i el 27 aC marquen el pas cap a l’Imperi.',
+        caption: 'Ordre esquemàtic de les etapes, amb durades gràfiques orientatives. El Senat va continuar existint sota els emperadors.',
+        variants: {
+          pla: { src: 'illustracions/m027/tres-etapes-govern-roma-pla.png', thumbnail: 'illustracions/m027/miniatures/tres-etapes-govern-roma-pla.jpg' },
+          atles: { src: 'illustracions/m027/tres-etapes-govern-roma-atles.png', thumbnail: 'illustracions/m027/miniatures/tres-etapes-govern-roma-atles.jpg' },
+        },
+      },
+      {
+        id: 'feines-i-drets-a-roma', section: 'societat', name: 'Feines que no donaven els mateixos drets', ratio: 2280 / 1420,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres persones en escenes domèstiques, de taller i de mercat. Els cartells indiquen ciutadania, llibertat sense ciutadania romana i esclavitud.',
+        caption: 'Tres casos ficticis en una ciutat provincial. Qui podia decidir on treballava? Què voldries saber per entendre els drets concrets de cada persona?',
+        variants: {
+          pla: { src: 'illustracions/m027/feines-i-drets-a-roma-pla.png', thumbnail: 'illustracions/m027/miniatures/feines-i-drets-a-roma-pla.jpg' },
+          atles: { src: 'illustracions/m027/feines-i-drets-a-roma-atles.png', thumbnail: 'illustracions/m027/miniatures/feines-i-drets-a-roma-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('origens', 'Al costat del Tíber',
         essencial('La ciutat de **Roma** va créixer a la vora del **Tíber**, a la península Itàlica.'),
@@ -1868,9 +2109,16 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'roma', title: 'En temps dels romans' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+    ],
     description: 'Ordena la monarquia, la república i l’imperi i explica com Roma es va expandir.',
     curriculum: [{ row: 'medi:passat', section: 'expansio', note: 'Ordena la monarquia, la república i l’imperi i explica com Roma es va expandir.' }],
     sources: [
+      ['Roman Empire Map · Polígons històrics i llicència', 'https://romanempiremap.com/data-sources#open-database-licence-notice-odbl-for-the-empire-extents'],
+      ['Base geogràfica del 117 dC · ODbL 1.0', 'https://tiles.romanempiremap.com/extents.geojson'],
+      ['Metropolitan Museum · La dinastia julioclàudia', 'https://www.metmuseum.org/essays/the-julio-claudian-dynasty-27-b-c-68-a-d'],
       ['Britannica · La Roma antiga', 'https://www.britannica.com/place/ancient-Rome'],
     ],
   });
