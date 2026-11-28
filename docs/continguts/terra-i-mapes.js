@@ -2286,10 +2286,7 @@ window.quaderns ??= [];
         width: 100, position: 'center', wrap: false, anchor: 'lead',
         alt: 'Vista en planta amb carrers, fòrum, botigues i teatre. Una línia A–B creua un canvi de nivell amb escalinates, que apareix també al perfil lateral.',
         caption: 'Ciutat romana de mostra, inspirada en les terrasses de Tàrraco. A i B uneixen el plànol amb el perfil. Busca més d’un camí possible entre el fòrum i el teatre.',
-        variants: {
-          pla: { src: 'illustracions/m030/planol-ciutat-terrasses-pla.png', thumbnail: 'illustracions/m030/miniatures/planol-ciutat-terrasses-pla.jpg' },
-          atles: { src: 'illustracions/m030/planol-ciutat-terrasses-atles.png', thumbnail: 'illustracions/m030/miniatures/planol-ciutat-terrasses-atles.jpg' },
-        },
+        src: 'illustracions/m030/planol-ciutat-terrasses-pla.png',
       },
       {
         id: 'forum-teatre-i-termes', section: 'edificis', name: 'Tres espais on es reunia la gent', ratio: 2280 / 1260,
@@ -2298,17 +2295,30 @@ window.quaderns ??= [];
         caption: 'Reconstruccions didàctiques de tres espais públics. Observa què fa la gent a la plaça, a les grades i a la sala de bany.',
         variants: {
           pla: { src: 'illustracions/m030/forum-teatre-i-termes-pla.png', thumbnail: 'illustracions/m030/miniatures/forum-teatre-i-termes-pla.jpg' },
-          atles: { src: 'illustracions/m030/forum-teatre-i-termes-atles.png', thumbnail: 'illustracions/m030/miniatures/forum-teatre-i-termes-atles.jpg' },
+          atles: {
+            src: 'illustracions/m030/forum-teatre-i-termes-atles.png?v=0.1.90', thumbnail: 'illustracions/m030/miniatures/forum-teatre-i-termes-atles.jpg?v=0.1.90',
+            ratio: 2400 / 1769,
+            alt: 'Dues persones conversen en una plaça porticada. En un teatre, el públic mira un actor des de les grades. A les termes, dues persones són a tocar d’un bany amb esglaons.',
+            caption: 'Tres escenes reconstruïdes. Observa on conversen les persones, cap a on miren els espectadors i per on s’entra a l’aigua.',
+            credit: 'Reconstruccions generades i retolades per a Món a mà.',
+          },
         },
       },
       {
-        id: 'taberna-del-carrer-al-taller', section: 'comerc', name: 'Una taberna oberta al carrer', ratio: 1200 / 915,
-        width: 50, position: 'right', wrap: true, anchor: 'after',
-        alt: 'Una façana obre el taulell al carrer. Darrere de l’obertura hi ha espai per treballar o guardar recipients.',
-        caption: 'Tall esquemàtic d’una taberna. On podia atendre la gent qui hi treballava? On podia desar els materials?',
+        id: 'taberna-del-carrer-al-taller', section: 'comerc', name: 'Una taberna oberta al carrer', ratio: 3 / 2,
+        width: 50, position: 'right', wrap: true, anchor: 'paragraph-1',
         variants: {
-          pla: { src: 'illustracions/m030/taberna-del-carrer-al-taller-pla.png', thumbnail: 'illustracions/m030/miniatures/taberna-del-carrer-al-taller-pla.jpg' },
-          atles: { src: 'illustracions/m030/taberna-del-carrer-al-taller-atles.png', thumbnail: 'illustracions/m030/miniatures/taberna-del-carrer-al-taller-atles.jpg' },
+          pla: {
+            src: 'illustracions/m030/taberna-del-carrer-al-taller-pla.png?v=0.1.90', thumbnail: 'illustracions/m030/miniatures/taberna-del-carrer-al-taller-pla.jpg?v=0.1.90',
+            alt: 'Planta amb el carrer a baix, el taulell a l’esquerra de l’entrada i el taller al fons a la dreta. Una fletxa ressegueix el pas lliure.',
+            caption: 'Planta d’una taberna imaginària. Ressegueix el pas del carrer al taller i assenyala on s’atenia la clientela.',
+          },
+          atles: {
+            src: 'illustracions/m030/taberna-del-carrer-al-taller-atles.png?v=0.1.90', thumbnail: 'illustracions/m030/miniatures/taberna-del-carrer-al-taller-atles.jpg?v=0.1.90',
+            alt: 'Vista des del carrer. Dues persones s’intercanvien un bol al taulell. Al fons, una tercera persona treballa amb un recipient de fang.',
+            caption: 'Reconstrucció didàctica vista des del carrer. Què fa cada persona i quines peces et donen pistes sobre la feina del taller?',
+            credit: 'Il·lustració generada i retolada per a Món a mà.',
+          },
         },
       },
     ],
@@ -2337,6 +2347,8 @@ window.quaderns ??= [];
       ['MNAT · Teatre de Tàrraco', 'https://www.mnat.cat/teatre-de-tarraco/'],
       ['Patrimoni cultural · Tàrraco', 'https://patrimoni.gencat.cat/ca/tarraco'],
       ['Museu Nacional Arqueològic de Tarragona', 'https://www.mnat.cat/'],
+      ['Parc Arqueològic de Pompeia · Botigues', 'https://pompeiisites.org/en/excavations-plan-en/shops/'],
+      ['Parc Arqueològic de Pompeia · Termes Estabianes', 'https://pompeiisites.org/en/excavations-plan-en/stabian-baths-and-republican-baths/'],
     ],
   });
 

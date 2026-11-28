@@ -4,6 +4,16 @@
 
 Cada encàrrec indica quantes **figures diferents** calen per apartat i quins **lots d’estil** cal lliurar. Una figura que es repeteix en tres estils compta com tres fitxers. Una fotografia o una graella compartida compta una sola vegada. Els lots visuals són independents de les variants de lectura Suport, Base i Ampliació.
 
+## Criteri editorial per al catàleg
+
+Aplica el mateix criteri a les figures de les fitxes definitives i de les fitxes en desenvolupament. [La planta](docs/illustracions/m039/planta-castell-espais-i-usos-pla.png) i [el tall del castell M039](docs/illustracions/m039/planta-castell-espais-i-usos-atles.png) en són la referència. La planta permet seguir el pas de l’entrada al pati. El tall revela la boca, el dipòsit i el nivell de l’aigua de la cisterna, amb els mateixos punts de referència.
+
+1. **Lectura.** Formula una acció observable per figura. L’alumnat ha de poder seguir un itinerari, distingir dos espais, interpretar una font o explicar un mecanisme amb proves visibles.
+2. **Composició i tècnica.** Tria l’enquadrament, les formes i el grau de detall en funció d’aquella acció. Construeix la cartografia i els esquemes mesurables amb dades o geometria controlades. Quan una reconstrucció ajudi a entendre l’escena, dona-li profunditat, materials i gestos que expliquin què passa. Identifica les reconstruccions al peu.
+3. **Pla i Atles.** Conserva les dades, l’espai i els referents que l’activitat demana. Dona a cada versió una lectura pròpia amb una vista, un tall, una acció o una jerarquia diferents. Si l’esquema o la font ja resolen la tasca, fes-ne una figura compartida. Un canvi de paleta, degradat o acabat per si sol comporta revisar la parella.
+4. **Prova d’impressió.** Compara les versions en miniatura i dins la fitxa a mida real, en color i en grisos. A 85 mm, escurça els rètols, afegeix les llegendes en una capa editable i comprova que s’entén el gest o el recorregut. A 170 mm, comprova que el detall rellevant és llegible i que cap guia acaba a l’element equivocat.
+5. **Revisió del que ja està publicat.** Comprova l’activitat, la precisió i la lectura de cada figura abans de decidir si convé conservar-la, compartir un original, retocar-la o refer-la. Comença per les escenes on els estils repeteixen composició i la imatge aporta poca informació al text. Mantén el vincle amb l’apartat i l’estat editorial de la fitxa.
+
 ## Pauta general
 
 Per a cada tema, acorda els lots, les figures que comparteixen i les referències abans de començar. Cada sèrie ha de poder-se emprar com un lot complet, amb una composició i una retolació pròpies que siguin coherents de la primera imatge a l’última. Per a cada figura, anota l’ID de l’apartat, l’ordre, què ha de veure o fer l’alumnat, les etiquetes literals i els fitxers per lot.

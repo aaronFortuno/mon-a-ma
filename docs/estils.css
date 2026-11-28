@@ -708,6 +708,7 @@ summary { color: var(--green); font-weight: 650; }
     font: 700 .83rem/1.35 var(--sans);
     opacity: .83;
   }
+  .paper-unit:has(> .section-preview-tools) .figure-style-trigger { inset-block-start: calc(.3rem + 36px / var(--zoom, 1)); }
   .figure-issue-trigger { inset: .3rem auto auto .3rem; display: grid; place-items: center; min-width: 1.65rem; min-height: 1.65rem; padding: .12rem; }
   .figure-style-trigger:is(:hover, :focus-visible), .figure-issue-trigger:is(:hover, :focus-visible) { opacity: 1; background: #e8f2ec; }
   .paper-stack:not(.is-repaginating) > .sheet-frame { overflow: clip; overflow-clip-margin: 4px; }

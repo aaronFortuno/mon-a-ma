@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.90 · 28 de novembre de 2026
+
+- Aplica el criteri visual del castell M039 a l’M030. Renova la taberna i els espais públics i comparteix un únic plànol de terrasses.
+
 ## 0.1.89 · 28 de novembre de 2026
 
 - Revisa les il·lustracions de l’M042 amb un mateix barri en planta i en vista elevada, una escena a peu de plaça i una làmina de fonts compartida.
