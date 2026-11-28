@@ -1049,6 +1049,39 @@ window.quaderns ??= [];
     id: 'altitud-i-perfils',
     title: 'Del mapa de corbes al perfil d’una excursió',
     intro: 'Dos camins poden començar i acabar a la mateixa altitud, però un pot fer una pujada molt més forta que l’altre. Les corbes de nivell i els perfils ens ajuden a triar.',
+    coverFigure: 'mapa-i-perfil',
+    figures: [
+      {
+        id: 'mapa-i-perfil', section: 'perfil', name: 'Del mapa al perfil', ratio: 2280 / 1410,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tram recte d’1 km. P és a 600 m, el punt del mig és a 620 m i Q és a 640 m. Al perfil, els punts són a 0, 0,5 i 1 km.',
+        caption: 'Tram de mostra P–Q. Les guies uneixen tres llocs del mapa amb els punts corresponents al perfil.',
+        variants: {
+          pla: { src: 'illustracions/m013/mapa-i-perfil-pla.png', thumbnail: 'illustracions/m013/miniatures/mapa-i-perfil-pla.jpg' },
+          atles: { src: 'illustracions/m013/mapa-i-perfil-atles.png', thumbnail: 'illustracions/m013/miniatures/mapa-i-perfil-atles.jpg' },
+        },
+      },
+      {
+        id: 'corbes-i-pendent', section: 'corbes', name: 'Mateixa equidistància, pendents diferents', ratio: 1200 / 790,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Retalls a la mateixa escala amb corbes de 540, 560 i 580 m. Les corbes són més juntes al pendent fort.',
+        caption: 'Les corbes tenen una equidistància de 20 m en tots dos retalls. Compara la distància que recorre cada fletxa entre una corba i la següent.',
+        variants: {
+          pla: { src: 'illustracions/m013/corbes-i-pendent-pla.png', thumbnail: 'illustracions/m013/miniatures/corbes-i-pendent-pla.jpg' },
+          atles: { src: 'illustracions/m013/corbes-i-pendent-atles.png', thumbnail: 'illustracions/m013/miniatures/corbes-i-pendent-atles.jpg' },
+        },
+      },
+      {
+        id: 'graella-dos-itineraris', section: 'excursio', name: 'Dos recorreguts sobre uns mateixos eixos', ratio: 2280 / 1110,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Graella buida. L’eix horitzontal va de 0 a 3 km. El vertical va de 500 a 750 m amb guies cada 10 m.',
+        caption: 'Marca els punts dels itineraris A i B sobre la mateixa graella. Uneix els punts d’A amb un traç continu i els de B amb un traç discontinu.',
+        variants: {
+          pla: { src: 'illustracions/m013/graella-dos-itineraris-pla.png', thumbnail: 'illustracions/m013/miniatures/graella-dos-itineraris-pla.jpg' },
+          atles: { src: 'illustracions/m013/graella-dos-itineraris-atles.png', thumbnail: 'illustracions/m013/miniatures/graella-dos-itineraris-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('corbes', 'Les corbes uneixen punts a la mateixa altitud',
         essencial('Una **corba de nivell** uneix punts situats a la mateixa altitud. En un mateix mapa, quan les corbes són més juntes, el pendent és més fort.'),
@@ -1064,6 +1097,10 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'relleu', title: 'El relleu i els rius' },
     theme: 'Geografia',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Aprèn a llegir corbes de nivell, dibuixa un perfil altimètric i compara dos recorreguts per preparar una excursió.',
     curriculum: [{ row: 'medi:cartografia', section: 'excursio', note: 'Aprèn a llegir corbes de nivell, dibuixa un perfil altimètric i compara dos recorreguts per preparar una excursió.' }],
     sources: [
@@ -1076,6 +1113,40 @@ window.quaderns ??= [];
     id: 'conservar-paisatges',
     title: 'Com podem tenir cura dels paisatges?',
     intro: 'Quan un barri creix o un bosc rep moltes visites, el paisatge canvia. Podem observar què s’hi transforma i pensar com conservar els espais que compartim.',
+    coverFigure: 'pluja-i-sol-urba',
+    figures: [
+      {
+        id: 'pluja-i-sol-urba', section: 'urbanitzacio', name: 'La mateixa pluja sobre dos barris', ratio: 2280 / 1255,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'En un carrer amb arbres i terra oberta, part de l’aigua s’infiltra. Amb el sòl pavimentat, més aigua circula per la superfície cap al mateix embornal.',
+        caption: 'Esquema del mateix carrer amb la mateixa pluja i el mateix pendent. Les fletxes mostren per on va l’aigua segons el tipus de sòl.',
+        variants: {
+          pla: { src: 'illustracions/m014/pluja-i-sol-urba-pla.png', thumbnail: 'illustracions/m014/miniatures/pluja-i-sol-urba-pla.jpg' },
+          atles: { src: 'illustracions/m014/pluja-i-sol-urba-atles.png', thumbnail: 'illustracions/m014/miniatures/pluja-i-sol-urba-atles.jpg' },
+        },
+      },
+      {
+        id: 'zona-humida-i-visitants', section: 'proteccio', name: 'Observar ocells en una zona humida', ratio: 2280 / 1210,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Uns visitants observen flamencs des de l’extrem d’un camí. L’aigua i la vegetació separen l’espai de pas de la zona de fauna.',
+        caption: 'Esquema inspirat en el Delta de l’Ebre. Des del punt d’observació es poden veure ocells sense sortir del camí senyalitzat.',
+        credit: 'Esquema inspirat en el Parc Natural del Delta de l’Ebre.',
+        variants: {
+          pla: { src: 'illustracions/m014/zona-humida-i-visitants-pla.png', thumbnail: 'illustracions/m014/miniatures/zona-humida-i-visitants-pla.jpg' },
+          atles: { src: 'illustracions/m014/zona-humida-i-visitants-atles.png', thumbnail: 'illustracions/m014/miniatures/zona-humida-i-visitants-atles.jpg' },
+        },
+      },
+      {
+        id: 'seguiment-drecera-bosc', section: 'boscos', name: 'Seguir el camí i observar l’erosió', ratio: 2280 / 1240,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Una drecera de terra nua talla un revolt. El segon dibuix incorpora un senyal que dirigeix el pas pel sender. Quatre estaques marquen el mateix quadrat d’observació als dos dibuixos.',
+        caption: 'Dos moments del mateix revolt. Un senyal indica el sender. Al cap d’un mes es pot tornar al punt de seguiment i anotar l’amplada del sòl nu o els solcs visibles.',
+        variants: {
+          pla: { src: 'illustracions/m014/seguiment-drecera-bosc-pla.png', thumbnail: 'illustracions/m014/miniatures/seguiment-drecera-bosc-pla.jpg' },
+          atles: { src: 'illustracions/m014/seguiment-drecera-bosc-atles.png', thumbnail: 'illustracions/m014/miniatures/seguiment-drecera-bosc-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('canvis', 'El paisatge canvia amb l’activitat humana',
         essencial('Les persones **transformem el medi** quan construïm, conreem o aprofitem recursos.'),
@@ -1097,9 +1168,14 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'relleu', title: 'El relleu i els rius' },
     theme: 'Geografia',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Analitza els efectes de la urbanització i proposa maneres de conservar els boscos i els espais naturals.',
     curriculum: [{ row: 'medi:ecosocial', section: 'boscos', note: 'Analitza els efectes de la urbanització i proposa maneres de conservar els boscos i els espais naturals.' }],
     sources: [
+      ['Parc Natural del Delta de l’Ebre · Pautes de visita', 'https://parcsnaturals.gencat.cat/ca/xarxa-de-parcs/delta-ebre/gaudeix-del-parc/consells/pautes-i-consells/index.html'],
       ['Generalitat · Els espais naturals protegits', 'https://mediambient.gencat.cat/ca/05_ambits_dactuacio/patrimoni_natural/senp_catalunya/'],
       ['ICGC · VISSIR, visor de cartografia', 'https://www.icgc.cat/ca/Eines-i-visors/Visors/VISSIR'],
     ],
@@ -1109,6 +1185,39 @@ window.quaderns ??= [];
     id: 'temps-i-clima',
     title: 'El temps d’avui i el clima d’un lloc',
     intro: 'Ens abriguem abans de sortir, però els pagesos també necessiten saber com solen ser les estacions de l’any. Són preguntes diferents i es responen amb dades diferents.',
+    coverFigure: 'un-dia-i-trenta-anys',
+    figures: [
+      {
+        id: 'un-dia-i-trenta-anys', section: 'clima', name: 'Un dia i trenta anys d’observacions', ratio: 2280 / 1165,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'En un dia de febrer, a les 8 h hi ha núvols i 10 °C, a les 13 h sol i 17 °C i a les 18 h pluja i 13 °C. La segona tira té una marca per cada febrer del 1991 al 2020.',
+        caption: 'Dades d’exemple d’una estació imaginària. Un panell recull tres observacions d’un sol dia i l’altre representa les observacions de febrer al llarg de trenta anys.',
+        variants: {
+          pla: { src: 'illustracions/m015/un-dia-i-trenta-anys-pla.png', thumbnail: 'illustracions/m015/miniatures/un-dia-i-trenta-anys-pla.jpg' },
+          atles: { src: 'illustracions/m015/un-dia-i-trenta-anys-atles.png', thumbnail: 'illustracions/m015/miniatures/un-dia-i-trenta-anys-atles.jpg' },
+        },
+      },
+      {
+        id: 'tres-instruments-meteorologics', section: 'temps', name: 'Què mesura una estació?', ratio: 1200 / 910,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Termòmetre dins d’un abric ventilat, pluviòmetre amb embut i anemòmetre de cassoletes amb una fletxa que en mostra el gir.',
+        caption: 'Tres instruments d’una estació mesuren la temperatura, la precipitació i la velocitat del vent.',
+        variants: {
+          pla: { src: 'illustracions/m015/tres-instruments-meteorologics-pla.png', thumbnail: 'illustracions/m015/miniatures/tres-instruments-meteorologics-pla.jpg' },
+          atles: { src: 'illustracions/m015/tres-instruments-meteorologics-atles.png', thumbnail: 'illustracions/m015/miniatures/tres-instruments-meteorologics-atles.jpg' },
+        },
+      },
+      {
+        id: 'dos-deserts-temperatures', section: 'extrems', name: 'Dos llocs molt secs i temperatures diferents', ratio: 2280 / 1180,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'El Sàhara es representa amb sorra i roca, i l’interior de l’Antàrtida amb una plana de gel. Tots dos són molt secs.',
+        caption: 'Esquemes de dos llocs amb molt poca precipitació. El Sàhara i l’interior de l’Antàrtida tenen paisatges i temperatures diferents.',
+        variants: {
+          pla: { src: 'illustracions/m015/dos-deserts-temperatures-pla.png', thumbnail: 'illustracions/m015/miniatures/dos-deserts-temperatures-pla.jpg' },
+          atles: { src: 'illustracions/m015/dos-deserts-temperatures-atles.png', thumbnail: 'illustracions/m015/miniatures/dos-deserts-temperatures-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('temps', 'Una fotografia del temps',
         essencial('El **temps atmosfèric** és l’estat de l’atmosfera en un lloc i un moment concrets.'),
@@ -1124,9 +1233,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'clima', title: 'El clima i la vegetació' },
     theme: 'Clima i paisatge',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Distingeix el temps del clima i interpreta exemples de condicions extremes.',
     curriculum: [{ row: 'medi:reptes', section: 'extrems', note: 'Distingeix el temps del clima i interpreta exemples de condicions extremes.' }],
     sources: [
+      ['Meteocat · Estacions automàtiques', 'https://apidocs.meteocat.gencat.cat/documentacio/dades-de-la-xema/'],
+      ['OMM · Períodes climatològics de referència', 'https://community.wmo.int/site/knowledge-hub/programmes-and-initiatives/climate-services/wmo-climatological-normals'],
       ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
       ['AEMET · Atles climàtics', 'https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/atlas_climatico'],
     ],
@@ -1136,6 +1251,39 @@ window.quaderns ??= [];
     id: 'factors-del-clima',
     title: 'Per què dos llocs tenen climes diferents?',
     intro: 'Dues poblacions poden estar a la mateixa latitud i tenir hiverns diferents. La latitud, el mar i les muntanyes hi influeixen alhora.',
+    coverFigure: 'angle-rajos-i-superficie',
+    figures: [
+      {
+        id: 'angle-rajos-i-superficie', section: 'latitud', name: 'Un mateix feix de llum sobre dues superfícies', ratio: 2280 / 1110,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dos feixos de la mateixa amplada il·luminen dues superfícies horitzontals. La marca que deixa el feix més inclinat és més llarga.',
+        caption: 'Model en tall lateral. A latituds diferents, un feix de rajos pot arribar amb angles diferents. Quan arriba més oblic, es reparteix sobre més superfície.',
+        variants: {
+          pla: { src: 'illustracions/m016/angle-rajos-i-superficie-pla.png', thumbnail: 'illustracions/m016/miniatures/angle-rajos-i-superficie-pla.jpg' },
+          atles: { src: 'illustracions/m016/angle-rajos-i-superficie-atles.png', thumbnail: 'illustracions/m016/miniatures/angle-rajos-i-superficie-atles.jpg' },
+        },
+      },
+      {
+        id: 'costa-i-interior-temperatures', section: 'mar', name: 'De la costa a l’interior', ratio: 2280 / 1240,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Temperatures d’hivern, primavera, estiu i tardor. A la costa són 9, 14, 21 i 16 °C. A l’interior són 4, 13, 26 i 17 °C.',
+        caption: 'Dades inventades de dues poblacions a la mateixa latitud i a una altitud semblant. Compara la diferència entre el màxim d’estiu i el mínim d’hivern a cada lloc.',
+        variants: {
+          pla: { src: 'illustracions/m016/costa-i-interior-temperatures-pla.png', thumbnail: 'illustracions/m016/miniatures/costa-i-interior-temperatures-pla.jpg' },
+          atles: { src: 'illustracions/m016/costa-i-interior-temperatures-atles.png', thumbnail: 'illustracions/m016/miniatures/costa-i-interior-temperatures-atles.jpg' },
+        },
+      },
+      {
+        id: 'aire-humit-i-serralada', section: 'relleu', name: 'La pluja a banda i banda d’una serra', ratio: 2280 / 1305,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'El vent humit entra per l’esquerra, puja pel vessant de l’estació A, es refreda i produeix núvols i precipitació. En passar la carena arriba al vessant de sotavent, on hi ha B.',
+        caption: 'Esquema d’una serra amb dues estacions a la mateixa altitud. Imagina per quin vessant pujaria l’aire humit si canviés la direcció del vent.',
+        variants: {
+          pla: { src: 'illustracions/m016/aire-humit-i-serralada-pla.png', thumbnail: 'illustracions/m016/miniatures/aire-humit-i-serralada-pla.jpg' },
+          atles: { src: 'illustracions/m016/aire-humit-i-serralada-atles.png', thumbnail: 'illustracions/m016/miniatures/aire-humit-i-serralada-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('factors', 'Llegir el clima amb un mapa',
         essencial('La **latitud**, la proximitat al mar i el **relleu** són alguns dels factors que influeixen en el clima.'),
@@ -1154,9 +1302,14 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'clima', title: 'El clima i la vegetació' },
     theme: 'Clima i paisatge',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Relaciona la latitud, la distància al mar, el relleu i l’altitud amb diferències de temperatura i precipitació.',
     curriculum: [{ row: 'medi:reptes', section: 'relleu', note: 'Relaciona la latitud, la distància al mar, el relleu i l’altitud amb diferències de temperatura i precipitació.' }],
     sources: [
+      ['IGN · Atles didàctic del clima', 'https://educativo.ign.es/atlas-didactico/clima-eso/'],
       ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
       ['AEMET · Atles climàtics', 'https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/atlas_climatico'],
     ],
@@ -1166,6 +1319,41 @@ window.quaderns ??= [];
     id: 'zones-climatiques',
     title: 'De les zones climàtiques als climogrames',
     intro: 'D’una regió polar a una costa mediterrània canvien les temperatures i les pluges. Els mapes de clima i els climogrames ens permeten llegir aquests patrons de dues maneres.',
+    coverFigure: 'climograma-lloc-c',
+    figures: [
+      {
+        id: 'climograma-lloc-c', section: 'dades', name: 'Un climograma de dotze mesos', ratio: 2280 / 1330,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dotze mesos amb barres de precipitació en mm i una línia de temperatura en °C. Al juliol s’arriba a la temperatura més alta i a la precipitació més baixa. A l’octubre la barra de precipitació és la més alta.',
+        caption: 'Estació C i dades inventades. Les barres es llegeixen amb l’eix de precipitació i la línia amb el de temperatura.',
+        variants: {
+          pla: { src: 'illustracions/m017/climograma-lloc-c-pla.png', thumbnail: 'illustracions/m017/miniatures/climograma-lloc-c-pla.jpg' },
+          atles: { src: 'illustracions/m017/climograma-lloc-c-atles.png', thumbnail: 'illustracions/m017/miniatures/climograma-lloc-c-atles.jpg' },
+        },
+      },
+      {
+        id: 'franges-climatiques-terra', section: 'terra', name: 'Grans franges climàtiques de la Terra', ratio: 2280 / 1315,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Planisferi amb una franja càlida entre els tròpics, dues de temperades i dues de fredes als extrems. Les categories porten ratlles diagonals, línies horitzontals o punts.',
+        caption: 'Franges climàtiques orientatives. El relleu i altres factors contribueixen a explicar els climes locals.',
+        credit: 'Natural Earth a 1:110 milions.',
+        variants: {
+          pla: { src: 'illustracions/m017/franges-climatiques-terra-pla.png', thumbnail: 'illustracions/m017/miniatures/franges-climatiques-terra-pla.jpg' },
+          atles: { src: 'illustracions/m017/franges-climatiques-terra-atles.png', thumbnail: 'illustracions/m017/miniatures/franges-climatiques-terra-atles.jpg' },
+        },
+      },
+      {
+        id: 'referents-climatics-europa', section: 'europa', name: 'Cinc referents climàtics a Europa', ratio: 2280 / 1455,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa amb l’exemple oceànic a l’oest d’Irlanda, el continental a l’est de Polònia, el mediterrani al litoral valencià, el d’alta muntanya als Alps i el polar a Svalbard.',
+        caption: 'Cinc exemples locals de climes de regions més àmplies. El requadre permet trobar l’exemple polar a Svalbard.',
+        credit: 'NOAA/NCEI ETOPO 2022 i Natural Earth.',
+        variants: {
+          pla: { src: 'illustracions/m017/referents-climatics-europa-pla.png', thumbnail: 'illustracions/m017/miniatures/referents-climatics-europa-pla.jpg' },
+          atles: { src: 'illustracions/m017/referents-climatics-europa-atles.png', thumbnail: 'illustracions/m017/miniatures/referents-climatics-europa-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('terra', 'Zones fredes, temperades i càlides',
         essencial('En general, a la Terra distingim zones **càlides** prop de l’equador, **temperades** a latituds mitjanes i **fredes** cap als pols.'),
@@ -1181,9 +1369,16 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'clima', title: 'El clima i la vegetació' },
     theme: 'Clima i paisatge',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Compara les grans zones climàtiques, els climes europeus i les dades que recull un climograma.',
     curriculum: [{ row: 'medi:reptes', section: 'dades', note: 'Compara les grans zones climàtiques, els climes europeus i les dades que recull un climograma.' }],
     sources: [
+      ['Natural Earth · Vectors físics a 1:110 milions', 'https://www.naturalearthdata.com/downloads/110m-physical-vectors/'],
+      ['Natural Earth · Vectors físics a 1:10 milions', 'https://www.naturalearthdata.com/downloads/10m-physical-vectors/'],
+      ['NOAA/NCEI · ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
       ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
       ['AEMET · Atles climàtics', 'https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/atlas_climatico'],
     ],
@@ -1193,6 +1388,40 @@ window.quaderns ??= [];
     id: 'climes-espanya-catalunya',
     title: 'Del litoral atlàntic al Mediterrani i les Canàries',
     intro: 'En un mateix viatge per la Península i les illes podem trobar pluges regulars, estius secs o neu hivernal. Mirem com es reparteixen aquests patrons.',
+    coverFigure: 'referents-clima-espanya-catalunya',
+    figures: [
+      {
+        id: 'referents-clima-espanya-catalunya', section: 'atlantic', name: 'Cinc referents climàtics i un detall de Catalunya', ratio: 2280 / 1460,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Mapa amb exemples climàtics al nord-oest, a les Canàries, als Pirineus, a la Meseta i al litoral mediterrani. Un mapa de Catalunya situa la Val d’Aran, els Pirineus, la Plana de Lleida i el Barcelonès.',
+        caption: 'Mapa de referents climàtics. Els símbols indiquen llocs representatius. Les transicions entre climes són graduals.',
+        credit: 'NOAA/NCEI ETOPO 2022, Natural Earth i © EuroGeographics pels límits de Catalunya.',
+        variants: {
+          pla: { src: 'illustracions/m018/referents-clima-espanya-catalunya-pla.png', thumbnail: 'illustracions/m018/miniatures/referents-clima-espanya-catalunya-pla.jpg' },
+          atles: { src: 'illustracions/m018/referents-clima-espanya-catalunya-atles.png', thumbnail: 'illustracions/m018/miniatures/referents-clima-espanya-catalunya-atles.jpg' },
+        },
+      },
+      {
+        id: 'climogrames-a-b', section: 'litoral', name: 'Dos climes llegits en dos gràfics', ratio: 2280 / 1510,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dos climogrames de dotze mesos, amb barres de precipitació fins a 160 mm i una línia de temperatura fins a 32 °C. El lloc A té un mínim de pluja molt marcat al juliol. El lloc B té barres més altes la major part de l’any.',
+        caption: 'Dades inventades per comparar patrons. Els dos gràfics tenen les mateixes escales.',
+        variants: {
+          pla: { src: 'illustracions/m018/climogrames-a-b-pla.png', thumbnail: 'illustracions/m018/miniatures/climogrames-a-b-pla.jpg' },
+          atles: { src: 'illustracions/m018/climogrames-a-b-atles.png', thumbnail: 'illustracions/m018/miniatures/climogrames-a-b-atles.jpg' },
+        },
+      },
+      {
+        id: 'vessants-illa-canaria', section: 'subtropical', name: 'Un vessant amb núvols i un altre de més sec', ratio: 1200 / 775,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Illa amb fletxa d’alisis entrant pel nord, núvols a mig vessant i menys núvols al sud en aquest exemple.',
+        caption: 'Tall esquemàtic. En algunes illes, els alisis aporten aire humit i afavoreixen la formació de núvols al vessant nord.',
+        variants: {
+          pla: { src: 'illustracions/m018/vessants-illa-canaria-pla.png', thumbnail: 'illustracions/m018/miniatures/vessants-illa-canaria-pla.jpg' },
+          atles: { src: 'illustracions/m018/vessants-illa-canaria-atles.png', thumbnail: 'illustracions/m018/miniatures/vessants-illa-canaria-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('atlantic', 'Pluges repartides a l’àrea atlàntica',
         essencial('Al nord i nord-oest peninsular hi ha zones de **clima atlàntic**, amb pluges freqüents i temperatures generalment moderades prop de la costa.'),
@@ -1214,9 +1443,16 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'clima', title: 'El clima i la vegetació' },
     theme: 'Clima i paisatge',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Identifica patrons atlàntics, subtropicals, de muntanya i mediterranis a Espanya i Catalunya.',
     curriculum: [{ row: 'medi:reptes', section: 'litoral', note: 'Identifica patrons atlàntics, subtropicals, de muntanya i mediterranis a Espanya i Catalunya.' }],
     sources: [
+      ['Natural Earth · Vectors físics a 1:10 milions', 'https://www.naturalearthdata.com/downloads/10m-physical-vectors/'],
+      ['NOAA/NCEI · ETOPO 2022', 'https://www.ncei.noaa.gov/products/etopo-global-relief-model'],
+      ['Eurostat/GISCO · Límits NUTS 2024', 'https://gisco-services.ec.europa.eu/distribution/v2/nuts/nuts-2024-files.html'],
       ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
       ['AEMET · Atles climàtics', 'https://www.aemet.es/es/serviciosclimaticos/datosclimatologicos/atlas_climatico'],
     ],
@@ -1226,6 +1462,39 @@ window.quaderns ??= [];
     id: 'vegetacio-espanya-catalunya',
     title: 'Els paisatges que formen les plantes',
     intro: 'Un bosc humit, una pineda de muntanya i una màquia litoral poden assemblar-se de lluny i ser molt diferents de prop. L’aigua, les temperatures, el sòl i els usos humans hi tenen a veure.',
+    coverFigure: 'quatre-paisatges-vegetals',
+    figures: [
+      {
+        id: 'quatre-paisatges-vegetals', section: 'subtropical', name: 'Quatre paisatges en paral·lel', ratio: 2280 / 1440,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Bosc humit amb núvols a les Canàries, prat delimitat per una tanca i un bosc caducifoli a l’àrea atlàntica, prat per sobre del bosc a l’alta muntanya i alzines disperses amb matollar a l’àrea mediterrània.',
+        caption: 'Quatre exemples de paisatges vegetals. Compara on creixen els arbres, com és el matollar i quines pistes mostren l’ús del sòl.',
+        variants: {
+          pla: { src: 'illustracions/m019/quatre-paisatges-vegetals-pla.png', thumbnail: 'illustracions/m019/miniatures/quatre-paisatges-vegetals-pla.jpg' },
+          atles: { src: 'illustracions/m019/quatre-paisatges-vegetals-atles.png', thumbnail: 'illustracions/m019/miniatures/quatre-paisatges-vegetals-atles.jpg' },
+        },
+      },
+      {
+        id: 'vegetacio-vessant-canari', section: 'subtropical', name: 'De les plantes de zones baixes al bosc humit', ratio: 2280 / 1190,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'Un cardonal de tiges suculentes creix a baix. La laurisilva ocupa el sector humit amb núvols. Les capçades dels pins destaquen més amunt. Les formacions es barregen als límits.',
+        caption: 'Vessant idealitzat. La distribució del cardonal, la laurisilva i la pineda canària varia segons l’illa, l’orientació i l’altitud.',
+        variants: {
+          pla: { src: 'illustracions/m019/vegetacio-vessant-canari-pla.png', thumbnail: 'illustracions/m019/miniatures/vegetacio-vessant-canari-pla.jpg' },
+          atles: { src: 'illustracions/m019/vegetacio-vessant-canari-atles.png', thumbnail: 'illustracions/m019/miniatures/vegetacio-vessant-canari-atles.jpg' },
+        },
+      },
+      {
+        id: 'fulla-d-alzina', section: 'mediterrania', name: 'Una fulla en temps sec', ratio: 1200 / 1010,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Anvers i revers de la mateixa forma de fulla, a la mateixa escala. L’anvers és més fosc i el revers mostra els nervis. Un detall mostra el gruix de la fulla coriàcia.',
+        caption: 'Model d’una fulla adulta d’alzina. L’anvers és més fosc i el revers és més clar. El detall ampliat mostra la làmina gruixuda.',
+        variants: {
+          pla: { src: 'illustracions/m019/fulla-d-alzina-pla.png', thumbnail: 'illustracions/m019/miniatures/fulla-d-alzina-pla.jpg' },
+          atles: { src: 'illustracions/m019/fulla-d-alzina-atles.png', thumbnail: 'illustracions/m019/miniatures/fulla-d-alzina-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('subtropical', 'Canàries, del cardonal a la laurisilva',
         essencial('A les **Canàries**, la vegetació varia amb l’altitud i la humitat. En sectors humits hi pot créixer la **laurisilva**.'),
@@ -1244,9 +1513,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'clima', title: 'El clima i la vegetació' },
     theme: 'Clima i paisatge',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Relaciona vegetació mediterrània, atlàntica, subtropical i de muntanya amb condicions del medi.',
     curriculum: [{ row: 'medi:reptes', section: 'muntanya', note: 'Relaciona vegetació mediterrània, atlàntica, subtropical i de muntanya amb condicions del medi.' }],
     sources: [
+      ['Govern de Canàries · Ecosistemes terrestres zonals', 'https://www.gobiernodecanarias.org/medioambiente/materias/biodiversidad/antiguo__biodiversidad-canaria/ecosistemas-terrestres-zonales/'],
+      ['Herbari Virtual de la UIB · Quercus ilex', 'https://herbarivirtual.uib.es/ca/general/170/especie/quercus-ilex-l-subsp-ilex'],
       ['IGN · Atlas Didàctic', 'https://educativo.ign.es/atlas-didactico/'],
       ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
     ],
@@ -1256,6 +1531,39 @@ window.quaderns ??= [];
     id: 'canvi-climatic-causes',
     title: 'El clima canvia, busquem-ne les causes',
     intro: 'El nostre planeta reté una part de l’energia que rep del Sol. Quan canvia la quantitat de gasos que hi ha a l’atmosfera, també canvia aquest equilibri.',
+    coverFigure: 'energia-i-efecte-hivernacle',
+    figures: [
+      {
+        id: 'energia-i-efecte-hivernacle', section: 'hivernacle', name: 'Com es reparteix l’energia', ratio: 2280 / 1210,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Fletxes contínues mostren la llum solar cap a la superfície. Fletxes discontínues mostren la radiació infraroja que emet la superfície, la que arriba a l’espai i la que els gasos reemeten cap a l’espai i cap a la superfície.',
+        caption: 'Esquema de l’efecte hivernacle natural. Les fletxes indiquen recorreguts qualitatius. Alguns gasos absorbeixen part de la radiació infraroja i en tornen a emetre en diverses direccions.',
+        variants: {
+          pla: { src: 'illustracions/m020/energia-i-efecte-hivernacle-pla.png', thumbnail: 'illustracions/m020/miniatures/energia-i-efecte-hivernacle-pla.jpg' },
+          atles: { src: 'illustracions/m020/energia-i-efecte-hivernacle-atles.png', thumbnail: 'illustracions/m020/miniatures/energia-i-efecte-hivernacle-atles.jpg' },
+        },
+      },
+      {
+        id: 'dies-per-sobre-del-llindar', section: 'canvi', name: 'Un recompte en dos períodes', ratio: 2280 / 1170,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Dues barres comencen a zero. La del període A arriba a 4 dies i la del període B a 15 dies, a la mateixa estació i amb el mateix llindar.',
+        caption: 'Exemple inventat amb dos períodes de la mateixa durada. Quins altres registres podríem consultar per saber si el canvi es manté?',
+        variants: {
+          pla: { src: 'illustracions/m020/dies-per-sobre-del-llindar-pla.png', thumbnail: 'illustracions/m020/miniatures/dies-per-sobre-del-llindar-pla.jpg' },
+          atles: { src: 'illustracions/m020/dies-per-sobre-del-llindar-atles.png', thumbnail: 'illustracions/m020/miniatures/dies-per-sobre-del-llindar-atles.jpg' },
+        },
+      },
+      {
+        id: 'dues-maneres-d-actuar', section: 'efectes', name: 'Actuar sobre la causa i preparar-se per als efectes', ratio: 2280 / 1380,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'A l’esquerra, baixen els trajectes en cotxe i algunes persones caminen fins a l’escola. A la dreta, s’obre un local de barri i s’hi veuen persones a l’ombra de l’entrada.',
+        caption: 'Dues seqüències esquemàtiques. Una escola fa a peu part dels trajectes curts i un barri obre un espai fresc durant les hores de més calor.',
+        variants: {
+          pla: { src: 'illustracions/m020/dues-maneres-d-actuar-pla.png', thumbnail: 'illustracions/m020/miniatures/dues-maneres-d-actuar-pla.jpg' },
+          atles: { src: 'illustracions/m020/dues-maneres-d-actuar-atles.png', thumbnail: 'illustracions/m020/miniatures/dues-maneres-d-actuar-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('hivernacle', 'L’efecte hivernacle, un procés natural',
         essencial('Alguns gasos de l’atmosfera absorbeixen i tornen a emetre part de l’energia que la Terra envia cap a l’espai. Aquest procés és l’**efecte hivernacle**.'),
@@ -1274,9 +1582,14 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'clima', title: 'El clima i la vegetació' },
     theme: 'Clima i paisatge',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Explica l’efecte hivernacle i relaciona les emissions humanes amb l’escalfament i els impactes climàtics.',
     curriculum: [{ row: 'medi:ecosocial', section: 'efectes', note: 'Explica l’efecte hivernacle i relaciona les emissions humanes amb l’escalfament i els impactes climàtics.' }],
     sources: [
+      ['IPCC · AR6, bases físiques', 'https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-1/'],
       ['IPCC · Informe de síntesi sobre el canvi climàtic', 'https://www.ipcc.ch/report/ar6/syr/resources/spm-headline-statements/'],
       ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
     ],
@@ -1286,6 +1599,39 @@ window.quaderns ??= [];
     id: 'etapes-prehistoria',
     title: 'Tres maneres de mirar la prehistòria',
     intro: 'Una eina de pedra, una olla i un estri de ferro poden donar pistes sobre moments diferents del passat. Les etapes ens ajuden a ordenar-les.',
+    coverFigure: 'tres-escenes-prehistoria',
+    figures: [
+      {
+        id: 'tres-escenes-prehistoria', section: 'paleolitic', name: 'Tres escenes i pistes per observar', ratio: 2280 / 1430,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Al paleolític, un grup recull fruits i hi ha una eina de pedra tallada. Al neolític, hi ha un camp, cabanes i un recipient de ceràmica. A les edats dels metalls, un intercanvi reuneix peces de metall, pedra i fusta.',
+        caption: 'Reconstruccions esquemàtiques. Els canvis es van produir en moments diferents segons el lloc. Cerca un material que aparegui en més d’una escena.',
+        variants: {
+          pla: { src: 'illustracions/m021/tres-escenes-prehistoria-pla.png', thumbnail: 'illustracions/m021/miniatures/tres-escenes-prehistoria-pla.jpg' },
+          atles: { src: 'illustracions/m021/tres-escenes-prehistoria-atles.png', thumbnail: 'illustracions/m021/miniatures/tres-escenes-prehistoria-atles.jpg' },
+        },
+      },
+      {
+        id: 'materials-en-tres-restes', section: 'metalls', name: 'Tres materials, tres detalls', ratio: 2280 / 1130,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Un estri de sílex amb una vora tallada, un fragment decorat de ceràmica amb secció visible i una peça corbada de bronze. Sota el bronze apareixen els rètols coure i estany units amb un signe més.',
+        caption: 'Tres models de peces. Compara el tall del sílex, la secció de l’argila i la superfície del bronze. Cada vinyeta té escala pròpia.',
+        variants: {
+          pla: { src: 'illustracions/m021/materials-en-tres-restes-pla.png', thumbnail: 'illustracions/m021/miniatures/materials-en-tres-restes-pla.jpg' },
+          atles: { src: 'illustracions/m021/materials-en-tres-restes-atles.png', thumbnail: 'illustracions/m021/miniatures/materials-en-tres-restes-atles.jpg' },
+        },
+      },
+      {
+        id: 'fogar-en-dos-contextos', section: 'neolitic', name: 'La mateixa pista en dos contextos', ratio: 2280 / 1190,
+        width: 100, position: 'center', wrap: false, anchor: 'after',
+        alt: 'El retall A té un fogar, peces de sílex i ossos d’animals. El retall B té un fogar, grans de cereal i un fragment de recipient.',
+        caption: 'Dos conjunts inventats per practicar la interpretació. El fogar és comú als dos retalls. Què hi afegeixen les altres restes?',
+        variants: {
+          pla: { src: 'illustracions/m021/fogar-en-dos-contextos-pla.png', thumbnail: 'illustracions/m021/miniatures/fogar-en-dos-contextos-pla.jpg' },
+          atles: { src: 'illustracions/m021/fogar-en-dos-contextos-atles.png', thumbnail: 'illustracions/m021/miniatures/fogar-en-dos-contextos-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('paleolitic', 'El paleolític, seguir els recursos',
         essencial('Durant el **paleolític**, les persones obtenien aliments caçant, pescant i recollint plantes i fruits.'),
@@ -1301,9 +1647,14 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'prehistoria', title: 'La prehistòria' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Ordena el paleolític, el neolític i les edats dels metalls i compara canvis en la vida quotidiana.',
     curriculum: [{ row: 'medi:passat', section: 'metalls', note: 'Ordena el paleolític, el neolític i les edats dels metalls i compara canvis en la vida quotidiana.' }],
     sources: [
+      ['Visitmuseum · Jaciment neolític de la Draga', 'https://visitmuseum.gencat.cat/ca/museu/poblat-neolitic-de-la-draga/recorregut/jaciment-neolitic-de-la-draga'],
       ['Museu d’Arqueologia de Catalunya', 'https://www.mac.cat/'],
       ['Patrimoni cultural · La Draga', 'https://patrimoni.gencat.cat/ca/coleccio/la-draga'],
     ],
@@ -1313,6 +1664,39 @@ window.quaderns ??= [];
     id: 'campament-paleolitic',
     title: 'Pistes d’un campament paleolític',
     intro: 'Si només ens quedessin unes pedres tallades i un cercle de cendres, podríem descobrir com s’organitzava un campament?',
+    coverFigure: 'planta-campament-i-fogar',
+    figures: [
+      {
+        id: 'planta-campament-i-fogar', section: 'refugi', name: 'Plànol esquemàtic d’un campament', ratio: 2280 / 1330,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Planta d’una balma amb la línia del sortint de roca i una zona excavada discontínua. Dins del perímetre hi ha un fogar amb cendra i carbó, peces de pedra i ossos.',
+        caption: 'Campament fictici en un plànol esquemàtic. Localitza els objectes prop del fogar i pensa quines altres pistes permetrien comprovar la teva interpretació.',
+        variants: {
+          pla: { src: 'illustracions/m022/planta-campament-i-fogar-pla.png', thumbnail: 'illustracions/m022/miniatures/planta-campament-i-fogar-pla.jpg' },
+          atles: { src: 'illustracions/m022/planta-campament-i-fogar-atles.png', thumbnail: 'illustracions/m022/miniatures/planta-campament-i-fogar-atles.jpg' },
+        },
+      },
+      {
+        id: 'rascador-cendra-i-agulla', section: 'estris', name: 'Tres restes que es poden examinar', ratio: 2280 / 1110,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        alt: 'Tres retalls en fons clar. El rascador mostra retocs de la vora, la cendra té fragments de carbó i l’agulla d’os té un forat. Les dues peces sòlides tenen barra d’escala.',
+        caption: 'Models de tres restes. Fixa’t en la vora treballada, la cendra amb carbó i el forat de l’agulla.',
+        variants: {
+          pla: { src: 'illustracions/m022/rascador-cendra-i-agulla-pla.png', thumbnail: 'illustracions/m022/miniatures/rascador-cendra-i-agulla-pla.jpg' },
+          atles: { src: 'illustracions/m022/rascador-cendra-i-agulla-atles.png', thumbnail: 'illustracions/m022/miniatures/rascador-cendra-i-agulla-atles.jpg' },
+        },
+      },
+      {
+        id: 'figures-paleolitiques-a-la-roca', section: 'pintures', name: 'Figures en una paret de roca', ratio: 1200 / 800,
+        width: 50, position: 'right', wrap: true, anchor: 'after',
+        alt: 'Una paret de roca mostra un animal amb cornamenta, un grup de punts foscos i el contorn clar d’una mà envoltat de pigment ocre.',
+        caption: 'Recreació original de tres formes d’art rupestre. S’hi veuen una figura animal, punts i una mà en negatiu. El seu significat queda obert a interpretació.',
+        variants: {
+          pla: { src: 'illustracions/m022/figures-paleolitiques-a-la-roca-pla.png', thumbnail: 'illustracions/m022/miniatures/figures-paleolitiques-a-la-roca-pla.jpg' },
+          atles: { src: 'illustracions/m022/figures-paleolitiques-a-la-roca-atles.png', thumbnail: 'illustracions/m022/miniatures/figures-paleolitiques-a-la-roca-atles.jpg' },
+        },
+      },
+    ],
     sections: [
       section('refugi', 'Entre coves, balmes i aire lliure',
         essencial('Els grups paleolítics podien instal·lar-se **a l’aire lliure**, en coves o sota una balma.'),
@@ -1334,9 +1718,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'prehistoria', title: 'La prehistòria' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Formes planes i traços nets.' },
+      { id: 'atles', label: 'Atles', description: 'Volum i textura als paisatges i més contrast als gràfics.' },
+    ],
     description: 'Interpreta refugis, eines, foc, pintures i vestits a partir de les restes que es poden conservar.',
     curriculum: [{ row: 'medi:passat', section: 'vestits', note: 'Interpreta refugis, eines, foc, pintures i vestits a partir de les restes que es poden conservar.' }],
     sources: [
+      ['IPHES · Abric Romaní', 'https://www.iphes.cat/ca/abric-roman%C3%AD'],
+      ['Museu d’Arqueologia de Catalunya · Art primer', 'https://artprimer.mac.cat/wp-content/uploads/2020/10/MAC_CATALEG_ARTPRIMER.pdf'],
       ['IPHES · Memòria d’excavació de l’Abric Romaní', 'https://calaix.gencat.cat/bitstream/handle/10687/457382/qmem16402.pdf?sequence=1'],
       ['Museu d’Arqueologia de Catalunya', 'https://www.mac.cat/'],
     ],

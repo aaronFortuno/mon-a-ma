@@ -5,13 +5,10 @@
   const countLabel = count => count === 1 ? '1 material' : count + ' materials';
   const cycleLabel = cycle => cycle.label + (cycle.stage === 'ESO' ? ' · ESO' : '');
 
-  function hasIllustrationSet(topic) {
-    const mainFigures = topic.chapters.flatMap(chapter => chapter.sections.map(section =>
-      chapter.figures?.find(figure => figure.section === section.id)).filter(Boolean));
-    if (!mainFigures.length) return false;
-    if (mainFigures.every(figure => figure.src)) return true;
-    return (topic.figureStyles ?? []).some(style =>
-      mainFigures.every(figure => figure.src || figure.variants?.[style.id]?.src));
+  function hasPublishedIllustration(topic) {
+    const styles = topic.figureStyles ?? [];
+    return topic.chapters.some(chapter => chapter.figures?.some(figure =>
+      figure.src || styles.some(style => figure.variants?.[style.id]?.src)));
   }
 
   function setupCurriculum(topics, materialAddress, isDefinitive) {
@@ -33,10 +30,10 @@
     let helpTimer;
     const helpContents = new WeakMap();
     const matches = new Map();
-    const illustratedTopics = new Set(topics.filter(hasIllustrationSet));
+    const illustratedTopics = new Set(topics.filter(hasPublishedIllustration));
     const statusLabel = topic => {
       const status = isDefinitive(topic) ? 'Definitiu' : 'En desenvolupament';
-      return illustratedTopics.has(topic) ? status + ' · Lot d’il·lustracions incorporat' : status;
+      return illustratedTopics.has(topic) ? status + ' · Il·lustracions en validació' : status;
     };
 
     for (const topic of topics) {

@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.84 · 28 de novembre de 2026
+
+- Incorpora els lots Pla i Atles de l’M013 a l’M022 amb l’Atles per defecte.
+- Marca al mapa curricular les lectures amb il·lustracions en fase de validació.
+
 ## 0.1.83 · 28 de novembre de 2026
 
 - Afegeix banderetes al visor i al mapa curricular i un recull local amb exportació JSON.
