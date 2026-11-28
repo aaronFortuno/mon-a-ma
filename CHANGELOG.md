@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.75 · 28 de novembre de 2026
+
+- Publica M111–M114, quatre esborranys sobre petjada ecològica, impostos, comerç del cacau i xarxes alimentàries.
+
 ## 0.1.74 · 28 de novembre de 2026
 
 - Publica M109 i M110, dos esborranys sobre la cerca i l’atribució de fonts i la protecció dels comptes digitals.

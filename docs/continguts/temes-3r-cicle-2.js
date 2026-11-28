@@ -1451,4 +1451,108 @@ window.variantsMaterials ??= {};
       guia: ['Marca què demana el missatge inesperat.', 'Digues què has de mantenir en privat.', 'Tria a qui ho explicaries abans de continuar.'],
       ampliacio: [repte('Dues capes, dos problemes', 'En un cas fictici, algú reutilitza la mateixa contrasenya en dos comptes. Un té verificació en dos passos i l’altre no. Explica per què és útil que les claus siguin diferents, fins i tot quan un compte té una segona comprovació.')],
     });
+
+  const economia = itinerari('recursos-i-economia', 'Recursos, economia i vida quotidiana', 'Ciutadania');
+  const vida = itinerari('vida', 'La diversitat de la vida', 'Éssers vius');
+
+  fitxa(economia, 'M111', 'petjada-de-l-esmorzar', 'Quina petjada deixa el nostre esmorzar?',
+    'Dues persones porten la mateixa ració de poma. Una la porta en una carmanyola que fa servir cada dia. L’altra, en un envàs d’un sol ús. Què podem comparar i quines dades ens falten?', {
+      descripcio: 'Segueix els recursos que calen per preparar un esmorzar i compara opcions amb criteris explícits.',
+      curriculum: [['ecosocial', 'comparar', 'Relaciona la petjada ecològica amb els recursos limitats, la producció, el transport i els residus.']],
+      fonts: [sabersCicleSuperior, ['Global Footprint Network · Dades i mètode de la petjada ecològica', 'https://footprintnetwork.org/resources/data/']],
+      apartats: [
+        apartat('recorregut', 'De l’hort fins al pati',
+          'Un aliment necessita **recursos** durant el seu recorregut. Una poma creix amb sòl, aigua i llum, i després es pot guardar, transportar i envasar.',
+          'Dibuixa quatre passos: conrear, preparar, transportar i menjar. Anota un recurs necessari en cada pas. Al final del recorregut hi pot haver restes d’aliment, un envàs per llençar o un recipient per rentar i tornar a fer servir.'),
+        apartat('petjada', 'Què mesura una petjada ecològica?',
+          'La **petjada ecològica** estima quina superfície productiva cal per obtenir recursos que fem servir i absorbir part dels residus que generem, especialment el diòxid de carboni.',
+          'Per comparar esmorzars, podem començar observant una part, com el material dels envasos o l’energia del transport. Per estimar la petjada sencera necessitaríem més dades sobre el recorregut.'),
+        apartat('comparar', 'Compara la mateixa ració',
+          'Fes servir la **mateixa ració** i explica quin criteri compares. Per exemple, pots comptar els envasos d’un sol ús d’una setmana.',
+          taula(['Opció', 'Cinc esmorzars', 'Què caldria saber?'], [
+            ['Carmanyola', 'El mateix recipient cinc vegades.', 'Quantes vegades es fa servir en total i com es renta.'],
+            ['Envàs d’un sol ús', 'Cinc envasos.', 'De quin material són i què se’n fa després.'],
+          ], 32),
+          repte('Una dada bona per començar', 'Amb cinc esmorzars, explica què pots comptar amb la taula. Si el trajecte de la poma és diferent en cada opció, exactament quina dada afegiries per comparar el transport?')),
+      ],
+      guia: ['Indica quin aliment és igual en les dues opcions.', 'Compta els envasos d’un sol ús després de cinc esmorzars.', 'Digues una cosa que cal saber de la carmanyola.'],
+      ampliacio: [repte('Dues rutes i un sol criteri?', 'Una poma viatja menys quilòmetres i es guarda més temps en una cambra frigorífica. L’altra viatja més quilòmetres i es guarda menys temps. Quines dades d’energia i de transport et permetrien comparar els dos recorreguts?')],
+    });
+
+  fitxa(economia, 'M112', 'impostos-i-serveis-compartits', 'Qui paga la biblioteca, els fanals i els parcs?',
+    'En un poble, la biblioteca vol obrir més hores i la plaça necessita fanals nous. Com es decideix què es pot pagar amb els diners de què disposa l’ajuntament?', {
+      descripcio: 'Relaciona impostos i serveis públics i pren una decisió sobre un pressupost municipal senzill.',
+      curriculum: [['ecosocial', 'pressupost', 'Relaciona la funció social dels impostos amb el finançament de serveis públics i interpreta ingressos i despeses.']],
+      fonts: [sabersCicleSuperior, ['Agència Tributària · Els ingressos públics i els impostos', 'https://sede.agenciatributaria.gob.es/Sede/educacion-civico-tributaria/programa-educacion-civico-tributaria/que-son-impuestos/contenidos/ingresos-publicos-impuestos.html']],
+      apartats: [
+        apartat('serveis', 'Serveis que compartim',
+          'Un **servei públic** respon a necessitats de la comunitat. Mantenir una biblioteca, l’enllumenat o un parc requereix materials, persones i diners.',
+          'Convé pensar qui utilitza cada servei i què passaria si fallés. Per exemple, els fanals ajuden les persones a veure el carrer quan es fa fosc.'),
+        apartat('ingressos', 'D’on vénen els diners?',
+          'Els **impostos** són pagaments obligatoris establerts per llei amb què les administracions obtenen una part dels diners per finançar despeses i serveis públics.',
+          'Una administració pot rebre diners d’altres administracions. Amb un **pressupost** preveu quins ingressos tindrà i com es proposa distribuir les despeses.'),
+        apartat('pressupost', 'Pren una decisió amb un pressupost',
+          'En un exemple inventat, l’ajuntament preveu **34.000 €** d’ingressos per a tres actuacions. Suma les despeses previstes abans de decidir si hi cap una millora.',
+          taula(['Actuació', 'Despesa prevista'], [
+            ['Biblioteca', '18.000 €'],
+            ['Enllumenat', '8.000 €'],
+            ['Parcs', '6.000 €'],
+          ], 49),
+          'En aquest exemple, 24.000 € dels ingressos provenen d’impostos i 10.000 € arriben d’una altra administració. Tots els imports són dades de l’activitat.',
+          repte('Hi cap la millora?', 'Calcula la despesa total i quants diners queden. Ampliar l’horari de la biblioteca costa 2.500 € més. Explica si es pot afegir sense canviar els ingressos ni les altres despeses.')),
+      ],
+      guia: ['Suma 18.000 €, 8.000 € i 6.000 €.', 'Resta el total a 34.000 €.', 'Compara els diners que queden amb els 2.500 € de la millora.'],
+      ampliacio: [repte('Dues necessitats i els mateixos diners', 'Imagina que tens 2.000 € disponibles i que hi ha dues millores de 2.000 € cadascuna. Proposa com decidiries quina és més urgent, a qui faria servei i quines dades caldria conèixer.')],
+    });
+
+  fitxa(economia, 'M113', 'cadena-del-cacau', 'Del cacau a la xocolata, qui hi fa què?',
+    'Segueix el recorregut d’una rajola de xocolata des d’una finca de cacau fins a un comerç. Quines feines fan possible cada pas i com podem llegir el preu final?', {
+      descripcio: 'Segueix una cadena comercial i compara les funcions dels productors, les cooperatives i els comerços.',
+      curriculum: [
+        ['ecosocial', 'preu', 'Relaciona la cadena d’un producte amb costos, repartiment d’ingressos i cooperació.'],
+        ['reptes', 'recorregut', 'Interpreta els intercanvis entre llocs dins d’una cadena de l’economia global.'],
+      ],
+      fonts: [sabersCicleSuperior, ['FAO · Iniciativa per a un cacau sostenible', 'https://www.fao.org/investment-centre/about-us/how-we-work/investmentplanningpolicy/sustainable-cocoa-initiative/']],
+      apartats: [
+        apartat('recorregut', 'De la finca a la botiga',
+          'Una **cadena comercial** relaciona qui produeix, qui agrupa o transporta, qui transforma i qui ven un producte.',
+          'El cacau es conrea i es cull en una finca. Els grans es preparen i es poden agrupar per transportar-los. Una empresa els transforma en xocolata i el comerç fa arribar la rajola a qui la compra. Un producte pot passar per més d’un territori.'),
+        apartat('cooperativa', 'Quan els productors s’organitzen',
+          'En una **cooperativa**, les persones sòcies s’associen per fer una part de la feina en comú. Per exemple, poden agrupar la producció i negociar com es vendrà.',
+          'En comptes de transportar lots petits per separat, una cooperativa pot preparar un lot conjunt. El resultat depèn dels acords, dels costos i de la participació de les persones sòcies.'),
+        apartat('preu', 'Què representa cada part del preu?',
+          'El **preu final** recull aportacions de diversos passos. En un model simplificat podem repartir el preu entre funcions i comparar els imports.',
+          taula(['Funció', 'Part del preu en el model'], [
+            ['Producció del cacau', '0,45 €'],
+            ['Agrupació i transport', '0,35 €'],
+            ['Transformació', '0,85 €'],
+            ['Venda', '0,75 €'],
+          ], 54),
+          'Els imports són inventats. Cada part també pot cobrir costos, com salaris, materials, transport o lloguer. Per saber què queda a cada participant cal conèixer les seves despeses.',
+          repte('Llegeix el preu de la rajola', 'Suma les quatre quantitats i digues quina part correspon a la producció del cacau. Explica una feina que pot facilitar una cooperativa. Quina dada et faltaria per saber quant queda a qui ha cultivat el cacau?')),
+      ],
+      guia: ['Ordena «finca», «fàbrica» i «botiga».', 'Troba qui transforma el cacau en xocolata.', 'Explica una cosa que es pot compartir en una cooperativa.'],
+      ampliacio: [repte('Canvia un acord', 'En el model, la part per a la producció augmenta 0,15 € i la de la venda baixa 0,15 €. Calcula els imports nous i el total. Quina altra dada necessites per valorar com afecta cada participant?')],
+    });
+
+  fitxa(vida, 'M114', 'xarxa-alimentaria-de-la-bassa', 'Qui es menja qui en una bassa?',
+    'En una bassa, unes dàfnies mengen algues i alguns animals es mengen les dàfnies. Quan un organisme serveix d’aliment a més d’un, les fletxes comencen a formar una xarxa.', {
+      descripcio: 'Construeix una xarxa alimentària i distingeix el pas de l’energia del retorn de la matèria al medi.',
+      curriculum: [['vida', 'materia-i-energia', 'Representa una xarxa alimentària i diferencia el flux d’energia i el cicle de la matèria.']],
+      fonts: [sabersCicleSuperior, ['NOAA · Xarxes alimentàries aquàtiques', 'https://www.noaa.gov/education/resource-collections/marine-life/aquatic-food-webs']],
+      apartats: [
+        apartat('fletxes', 'Què indica una fletxa?',
+          'En aquesta **xarxa alimentària**, les fletxes van des de l’organisme que serveix d’aliment fins a l’organisme que se’l menja. **Algues → dàfnies** vol dir que les dàfnies mengen algues.',
+          'Les algues són **productores** perquè elaboren matèria orgànica aprofitant la llum. Les dàfnies són petits animals aquàtics i obtenen matèria i energia del que mengen.'),
+        apartat('xarxa', 'De dues cadenes a una xarxa',
+          'Una **cadena** segueix un camí d’alimentació. Una **xarxa** mostra els diferents camins que es connecten.',
+          'En el model, les algues alimenten dàfnies i alguns capgrossos. Les dàfnies serveixen d’aliment a un peix petit i a una larva de libèl·lula. La larva també pot alimentar-se de capgrossos petits. Dibuixa aquests cinc organismes i afegeix les fletxes corresponents.'),
+        apartat('materia-i-energia', 'Què va passant i què torna al medi?',
+          'L’**energia** entra a la xarxa gràcies a la llum que aprofiten els productors. Una part es transfereix amb l’aliment i una part es dispersa en forma de calor.',
+          'Quan hi ha restes, els **descomponedors**, com molts fongs i bacteris, les transformen. Una part de la matèria torna al medi en forma de nutrients que els productors poden aprofitar. Així la matèria circula.',
+          repte('Segueix una fletxa i imagina un canvi', 'Marca dos camins que comencin a les algues. Si durant uns dies disminueixen les dàfnies, quins organismes del model poden trobar menys aliment? Explica quina altra informació et caldria abans de dir que també disminuiran.')),
+      ],
+      guia: ['Dibuixa «Algues → dàfnies → peix petit».', 'Digues què mengen les dàfnies en aquest model.', 'Afegeix una fletxa de les dàfnies a la larva de libèl·lula i explica què indica.'],
+      ampliacio: [repte('Un mateix canvi, diverses conseqüències', 'Després d’una setmana amb poca llum es compten menys algues. Traça dos camins que podrien portar aquest canvi a altres organismes. Tria una mesura que recolliries durant diverses setmanes per comprovar una de les prediccions.')],
+    });
 }
