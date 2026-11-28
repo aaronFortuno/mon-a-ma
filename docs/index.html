@@ -7,16 +7,16 @@
   <title>Món a mà · Apunts i materials per explorar el medi</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png?v=0.1.4">
   <link rel="apple-touch-icon" href="assets/mon-a-ma.png?v=0.1.4">
-  <link rel="stylesheet" href="estils.css?v=0.1.68">
-  <script src="interficie.js?v=0.1.68" defer></script>
-  <script src="continguts/terra-i-mapes.js?v=0.1.68" defer></script>
-  <script src="continguts/variants-terra-i-mapes.js?v=0.1.68" defer></script>
-  <script src="continguts/temes-3r-cicle-2.js?v=0.1.68" defer></script>
-  <script src="imprimible.js?v=0.1.68" defer></script>
-  <script src="preferencies.js?v=0.1.68" defer></script>
-  <script src="continguts/curriculum.js?v=0.1.68" defer></script>
-  <script src="mapa-curricular.js?v=0.1.68" defer></script>
-  <script src="app.js?v=0.1.68" defer></script>
+  <link rel="stylesheet" href="estils.css?v=0.1.69">
+  <script src="interficie.js?v=0.1.69" defer></script>
+  <script src="continguts/terra-i-mapes.js?v=0.1.69" defer></script>
+  <script src="continguts/variants-terra-i-mapes.js?v=0.1.69" defer></script>
+  <script src="continguts/temes-3r-cicle-2.js?v=0.1.69" defer></script>
+  <script src="imprimible.js?v=0.1.69" defer></script>
+  <script src="preferencies.js?v=0.1.69" defer></script>
+  <script src="continguts/curriculum.js?v=0.1.69" defer></script>
+  <script src="mapa-curricular.js?v=0.1.69" defer></script>
+  <script src="app.js?v=0.1.69" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Ves al contingut</a>
@@ -324,7 +324,7 @@
         <button type="button" id="reset-user" title="Restableix els ajustos de totes les fitxes, les plantilles, les col·leccions i les imatges pròpies.">Restableix preferències</button>
         <span id="reset-user-status" role="status"></span>
         <a href="https://github.com/aaronFortuno/mon-a-ma/blob/main/license.md">MIT</a>
-        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.68 · Historial de versions">v0.1.68</button>
+        <button type="button" data-dialog="release" aria-haspopup="dialog" aria-label="v0.1.69 · Historial de versions">v0.1.69</button>
         <button type="button" data-dialog="about" aria-haspopup="dialog" aria-label="V4V · Sobre el projecte">V4V</button>
       </nav>
     </div>
@@ -335,6 +335,10 @@
       <form method="dialog"><button type="submit" class="icon-button" aria-label="Tanca" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
     </div>
     <div class="dialog-content">
+      <h3>v0.1.69</h3>
+      <ul>
+        <li>Eixampla el mapa curricular, compacta els indicadors i mostra la miniatura només en fitxes concretes. El llistat s’obre quan se selecciona una cel·la.</li>
+      </ul>
       <h3>v0.1.68</h3>
       <ul>
         <li>Afegeix 45 fitxes en desenvolupament (M052–M096) sobre drets, matèria, reproducció, benestar, institucions i història.</li>
@@ -835,7 +839,7 @@
         <li><span class="is-draft" aria-hidden="true"></span> En desenvolupament</li>
       </ul>
       <div class="curriculum-layout" id="curriculum-panel" role="tabpanel" aria-labelledby="curriculum-primary">
-        <div class="curriculum-grid scroll-pane" role="region" aria-label="Blocs per cicle" tabindex="0">
+        <div class="curriculum-grid" role="region" aria-label="Blocs per cicle">
           <table id="curriculum-table" class="curriculum-table">
             <caption class="sr-only">Sabers i materials disponibles per cicle</caption>
             <thead></thead>
@@ -843,7 +847,7 @@
           </table>
           <p id="curriculum-empty" hidden>No hi ha cap bloc amb aquests filtres.</p>
         </div>
-        <aside id="curriculum-detail" class="curriculum-detail scroll-pane" aria-labelledby="curriculum-detail-title" aria-live="polite" tabindex="0"></aside>
+        <aside id="curriculum-detail" class="curriculum-detail" aria-labelledby="curriculum-detail-title" aria-live="polite"></aside>
       </div>
     </div>
     <div class="curriculum-help" id="curriculum-help" role="tooltip" hidden></div>

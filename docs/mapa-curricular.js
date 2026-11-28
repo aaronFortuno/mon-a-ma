@@ -10,14 +10,13 @@
     const form = byId('curriculum-filters');
     const table = byId('curriculum-table');
     const panel = byId('curriculum-panel');
-    const grid = panel.querySelector('.curriculum-grid');
     const detail = byId('curriculum-detail');
     const help = byId('curriculum-help');
     const cycleSelect = form.elements.cycle;
     const areaSelect = form.elements.area;
     const tabs = [...dialog.querySelectorAll('[role="tab"]')];
     const filters = {
-      p: { area: '', cycle: '', withMaterials: false, selection: 'medi:terra:p3' },
+      p: { area: '', cycle: '', withMaterials: false, selection: '' },
       s: { area: '', cycle: '', withMaterials: false, selection: '' },
     };
     let stage = 'p';
@@ -41,7 +40,6 @@
 
     function hideHelp() {
       clearTimeout(helpTimer);
-      helpTarget?.querySelector('.curriculum-cell-action')?.removeAttribute('aria-describedby');
       helpTarget?.removeAttribute('aria-describedby');
       helpTarget = null;
       help.hidden = true;
@@ -52,8 +50,7 @@
       if (helpTarget === target || !dialog.open) return;
       hideHelp();
       helpTarget = target;
-      const control = target.querySelector('.curriculum-cell-action') ?? target;
-      control.setAttribute('aria-describedby', help.id);
+      target.setAttribute('aria-describedby', help.id);
       help.replaceChildren(...helpContents.get(target)());
       help.hidden = false;
       const frame = dialog.getBoundingClientRect();
@@ -62,14 +59,9 @@
       const left = anchor.left - frame.left + (anchor.width - help.offsetWidth) / 2;
       const below = anchor.bottom - frame.top + gap;
       const above = anchor.top - frame.top - help.offsetHeight - gap;
-      help.style.left = Math.max(gap, Math.min(left, dialog.clientWidth - help.offsetWidth - gap)) + 'px';
-      help.style.top = Math.max(gap, Math.min(below + help.offsetHeight <= dialog.clientHeight ? below : above,
+      help.style.left = dialog.scrollLeft + Math.max(gap, Math.min(left, dialog.clientWidth - help.offsetWidth - gap)) + 'px';
+      help.style.top = dialog.scrollTop + Math.max(gap, Math.min(below + help.offsetHeight <= dialog.clientHeight ? below : above,
         dialog.clientHeight - help.offsetHeight - gap)) + 'px';
-    }
-
-    function withHelp(element, content) {
-      element.dataset.curriculumHelp = '';
-      helpContents.set(element, content);
     }
 
     function helpHeading(title, context) {
@@ -77,22 +69,6 @@
       if (context) heading.append(node('span', '', context));
       heading.append(node('strong', '', title));
       return heading;
-    }
-
-    function saberHelp(row, columns) {
-      const list = node('dl', 'curriculum-help-sabers');
-      for (const cycle of columns) {
-        if (row[3][cycle.id]) list.append(node('dt', '', cycleLabel(cycle)), node('dd', '', row[3][cycle.id]));
-      }
-      return [helpHeading(row[2], row[1]), list];
-    }
-
-    function cellHelp(row, cycle, linked) {
-      const heading = helpHeading(row[2], cycleLabel(cycle));
-      if (!linked.length) return [heading, node('p', '', 'Encara sense materials')];
-      const titles = node('ul', 'curriculum-help-list');
-      for (const entry of linked) titles.append(node('li', '', entry.topic.code + ' · ' + entry.topic.title));
-      return [heading, titles];
     }
 
     function materialHelp(entry, cycle) {
@@ -108,17 +84,19 @@
       return [content];
     }
 
-    function materialLink(entry, square = false) {
+    function materialLink(entry, cycle, square = false) {
       const label = entry.topic.code + ' · ' + entry.topic.title;
       const anchor = node('a', square ? 'curriculum-square' : '', square ? '' : label);
       anchor.href = materialAddress(entry.topic, entry.section);
       anchor.dataset.material = '';
       anchor.setAttribute('aria-label', label + ' · ' + statusLabel(entry.topic));
       if (square && !isDefinitive(entry.topic)) anchor.classList.add('is-draft');
+      helpContents.set(anchor, () => materialHelp(entry, cycle));
       return anchor;
     }
 
-    function showCell(group, row, cycle) {
+    function showCell(group, row, cycle, reveal = false) {
+      hideHelp();
       const selected = cellKey(group, row, cycle);
       filters[stage].selection = selected;
       for (const control of table.querySelectorAll('button[data-cell], button[data-row]')) {
@@ -136,7 +114,9 @@
         const list = node('ul', 'curriculum-materials');
         for (const entry of linked) {
           const item = node('li');
-          item.append(materialLink(entry), node('small', 'curriculum-material-status', statusLabel(entry.topic)), node('p', '', entry.note));
+          const heading = node('div', 'curriculum-material-heading');
+          heading.append(materialLink(entry, cycle), node('small', 'curriculum-material-status', statusLabel(entry.topic)));
+          item.append(heading, node('p', '', entry.note));
           list.append(item);
         }
         detail.append(list);
@@ -147,7 +127,10 @@
       source.target = '_blank';
       source.rel = 'noopener';
       detail.append(source);
-      detail.scrollTop = 0;
+      if (reveal) {
+        if (window.matchMedia('(max-width: 800px)').matches) detail.scrollIntoView({ block: 'start' });
+        else title.scrollIntoView({ block: 'nearest' });
+      }
     }
 
     function makeCell(cell, group, row, cycle, linked) {
@@ -155,13 +138,10 @@
       const action = node('button', 'curriculum-cell-action');
       action.type = 'button';
       action.dataset.cell = cellKey(group, row, cycle);
+      action.setAttribute('aria-pressed', 'false');
       action.setAttribute('aria-label', row[2] + ', ' + cycleLabel(cycle) + ' · ' + (linked.length ? countLabel(linked.length) : 'Sense materials'));
-      action.addEventListener('click', () => {
-        hideHelp();
-        showCell(group, row, cycle);
-      });
+      action.addEventListener('click', () => showCell(group, row, cycle, true));
       cell.append(action);
-      withHelp(cell, () => cellHelp(row, cycle, linked));
 
       if (!linked.length) {
         const empty = node('span', 'curriculum-cell-empty', '—');
@@ -170,11 +150,7 @@
         return;
       }
       const squares = node('div', 'curriculum-squares');
-      for (const entry of linked) {
-        const square = materialLink(entry, true);
-        withHelp(square, () => materialHelp(entry, cycle));
-        squares.append(square);
-      }
+      for (const entry of linked) squares.append(materialLink(entry, cycle, true));
       cell.append(squares);
     }
 
@@ -213,15 +189,14 @@
           const rowAction = node('button', 'curriculum-row-action', row[2]);
           rowAction.type = 'button';
           rowAction.dataset.row = rowKey(group, row);
-          withHelp(rowAction, () => saberHelp(row, columns));
+          rowAction.setAttribute('aria-pressed', 'false');
           heading.append(rowAction);
           line.append(heading);
           const available = columns.filter(cycle => row[3][cycle.id]);
           rowAction.addEventListener('click', () => {
-            hideHelp();
             const cycle = available.find(cycle => resources(group, row, cycle).length) ??
               available.find(cycle => filters[stage].selection.endsWith(':' + cycle.id)) ?? available[0];
-            showCell(group, row, cycle);
+            showCell(group, row, cycle, true);
           });
           for (const cycle of columns) {
             const cell = line.insertCell();
@@ -232,18 +207,21 @@
             }
             const linked = resources(group, row, cycle);
             makeCell(cell, group, row, cycle, linked);
-            options.push({ group, row, cycle, count: linked.length });
+            options.push({ group, row, cycle });
           }
         }
       }
       table.hidden = !options.length;
       byId('curriculum-empty').hidden = options.length > 0;
-      const chosen = options.find(item => cellKey(item.group, item.row, item.cycle) === filters[stage].selection) ??
-        options.find(item => item.count) ?? options[0];
+      const chosen = options.find(item => cellKey(item.group, item.row, item.cycle) === filters[stage].selection);
       if (chosen) showCell(chosen.group, chosen.row, chosen.cycle);
-      detail.hidden = !chosen;
-      grid.scrollTop = 0;
-      grid.scrollLeft = 0;
+      else {
+        const title = node('h3', '', 'Sabers i fitxes');
+        title.id = 'curriculum-detail-title';
+        detail.replaceChildren(title, node('p', 'hint', 'Tria una cel·la per veure què es treballa al bloc i quines fitxes hi ha disponibles.'));
+      }
+      detail.hidden = !options.length;
+      dialog.scrollTop = 0;
     }
 
     function selectStage(tab) {
@@ -268,25 +246,28 @@
       render();
     }
 
-    const tooltipTrigger = element => element?.closest?.('[data-curriculum-help]');
-    table.addEventListener('pointerover', event => {
+    const tooltipTrigger = element => element?.closest?.('a[data-material]');
+    panel.addEventListener('pointerover', event => {
       if (event.pointerType === 'touch') return;
       const target = tooltipTrigger(event.target);
       if (target) showHelp(target);
     });
-    table.addEventListener('pointerout', event => {
-      if (event.pointerType === 'touch' || tooltipTrigger(event.relatedTarget) === helpTarget) return;
+    panel.addEventListener('pointerout', event => {
+      if (event.pointerType === 'touch' || !helpTarget ||
+        tooltipTrigger(event.target) !== helpTarget || tooltipTrigger(event.relatedTarget) === helpTarget) return;
       clearTimeout(helpTimer);
       helpTimer = setTimeout(hideHelp, 140);
     });
-    table.addEventListener('focusin', event => {
+    panel.addEventListener('focusin', event => {
       const target = tooltipTrigger(event.target);
       if (target) showHelp(target);
     });
-    table.addEventListener('focusout', hideHelp);
+    panel.addEventListener('focusout', event => {
+      if (tooltipTrigger(event.target) === helpTarget) hideHelp();
+    });
     help.addEventListener('pointerenter', () => clearTimeout(helpTimer));
     help.addEventListener('pointerleave', hideHelp);
-    grid.addEventListener('scroll', hideHelp);
+    dialog.addEventListener('scroll', hideHelp);
     window.addEventListener('resize', hideHelp);
     dialog.addEventListener('keydown', event => {
       if (event.key === 'Escape' && !help.hidden) {

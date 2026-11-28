@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.69 · 28 de novembre de 2026
+
+- Eixampla el mapa curricular, compacta els indicadors i mostra la miniatura només en fitxes concretes. El llistat s’obre quan se selecciona una cel·la.
+
 ## 0.1.68 · 28 de novembre de 2026
 
 - Afegeix les fitxes en desenvolupament M052–M096 del segon índex de cicle superior, amb variants de Suport, Base i Ampliació.
