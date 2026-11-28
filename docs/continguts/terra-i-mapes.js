@@ -168,21 +168,39 @@ window.quaderns ??= [];
     intro: 'Una boia de l’Atlàntic envia un missatge amb dos nombres. Podem saber on és sense veure-la? Amb un mapa i les seves **coordenades geogràfiques**, sí.',
     figures: [
       {
-        id: 'reserva-latitud', section: 'latitud', name: 'Els paral·lels en un globus', ratio: 2.35,
-        alt: 'Globus amb l’equador marcat a 0° i el paral·lel de 20° N ressaltat. El tram ocult del paral·lel es mostra amb una línia discontínua.',
-        caption: 'L’equador marca 0°. Els paral·lels del nord i del sud es fan més petits a mesura que s’acosten als pols.',
+        id: 'reserva-latitud', section: 'latitud', name: 'Els paral·lels en un globus', ratio: 2400 / 1178,
         variants: {
-          pla: { src: 'illustracions/m002/parallels-pla.png' },
-          volum: { src: 'illustracions/m002/parallels-volum.png' },
+          pla: {
+            src: 'illustracions/m002/parallels-pla.png?v=0.1.91',
+            thumbnail: 'illustracions/m002/miniatures/parallels-pla.jpg?v=0.1.91',
+            alt: 'Tall circular pel centre de la Terra, amb el pol nord a dalt. Un angle de 20° entre l’equador i el radi inclinat marca el paral·lel de 20° N.',
+            caption: 'En un tall pel centre pots veure l’angle entre l’equador i un punt del paral·lel de 20° N.',
+          },
+          volum: {
+            src: 'illustracions/m002/parallels-volum.png?v=0.1.91',
+            thumbnail: 'illustracions/m002/miniatures/parallels-volum.jpg?v=0.1.91',
+            alt: 'Globus vist en oblic. L’equador i el paral·lel de 20° N estan destacats. Un traç discontinu indica el tram del paral·lel que passa pel darrere.',
+            caption: 'Segueix el paral·lel de 20° N també pel darrere del globus. Compara’l amb els cercles més a prop del pol nord.',
+            credit: 'Relleu i costes a partir de Natural Earth.',
+          },
         },
       },
       {
-        id: 'reserva-longitud', section: 'longitud', name: 'Els meridians en un globus', ratio: 2.35,
-        alt: 'Globus amb arcs que uneixen els pols. El meridià de Greenwich marca 0°, amb el de 40° O a l’esquerra i el de 40° E a la dreta.',
-        caption: 'Els meridians es troben als pols. El de Greenwich és la referència per comptar els graus cap a l’est i cap a l’oest.',
+        id: 'reserva-longitud', section: 'longitud', name: 'Els meridians en un globus', ratio: 2400 / 1178,
         variants: {
-          pla: { src: 'illustracions/m002/meridians-pla.png' },
-          volum: { src: 'illustracions/m002/meridians-volum.png' },
+          pla: {
+            src: 'illustracions/m002/meridians-pla.png?v=0.1.91',
+            thumbnail: 'illustracions/m002/miniatures/meridians-pla.jpg?v=0.1.91',
+            alt: 'Vista des del pol nord, que és al centre. Tres radis corresponen a 40° O, Greenwich i 40° E. La vora del cercle és l’equador.',
+            caption: 'Des del pol nord, compara l’angle de 40° a l’oest i a l’est de Greenwich. La vora del cercle representa l’equador.',
+          },
+          volum: {
+            src: 'illustracions/m002/meridians-volum.png?v=0.1.91',
+            thumbnail: 'illustracions/m002/miniatures/meridians-volum.jpg?v=0.1.91',
+            alt: 'Globus de front amb els dos pols visibles. Greenwich i els meridians de 40° O i de 40° E uneixen tots dos pols.',
+            caption: 'Segueix cada meridià d’un pol a l’altre. On són més separats, a l’equador o prop dels pols?',
+            credit: 'Relleu i costes a partir de Natural Earth.',
+          },
         },
       },
       {
@@ -237,8 +255,8 @@ window.quaderns ??= [];
     ],
   }, {
     figureStyles: [
-      { id: 'pla', label: 'Esquema pla', description: 'Globus plans i graella esquemàtica.' },
-      { id: 'volum', label: 'Il·lustració amb volum', description: 'Globus amb ombres i graella sobre un mapa de l’Atlàntic.' },
+      { id: 'pla', label: 'Esquema pla', description: 'Tall lateral de latitud, vista polar de longitud i graella esquemàtica.' },
+      { id: 'volum', label: 'Il·lustració amb volum', description: 'Globus projectats amb costes i relleu i graella sobre un mapa de l’Atlàntic.' },
     ],
     status: 'definitiu',
     description: 'Fes servir els paral·lels i els meridians per llegir la latitud i la longitud i localitzar un punt al mapa.',

@@ -130,11 +130,11 @@ Les quatre figures principals i l’exemple opcional estan disponibles a Suport,
 
 ### Els paral·lels en un globus
 
-Mostra el globus amb el pol nord a dalt i el pol sud a baix. Identifica «Equador · 0°» i ressalta el paral·lel «20° N», al nord de l’equador. Inclou com a mínim un paral·lel al sud i fes visible com s’escurcen els cercles cap als pols.
+En Pla, talla l’esfera per l’eix dels pols i dibuixa un radi que formi 20° amb l’equador al costat nord. En Volum, projecta el globus des de sobre de l’equador perquè es vegi la curvatura del paral·lel de 20° N. Marca’n amb un traç discontinu la part que queda al darrere. Mantén l’equador visible i diferencia’l pel traç.
 
 ### Els meridians en un globus
 
-Repeteix l’orientació del primer globus. Dibuixa meridians que s’uneixen als dos pols i marca «Greenwich · 0°». Assenyala «40° O» a l’oest de Greenwich i un meridià a l’est. Conserva només les etiquetes necessàries per identificar el 0° i llegir les direccions.
+En Pla, mira des del pol nord. Els tres radis marquen 40° O, Greenwich i 40° E fins a l’equador, que és la vora del cercle. En Volum, mira el globus de front per veure com els mateixos meridians uneixen tots dos pols. Projecta la cartografia i les corbes a partir de les mateixes coordenades.
 
 ### Graella de les boies
 

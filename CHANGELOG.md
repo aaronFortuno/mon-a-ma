@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.91 · 28 de novembre de 2026
+
+- Renova els globus de l’M002 amb un tall lateral, una vista polar i globus amb costes i relleu projectats a partir de dades cartogràfiques.
+
 ## 0.1.90 · 28 de novembre de 2026
 
 - Aplica el criteri visual del castell M039 a l’M030. Renova la taberna i els espais públics i comparteix un únic plànol de terrasses.
