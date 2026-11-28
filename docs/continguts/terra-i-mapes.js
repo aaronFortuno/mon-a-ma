@@ -3151,37 +3151,48 @@ window.quaderns ??= [];
     coverFigure: 'planta-ciutat-medieval',
     figures: [
       {
-        id: 'planta-ciutat-medieval', section: 'muralla', name: 'D’una porta al mercat i al taller', ratio: 2280 / 1440,
+        id: 'planta-ciutat-medieval', section: 'muralla', name: 'D’una porta al mercat i al taller', ratio: 2280 / 1640,
         width: 100, position: 'center', wrap: false, anchor: 'lead',
-        alt: 'Una muralla amb una porta separa la ciutat del raval. Hi ha més d’un carrer que comunica la plaça del mercat amb la porta o el taller.',
-        caption: 'Planta d’una ciutat medieval imaginària. Tria un recorregut de tres parades i explica quina funció té cada espai.',
-        credit: 'Dibuix didàctic de producció pròpia.',
         variants: {
-          pla: { src: 'illustracions/m042/planta-ciutat-medieval-pla.png', thumbnail: 'illustracions/m042/miniatures/planta-ciutat-medieval-pla.jpg' },
-          atles: { src: 'illustracions/m042/planta-ciutat-medieval-atles.png', thumbnail: 'illustracions/m042/miniatures/planta-ciutat-medieval-atles.jpg' },
+          pla: {
+            src: 'illustracions/m042/planta-ciutat-medieval-pla.png', thumbnail: 'illustracions/m042/miniatures/planta-ciutat-medieval-pla.jpg',
+            alt: 'Plànol amb muralla, porta, raval, plaça del mercat i taller. Hi ha més d’un camí per arribar a la plaça i al taller.',
+            caption: 'Plànol d’un barri medieval imaginari. Troba dos recorreguts possibles entre la porta, la plaça i el taller.',
+            credit: 'Dibuix de producció pròpia a partir de la geometria compartida amb la vista elevada.',
+          },
+          atles: {
+            src: 'illustracions/m042/planta-ciutat-medieval-atles.png', thumbnail: 'illustracions/m042/miniatures/planta-ciutat-medieval-atles.jpg',
+            alt: 'Vista elevada del mateix barri. La muralla és de pedra i les teulades de teula. A la plaça hi ha dues parades i el taller s’obre al carrer.',
+            caption: 'Vista elevada del mateix barri. Fixa’t en la porta i les bifurcacions. Per on aniries de la plaça al taller?',
+            credit: 'Reconstrucció didàctica en tres dimensions inspirada en l’urbanisme de la Barcelona medieval.',
+          },
         },
       },
       {
-        id: 'mercat-oficis-i-productes', section: 'placa', name: 'Una plaça amb feines diferents', ratio: 2280 / 1340,
+        id: 'mercat-oficis-i-productes', section: 'placa', name: 'Una plaça amb feines diferents', ratio: 2280 / 1640,
         width: 100, position: 'center', wrap: false, anchor: 'lead',
-        alt: 'Una persona arriba amb productes del camp, una parada els posa a la venda i una persona treballa en un taller obert a la plaça.',
-        caption: 'Reconstrucció didàctica d’una plaça de mercat. Segueix un producte del camp fins a la parada i identifica què es fa al taller.',
-        credit: 'Dibuix didàctic de producció pròpia.',
         variants: {
-          pla: { src: 'illustracions/m042/mercat-oficis-i-productes-pla.png', thumbnail: 'illustracions/m042/miniatures/mercat-oficis-i-productes-pla.jpg' },
-          atles: { src: 'illustracions/m042/mercat-oficis-i-productes-atles.png', thumbnail: 'illustracions/m042/miniatures/mercat-oficis-i-productes-atles.jpg' },
+          pla: {
+            src: 'illustracions/m042/mercat-oficis-i-productes-pla.png', thumbnail: 'illustracions/m042/miniatures/mercat-oficis-i-productes-pla.jpg',
+            alt: 'Tres vinyetes segueixen unes pomes d’una cistella a la parada i a la mà del comprador. Un requadre separat indica el taller de cuir.',
+            caption: 'Segueix les pomes en els tres moments. Quina feina es fa al taller, al costat del mercat?',
+            credit: 'Esquema didàctic de producció pròpia.',
+          },
+          atles: {
+            src: 'illustracions/m042/mercat-oficis-i-productes-atles.png', thumbnail: 'illustracions/m042/miniatures/mercat-oficis-i-productes-atles.jpg',
+            alt: 'A peu de plaça, una dona porta una cistella de pomes. Una venedora les posa al taulell i un comprador en tria una. A la dreta, un artesà treballa el cuir.',
+            caption: 'Reconstrucció d’una plaça medieval. Segueix les pomes de la cistella a la parada. Quina pista deixa veure què es fa al taller?',
+            credit: 'Reconstrucció didàctica generada, inspirada en l’activitat del mercat i els oficis urbans medievals.',
+          },
         },
       },
       {
-        id: 'tres-fonts-sobre-una-epidemia', section: 'malalties', name: 'Tres documents sobre una epidèmia a la ciutat', ratio: 2280 / 1320,
+        id: 'tres-fonts-sobre-una-epidemia', section: 'malalties', name: 'Tres documents sobre una epidèmia a la ciutat', ratio: 2280 / 1640,
         width: 100, position: 'center', wrap: false, anchor: 'lead',
-        alt: 'Tres targetes presenten un registre d’enterraments amb dates, un testament amb una disposició i una ordenança amb una regla municipal.',
-        caption: 'Tres exemples inventats. Quin document serviria per comptar enterraments? Quin ajudaria a entendre una decisió del govern local?',
-        credit: 'Dibuix didàctic de producció pròpia.',
-        variants: {
-          pla: { src: 'illustracions/m042/tres-fonts-sobre-una-epidemia-pla.png', thumbnail: 'illustracions/m042/miniatures/tres-fonts-sobre-una-epidemia-pla.jpg' },
-          atles: { src: 'illustracions/m042/tres-fonts-sobre-una-epidemia-atles.png', thumbnail: 'illustracions/m042/miniatures/tres-fonts-sobre-una-epidemia-atles.jpg' },
-        },
+        alt: 'Tres fragments inventats amb transcripcions. Un registre conté dates d’enterrament, un testament deixa estris i una ordenança estableix un avís.',
+        caption: 'Tres fragments inventats amb la transcripció en català actual. Quin document serviria per comptar enterraments? Quin ajudaria a entendre una decisió del consell?',
+        credit: 'Fragments i transcripcions didàctics de producció pròpia.',
+        src: 'illustracions/m042/tres-fonts-sobre-una-epidemia.png', thumbnail: 'illustracions/m042/miniatures/tres-fonts-sobre-una-epidemia.jpg',
       },
     ],
     sections: [
@@ -3209,12 +3220,13 @@ window.quaderns ??= [];
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
     figureStyles: [
-      { id: 'pla', label: 'Pla', description: 'Formes planes, traços nets i una paleta més gràfica.' },
-      { id: 'atles', label: 'Atles', description: 'Volum, textura i contrast de color.' },
+      { id: 'pla', label: 'Pla', description: 'Planta per resseguir els carrers i seqüència per seguir el producte.' },
+      { id: 'atles', label: 'Atles', description: 'Vista elevada del barri i reconstrucció a peu de plaça.' },
     ],
     description: 'Interpreta la muralla, els barris i els mercats d’una ciutat medieval i relaciona la vida urbana amb els riscos de malaltia.',
     curriculum: [{ row: 'medi:passat', section: 'carrers', note: 'Interpreta la muralla, els barris i els mercats d’una ciutat medieval i relaciona la vida urbana amb els riscos de malaltia.' }],
     sources: [
+      ['Arxiu Municipal de Barcelona · Itinerari per Ciutat Vella', 'https://ajuntament.barcelona.cat/arxiumunicipal/sites/default/files/2022-06/ITINERARI%20PER%20CIUTAT%20VELLA_def.pdf'],
       ['Museu d’Història de Catalunya · Guia del museu', 'https://www.mhcat.cat/enmhc/visiting_the_museum/plano_libreria/guide_to_visit_the_museum/audio_guide/guia_de_visita_al_museo/segona_planta'],
       ['MHC · La mar nostra', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/la_mar_nostra'],
       ['MHC · Edat mitjana', 'https://www.mhcat.cat/esmhc/consulta_la_coleccion/els_destacats_del_museu/els_destacats_del_museu/edat_mitjana'],
@@ -3225,6 +3237,27 @@ window.quaderns ??= [];
     id: 'romanic-i-gotic',
     title: 'Llegim el romànic i el gòtic als edificis',
     intro: 'En entrar en dues esglésies medievals podem observar la forma dels arcs, la llum que hi entra i el pes que han de suportar les parets. Què indica cada detall?',
+    coverFigure: 'arcs-i-llum',
+    figures: [
+      {
+        id: 'arcs-i-llum', section: 'romanic', name: 'Arcs i llum a l’interior', ratio: 2280 / 1640,
+        width: 100, position: 'center', wrap: false, anchor: 'lead',
+        variants: {
+          pla: {
+            src: 'illustracions/m043/arcs-i-llum-pla.png', thumbnail: 'illustracions/m043/miniatures/arcs-i-llum-pla.jpg',
+            alt: 'Dibuix d’un arc de mig punt amb un mur gruixut i una finestra petita, al costat d’un arc apuntat i un finestral més gran.',
+            caption: 'Dos perfils de mostra sense escala comuna. Compara la forma dels arcs i l’amplada de les obertures.',
+            credit: 'Esquema didàctic de producció pròpia.',
+          },
+          atles: {
+            src: 'illustracions/m043/arcs-i-llum-atles.png', thumbnail: 'illustracions/m043/miniatures/arcs-i-llum-atles.jpg',
+            alt: 'Dos interiors imaginats. La llum entra per una finestra petita sota arcs de mig punt i per un finestral gran sota les voltes de creueria.',
+            caption: 'Dos interiors imaginats, inspirats en el romànic de la Vall de Boí i el gòtic barceloní. Què canvia en la llum quan són diferents les obertures?',
+            credit: 'Reconstruccions generades amb Sant Climent de Taüll i Santa Maria del Mar com a referents d’arquitectura.',
+          },
+        },
+      },
+    ],
     sections: [
       section('romanic', 'Arcs rodons i pintures murals',
         essencial('En moltes esglésies **romàniques** hi ha arcs de mig punt, murs gruixuts i finestres petites.'),
@@ -3243,9 +3276,15 @@ window.quaderns ??= [];
   }, {
     collection: { id: 'medieval', title: 'L’edat mitjana' },
     theme: 'Història',
+    figureStyles: [
+      { id: 'pla', label: 'Pla', description: 'Perfils per comparar la forma dels arcs i les obertures.' },
+      { id: 'atles', label: 'Atles', description: 'Vistes interiors per observar la llum i els materials.' },
+    ],
     description: 'Distingeix elements del romànic i del gòtic i compara la Vall de Boí i Santa Maria del Mar.',
     curriculum: [{ row: 'medi:passat', section: 'santa-maria', note: 'Distingeix elements del romànic i del gòtic i compara la Vall de Boí i Santa Maria del Mar.' }],
     sources: [
+      ['Centre del Romànic · Sant Climent de Taüll', 'https://www.centreromanic.com/esglesia/sant-climent-de-taull/'],
+      ['Ajuntament de Barcelona · Santa Maria del Mar', 'https://guia.barcelona.cat/detall/visites-a-santa-maria-del-mar_99400477080.html'],
       ['UNESCO · Esglésies romàniques de la Vall de Boí', 'https://whc.unesco.org/en/list/988/'],
       ['MHC · La mar nostra', 'https://www.mhcat.cat/exposicions/la_memoria_d_un_pais/la_mar_nostra'],
     ],

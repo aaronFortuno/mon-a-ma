@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.89 · 28 de novembre de 2026
+
+- Revisa les il·lustracions de l’M042 amb un mateix barri en planta i en vista elevada, una escena a peu de plaça i una làmina de fonts compartida.
+- Afegeix la prova d’arcs i llum de l’M043 en dos estils i marca la fitxa al mapa curricular com a il·lustracions en validació.
+
 ## 0.1.88 · 28 de novembre de 2026
 
 - Incorpora a l’M039 la prova en esborrany del castell amb planta Pla i tall Atles, pendent de validació.
