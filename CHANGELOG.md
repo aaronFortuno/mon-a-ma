@@ -1,5 +1,10 @@
 # Historial de versions
 
+## 0.1.96 · 28 de novembre de 2026
+
+- Revisa l’M038 amb un mapa compartit dels tres períodes i noves lectures del paisatge en Pla i Atles.
+- Completa l’M039 amb la vista de la vall des de la torre, el perfil de visibilitat i el tall de les dependències del castell.
+
 ## 0.1.95 · 28 de novembre de 2026
 
 - Renova el viatge de l’àmfora d’oli de l’M031 amb una ruta esquemàtica i quatre escenes que mostren la mateixa peça.
