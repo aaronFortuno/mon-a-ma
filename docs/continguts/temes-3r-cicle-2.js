@@ -1100,4 +1100,101 @@ window.variantsMaterials ??= {};
         repte('Recordar un botó premut', 'Dibuixa els passos si una persona prem el botó durant el pas 4. Compara aquest recorregut amb el de la primera maqueta. Quin cas hauries de provar per assegurar que la petició només es fa servir una vegada?'),
       ],
     });
+
+  const proves = itinerari('investigar-amb-proves', 'Investigar amb proves', 'Ciència i tecnologia');
+  const digital = itinerari('dades-i-ciutadania-digital', 'Dades i ciutadania digital', 'Tecnologia i digitalització');
+
+  fitxa(proves, 'M099', 'planadors-en-prova', 'Quin planador vola més lluny?',
+    'Dos planadors de paper aterren a llocs diferents. Un té les puntes de les ales plegades cap amunt. Com podem saber si aquest detall explica la diferència?', {
+      descripcio: 'Compara vols de planadors amb una prova repetida, mesures de distància i una conclusió basada en dades.',
+      curriculum: [
+        ['indagacio', 'mesures', 'Controla variables, repeteix una prova, registra les mesures i argumenta amb les dades.'],
+        ['materia', 'forces', 'Relaciona la forma de les ales i les forces que actuen sobre un planador.'],
+      ],
+      fonts: [
+        sabersCicleSuperior,
+        ['NASA JPL · Construcció i prova d’un planador de paper', 'https://www.jpl.nasa.gov/edu/resources/project/make-a-paper-glider/'],
+        ['NASA Glenn · Forces que actuen sobre un planador', 'https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/three-forces-on-a-glider/'],
+      ],
+      apartats: [
+        apartat('forces', 'Què passa un cop el deixem anar?',
+          'Quan el **planador** avança, l’aire exerceix forces sobre les ales. La **sustentació** ajuda a mantenir-lo a l’aire i la **resistència** en frena l’avanç. El pes l’estira cap avall.',
+          'En un model de paper, el llançament proporciona la velocitat inicial. Un cop a l’aire, modificar la forma de les ales pot canviar com plana. Farem una prova per veure què passa amb un plec petit a les puntes.'),
+        apartat('control', 'Canvia una sola cosa',
+          'Fes dues versions a partir del mateix model. A la versió **A**, les puntes de les ales queden planes. A la **B**, es plega cap amunt una tira d’1 cm a l’extrem de cada ala.',
+          'Per fer el model, posa un full en vertical i plega’l per la meitat al llarg. Obre’l, porta les dues cantonades de dalt fins al plec central i torna-hi a plegar les vores inclinades. Tanca el full pel plec central i abaixa els dos costats per formar ales iguals. Repeteix el model amb un full igual.',
+          'Proveu els planadors en un espai tranquil i sense obstacles. Mantingueu la mateixa persona, la línia de sortida, l’altura i el tipus de llançament. Alterneu A i B per repartir els canvis d’un intent al següent.'),
+        apartat('mesures', 'Mesura i repeteix',
+          'Mesura des de la línia fins al lloc on el planador toca el terra per primera vegada. Feu **tres intents per versió** abans de comparar dades.',
+          taula(['Versió', 'Vol 1', 'Vol 2', 'Vol 3'], [
+            ['A · Puntes planes', '3,0 m', '4,0 m', '3,5 m'],
+            ['B · Puntes plegades', '4,2 m', '3,7 m', '4,1 m'],
+          ], 38),
+          'A la taula hi ha mesures d’exemple. Per calcular la **mitjana**, suma les tres distàncies d’una versió i divideix el total per tres. Pots comparar també si els resultats de totes dues versions se solapen.'),
+        apartat('conclusio', 'Què podem afirmar amb aquestes dades?',
+          'Una **conclusió** respon a la pregunta inicial amb proves. Digues en quines condicions has fet la prova i quines mesures donen suport a l’afirmació.',
+          repte('Explica el resultat amb dades', 'Calcula la mitjana de cada versió amb les dades de la taula i tria quina ha volat més lluny de mitjana. Busca dos intents que mostrin que una versió no guanya cada vegada. Proposa una millora per repetir la prova.')),
+      ],
+      guia: ['Assenyala què canvia entre A i B.', 'Llegeix aquests dos exemples: A vola 4,0 m al segon intent i B vola 3,7 m. Quin ha fet més distància en aquest intent?', 'Digues per què faries més intents abans de triar un planador.'],
+      ampliacio: [repte('Una mitjana molt semblant', 'Un segon grup obté 3,9 m de mitjana amb A i 4,0 m amb B. Explica per què seria útil veure les sis mesures originals i què més voldries saber del llançament abans de comparar els dos grups.')],
+    });
+
+  fitxa(digital, 'M100', 'dades-del-pati', 'De les dades del pati a un gràfic que s’entén',
+    'La classe vol saber en quina zona del pati es troben més papers a terra. Ajudarà mirar a tot arreu de la mateixa manera i fer un gràfic que es pugui llegir.', {
+      descripcio: 'Delimita una observació, ordena els recomptes en un full de càlcul i explica un gràfic de barres.',
+      curriculum: [
+        ['digital', 'grafic', 'Organitza dades en un full de càlcul i en fa una representació gràfica llegible.'],
+        ['indagacio', 'observacio', 'Aplica un criteri comú de recompte i identifica els límits de les dades.'],
+      ],
+      fonts: [
+        sabersCicleSuperior,
+        ['XTEC · Sabers de matemàtiques a primària', 'https://projectes.xtec.cat/nou-curriculum/wp-content/uploads/usu2072/2024/04/Ed.Primaria_Matematiques_sabers.pdf'],
+      ],
+      apartats: [
+        apartat('observacio', 'Preparem un recompte que es pugui comparar',
+          'Observa zones de la **mateixa superfície** a la mateixa hora. Decideix què comptaràs i segueix el mateix criteri a cada zona.',
+          'Després del pati marqueu quatre espais de 3 metres per 3. Compteu durant cinc minuts els trossos de paper visibles dins de cada espai. Per comptar un paper que toca el límit, acordeu mirar si més de la meitat queda a dins. Si no hi ha cap tros, anoteu **0**.'),
+        apartat('registre', 'Una fila per a cada zona',
+          'Al **full de càlcul**, posa el nom de la zona en una columna i el nombre de papers en una altra. Un títol ha d’explicar què hi ha a cada columna.',
+          taula(['Zona observada', 'Trossos de paper'], [
+            ['Entrada', '4'],
+            ['Porxo', '7'],
+            ['Pista', '2'],
+            ['Hort', '0'],
+          ], 48),
+          'Aquests nombres són inventats. Si una zona queda sense observar, marca-ho a les notes i deixa la dada pendent. Un zero significa que sí que s’ha observat i no s’hi ha trobat cap paper.'),
+        apartat('grafic', 'Del recompte a les barres',
+          'En un **gràfic de barres** vertical, posem les zones a baix i el nombre de trossos a l’eix vertical. L’escala comença a **zero** i avança amb intervals iguals.',
+          'Selecciona les dues columnes del full i insereix un gràfic de barres verticals. Posa-hi un títol com «Trossos de paper observats al pati després de l’esbarjo». Revisa que l’escala, els noms de les zones i la unitat es llegeixin. També pots dibuixar el gràfic en paper quadriculat.'),
+        apartat('lectura', 'Què podem explicar amb el gràfic?',
+          'Una fotografia de les dades d’un dia descriu aquell moment. Per dir si el resultat es repeteix, necessitem mesures d’**altres dies** en condicions comparables.',
+          repte('Llegeix i comunica una observació', 'Fes el gràfic amb les dades de la fitxa. On se n’han comptat més? Quants trossos més hi ha al Porxo que a l’Entrada? Escriu una frase que indiqui també l’àrea i el moment observats.')),
+      ],
+      guia: ['Fes tres barres que comencin a 0. Entrada té 4 papers, Porxo en té 7 i Pista en té 2.', 'Escriu el nom de cada zona sota la seva barra.', 'Marca quina és la barra més alta i digues què indica.'],
+      ampliacio: [repte('Quan les superfícies són diferents', 'Un altre grup compta 10 papers en 20 m² i 6 papers en 10 m². Calcula quants n’hi ha per cada 10 m² a la primera zona i compara les dues zones amb la mateixa unitat. Explica per què els totals donaven una impressió diferent.')],
+    });
+
+  fitxa(digital, 'M101', 'que-publiquem-a-internet', 'Quina informació compartim quan publiquem a internet?',
+    'La classe vol compartir una fotografia d’un projecte. Al fons s’hi veuen un horari amb noms i una persona que no vol aparèixer. Què podem canviar abans de publicar-la?', {
+      descripcio: 'Reconeix pistes que identifiquen persones i practica com compartir amb privadesa i respecte.',
+      curriculum: [['digital', 'tria', 'Analitza la identitat i la petjada digitals i aplica decisions de privadesa abans de compartir.']],
+      fonts: [
+        sabersCicleSuperior,
+        ['APDCAT · Difusió d’imatges de menors i joves als centres educatius', 'https://apdcat.gencat.cat/web/.content/04-actualitat/noticies/documents/DifusioImatgesMenors.pdf'],
+      ],
+      apartats: [
+        apartat('pistes', 'Una imatge pot dir més del que pensem',
+          'Una **dada personal** és informació que identifica algú directament o amb altres pistes. Un nom, una cara o un horari amb noms en poden ser exemples.',
+          'En una foto, mira també el fons i el text que l’acompanya. Un nom en una carpeta i el lloc visible en un cartell poden aportar informació que no cal compartir per explicar el projecte.'),
+        apartat('petjada', 'Qui ho podrà veure després?',
+          'La **petjada digital** inclou rastres que deixem quan fem servir internet. La **identitat digital** és la imatge que s’hi forma sobre nosaltres amb informació pròpia i d’altres persones.',
+          'Abans de compartir en un grup, comprova qui hi té accés. Una persona del grup pot reenviar una imatge o fer-ne una captura. Si alguna cosa et preocupa, demana ajuda a una persona adulta de confiança.'),
+        apartat('tria', 'Tres preguntes abans de compartir',
+          'Pregunta’t **què** vols mostrar, **qui** ho veurà i **quines dades** necessites. Si hi reconeixes altres persones, parla amb elles i seguiu amb la mestra o el mestre les pautes del centre.',
+          'Podeu fer una foto nova centrada en el projecte, treure noms del cartell o presentar el treball amb un dibuix. Si algú expressa que no vol sortir en una imatge, respecteu la seva decisió i busqueu una manera de mostrar el treball.',
+          repte('Tria què envies i a qui', 'Imagineu un vídeo d’una maqueta amb una persona i un full amb cognoms al darrere. Proposeu una nova versió que mostri la feina. Decidiu si el grup de classe necessita el mateix accés que les persones de fora del centre.')),
+      ],
+      guia: ['Busca una pista que permeti identificar algú.', 'Digues quina part del projecte voleu mostrar.', 'Tria una manera de mostrar-la que deixi fora aquella dada.'],
+      ampliacio: [repte('La fotografia ja s’ha compartit', 'Una companya descobreix que una foto seva s’ha reenviat sense que ella ho volgués. Escriu què pot fer el grup per aturar nous reenviaments i què podria fer una persona adulta del centre per ajudar.')],
+    });
 }

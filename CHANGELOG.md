@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.71 · 28 de novembre de 2026
+
+- Publica M099–M101, tres esborranys sobre indagació amb planadors, representació de dades i privadesa digital.
+
 ## 0.1.70 · 28 de novembre de 2026
 
 - Publica M097 i M098, dos esborranys sobre el disseny i la prova d’un prototip de reg i d’un semàfor.
