@@ -530,5 +530,129 @@ window.variantsMaterials ??= {};
         },
       },
     },
+    M021: {
+      'etapes-prehistoria': {
+        suport: {
+          intro: 'Una eina de pedra, una olla i un estri de ferro poden donar pistes sobre moments diferents del passat. Les etapes ens ajuden a ordenar-les.',
+          sections: {
+            'paleolitic': [],
+            'neolitic': [passos('Ordena «caçar», «sembrar» i «treballar el ferro» segons quan apareixen en el relat.', 'Digues una activitat antiga que va continuar quan se’n van introduir de noves.')],
+            'metalls': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'metalls': [
+              p('Les primeres fonts escrites no apareixen alhora arreu. A més, un poble pot ser conegut per textos escrits per grups de fora.'),
+              repte('Què passa si falta l’escriptura?', 'Compara dues maneres d’estudiar una mateixa comunitat, amb restes excavades i amb un text d’un viatger. Què pot aportar cada font?'),
+            ],
+          },
+        },
+      },
+    },
+    M022: {
+      'campament-paleolitic': {
+        suport: {
+          intro: 'Si només ens quedessin unes pedres tallades i un cercle de cendres, podríem descobrir com s’organitzava un campament?',
+          sections: {
+            'refugi': [],
+            'estris': [],
+            'foc': [passos('Busca tres restes que poden quedar d’un foc.', 'Digues una cosa que es podia fer a la seva vora.')],
+            'pintures': [],
+            'vestits': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'refugi': [
+              p('Les pedres i alguns ossos es conserven més sovint que les pells i les fibres. Els jaciments a l’aire lliure són més difícils de detectar en alguns paisatges.'),
+              repte('El que trobem i el que s’ha perdut', 'Per què un mapa amb moltes coves excavades pot donar una idea incompleta dels llocs on es feien els campaments?'),
+            ],
+          },
+        },
+      },
+    },
+    M023: {
+      'poblat-neolitic': {
+        suport: {
+          intro: 'A tocar d’un estany hi ha camps, cabanes i espais on es treballa la fusta. Cadascun deixa pistes diferents sobre com vivia la gent.',
+          sections: {
+            'poblats': [],
+            'teixit': [],
+            'ceramica': [],
+            'estris': [passos('Relaciona falç amb tallar, molí amb triturar i aixa amb fusta.', 'Tria un estri i explica la feina amb una frase.')],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'poblats': [
+              p('En ambients amb poc oxigen, alguns materials orgànics es poden conservar molt de temps.'),
+              repte('L’avantatge d’un lloc humit', 'Com canviaria la nostra idea dels poblats si de la Draga només haguessin sobreviscut la pedra i la ceràmica? Dona dos exemples de dades que perdríem.'),
+            ],
+          },
+        },
+      },
+    },
+    M024: {
+      'arqueologia-pistes': {
+        suport: {
+          intro: 'Una peça sola dona pistes. Si sabem on era, a quina capa i què hi havia al costat, en podem aprendre molt més.',
+          sections: {
+            'metode': [],
+            'jaciment': [passos('Dibuixa dues capes de terra. Posa un objecte a cada capa.', 'Si ningú ha mogut la terra, quin podria ser més antic?')],
+            'comparacio': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'metode': [
+              p('Un grup d’ossos en un racó podria indicar una deixalla d’aliments o el resultat d’un altre procés.'),
+              repte('Prova una interpretació alternativa', 'Quines marques o quina distribució et farien pensar que els ossos tenen relació amb les activitats del campament?'),
+            ],
+          },
+        },
+      },
+    },
+    M025: {
+      'poblat-edat-ferro': {
+        suport: {
+          intro: 'El ferro va obrir possibilitats noves, però fabricar una eina requeriria coneixements, temps i persones especialitzades. Què es veuria en un poblat?',
+          sections: {
+            'metall': [],
+            'poblat': [],
+            'cases': [passos('Busca tres materials que podien formar part d’una casa.', 'Digues com sabries si en una habitació es feia foc.')],
+            'estris': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'metall': [
+              p('Les escòries són residus que poden quedar quan es treballa un mineral. Els motlles i les marques d’impacte donen pistes diferents sobre com s’ha fet una peça.'),
+              repte('Fosa o forja?', 'Quina pista buscaries per distingir un objecte fos en un motlle d’una fulla treballada a cops?'),
+            ],
+          },
+        },
+      },
+    },
+    M026: {
+      'patrimoni-figures-i-pedres': {
+        suport: {
+          intro: 'Alguns paisatges conserven pintures i grans pedres alçades. Són testimonis fràgils, i estudiar-los ens obliga a separar allò que veiem d’allò que imaginem.',
+          sections: {
+            'rupestre': [],
+            'megalits': [passos('Imagina una pedra dreta i una cambra de lloses.', 'Relaciona-les amb els mots menhir i dolmen.')],
+            'gravats': [],
+          },
+        },
+        ampliacio: {
+          sections: {
+            'rupestre': [
+              p('Un conjunt de figures es pot descriure per la posició, la mida i les formes. La seva intenció és sovint més difícil d’establir.'),
+              repte('Un dibuix no té una sola lectura', 'Tria una escena amb persones i animals. Escriu dues observacions que es puguin comprovar i dues interpretacions possibles.'),
+            ],
+          },
+        },
+      },
+    },
   });
 }

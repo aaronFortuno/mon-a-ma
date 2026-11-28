@@ -1076,4 +1076,178 @@ window.quaderns ??= [];
       ['Meteocat · Climatologia', 'https://www.meteocat.gencat.cat/ca/climatologia/'],
     ],
   });
+
+  addTopic('M021', {
+    id: 'etapes-prehistoria',
+    title: 'Tres maneres de mirar la prehistòria',
+    intro: 'Una eina de pedra, una olla i un estri de ferro poden donar pistes sobre moments diferents del passat. Les etapes ens ajuden a ordenar-les.',
+    sections: [
+      section('paleolitic', 'El paleolític, seguir els recursos',
+        essencial('Durant el **paleolític**, les persones obtenien aliments caçant, pescant i recollint plantes i fruits.'),
+        p('Molts grups es desplaçaven segons l’estació i els recursos. Fabricaven eines de pedra tallada, d’os i de fusta. La **prehistòria** és el nom que donem, en cada lloc, al passat humà anterior a les primeres fonts escrites disponibles.')),
+      section('neolitic', 'Sembrar, criar animals i tornar a un lloc',
+        essencial('Al **neolític** alguns grups van començar a cultivar plantes i criar animals.'),
+        p('En molts llocs es van establir en poblats durant períodes més llargs. La caça i la recol·lecció van continuar. Aquestes maneres de viure van aparèixer en moments diferents segons la regió.')),
+      section('metalls', 'Conèixer materials nous',
+        essencial('En les **edats dels metalls**, diferents societats van aprendre a treballar el coure, el bronze i el ferro.'),
+        p('El bronze sol ser una barreja de coure i estany. Les eines de pedra, de fusta i d’os van continuar en ús. L’intercanvi permetia que materials i objectes circulessin entre poblats.'),
+        box('prova', 'Classifica amb una pista', 'Relaciona un fogar amb eines de sílex, un poblat amb cereals i una ferreria amb les tres etapes. Podria haver-hi un fogar en més d’una etapa? Explica què miraries per decidir.')),
+    ],
+  }, {
+    collection: { id: 'prehistoria', title: 'La prehistòria' },
+    theme: 'Història',
+    description: 'Ordena el paleolític, el neolític i les edats dels metalls i compara canvis en la vida quotidiana.',
+    curriculum: [{ row: 'medi:passat', section: 'metalls', note: 'Ordena el paleolític, el neolític i les edats dels metalls i compara canvis en la vida quotidiana.' }],
+    sources: [
+      ['Museu d’Arqueologia de Catalunya', 'https://www.mac.cat/'],
+      ['Patrimoni cultural · La Draga', 'https://patrimoni.gencat.cat/ca/coleccio/la-draga'],
+    ],
+  });
+
+  addTopic('M022', {
+    id: 'campament-paleolitic',
+    title: 'Pistes d’un campament paleolític',
+    intro: 'Si només ens quedessin unes pedres tallades i un cercle de cendres, podríem descobrir com s’organitzava un campament?',
+    sections: [
+      section('refugi', 'Entre coves, balmes i aire lliure',
+        essencial('Els grups paleolítics podien instal·lar-se **a l’aire lliure**, en coves o sota una balma.'),
+        p('Una balma és un sortint de roca que ofereix refugi. A prop podien buscar aigua i aliments. Les coves conserven restes durant molt de temps, però només mostren una part dels llocs on es vivia.')),
+      section('estris', 'Eines per a feines diferents',
+        essencial('Amb pedra, os i fusta, els grups fabricaven **eines** per tallar, rascar o treballar altres materials.'),
+        p('Una vora esmolada podia ajudar a tallar carn o fibres. Un rascador permetia preparar pells. Les marques d’ús són una pista sobre quina feina s’hi va fer.')),
+      section('foc', 'El foc al centre de moltes activitats',
+        essencial('El **foc** servia per escalfar-se, il·luminar i preparar aliments.'),
+        p('Les restes d’un fogar poden incloure carbó, cendra i ossos cremats. Saber on són respecte de les eines ajuda a imaginar com es repartien algunes feines.')),
+      section('pintures', 'Figures sobre la roca',
+        essencial('Algunes persones del paleolític van representar **animals, signes i mans** a les parets i sostres de coves.'),
+        p('Per fer els colors es podien usar pigments com els ocres i el carbó. Les figures aporten pistes sobre què es representava, però sovint desconeixem què significaven per als seus autors.')),
+      section('vestits', 'Roba que costa de conservar',
+        essencial('Les persones podien preparar **pells** per protegir-se del fred.'),
+        p('Com que les pells es desfan amb el temps, agulles d’os i rascadors poden ser pistes indirectes. Una agulla indica que es podia cosir, però no ens diu com era qualsevol peça de roba.'),
+        box('prova', 'Fes d’arqueòleg', 'Imagina que trobes un rascador, cendra i una agulla d’os. Per a cada resta, escriu una observació i una possible explicació. Quina explicació voldries confirmar amb una altra pista?')),
+    ],
+  }, {
+    collection: { id: 'prehistoria', title: 'La prehistòria' },
+    theme: 'Història',
+    description: 'Interpreta refugis, eines, foc, pintures i vestits a partir de les restes que es poden conservar.',
+    curriculum: [{ row: 'medi:passat', section: 'vestits', note: 'Interpreta refugis, eines, foc, pintures i vestits a partir de les restes que es poden conservar.' }],
+    sources: [
+      ['IPHES · Memòria d’excavació de l’Abric Romaní', 'https://calaix.gencat.cat/bitstream/handle/10687/457382/qmem16402.pdf?sequence=1'],
+      ['Museu d’Arqueologia de Catalunya', 'https://www.mac.cat/'],
+    ],
+  });
+
+  addTopic('M023', {
+    id: 'poblat-neolitic',
+    title: 'Un poblat neolític, feina a feina',
+    intro: 'A tocar d’un estany hi ha camps, cabanes i espais on es treballa la fusta. Cadascun deixa pistes diferents sobre com vivia la gent.',
+    sections: [
+      section('poblats', 'Fer vida a prop dels conreus',
+        essencial('Al **neolític**, molts poblats eren prop d’aigua i de terres que es podien conrear.'),
+        p('Les cabanes es feien amb materials de l’entorn, com fusta i fibres. A la Draga, a Banyoles, s’han conservat elements de fusta gràcies a un medi humit que n’ha alentit la descomposició.')),
+      section('teixit', 'De la fibra al fil',
+        essencial('Per fer un **teixit** cal transformar fibres en fils i entrecreuar-los.'),
+        p('Alguns estris relacionats amb el filat i el teixit s’han conservat millor que la roba. També hi ha cistells i cordes de fibres vegetals en alguns jaciments.')),
+      section('ceramica', 'Recipients que guarden els aliments',
+        essencial('La **ceràmica** es fa donant forma a l’argila i coent-la.'),
+        p('Una olla pot servir per cuinar o contenir aigua. Un recipient gran permet guardar aliments. La forma, les restes i el lloc on s’ha trobat ajuden a interpretar-ne l’ús.'),
+        box('prova', 'Decideix què caldrà al poblat', 'Una família vol recollir cereal i guardar-ne una part fins a l’hivern. Quins estris i recipients proposaries? Ordena les feines que fan falta.')),
+      section('estris', 'De la collita al menjar',
+        essencial('Les falçs, els molins de mà i les aixes ajudaven a fer feines relacionades amb els conreus i la fusta.'),
+        p('Una **falç** talla les tiges. Un molí de mà tritura grans. Una **aixa** serveix per treballar la fusta. Un estri podia combinar materials diferents, com un mànec de fusta i una fulla de pedra.')),
+    ],
+  }, {
+    collection: { id: 'prehistoria', title: 'La prehistòria' },
+    theme: 'Història',
+    description: 'Relaciona els poblats neolítics amb l’agricultura, el teixit, la ceràmica i les eines.',
+    curriculum: [{ row: 'medi:passat', section: 'ceramica', note: 'Relaciona els poblats neolítics amb l’agricultura, el teixit, la ceràmica i les eines.' }],
+    sources: [
+      ['Patrimoni cultural · La Draga', 'https://patrimoni.gencat.cat/ca/coleccio/la-draga'],
+      ['Museu d’Arqueologia de Catalunya', 'https://www.mac.cat/'],
+    ],
+  });
+
+  addTopic('M024', {
+    id: 'arqueologia-pistes',
+    title: 'Arqueologia, de la troballa a l’explicació',
+    intro: 'Una peça sola dona pistes. Si sabem on era, a quina capa i què hi havia al costat, en podem aprendre molt més.',
+    sections: [
+      section('metode', 'Què estudia l’arqueologia?',
+        essencial('L’**arqueologia** estudia les societats del passat a partir de les seves restes materials.'),
+        p('L’equip anota la posició, el tipus de sòl, la capa i les troballes del voltant abans de retirar un objecte. L’observació queda registrada perquè altres persones puguin revisar les interpretacions.')),
+      section('jaciment', 'Llegir les capes d’un jaciment',
+        essencial('Un **jaciment** és un lloc on s’han conservat restes d’activitats del passat.'),
+        p('En un terreny que no s’ha remogut, les capes inferiors solen ser més antigues. Un forat o una arrel pot desplaçar materials. Per situar una peça en el temps es combinen diverses pistes.')),
+      section('comparacio', 'Dues finestres al passat català',
+        essencial('A l’**Abric Romaní**, a Capellades, s’han trobat restes de fogars i d’ocupacions neandertals. A **la Draga**, a Banyoles, s’ha conservat un poblat neolític.'),
+        p('Les eines, ossos i fogars de l’Abric Romaní aporten pistes sobre campaments paleolítics. Les fustes i eines de la Draga mostren pràctiques quotidianes d’un poblat amb agricultura i ramaderia.'),
+        box('prova', 'Dues restes i dues preguntes', 'Tria una resta de cada jaciment i escriu què pot explicar. Quina pregunta no es pot respondre encara amb aquesta resta sola?')),
+    ],
+  }, {
+    collection: { id: 'prehistoria', title: 'La prehistòria' },
+    theme: 'Història',
+    description: 'Aprèn què és el context arqueològic i compara les troballes de l’Abric Romaní i la Draga.',
+    curriculum: [{ row: 'medi:passat', section: 'comparacio', note: 'Aprèn què és el context arqueològic i compara les troballes de l’Abric Romaní i la Draga.' }],
+    sources: [
+      ['IPHES · Memòria d’excavació de l’Abric Romaní', 'https://calaix.gencat.cat/bitstream/handle/10687/457382/qmem16402.pdf?sequence=1'],
+      ['Patrimoni cultural · La Draga', 'https://patrimoni.gencat.cat/ca/coleccio/la-draga'],
+    ],
+  });
+
+  addTopic('M025', {
+    id: 'poblat-edat-ferro',
+    title: 'Cases, tallers i ferro al poblat',
+    intro: 'El ferro va obrir possibilitats noves, però fabricar una eina requeriria coneixements, temps i persones especialitzades. Què es veuria en un poblat?',
+    sections: [
+      section('metall', 'Del mineral a l’estri',
+        essencial('Per obtenir **ferro** es tracta el mineral amb molta calor. Després, el metall es pot treballar a cops mentre és calent.'),
+        p('A l’edat del ferro, els ferrers sovint donaven forma al ferro per forja. El bronze fos, en canvi, es podia abocar en motlles. Els residus dels forns i tallers són pistes sobre aquests processos.')),
+      section('poblat', 'Espais per viure, guardar i treballar',
+        essencial('Alguns poblats de l’edat del ferro s’alçaven en un turó i tenien carrers i muralles.'),
+        p('El terreny podia facilitar la vigilància i l’organització. També calia tenir accés a aigua, camps i camins. Ullastret és un exemple de gran assentament ibèric de l’edat del ferro.')),
+      section('cases', 'Què ens expliquen les cases?',
+        essencial('En molts habitatges hi havia parets amb base de **pedra** i parts fetes amb terra i fusta.'),
+        p('Un fogar servia per cuinar i escalfar l’espai. Gerres i altres estris permetien guardar aliments. Les dimensions i les restes trobades ens ajuden a imaginar feines i espais de cada casa.')),
+      section('estris', 'Eines noves al costat de les antigues',
+        essencial('Amb el ferro es podien fer fulles de tall, eines agrícoles i altres peces resistents.'),
+        p('Els molins de pedra, els recipients de ceràmica i els mànecs de fusta continuaven sent útils. La tècnica nova complementava altres maneres de fabricar objectes.'),
+        box('prova', 'Què ens diu un taller?', 'En un espai hi ha escòries, restes de carbó i una peça de ferro a mig acabar. Proposa una explicació i digues quina altra resta cercaries per comprovar-la.')),
+    ],
+  }, {
+    collection: { id: 'prehistoria', title: 'La prehistòria' },
+    theme: 'Història',
+    description: 'Interpreta l’organització d’un poblat de l’edat del ferro, els habitatges i la feina del metall.',
+    curriculum: [{ row: 'medi:passat', section: 'estris', note: 'Interpreta l’organització d’un poblat de l’edat del ferro, els habitatges i la feina del metall.' }],
+    sources: [
+      ['Museu d’Arqueologia de Catalunya', 'https://www.mac.cat/'],
+      ['Museu d’Arqueologia · Ullastret', 'https://www.macullastret.cat/'],
+    ],
+  });
+
+  addTopic('M026', {
+    id: 'patrimoni-figures-i-pedres',
+    title: 'Pedres i figures que ens parlen del passat',
+    intro: 'Alguns paisatges conserven pintures i grans pedres alçades. Són testimonis fràgils, i estudiar-los ens obliga a separar allò que veiem d’allò que imaginem.',
+    sections: [
+      section('rupestre', 'Pintar sobre la roca',
+        essencial('L’**art rupestre** es va fer sobre superfícies de roca, com parets de coves i de balmes.'),
+        p('En el conjunt mediterrani de la Península hi ha figures humanes, animals i escenes en moviment. Segons el lloc i el moment, les tècniques i els temes poden variar.')),
+      section('megalits', 'Menhirs, dòlmens i cercles de pedra',
+        essencial('Els **megàlits** són construccions o monuments fets amb grans pedres. Un menhir és una pedra dreta i un cromlec és un conjunt de pedres en cercle.'),
+        p('Molts **dòlmens** eren cambres funeràries fetes amb lloses. La **Cova d’en Daina**, a Romanyà de la Selva, és un dolmen amb una cambra i un corredor, envoltat per un cercle de pedres que delimitava el túmul.')),
+      section('gravats', 'Figures fetes amb altres tècniques',
+        essencial('Un **gravat** es fa marcant una superfície. Una **escultura** dona volum a una figura.'),
+        p('Una figura es podia gravar a la roca o esculpir en pedra, os o altres materials. Seguir la direcció de les marques i mirar-ne el suport ajuda a descriure la tècnica.'),
+        box('prova', 'Pintat, gravat o esculpit?', 'Dibuixa un exemple de cada tècnica i explica què miraries en una peça real per distingir-les. Per què és important observar una pintura sense tocar-la?')),
+    ],
+  }, {
+    collection: { id: 'prehistoria', title: 'La prehistòria' },
+    theme: 'Història',
+    description: 'Interpreta exemples de pintures, megàlits, gravats i escultures i explica com protegir-los.',
+    curriculum: [{ row: 'medi:passat', section: 'gravats', note: 'Interpreta exemples de pintures, megàlits, gravats i escultures i explica com protegir-los.' }],
+    sources: [
+      ['UNESCO · Art rupestre mediterrani', 'https://whc.unesco.org/en/list/874/'],
+      ['Patrimoni cultural · Cova d’en Daina', 'https://patrimoni.gencat.cat/ca/coleccio/cova-den-daina'],
+    ],
+  });
 }

@@ -1,5 +1,9 @@
 # Historial de versions
 
+## 0.1.64 · 28 de novembre de 2026
+
+- Publica els esborranys M021–M026 sobre la prehistòria, l’arqueologia i el patrimoni.
+
 ## 0.1.63 · 28 de novembre de 2026
 
 - Publica els esborranys M015–M020 sobre el clima, la vegetació i el canvi climàtic.
